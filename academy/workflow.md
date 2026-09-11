@@ -2,63 +2,37 @@
 title: Nasıl çalışır?
 ---
 
-# Küçük görev, gerçek kod
+# Kısa ders, gerçek oyun
 
-Sohbet ana mentor kanalın. **“Mevcut dersten devam edelim”** dediğinde tek bir
-görevle ilerleriz. Academy aynı dersleri tarayıcıdan okumak için isteğe bağlı
-arşivin; kodu her durumda kendi editöründe yazarsın.
+Sohbet ana mentor kanalın. Academy, istersen dersleri tarayıcıda okuyacağın arşivdir; kodu kendi editöründe yazarsın.
 
 ## Şimdi ne yapacağım?
 
-1. [0.1 — Bellek yerleşimi](/worlds/00-systems/01-memory-layout) görevini oku
-   veya sohbette 0.1'i iste.
-2. `labs/00-memory-layout/main.odin` ile `journal/00-memory-layout.md` dosyalarını aç.
-3. Önce tahminini yaz. Sonra yalnızca **mevcut dersin** ölçüm kodunu ekle.
-4. Repo kökünden çalıştır:
+1. [1.1 — İlk raketi çiz](/worlds/01-pong/01-first-paddle) dersini aç.
+2. `games/pong/main.odin` içindeki hazır pencereye görevi ekle.
+3. Çalıştır:
 
 ```sh
-odin run labs/00-memory-layout -out:labs/00-memory-layout/lab
+odin run games/pong -out:/tmp/mucahit-pong
 ```
 
-5. Sonucu ve kısa açıklamanı journal'ın ilgili bölümüne ekle. **“0.1 denememi
-   değerlendir; kodumu değiştirme, önce tek ipucu ver”** yaz.
+4. Gördüğünü ve `x` coordinate'i değişince ne olduğunu sohbette kısaca anlat. **“Pong 1.1 denememi değerlendir”** yaz.
 
-## Bir dersin boyutu
+Journal tutmak isteğe bağlıdır. Progress JSON, CSS ve VitePress bakımını ben
+yaparım. Okuyucuda sorun varsa sohbette bildir; onarımı ben üstlenirim.
 
-**Hedef → kısa bağlam → görev → sınırlar → geçme koşulu.** Bir ders tek ana fikir
-taşır. Açılır ipuçları ve Deep Dive bölümleri isteğe bağlıdır; hepsini okumak
-tamamlanma şartı değildir. Takıldığında yalnızca eksik kavramı birlikte açarız.
+## Ders biçimi
 
-İlk bellek çalışması üç küçük derse ayrıldı:
+Her ders önce hedefi, görevi ve kabul koşulunu gösterir. Ardından yalnız göreve
+yetecek kadar açıklama gelir. İpuçları ve Deep Dive isteğe bağlıdır. Bir ders
+bir ana fikir taşır; sonraki sorun için gerekmeyen teori sonraya kalır.
 
-| Ders | Görev | Journal bölümü |
-| --- | --- | --- |
-| [0.1](/worlds/00-systems/01-memory-layout) | Yerleşimi tahmin et, ölç, padding'i göster | İlk tahmin / İlk ölçüm |
-| [0.2](/worlds/00-systems/02-field-order) | Aynı alanları başka sırayla karşılaştır | Yeniden sıralama |
-| [0.3](/worlds/00-systems/03-memory-budget) | Ölçtüğün boyutla 100.000 merminin maliyetini hesapla | 100.000 Bullet hesabı |
+## World 0
 
-Aynı lab ve journal kullanılır. Dosyada sonraki görevin TODO'sunu görmen, onu
-şimdi çözmen gerektiği anlamına gelmez. Cache ve AoS/SoA, Snake'te ayrı erişim
-deneyleriyle ele alınacak; journal'daki ilgili sorular başlangıç derslerinin kapısı değil.
+Memory layout, pointer, slice ve allocation notları [World 0](/worlds/00-systems/) altında optional reference olarak duruyor. Pong'a başlamak için onları bitirmen, journal tablosu doldurman veya bir açıklama yazman gerekmez. Bir oyun problemi bu kavramlardan birini gerektirirse onu o anda küçük bir görevle ele alırız.
 
-## Yardım ve değerlendirme
+## İnceleme
 
-İpucu 1 bir düşünme sorusu; ipucu 2 daha dar bir yön; ipucu 3 küçük bir örnek veya
-uygulanabilir yol gösterir. İstediğinde tam açıklama alabilirsin. Ardından farklı
-bir örnekte desteksiz deneme, kavramı bağımsız kullanabildiğini gösterir.
+İncelemede önce gözlediğim davranışı söylerim. Sonra tek önemli soruyu veya Hint 1'i veririm. İstersen Hint 2, Hint 3 ve tam açıklamaya ilerleriz. Çözümü senin yerine yazmam; açıkça istediğinde koduna düzenleme yaparım.
 
-Değerlendirmede önce çalışan tarafları, sonra kavramsal riskleri ve eksik
-ölçümleri inceleriz. Sonraki adım bir odak sorusudur; çözümü sen geliştirirsin.
-
-`npm run lab:check` yalnızca derleyici kontrolüdür. İlerleme, dersin kabul
-ölçütleri incelendikten sonra kaydedilir. Ders tamamlanması, bağımsız beceri
-ve değerlendirme geçmişi ayrı tutulur.
-
-## Araçlar da dersin parçası
-
-Pong'da debug değerlerini görürsün; Breakout'ta Dear ImGui paneliyle juice
-parametrelerini oyun çalışırken ayarlarsın. Sonra rule inspector, timeline ve
-ağ hata ayıklama araçları gelir. Kullandığın aracın hangi soruyu cevapladığını
-açıklarsın. Oyuncunun menü ve HUD sistemi ayrı bir konudur.
-
-[Büyük resmi görmek istediğinde yol haritasını aç →](/roadmap)
+[Yol haritası →](/roadmap)

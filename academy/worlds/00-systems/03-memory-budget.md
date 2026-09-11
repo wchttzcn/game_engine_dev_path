@@ -1,66 +1,57 @@
 ---
-title: Bellek Bütçesi
+title: Memory Budget
 ---
 
-# 0.3 — 100.000 mermi ne kadar yer kaplar?
+# 0.3 — 100.000 mermi ne kadar memory kaplar?
 
-## Hedef
+Bu ders isteğe bağlı kaynak; [Pong'a başlamak](/worlds/01-pong/01-first-paddle)
+için ön koşul değil. İleride dönersen hesabını journal yerine sohbette
+paylaşabilirsin.
 
-Bir önceki derste iki gerçek `size_of` sonucu elde ettin. Şimdi bu ölçümleri oyun ölçeğine taşıyacaksın: bir mermi tanımı küçük görünür; on binlercesi ise açık bir bellek bütçesidir.
+**Hedef:** Ölçtüğün `Bullet` size'ından 100.000 instance'ın kapladığı yeri ve padding farkının toplam etkisini hesapla.
 
-**Hedef:** Ölçülmüş bir örnek boyutundan veri için gereken alanı hesaplamak.
-Bu kısa görev journal'da çözülür.
+## Görev
 
-## Challenge
+`journal/00-memory-layout.md` içindeki `Bullet` ve `Bullet_Reordered` ölçümlerini kullan. Hesaplamadan önce, farkın 100.000 instance'ta nasıl büyüyeceğini tek cümleyle tahmin et. Mevcut **100.000 Bullet hesabı** tablosunu iki düzenin byte ve MiB değerleriyle doldur. Ardından hangi düzenin daha az memory kapladığını ve farkın padding ile instance size'ından nasıl geldiğini bir veya iki cümleyle açıkla. Ölçümler eşitse bunu da kanıt olarak yaz.
 
-Journal’daki ilk `Bullet` ve `Bullet_Reordered` ölçümlerini kullan. Hesaplamadan
-önce 100.000 örnekte farkın nasıl büyümesini beklediğini tek cümleyle yaz.
-Her biri için gereken alanı hesapla ve mevcut “100.000 Bullet hesabı” tablosunu doldur.
+## Bitti sayılır
 
-Formül, herhangi bir kayıt türü için şöyledir:
+- Journal tablosunda iki düzen için byte ve MiB değeri var.
+- Hesap, 0.2'de ölçtüğün `size_of` sonucuna dayanıyor.
+- Kısa yorum farkı padding ve instance size'ıyla bağlıyor.
+
+Bir mermi tanımı tek başına küçük görünebilir. Oyun aynı tanımdan binlerce instance taşıdığında, struct size'ındaki fark her instance'ta tekrar eder. Bu görev yeni kod yazdırmaz; önceki gerçek ölçümü bir memory budget'a çevirir.
+
+İhtiyacın olan hesap:
 
 ```text
-toplam_bayt = kayıt_boyutu_bayt * kayıt_sayısı
-MiB = toplam_bayt / 1.048.576
+total_bytes = record_size_bytes * record_count
+MiB = total_bytes / 1.048.576
 ```
 
-Buradaki `kayıt_boyutu_bayt`, ölçtüğün `size_of` sonucudur; tahmin veya alan boyutlarının ham toplamı değildir. İstersen ondalık MB sütununu da doldur: 1 MB = 1.000.000 bayt. MiB ile MB’yi aynı birim gibi yazma.
-
-Sonra iki yerleşimin farkını bir veya iki cümleyle açıkla: 100.000 örnekte hangi düzen daha az yer kaplıyor ve fark nereden geliyor? Eğer ölçümlerin eşitse, bunu da kanıt olarak yaz; eşit sonuç geçerlidir.
+Buradaki record size, field size'larının ham toplamı değil, 0.2'de ölçtüğün `size_of` sonucudur. Çünkü padding de her instance'ın parçasıdır. Tabloda decimal MB sütunu varsa onu da doldurabilirsin; 1 MB = 1.000.000 byte, 1 MiB = 1.048.576 byte'tır.
 
 ## Sınırlar
 
-- Yeni Odin kodu, dizi veya allocation ekleme.
 - Yeni ölçüm uydurma; 0.2’de kaydettiğin gerçek değerleri kullan.
-- Toplam footprint’i süreç RAM’i, oyun RAM’i veya performans süresi diye adlandırma. Bu yalnızca bu veri dizisinin teorik eleman alanıdır.
-
-## Kabul kanıtı
-
-- Journal tablosunda iki düzen için bayt ve MiB değeri var.
-- Hesap `size_of` ölçümüne dayanıyor.
-- MB sütunu doldurulduysa birimi doğru etiketli.
-- Kısa yorum, farkı padding/örnek boyutuyla bağlıyor.
-
-Mentor incelemesinde kendi ölçümünden toplam alanı nasıl türettiğini göster.
-`npm run lab:check` kullanabilirsin; bu derste kod değişmediği için tekrar
-çalıştırmak geçme koşulu değil, matematik yorumunu da doğrulamaz.
+- Bu hesap yalnızca array elemanlarının kapladığı teorik yeri gösterir; tüm process'in veya oyunun RAM kullanımı değildir, çalışma süresini de ölçmez.
 
 ::: details İpucu 1 — tek birimden başla
-İlk olarak yalnızca bayt hesabını yap. Birim dönüşümünü ikinci adımda yapınca yanlış daha kolay görünür.
+Önce yalnızca byte cinsinden düşün: tek instance'ın kapladığı yer kaç kez tekrar ediyor? Birim dönüşümünü sonra yap.
 :::
 
 ::: details İpucu 2 — hangi sayı kaynak?
-Alanların tek tek boyutlarını toplama. Struct içindeki padding de `size_of` sonucunun parçasıdır.
+Tablodaki 0.2 ölçümünü kullan. Field'ların tek tek size'larını toplarsan padding'i kaybedersin.
 :::
 
 ::: details İpucu 3 — yorum sorusu
-İki örnek boyutu arasındaki fark, 100.000 kayıt için kaç kez tekrar eder? Bu ilişkiyi cümlede kullan.
+İki `size_of` sonucu arasındaki byte farkını 100.000 ile çarp. Bu sayı yorumunda gördüğün toplam farktır.
 :::
 
 ::: details Deep Dive — MB ve MiB
-MB ondalık ölçüdür: 1.000.000 bayt. MiB ikili ölçüdür: 1.048.576 bayt. Araçlar ikisini farklı kullanabilir; bu yüzden sonuç yanında birimi yazmak, sayıyı tek başına yazmaktan daha değerlidir.
+MB decimal ölçüdür: 1.000.000 byte. MiB binary ölçüdür: 1.048.576 byte. Araçlar ikisini farklı kullanabilir; bu yüzden sonuç yanında birimi yazmak, sayıyı tek başına yazmaktan daha değerlidir.
 :::
 
 ## Sonraki
 
-[0.2 — Alan sırası](/worlds/00-systems/02-field-order) ölçümlerine dönmen gerekirse geri dön. Sonraki planlanan adım için [Dünya 0 dizinine](/worlds/00-systems/) bak; 0.4 henüz hazırlanmış bir ders değil.
+**Kazanım:** Tek instance'ın ölçümünden çok sayıda instance için gereken memory'yi hesaplayabilirsin. İstersen **“0.3 denememi değerlendir”** yaz. Aktif oyun başlangıcı [Pong 1.1](/worlds/01-pong/01-first-paddle); World 0'da devam etmen gerekmiyor.

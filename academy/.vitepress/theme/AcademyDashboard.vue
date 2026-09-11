@@ -20,7 +20,7 @@ const skillLabels: Record<string, string> = {
     <header class="academy-intro">
       <p class="eyebrow">MÜCAHİT'İN ÇALIŞMA ALANI · ODIN / macOS</p>
       <h1>Oyun yap.<br /><span>Sistemi anla.</span></h1>
-      <p class="intro-copy">İlk frame'den kendi motoruna. Belleği, hareketi ve oyun dünyalarının kurallarını yazarak öğren.</p>
+      <p class="intro-copy">İlk frame'den kendi motoruna. Memory'yi, hareketi ve oyun dünyalarının kurallarını yazarak öğren.</p>
     </header>
 
     <section v-if="current" class="current-lesson" aria-labelledby="current-heading">
@@ -47,11 +47,11 @@ const skillLabels: Record<string, string> = {
     <div class="academy-columns">
       <section class="academy-panel" aria-labelledby="skills-heading">
         <p class="eyebrow">KANITLA İLERLE</p>
-        <h2 id="skills-heading">Şu an çalışacağın beceriler</h2>
+        <h2 id="skills-heading">Beceri kaydı</h2>
         <ul class="skill-list">
           <li v-for="skill in progress.skills" :key="skill.id"><span>{{ skill.title }}</span><small>{{ skillLabels[skill.status] }}</small></li>
         </ul>
-        <p class="panel-note">Dersi bitirmek ve bir beceriyi bağımsız uygulamak ayrı takip edilir.</p>
+        <p class="panel-note">Bu liste ön koşul değildir. Aktif görevin yukarıda; World 0 isteğe bağlıdır.</p>
       </section>
       <section class="academy-panel" aria-labelledby="routine-heading">
         <p class="eyebrow">ÇALIŞMA DÖNGÜN</p>
@@ -66,7 +66,7 @@ const skillLabels: Record<string, string> = {
     </div>
 
     <section class="academy-next" aria-labelledby="next-heading">
-      <div><p class="eyebrow">BİR SONRAKİ OYNANABİLİR HEDEF</p><h2 id="next-heading">Pong · Bir frame'i anlamak</h2><p>Input, zaman, çarpışma. Ardından vuruş hissi, ses ve görsel tepki.</p></div>
+      <div><p class="eyebrow">ÜZERİNDE ÇALIŞTIĞIN OYUN</p><h2 id="next-heading">Pong · İlk raketten oynanabilir maça</h2><p>Önce ekranda bir raket. Sonra input, top ve collision.</p></div>
       <a class="text-link" :href="withBase('/worlds/01-pong/')">Bölüm planı →</a>
     </section>
     <p class="academy-footnote">{{ progress.lessons.length }} kısa ders hazır. Sohbet ana mentor kanalın; burası isteğe bağlı ders arşivin.</p>

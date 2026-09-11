@@ -1,17 +1,17 @@
 ---
-title: Bellek Yerleşimi Günlüğü
+title: Memory Layout Günlüğü
 ---
 
-# Bellek Yerleşimi Günlüğü
+# Memory Layout Günlüğü
 
 ## İlk tahmin
 
 | Ölçüm | Tahmin |
 | --- | --- |
-| Bullet hizalaması | |
-| Bullet toplam boyutu (bayt) | |
+| Bullet alignment | |
+| Bullet size (byte) | |
 
-| Alan | Boyut tahmini | Hizalama tahmini | Başlangıç ofseti tahmini | Önceki padding |
+| Field | Size tahmini | Alignment tahmini | Başlangıç offset tahmini | Önceki padding |
 | --- | --- | --- | --- | --- |
 | active | | | | |
 | position | | | | |
@@ -24,10 +24,10 @@ title: Bellek Yerleşimi Günlüğü
 
 | Ölçüm | Gerçek |
 | --- | --- |
-| Bullet hizalaması | |
-| Bullet toplam boyutu (bayt) | |
+| Bullet alignment | |
+| Bullet size (byte) | |
 
-| Alan | Gerçek ofset | Tahminden fark | Açıklama |
+| Field | Gerçek offset | Tahminden fark | Açıklama |
 | --- | --- | --- | --- |
 | active | | | |
 | position | | | |
@@ -38,17 +38,17 @@ title: Bellek Yerleşimi Günlüğü
 
 ## Yeniden sıralama
 
-Yeni alan sırası:
+Yeni field sırası:
 
 
 | Ölçüm | Yeni değer |
 | --- | --- |
-| Bullet hizalaması | |
-| Bullet toplam boyutu (bayt) | |
+| Bullet alignment | |
+| Bullet size (byte) | |
 
-Hangi padding baytları kayboldu ya da yer değiştirdi?
+Hangi padding byte'ları kayboldu ya da yer değiştirdi?
 
-| Alan | Yeni ofset | Önceki ofsetten fark |
+| Field | Yeni offset | Önceki offset'ten fark |
 | --- | --- | --- |
 | active | | |
 | position | | |
@@ -60,14 +60,14 @@ Hangi padding baytları kayboldu ya da yer değiştirdi?
 
 ## 100.000 Bullet hesabı
 
-| Yerleşim | Bayt | MiB | MB |
+| Layout | Byte | MiB | MB |
 | --- | --- | --- | --- |
 | İlk sıra | | | |
 | Yeni sıra | | | |
 
 ## Yorum
 
-Bu yerleşim değişikliği bellek ve cache için neyi iyileştirebilir?
+Bu layout değişikliği memory kullanımı ve cache için neyi iyileştirebilir?
 
 
 Neden daha küçük struct otomatik olarak daha hızlı değildir?
@@ -75,4 +75,4 @@ Neden daha küçük struct otomatik olarak daha hızlı değildir?
 
 ## Mentor inceleme notu
 
-İki yerleşimi çiz, padding’in konumlarını göster ve ölçümün hedefe bağlı olduğunu açıkla.
+İki layout'u çiz, padding’in konumlarını göster ve ölçümün hedefe bağlı olduğunu açıkla.

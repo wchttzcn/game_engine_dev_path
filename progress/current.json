@@ -1,22 +1,31 @@
 {
   "schemaVersion": 1,
   "learner": "Mücahit",
-  "currentLessonId": "systems-01-memory-layout",
+  "currentLessonId": "pong-01-first-paddle",
   "lessons": [
     {
+      "id": "pong-01-first-paddle",
+      "title": "İlk raketi çiz",
+      "description": "Pong penceresine bir raket çiz. x değişince nereye gideceğini tahmin et, çalıştır ve gözle.",
+      "world": "World 1 · Pong",
+      "url": "/worlds/01-pong/01-first-paddle",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
       "id": "systems-01-memory-layout",
-      "title": "Bellek yerleşimi",
-      "description": "Bullet alanları arasında boşluk var mı? Tahmin et, ölç, padding'i göster.",
-      "world": "World 0 · Systems Foundations",
+      "title": "Memory layout",
+      "description": "Bullet field'ları arasında boşluk var mı? Tahmin et, ölç, padding'i göster.",
+      "world": "World 0 · İsteğe bağlı",
       "url": "/worlds/00-systems/01-memory-layout",
       "status": "not_started",
       "evidence": []
     },
     {
       "id": "systems-02-field-order",
-      "title": "Alan sırasını değiştir",
-      "description": "Aynı alanları başka sırayla yerleştir. Padding'in ve toplam boyutun nasıl değiştiğini ölç.",
-      "world": "World 0 · Systems Foundations",
+      "title": "Field sırasını değiştir",
+      "description": "Aynı field'ları başka sırayla yerleştir. Padding'in ve toplam size'ın nasıl değiştiğini ölç.",
+      "world": "World 0 · İsteğe bağlı",
       "url": "/worlds/00-systems/02-field-order",
       "status": "not_started",
       "evidence": []
@@ -24,15 +33,16 @@
     {
       "id": "systems-03-memory-budget",
       "title": "100.000 merminin maliyeti",
-      "description": "Ölçtüğün iki yerleşimi kullanarak veri boyutunu hesapla; bayt ile MiB arasındaki farkı göster.",
-      "world": "World 0 · Systems Foundations",
+      "description": "Ölçtüğün iki layout'u kullanarak veri için gereken yeri hesapla; byte ile MiB arasındaki farkı göster.",
+      "world": "World 0 · İsteğe bağlı",
       "url": "/worlds/00-systems/03-memory-budget",
       "status": "not_started",
       "evidence": []
     }
   ],
   "skills": [
-    { "id": "layout", "title": "Bellek yerleşimi", "status": "unassessed", "evidence": [] },
+    { "id": "screen-coordinates", "title": "Screen coordinates", "status": "unassessed", "evidence": [] },
+    { "id": "layout", "title": "Memory layout", "status": "unassessed", "evidence": [] },
     { "id": "alignment", "title": "Alignment ve padding", "status": "unassessed", "evidence": [] },
     { "id": "measurement", "title": "Tahmin ve ölçüm", "status": "unassessed", "evidence": [] }
   ],

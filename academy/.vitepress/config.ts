@@ -23,17 +23,20 @@ export default defineConfig({
         ],
       },
       {
-        text: 'World 0 · Systems',
+        text: 'World 1 · Pong',
         items: [
-          { text: 'Bölüm planı', link: '/worlds/00-systems/' },
-          { text: '0.1 · Bellek yerleşimi', link: '/worlds/00-systems/01-memory-layout' },
-          { text: '0.2 · Alan sırasını değiştir', link: '/worlds/00-systems/02-field-order' },
-          { text: '0.3 · 100.000 merminin maliyeti', link: '/worlds/00-systems/03-memory-budget' },
+          { text: 'Bölüm', link: '/worlds/01-pong/' },
+          { text: '1.1 · İlk raketi çiz', link: '/worlds/01-pong/01-first-paddle' },
         ],
       },
       {
-        text: 'Sıradaki dünya',
-        items: [{ text: 'World 1 · Pong — plan', link: '/worlds/01-pong/' }],
+        text: 'Optional reference · World 0',
+        items: [
+          { text: 'Bölüm', link: '/worlds/00-systems/' },
+          { text: '0.1 · Memory layout', link: '/worlds/00-systems/01-memory-layout' },
+          { text: '0.2 · Field sırası', link: '/worlds/00-systems/02-field-order' },
+          { text: '0.3 · Memory budget', link: '/worlds/00-systems/03-memory-budget' },
+        ],
       },
     ],
     outline: { level: [2, 3], label: 'Bu derste' },

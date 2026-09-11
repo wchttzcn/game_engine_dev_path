@@ -1,5 +1,11 @@
 # İlerleme kaydı
 
+Bu belge agent içindir. Kaydı, şemayı ve dashboard bağlantısını agent yönetir;
+Mücahit yalnızca tahminini, Odin denemesini ve gözlemini paylaşır. Platform veya
+içerik denetimi öğrenci girişimi değildir; aktif ders, durumlar ve geçmiş korunur.
+Öğrenci rota değişikliği istediğinde hazır bir derse geçilebilir; önceki dersler
+tamamlanmış sayılmaz, girişimler ve kanıtları korunur. World 0 isteğe bağlıdır.
+
 `current.json` tek doğruluk kaynağıdır. Academy buradan okur; tarayıcıda ayrı
 bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya değişikliklerini izler;
 üretim çıktısına yansıtmak için site yeniden derlenir.
@@ -21,14 +27,16 @@ derse geçilmez.
 | `review_needed` | Öğrenci değerlendirme istedi; kanıtları incelenmeyi bekliyor |
 | `completed` | Dersin kabul ölçütleri incelendi; sonuçlar değerlendirmeye yazıldı |
 
-`evidence` alanları repo köküne göre dosya yollarıdır. Tamamlanma için en az
-alıştırma kodu, journal'ın o derse ait doldurulmuş bölümü ve değerlendirme kaydı gerekir. İpuçlarıyla
+`evidence` alanları repo köküne göre dosya yollarıdır. Tamamlanma, dersin kabul
+koşullarını karşılayan gözleme ve değerlendirme kaydına dayanır. Kod görevlerinde
+kod yolu eklenir; davranış ve kısa sohbet açıklaması agent'ın `progress/notes/`
+notuyla kaydedilebilir. Journal ve tablo doldurmak zorunlu değildir. İpuçlarıyla
 tamamlanan ders de tamamlanabilir; bağımsız beceri durumu ayrıca değerlendirilir.
 
-0.1 ilk tahmin/ölçüm ve çizimi; 0.2 yeniden sıralamayı; 0.3 100.000 Bullet
-hesabını değerlendirir. Üç ders aynı lab ve journal dosyasını paylaşır. Kayda
-hangi bölümün incelendiğini yaz. Cache yorumları ve AoS/SoA bu derslerin geçme
-koşulu değildir.
+İsteğe bağlı World 0 dersleri aynı lab ve journal dosyasını paylaşır. Bu dosyalar
+mevcut girişimi korur; tamamlanmaları Pong'a geçiş şartı değildir. Yeniden
+çalışılırsa journal yerine sohbetten tahmin/gözlem kabul edilir. Kayda yalnızca
+incelenen bölümü yaz; cache yorumları ve AoS/SoA ek geçme koşulu değildir.
 
 ## Beceriler
 
