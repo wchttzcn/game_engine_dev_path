@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "learner": "Mücahit",
+  "currentLessonId": "systems-01-memory-layout",
+  "lessons": [
+    {
+      "id": "systems-01-memory-layout",
+      "title": "Bellek yerleşimi",
+      "description": "Bullet alanları arasında boşluk var mı? Tahmin et, ölç, padding'i göster.",
+      "world": "World 0 · Systems Foundations",
+      "url": "/worlds/00-systems/01-memory-layout",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "systems-02-field-order",
+      "title": "Alan sırasını değiştir",
+      "description": "Aynı alanları başka sırayla yerleştir. Padding'in ve toplam boyutun nasıl değiştiğini ölç.",
+      "world": "World 0 · Systems Foundations",
+      "url": "/worlds/00-systems/02-field-order",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "systems-03-memory-budget",
+      "title": "100.000 merminin maliyeti",
+      "description": "Ölçtüğün iki yerleşimi kullanarak veri boyutunu hesapla; bayt ile MiB arasındaki farkı göster.",
+      "world": "World 0 · Systems Foundations",
+      "url": "/worlds/00-systems/03-memory-budget",
+      "status": "not_started",
+      "evidence": []
+    }
+  ],
+  "skills": [
+    { "id": "layout", "title": "Bellek yerleşimi", "status": "unassessed", "evidence": [] },
+    { "id": "alignment", "title": "Alignment ve padding", "status": "unassessed", "evidence": [] },
+    { "id": "measurement", "title": "Tahmin ve ölçüm", "status": "unassessed", "evidence": [] }
+  ],
+  "reviews": [],
+  "openQuestions": []
+}

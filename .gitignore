@@ -1,0 +1,7 @@
+node_modules/
+academy/.vitepress/cache/
+academy/.vitepress/dist/
+*.dSYM/
+labs/**/lab
+games/**/game
+.DS_Store

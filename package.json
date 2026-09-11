@@ -1,0 +1,17 @@
+{
+  "name": "mucahit-engine-academy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "academy:dev": "vitepress dev academy --host 127.0.0.1",
+    "academy:build": "vitepress build academy",
+    "academy:preview": "vitepress preview academy --host 127.0.0.1",
+    "lab:check": "node scripts/check-lab.mjs"
+  },
+  "devDependencies": {
+    "vitepress": "2.0.0-alpha.20",
+    "vue": "^3.5.13"
+  }
+}
