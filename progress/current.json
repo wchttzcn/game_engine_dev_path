@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-04-delta-time",
+  "currentLessonId": "pong-05-ball-velocity",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -44,8 +44,10 @@
       "description": "Raket hareketini delta time ile saniye başına pixel olarak hesapla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/04-delta-time",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-05-ball-velocity",
@@ -189,6 +191,19 @@
       "evidence": [
         "games/pong/main.odin"
       ]
+    },
+    {
+      "id": "delta-time",
+      "title": "Zaman tabanlı hareket",
+      "status": "learning",
+      "lessons": [
+        "pong-04-delta-time"
+      ],
+      "note": "Hızı pixel/saniye olarak adlandırdı ve GetFrameTime'ı loop başında bir kez alıp input update'inde çarptı. Aynı dt'nin ball gibi başka bir hareket eden nesneye uygulanışı henüz görülmedi.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     }
   ],
   "reviews": [
@@ -233,6 +248,16 @@
         "games/pong/main.odin"
       ],
       "summary": "W/S ile player raketi hareket ediyor, SCREEN_WIDTH ve SCREEN_HEIGHT dosya seviyesinde tanımlı ve InitWindow onları kullanıyor, iki yönde de sınır clamp'i doğru, rakip ile top sabit, odin check geçti. Ders istemeden rectangle kurulumunu game loop'un içine taşıyarak 1.2'deki stale render sorununu kendi kapattı. Açık gözlem: opponent.x hâlâ 740 literal'i. GUI agent tarafından çalıştırılmadı.",
+      "hintLevel": 0
+    },
+    {
+      "lessonId": "pong-04-delta-time",
+      "reviewedAt": "2026-09-13T00:00:00Z",
+      "outcome": "passed",
+      "evidence": [
+        "games/pong/main.odin"
+      ],
+      "summary": "PLAYER_SPEED pixel/saniye sabiti tanımlı, dt loop başında bir kez alınıyor ve W/S update'inde çarpılıyor, 1.3'ün clamp'leri korunmuş, odin check geçti. Açık gözlem: Paddle'a eklenen speed field'ı iki rakette de set ediliyor ama hiç okunmuyor; hız sabit mi entity state'i mi olacağı kararı 1.9'daki opponent AI'a kadar açık. GUI agent tarafından çalıştırılmadı.",
       "hintLevel": 0
     }
   ],

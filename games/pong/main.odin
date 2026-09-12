@@ -5,6 +5,8 @@ import rl "vendor:raylib"
 SCREEN_WIDTH :: 800
 SCREEN_HEIGHT :: 450
 
+PLAYER_SPEED :: 400.0
+
 Game :: struct {
 	player, opponent: Paddle,
 	ball:             Ball,
@@ -12,6 +14,7 @@ Game :: struct {
 
 Paddle :: struct {
 	x, y, width, height: f32,
+	speed:               f32,
 }
 Ball :: struct {
 	x, y, radius: f32,
@@ -23,20 +26,21 @@ main :: proc() {
 	rl.SetTargetFPS(60)
 
 	game := Game {
-		player = Paddle{x = 40, y = 160, width = 20, height = 100},
-		opponent = Paddle{x = 740, y = 160, width = 20, height = 100},
+		player = Paddle{x = 40, y = 160, width = 20, height = 100, speed = 400.0},
+		opponent = Paddle{x = 740, y = 160, width = 20, height = 100, speed = 400.0},
 		ball = Ball{x = 400, y = 225, radius = 5},
 	}
 
 
 	for !rl.WindowShouldClose() {
 		//        === Update ===
+		dt := rl.GetFrameTime()
 
 		if rl.IsKeyDown(.W) {
-			game.player.y -= 5.0
+			game.player.y -= PLAYER_SPEED * dt
 		}
 		if rl.IsKeyDown(.S) {
-			game.player.y += 5.0
+			game.player.y += PLAYER_SPEED * dt
 		}
 
 
