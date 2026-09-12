@@ -15,7 +15,8 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   Dilin tamamının tek sayfalık referansı. Şunun için: `struct`, `enum`,
   `switch`, procedure, fixed array gibi dil yapılarının doğru sözdizimi ve
   semantiği. Bölüm anchor'ları: `#structs`, `#enumerations`,
-  `#switch-statement`, `#procedures`, `#fixed-arrays`, `#array-programming`.
+  `#switch-statement`, `#procedures`, `#fixed-arrays`, `#array-programming`,
+  `#constant-declarations`.
 - [Odin builtin procedure'ları](https://pkg.odin-lang.org/base/builtin/)
   `clamp`, `min`, `max`, `abs` gibi import gerektirmeyen builtin'ler. Şunun
   için: sınır içinde tutma ve hız sınırlama hesapları.

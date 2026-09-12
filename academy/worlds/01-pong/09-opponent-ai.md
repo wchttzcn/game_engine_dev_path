@@ -12,8 +12,8 @@ description: "Rakip raketin hedefe kontrollü yaklaşmasını sağla."
 Sağ paddle için basit bir opponent update'i yaz. Raketin merkezi topun
 merkezinin üstündeyse aşağı, altındaysa yukarı hareket etsin. Hızı örneğin
 `opponent_speed` ile sınırla ve her frame hareketi `dt` ile çarp. Update sonunda
-`game.opponent.y` değerini `0` ile `450 - game.opponent.height` arasında clamp
-et.
+`game.opponent.y` değerini `0` ile `SCREEN_HEIGHT - game.opponent.height`
+arasında clamp et.
 
 Bu AI topun konumuna “teleport” etmemeli. Capped speed yüzünden hızlı bir top
 raketi geçebilmeli; bu, oyunun zorluk ayarı için kullanışlı bir davranış.
@@ -56,8 +56,8 @@ değeri `game.opponent.y`den çıkar, aşağıdaysa ekle.
 
 ::: details İpucu 3 — Clamp API'si
 `clamp` builtin ve generic'tir; import gerekmez. `game.opponent.y`
-güncellendikten sonra minimum `0`, maksimum `450 - game.opponent.height`
-ile çağır.
+güncellendikten sonra minimum `0`, maksimum
+`SCREEN_HEIGHT - game.opponent.height` ile çağır.
 :::
 
 ::: details Deep Dive — Bu neden “iyi” AI değildir?

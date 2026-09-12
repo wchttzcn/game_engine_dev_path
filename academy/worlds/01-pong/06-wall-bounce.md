@@ -12,9 +12,9 @@ description: "Topun dikey hızını sınırda tersine çevir."
 `games/pong/main.odin` içindeki hareket eden topa üst ve alt duvar collision'ı
 ekle. Topun merkezi `game.ball.y`, radius'u `game.ball.radius`, dikey hızı
 `game.ball.velocity_y` ise görünür alan `game.ball.radius` ile
-`450 - game.ball.radius` arasındadır. Top bu sınırlardan birini geçerse önce
-`game.ball.y` değerini geçerli sınıra düzelt, sonra dikey velocity'yi o duvardan
-uzağa yönlendir.
+`SCREEN_HEIGHT - game.ball.radius` arasındadır. Top bu sınırlardan birini
+geçerse önce `game.ball.y` değerini geçerli sınıra düzelt, sonra dikey
+velocity'yi o duvardan uzağa yönlendir.
 
 ## Ne zaman bitti?
 
@@ -29,8 +29,9 @@ için negatif dikey velocity topu yukarı, pozitif değer aşağı götürür. H
 magnitude'ını koruyup işaretini duvardan uzağa göre seçmek yönü güvenceye alır.
 
 Bu collision bir alan çakışması değildir: topun bir sınırı geçip geçmediğini
-kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `450` ile karşılaştırmak
-yeterli değildir; dairenin kenarı merkezinden `game.ball.radius` kadar uzaktadır.
+kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `SCREEN_HEIGHT` ile
+karşılaştırmak yeterli değildir; dairenin kenarı merkezinden `game.ball.radius`
+kadar uzaktadır.
 
 ## Sınır
 
@@ -40,7 +41,7 @@ izole etmek.
 
 ::: details İpucu 1 — Hangi kenarı izleyeceksin?
 Üst kenar `game.ball.y - game.ball.radius`, alt kenar `game.ball.y + game.ball.radius` olur.
-Bu iki değeri pencerenin üstü ve altıyla karşılaştır.
+Bu iki değeri `0` ve `SCREEN_HEIGHT` ile karşılaştır.
 :::
 
 ::: details İpucu 2 — Yönü tersine çevir
