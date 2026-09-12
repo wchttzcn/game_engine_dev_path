@@ -12,6 +12,12 @@ description: "Klavye input'u ile player raketini ekran sınırları içinde hare
 W ve S tuşlarıyla sol raketi yukarı/aşağı hareket ettir. Raket pencerenin üstüne
 veya altına taşmamalı.
 
+Sınırı kontrol edebilmek için önce ona bir isim ver: `SCREEN_WIDTH` ve
+`SCREEN_HEIGHT` sabitlerini dosya seviyesinde tanımla ve `rl.InitWindow`
+çağrısında da bunları kullan; aynı sayıyı iki ayrı yerde tutarsan pencere
+boyutunu değiştirdiğin gün sınır kontrolü sessizce yanlış kalır. Bu derste
+dikey sınır yeter; `SCREEN_WIDTH` 1.10'da yatay sınır olarak işini görecek.
+
 Input ve `game.player.y` güncellemesini `BeginDrawing`den önce, game loop'un içinde yap;
 render kodu yalnızca güncel game state'ini çizsin. Bu ders için frame başına
 sabit bir hareket miktarı kullanabilirsin.
@@ -19,7 +25,9 @@ sabit bir hareket miktarı kullanabilirsin.
 ## Ne zaman bitti?
 
 - W basılıyken player raketi yukarı, S basılıyken aşağı gider.
-- Raketin üst kenarı `0`ın üstüne çıkmaz; alt kenarı `450`yi geçmez.
+- `SCREEN_WIDTH` ve `SCREEN_HEIGHT` dosya seviyesinde tanımlı; pencere de bu
+  sabitlerle açılıyor.
+- Raketin üst kenarı `0`ın üstüne çıkmaz; alt kenarı `SCREEN_HEIGHT`i geçmez.
 - Rakip ve top sabit kalır.
 - `odin check games/pong` geçiyor.
 
@@ -41,8 +49,18 @@ Bu, React'teki tek seferlik key event'e değil, her frame çalışan bir update'
 benzer. Aynı anda iki tuş basılıysa iki koşul da çalışabilir; bu Pong için kabul
 edilebilir bir başlangıç davranışı.
 
-Sınır kontrolünde yalnızca `game.player.y` değil, raketin tamamı önemlidir. Alt sınır
-`game.player.y + f32(game.player.height)` ile hesaplanır.
+Sınır kontrolünde yalnızca `game.player.y` değil, raketin tamamı önemlidir. Alt
+sınır, `game.player.y + game.player.height` değerini `SCREEN_HEIGHT` ile
+karşılaştırarak bulunur.
+
+Sabitleri 1.2'de `Paddle` için kullandığın `::` ile yazarsın; untyped
+kaldıkları için hem `rl.InitWindow`ın integer parametresine hem de `f32` raket
+hesabına dönüşümsüz girerler:
+
+```odin
+SCREEN_WIDTH :: 800
+SCREEN_HEIGHT :: 450
+```
 
 ## Sınırlar
 
@@ -57,8 +75,8 @@ değişikliğinde görünmeyen bir gameplay bug birikmesini önler.
 
 ::: details İpucu 2 — Alt kenar
 Yukarı hareketten sonra `game.player.y < 0` ise `game.player.y = 0` yap. Aşağı için
-`game.player.y + f32(game.player.height) > 450` durumunda `game.player.y`yi
-`450 - f32(game.player.height)` değerine sabitle.
+`game.player.y + game.player.height > SCREEN_HEIGHT` durumunda `game.player.y`yi
+`SCREEN_HEIGHT - game.player.height` değerine sabitle.
 :::
 
 ::: details İpucu 3 — Tuş adları
@@ -77,7 +95,8 @@ arasındaki fark oyuncu hissini doğrudan belirleyecek.
 
 [Odin vendor:raylib — `IsKeyDown`](https://pkg.odin-lang.org/vendor/raylib/#IsKeyDown).
 Basılı tutma ile tek atımlık basışın (`IsKeyPressed`) imzalarını yan yana
-gördüğün yer.
+gördüğün yer. Bu derste tanıtılan `::` sabit tanımı için [Odin Overview —
+Constant declarations](https://odin-lang.org/docs/overview/#constant-declarations).
 
 **Kazanım:** Input'un game state'i değiştirdiği, render'ın da sonucu gösterdiği
 ilk frame akışını kurdun. Sonraki adım: [1.4 — Delta time](/worlds/01-pong/04-delta-time).

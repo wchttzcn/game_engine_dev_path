@@ -12,9 +12,10 @@ topu belirli bir servis yönüyle yeniden oyuna sok.
 
 Mevcut `Game` state'ine iki skor alanı ekle. Update sırasında topun tamamının
 sol veya sağ sınırı geçtiğini tespit et. Sol sınırdan çıkarsa sağ oyuncunun,
-sağ sınırdan çıkarsa sol oyuncunun skorunu artır. Ardından topu sahanın
-merkezine koy ve hızı, sayı kaybeden oyuncuya doğru gidecek şekilde sabit bir
-değere ayarla. Skorları ekrana çiz.
+sağ sınırdan çıkarsa sol oyuncunun skorunu artır. Yatay sınırlar 1.3'te
+tanımladığın `SCREEN_WIDTH` sabitinden gelsin. Ardından topu sahanın merkezine
+(`SCREEN_WIDTH / 2`, `SCREEN_HEIGHT / 2`) koy ve hızı, sayı kaybeden oyuncuya
+doğru gidecek şekilde sabit bir değere ayarla. Skorları ekrana çiz.
 
 ## Bilmen gereken küçük parça
 
@@ -50,8 +51,8 @@ Skor sayılarını `rl.TextFormat` ile raylib'in beklediği `cstring` metnine ç
 - `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Hangi sınır geçti?
-Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. Bunları
-oyun alanının `0` ve pencere genişliğiyle karşılaştır.
+Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. Bunları oyun
+alanının yatay sınırlarıyla — `0` ve `SCREEN_WIDTH` — karşılaştır.
 :::
 
 ::: details İpucu 2 — Reset procedure'ın girdisi

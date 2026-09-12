@@ -114,9 +114,18 @@
     {
       "id": "pong-13-debug-overlay",
       "title": "Debug overlay ekle",
-      "description": "F1 ile açılan overlay'de oyunun görünmeyen state'ini ekrana getir.",
+      "description": "F1 ile açılan overlay'de oyunun görünmeyen sayısal state'ini ekrana getir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/13-debug-overlay",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pong-14-collision-shapes",
+      "title": "Collision shape'lerini çiz",
+      "description": "Top ve raketlerin collision shape'lerini, collision hesabının kendi değerlerinden outline olarak çiz.",
+      "world": "World 1 · Pong",
+      "url": "/worlds/01-pong/14-collision-shapes",
       "status": "not_started",
       "evidence": []
     }

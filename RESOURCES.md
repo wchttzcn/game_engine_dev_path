@@ -15,10 +15,16 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   Dilin tamamının tek sayfalık referansı. Şunun için: `struct`, `enum`,
   `switch`, procedure, fixed array gibi dil yapılarının doğru sözdizimi ve
   semantiği. Bölüm anchor'ları: `#structs`, `#enumerations`,
-  `#switch-statement`, `#procedures`, `#fixed-arrays`, `#array-programming`.
+  `#switch-statement`, `#procedures`, `#fixed-arrays`, `#array-programming`,
+  `#constant-declarations`.
 - [Odin builtin procedure'ları](https://pkg.odin-lang.org/base/builtin/)
   `clamp`, `min`, `max`, `abs` gibi import gerektirmeyen builtin'ler. Şunun
   için: sınır içinde tutma ve hız sınırlama hesapları.
+- [Odin adlandırma konvansiyonu — `base/runtime/core.odin`](https://github.com/odin-lang/Odin/blob/master/base/runtime/core.odin)
+  Dosyanın başındaki yorum bloğu dilin kendi adlandırma kuralını sayar: tip ve
+  enum üyesi Ada_Case, procedure ve değişken snake_case, constant
+  SCREAMING_SNAKE_CASE. Şunun için: derslerde yazılan adların core paketlerle aynı
+  biçimde olması. Kurulu derleyicideki kopyayla doğrulandı.
 - [Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/)
   Odin'in kendi raylib binding'inin üretilmiş dokümantasyonu — C değil, gerçekte
   çağırdığın imzalar. Şunun için: her raylib çağrısının parametre sırası ve
