@@ -90,7 +90,7 @@
     },
     {
       "id": "pong-10-score-and-reset",
-      "title": "1.10 — Sayı ve servis",
+      "title": "1.10 — Skor ve servis",
       "description": "Top sahadan çıkınca doğru skoru artır ve yeni servis için topu sıfırla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/10-score-and-reset",

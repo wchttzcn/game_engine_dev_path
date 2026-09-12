@@ -57,7 +57,7 @@ yardım etmek istersen `PLAYER_SPEED_PIXELS_PER_SECOND` da kullanabilirsin.
 :::
 
 ::: details İpucu 3 — Sıra
-Önce `dt`yi al, sonra input ile `game.player.y`yi güncelle, ardından önceki dersteki
+Önce `dt`'yi al, sonra input ile `game.player.y`'yi güncelle, ardından önceki dersteki
 clamp koşullarını uygula. Render bölümü bu değişiklikten habersiz kalır.
 :::
 

@@ -27,7 +27,7 @@ collision ve debug derslerinde aynı değeri tekrar kullanacaksın. Topu
 
 ## Ne zaman bitti?
 
-- `Paddle`, `Ball` ve `Game` declaration'ları `main`in dışında duruyor.
+- `Paddle`, `Ball` ve `Game` declaration'ları `main`'in dışında duruyor.
 - `main` içinde iki raket ile topu taşıyan tek bir `Game` değeri oluşturuluyor.
 - Önceden doğrudan yazılmış sayılar yerine state field'larıyla iki raket ve
   ortadaki daire top çiziliyor.
@@ -99,8 +99,8 @@ ver; `DrawCircleV` topun merkezi ile `radius` field'ını kullanır.
 :::
 
 ::: details Deep Dive — State neden değer olarak duruyor?
-Bu küçük oyunda `game` doğrudan `main`in local değeri olabilir. İçindeki player,
-opponent ve ball değerlerinin ömrü game loop boyunca sürer; owner `game`dir.
+Bu küçük oyunda `game` doğrudan `main`'in local değeri olabilir. İçindeki player,
+opponent ve ball değerlerinin ömrü game loop boyunca sürer; owner `game`'dir.
 İleride procedure'lar aynı state'e eriştiğinde pointer ve update sırası gerçek
 sorulara dönüşecek; şimdiden heap allocation gerekmez.
 :::

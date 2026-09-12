@@ -51,7 +51,7 @@ ve aşağı taşıyacak pozitif sayılar seç.
 :::
 
 ::: details İpucu 2 — Doğru update formülü
-Input update'inden sonra, `BeginDrawing()`den önce hem `game.ball.x` hem `game.ball.y`
+Input update'inden sonra, `BeginDrawing()`'den önce hem `game.ball.x` hem `game.ball.y`
 alanını kendi velocity'si ile `dt` çarparak artır.
 :::
 
@@ -62,7 +62,7 @@ Hareket için render koduna yeni sayı ekleme; değişen tek kaynak ball state o
 
 ::: details Deep Dive — Position ve velocity neden ayrı state?
 Velocity'yi doğrudan position yerine saklamak, sonraki collision response için
-gereklidir: duvara değince `velocity_y`nin işaretini değiştirmek topu ters yöne
+gereklidir: duvara değince `velocity_y`'nin işaretini değiştirmek topu ters yöne
 gönderir. Position'ı rastgele geri almak aynı bilgiyi ifade etmez ve raket
 collision'ında hangi yönden geldiğini kaybettirir. Acceleration veya spin ancak
 oyun bunları gerektirdiğinde bu modele eklenir.
