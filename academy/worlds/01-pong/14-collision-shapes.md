@@ -13,8 +13,8 @@ next: false
 
 1.13'teki `debug_visible` bloğunu genişlet. Overlay açıkken topun circle
 collision shape'ini, iki raketin rectangle collision shape'ini outline olarak ve
-sahanın merkez çizgisini çiz. Bu shape'leri `CheckCollisionCircleRec`'e verdiğin
-değişkenlerin **aynısından** üret; yeni sayı yazma. Overlay kapalıyken bu
+sahanın merkez çizgisini çiz. Bu shape'leri, collision testinin okuduğu **aynı**
+`Game` field'larından üret; debug için yeni sayı yazma. Overlay kapalıyken bu
 çizimler görünmesin.
 
 ## Bilmen gereken küçük parça
@@ -37,8 +37,8 @@ olur.
 
 - Outline'lar yalnızca çizim yapar; hiçbir position, velocity veya skor
   değiştirmez.
-- Ayrı "debug hitbox" sayıları tanımlama. 1.2'den beri taşıdığın `player_rect`,
-  `opponent_rect` ve topun merkez/`radius` değerleri girdinin tamamıdır.
+- Ayrı "debug hitbox" sayıları tanımlama. `game.player`, `game.opponent` ve
+  `game.ball` field'ları girdinin tamamıdır.
 - Shape'leri outline olarak çiz, dolu değil: altlarındaki gerçek raket ve top
   görünmeye devam etmeli.
 - Çizim sırası kendi konusu değil; overlay'i normal sahnenin üstüne koyman
@@ -55,8 +55,9 @@ olur.
 
 ::: details İpucu 1 — Hangi değerler zaten elinde?
 `draw_game` içinde raketleri çizmek için kurduğun `player_rect` ve
-`opponent_rect` ile topun merkezi olan `rl.Vector2` değeri. Outline çağrıları
-tam olarak bu üç değeri alır.
+`opponent_rect`, bir de `DrawCircleV`'ye verdiğin
+`rl.Vector2{game.ball.x, game.ball.y}` merkezi. Outline çağrıları tam olarak bu
+üç değeri alır.
 :::
 
 ::: details İpucu 2 — Outline çağrıları

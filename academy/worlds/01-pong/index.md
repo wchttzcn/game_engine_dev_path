@@ -37,4 +37,5 @@ odin run games/pong -out:/tmp/mucahit-pong
 14. [1.14 — Collision shape'lerini çiz](/worlds/01-pong/14-collision-shapes)
 
 Bu paket bittiğinde maç oynanabilir, yeniden başlatılabilir; önemli state ve
-collision shape'leri F1 ile görünür olur. Ses ve game-feel adımları sonraki paket için açık kalır.
+collision shape'leri F1 ile görünür olur. Ses ve game-feel adımları sonraki
+paket için açık kalır.

@@ -53,8 +53,9 @@ tarafı yalnızca sonucu okur.
 :::
 
 ::: details İpucu 2 — Sayıyı metne dönüştürme
-`rl.DrawText` bir `cstring` bekler. `rl.TextFormat("ball %.1f, %.1f", game.ball.x, game.ball.y)`
-sayıları o `cstring` içine formatlar. Bu binding'in `TextFormat`'ı Odin'in `fmt`
+`rl.DrawText` bir `cstring` bekler.
+`rl.TextFormat("ball %.1f, %.1f", game.ball.x, game.ball.y)` sayıları o
+`cstring` içine formatlar. Bu binding'in `TextFormat`'ı Odin'in `fmt`
 verb'lerini kullanır, yani enum'u `%v` ile doğrudan adıyla yazdırabilirsin. FPS
 için ayrıca `rl.DrawFPS(x, y)` hazır çağrısı var.
 :::

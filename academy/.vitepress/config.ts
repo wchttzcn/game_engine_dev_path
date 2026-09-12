@@ -39,7 +39,7 @@ export default defineConfig({
           { text: '1.11 · Match state', link: '/worlds/01-pong/11-match-state' },
           { text: '1.12 · Update / render', link: '/worlds/01-pong/12-update-render' },
           { text: '1.13 · Debug overlay', link: '/worlds/01-pong/13-debug-overlay' },
-          { text: "1.14 · Collision shape'leri", link: '/worlds/01-pong/14-collision-shapes' },
+          { text: "1.14 · Collision shape'lerini çiz", link: '/worlds/01-pong/14-collision-shapes' },
         ],
       },
     ],

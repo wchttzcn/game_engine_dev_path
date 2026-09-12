@@ -31,7 +31,8 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 | `RESOURCES.md` | Derslerin dayandığı doğrulanmış kaynaklar ve topluluklar |
 
 Pong'un 1.1–1.14 dersleri (14 ders) hazırdır. Bu paket oynanabilir maç, açık
-match state, update/render ayrımı ve ilk debug overlay'e kadar gider. Sonraki
+match state, update/render ayrımı ve collision shape'lerini görünür kılan ilk
+debug overlay'e kadar gider. Sonraki
 dersler, mevcut iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre
 hazırlanır.
 
