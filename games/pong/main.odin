@@ -17,7 +17,8 @@ Paddle :: struct {
 	speed:               f32,
 }
 Ball :: struct {
-	x, y, radius: f32,
+	x, y, radius:           f32,
+	velocity_x, velocity_y: f32,
 }
 
 main :: proc() {
@@ -28,7 +29,7 @@ main :: proc() {
 	game := Game {
 		player = Paddle{x = 40, y = 160, width = 20, height = 100, speed = 400.0},
 		opponent = Paddle{x = 740, y = 160, width = 20, height = 100, speed = 400.0},
-		ball = Ball{x = 400, y = 225, radius = 5},
+		ball = Ball{x = 400, y = 225, radius = 5, velocity_x = 300.0, velocity_y = 180.0},
 	}
 
 
@@ -43,13 +44,15 @@ main :: proc() {
 			game.player.y += PLAYER_SPEED * dt
 		}
 
-
 		if game.player.y + game.player.height > SCREEN_HEIGHT {
 			game.player.y = SCREEN_HEIGHT - game.player.height
 		}
 		if game.player.y < 0 {
 			game.player.y = 0
 		}
+
+		game.ball.x += game.ball.velocity_x * dt
+		game.ball.y += game.ball.velocity_y * dt
 
 		player_rect := rl.Rectangle {
 			game.player.x,
