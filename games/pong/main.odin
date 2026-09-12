@@ -7,12 +7,11 @@ main :: proc() {
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
-	// Hazır pencere döngüsü. Bu derste yalnızca çizim TODO'suyla çalış.
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
 
-		// TODO: 1.1 — Beyaz raketi burada çiz.
+		rl.DrawRectangle(40, 160, 20, 100, rl.WHITE)
 
 		rl.EndDrawing()
 	}
