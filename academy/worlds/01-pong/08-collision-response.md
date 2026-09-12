@@ -1,6 +1,7 @@
 ---
 title: "1.8 — Çakışmayı çöz"
 description: "Topu raketin dışına al ve yatay yönünü doğru tarafa çevir."
+section: Oynanış
 ---
 
 # 1.8 — Çakışmayı çöz
@@ -38,11 +39,13 @@ kenarı `game.opponent.x` olur. Topun merkezi ilgili kenarın dışında en az
 `game.ball.radius` kadar uzakta olmalıdır. Yatay velocity'nin magnitude'ını koruyup
 işaretini paddle tarafına göre seçmek hızı değiştirmeden yönü güvenceye alır.
 
-## Sınır
+## Sınırlar
 
-Bu response iki paddle için de yalnızca yatay yönü belirler. Açıya göre sekme,
-hızlanma ve skor sonraki küçük problemlerdir. Amaç güvenilir bir temas sonrası
-state'i kurmak.
+Bu response iki paddle için de yalnızca yatay yönü belirler ve yandan gelen
+temas için doğrudur: top raketin üst veya alt kenarına yukarıdan değerse
+yatay düzeltme onu yanlış tarafa iter. Bu durumu şimdilik kabul ediyoruz.
+Açıya göre sekme, hızlanma ve skor sonraki küçük problemlerdir. Amaç
+güvenilir bir temas sonrası state'i kurmak.
 
 ::: details İpucu 1 — Yeni güvenli merkez
 Sol hit'te sol raketin sağ kenarına `game.ball.radius` ekle. Sağ hit'te sağ raketin
@@ -77,5 +80,9 @@ JavaScript örnekleriyle anlatır; circle-rectangle durumunu kapsamaz, onu rayli
 üstlenir.
 
 **Kazanım:** Collision response'un position correction ve yön kararından
-oluştuğunu kullandın. Sonraki adım:
-[1.9 — Rakip kendi kendine hareket etsin](/worlds/01-pong/09-opponent-ai).
+oluştuğunu kullandın.
+
+**“Pong 1.8 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.9 — Rakip kendi kendine hareket
+etsin](/worlds/01-pong/09-opponent-ai).

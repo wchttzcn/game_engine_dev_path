@@ -5,16 +5,20 @@
   "lessons": [
     {
       "id": "pong-01-first-paddle",
-      "title": "İlk raketi çiz",
+      "title": "1.1 — İlk raketi çiz",
       "description": "Pong penceresine ilk raketi çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/01-first-paddle",
       "status": "completed",
-      "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md", "progress/notes/2026-09-11-gameplay-workflow.md"]
+      "evidence": [
+        "games/pong/main.odin",
+        "progress/notes/2026-09-11-world0-pong-review.md",
+        "progress/notes/2026-09-11-gameplay-workflow.md"
+      ]
     },
     {
       "id": "pong-02-game-state",
-      "title": "Oyun state'ini kur",
+      "title": "1.2 — Oyun state'ini kur",
       "description": "İki raket ile topun verisini çizim çağrılarından ayır ve sahneyi bu state'ten çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/02-game-state",
@@ -23,7 +27,7 @@
     },
     {
       "id": "pong-03-player-input",
-      "title": "Oyuncu input'u",
+      "title": "1.3 — Oyuncu input'u",
       "description": "W/S input'u ile oyuncu raketini hareket ettir ve oyun alanında tut.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/03-player-input",
@@ -32,7 +36,7 @@
     },
     {
       "id": "pong-04-delta-time",
-      "title": "Delta time",
+      "title": "1.4 — Delta time",
       "description": "Raket hareketini delta time ile saniye başına pixel olarak hesapla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/04-delta-time",
@@ -41,7 +45,7 @@
     },
     {
       "id": "pong-05-ball-velocity",
-      "title": "Top velocity'si",
+      "title": "1.5 — Top velocity'si",
       "description": "Top position'ını velocity ve delta time ile her frame güncelle.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/05-ball-velocity",
@@ -50,7 +54,7 @@
     },
     {
       "id": "pong-06-wall-bounce",
-      "title": "Duvarlardan sek",
+      "title": "1.6 — Duvarlardan sek",
       "description": "Top üst veya alt sınıra değdiğinde dikey velocity yönünü değiştir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/06-wall-bounce",
@@ -59,7 +63,7 @@
     },
     {
       "id": "pong-07-paddle-collision",
-      "title": "Rakete değdi mi?",
+      "title": "1.7 — Rakete değdi mi?",
       "description": "Top ile raket çakışmasını tespit et ve debug rengiyle göster.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/07-paddle-collision",
@@ -68,7 +72,7 @@
     },
     {
       "id": "pong-08-collision-response",
-      "title": "Çakışmayı çöz",
+      "title": "1.8 — Çakışmayı çöz",
       "description": "Topu raketin dışına çıkar ve horizontal velocity'yi raketten uzağa yönlendir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/08-collision-response",
@@ -77,7 +81,7 @@
     },
     {
       "id": "pong-09-opponent-ai",
-      "title": "Rakip kendi kendine hareket etsin",
+      "title": "1.9 — Rakip kendi kendine hareket etsin",
       "description": "Rakip raketin topu sınırlı hızla takip etmesini sağla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/09-opponent-ai",
@@ -86,7 +90,7 @@
     },
     {
       "id": "pong-10-score-and-reset",
-      "title": "Sayı ve servis",
+      "title": "1.10 — Sayı ve servis",
       "description": "Top sahadan çıkınca doğru skoru artır ve yeni servis için topu sıfırla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/10-score-and-reset",
@@ -95,7 +99,7 @@
     },
     {
       "id": "pong-11-serve-state",
-      "title": "Servis state'i",
+      "title": "1.11 — Servis state'i",
       "description": "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/11-serve-state",
@@ -104,7 +108,7 @@
     },
     {
       "id": "pong-12-match-over",
-      "title": "Maç sonu ve restart",
+      "title": "1.12 — Maç sonu ve restart",
       "description": "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/12-match-over",
@@ -113,7 +117,7 @@
     },
     {
       "id": "pong-13-update-render",
-      "title": "Update ve render sınırı",
+      "title": "1.13 — Update ve render sınırı",
       "description": "State mutation ile çizimi ayrı procedure'lara taşı.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/13-update-render",
@@ -122,7 +126,7 @@
     },
     {
       "id": "pong-14-debug-overlay",
-      "title": "Debug overlay ekle",
+      "title": "1.14 — Debug overlay",
       "description": "F1 ile açılan overlay'de oyunun görünmeyen sayısal state'ini ekrana getir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/14-debug-overlay",
@@ -131,7 +135,7 @@
     },
     {
       "id": "pong-15-collision-shapes",
-      "title": "Collision shape'lerini çiz",
+      "title": "1.15 — Collision shape'lerini çiz",
       "description": "Top ve raketlerin collision shape'lerini, collision hesabının kendi değerlerinden outline olarak çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/15-collision-shapes",
@@ -144,10 +148,15 @@
       "id": "screen-coordinates",
       "title": "Screen coordinates",
       "status": "learning",
-      "lessons": ["pong-01-first-paddle"],
+      "lessons": [
+        "pong-01-first-paddle"
+      ],
       "note": "Sol üst köşe (0,0), y aşağı artar. Raketi doğru konuma çizdi; farklı bir bağlamda (ör. sınır kontrolü) tekrar uygulanışı henüz görülmedi.",
       "lastRecallAt": null,
-      "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md"]
+      "evidence": [
+        "games/pong/main.odin",
+        "progress/notes/2026-09-11-world0-pong-review.md"
+      ]
     }
   ],
   "reviews": [
@@ -155,7 +164,10 @@
       "lessonId": "pong-01-first-paddle",
       "reviewedAt": "2026-09-11T23:18:13Z",
       "outcome": "needs_revision",
-      "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md"],
+      "evidence": [
+        "games/pong/main.odin",
+        "progress/notes/2026-09-11-world0-pong-review.md"
+      ],
       "summary": "Raket çizimi göreve uygun ve compiler kontrolü başarılı. Pencere davranışı ile x=100 denemesinin tahmin/gözlemi henüz doğrulanmadı; kod düzeltmesi istenmiyor.",
       "hintLevel": 0
     },
@@ -163,7 +175,11 @@
       "lessonId": "pong-01-first-paddle",
       "reviewedAt": "2026-09-11T23:23:27Z",
       "outcome": "passed",
-      "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md", "progress/notes/2026-09-11-gameplay-workflow.md"],
+      "evidence": [
+        "games/pong/main.odin",
+        "progress/notes/2026-09-11-world0-pong-review.md",
+        "progress/notes/2026-09-11-gameplay-workflow.md"
+      ],
       "summary": "Kullanıcının tercihiyle x değiştirme ve tahmin/gözlem raporu koşulları kaldırıldı. Doğru raket implementasyonu ve önceki başarılı compiler kontrolü güncel çizim görevi için yeterli. GUI agent tarafından çalıştırılmadı.",
       "hintLevel": 0
     }

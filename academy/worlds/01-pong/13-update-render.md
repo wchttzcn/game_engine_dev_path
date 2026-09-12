@@ -1,6 +1,7 @@
 ---
 title: "1.13 — Update ve render sınırı"
 description: "Game state'ini update eden kodu, state'i çizen koddan ayır."
+section: Kod sınırları ve araç
 ---
 
 # 1.13 — Update ve render sınırı
@@ -16,6 +17,13 @@ değeri oluştur; her frame delta time al, update çağır, ardından raylib dra
 bloğu içinde draw çağır. Input, raket hareketi, top hareketi, skor ve match
 state transition'ları update tarafında kalsın. Rectangle, text ve arka plan
 çizimi draw tarafında kalsın.
+
+## Ne zaman bitti?
+
+- `main` oyunu oluşturuyor, `dt` alıyor, update ediyor ve çiziyor.
+- Oynanış sonuçları önceki dersle aynı: input, sayı, servis ve restart çalışıyor.
+- `update_game` gerçek `Game` değerini pointer üzerinden değiştiriyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -37,13 +45,6 @@ sorumluluğu ver.
   `main` içinde tut; `draw_game` yalnızca sahneyi çizsin.
 - Update içinde raylib çizim çağrısı, draw içinde state ataması yapma. Bu sınır
   sonraki debug overlay'i güvenle eklememizi sağlar.
-
-## Ne zaman bitti?
-
-- `main` oyunu oluşturuyor, `dt` alıyor, update ediyor ve çiziyor.
-- Oynanış sonuçları önceki dersle aynı: input, sayı, servis ve restart çalışıyor.
-- `update_game` gerçek `Game` değerini pointer üzerinden değiştiriyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Taşınacak satırları ayır
 Position, velocity, score veya match state yazan her satır update'e gider.
@@ -75,5 +76,9 @@ Patterns](https://gameprogrammingpatterns.com/game-loop.html).
 Bir frame'in "input al → update → render" sorumluluklarına neden ayrıldığı.
 
 **Kazanım:** Pong'un state'i tek bir update yolunda değişiyor, render ise onu
-yansıtıyor. Bu sınır, görünmeyen state'i oyun oynarken inceleyecek overlay için
-temel oluşturuyor.
+yansıtıyor.
+
+**“Pong 1.13 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu sınırın ayırdığı state'i oynarken okunur kılmak:
+[1.14 — Debug overlay](/worlds/01-pong/14-debug-overlay).

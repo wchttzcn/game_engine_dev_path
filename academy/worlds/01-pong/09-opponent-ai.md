@@ -1,6 +1,7 @@
 ---
 title: "1.9 — Rakip kendi kendine hareket etsin"
 description: "Rakip raketin hedefe kontrollü yaklaşmasını sağla."
+section: Oynanış
 ---
 
 # 1.9 — Rakip kendi kendine hareket etsin
@@ -38,7 +39,7 @@ sağlar.
 opponent update'inden sonra uygula ki hareket kaynağı ne olursa olsun oyun alanı
 kuralı tek yerde kalsın.
 
-## Sınır
+## Sınırlar
 
 Rakip sadece topun güncel `y` konumunu takip etsin. Prediction, reaction delay,
 hedef sapması veya farklı zorluk seviyeleri ekleme; bunlar çalışır temel AI'ın
@@ -75,5 +76,8 @@ Her entity'nin kendi davranışını frame başına bir adım ilerletmesi fikri;
 raketin update'i bunun en küçük hali.
 
 **Kazanım:** Hedefe yönelen, delta time kullanan ve oyun alanı sınırını koruyan
-bir AI controller yazdın. Sonraki adım:
-[1.10 — Skor ve yeni servis](/worlds/01-pong/10-score-and-reset).
+bir AI controller yazdın.
+
+**“Pong 1.9 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.10 — Sayı ve servis](/worlds/01-pong/10-score-and-reset).

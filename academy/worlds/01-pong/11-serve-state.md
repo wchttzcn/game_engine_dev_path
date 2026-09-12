@@ -1,6 +1,7 @@
 ---
 title: "1.11 — Servis state'i"
 description: "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın."
+section: Oynanış
 ---
 
 # 1.11 — Servis state'i
@@ -19,6 +20,14 @@ işlemesin, yalnızca Space beklensin; Space'e basıldığında state `Playing`
 olsun. `Playing` sırasında 1.5–1.10'da kurduğun top hareketi, collision ve sayı
 kuralları çalışsın. Sayı verildikten sonra reset'i çağır ve state'i yeniden
 `Serving` yap.
+
+## Ne zaman bitti?
+
+- Oyun açıldığında top merkezde duruyor; Space'e basılana kadar kıpırdamıyor.
+- Space topu 1.10'un belirlediği yöne gönderiyor ve state `Playing` oluyor.
+- Sayıdan sonra top merkeze dönüyor ve yeniden Space bekliyor.
+- `Serving` sırasında ne top hareket ediyor ne de skor artıyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -47,14 +56,6 @@ tutmak her frame aynı transition'ı tetikler.
 - Maç sonu bu dersin konusu değil. Şimdilik iki state yeter; `Match_Over` bir
   sonraki derste gelir.
 - 1.10'un deterministic servis yönü kuralı aynı kalsın; rastgelelik ekleme.
-
-## Ne zaman bitti?
-
-- Oyun açıldığında top merkezde duruyor; Space'e basılana kadar kıpırdamıyor.
-- Space topu 1.10'un belirlediği yöne gönderiyor ve state `Playing` oluyor.
-- Sayıdan sonra top merkeze dönüyor ve yeniden Space bekliyor.
-- `Serving` sırasında ne top hareket ediyor ne de skor artıyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — State nerede yaşar?
 `match_state: Match_State` alanını `Game` içine koy. Skor, top ve maç aşaması
@@ -92,6 +93,10 @@ adlandırmanın dayanağı ise [Odin adlandırma
 konvansiyonu](https://github.com/odin-lang/Odin/blob/master/base/runtime/core.odin):
 kuralı dilin kendi kaynak dosyası söyler.
 
-**Kazanım:** Maçın en belirsiz anı — "top ne zaman kalkar?" — artık kodda yazılı.
-Sonraki adım aynı enum'a maçın sonunu eklemek:
-[1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over).
+**Kazanım:** Maçın en belirsiz anı — "top ne zaman kalkar?" — artık kodda
+yazılı.
+
+**“Pong 1.11 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım aynı enum'a maçın sonunu eklemek: [1.12 — Maç sonu ve
+restart](/worlds/01-pong/12-match-over).

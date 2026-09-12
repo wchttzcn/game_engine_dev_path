@@ -1,6 +1,7 @@
 ---
 title: "1.14 — Debug overlay"
 description: "F1 ile açılan bir overlay üzerinden Pong'un sayısal state'ini görünür yap."
+section: Kod sınırları ve araç
 ---
 
 # 1.14 — Debug overlay
@@ -14,6 +15,15 @@ state'ini oynarken oku.
 tersine çevir. `draw_game` içinde overlay açıksa FPS'i, topun position ve
 velocity değerlerini ve match state'in adını ekrana yaz. Overlay kapalıyken
 bu metinler görünmesin.
+
+## Ne zaman bitti?
+
+- F1, overlay'i her basışta bir kez açıp kapatıyor; tuşu basılı tutmak yanıp
+  sönmeye yol açmıyor.
+- Açık overlay FPS, top position/velocity ve match state adını gösteriyor.
+- Overlay kapalıyken ekranda normal maç görüntüsünden başka bir şey yok.
+- Normal maç akışı değişmiyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -36,15 +46,6 @@ bıraktığın yerde kalması tamamen şansa bağlı olur.
   Pong'un ihtiyacı değil; Breakout'ta runtime tuning problemiyle gelecek.
 - Overlay için ayrı bir procedure, panel abstraction'ı veya satır listesi kurma.
   `draw_game` içindeki bir `if` bloğu bu kadar bilgi için yeterli.
-
-## Ne zaman bitti?
-
-- F1, overlay'i her basışta bir kez açıp kapatıyor; tuşu basılı tutmak yanıp
-  sönmeye yol açmıyor.
-- Açık overlay FPS, top position/velocity ve match state adını gösteriyor.
-- Overlay kapalıyken ekranda normal maç görüntüsünden başka bir şey yok.
-- Normal maç akışı değişmiyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Toggle formülü
 F1 basıldıysa `game.debug_visible = !game.debug_visible` ataması yap. Bunu
@@ -79,6 +80,9 @@ allocation sayaçlarına, Breakout'ta runtime tuning paneline genişleyecek.
 Overlay'in kullandığı `DrawFPS`, `DrawText` ve `IsKeyPressed` imzaları aynı
 binding sayfasında; `TextFormat`in Odin tarafındaki gövdesi de orada.
 
-**Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun. Sonraki adım
-görünmeyen shape'leri de çizmek:
-[1.15 — Collision shape'lerini çiz](/worlds/01-pong/15-collision-shapes).
+**Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun.
+
+**“Pong 1.14 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım görünmeyen shape'leri de çizmek: [1.15 — Collision shape'lerini
+çiz](/worlds/01-pong/15-collision-shapes).

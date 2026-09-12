@@ -1,6 +1,7 @@
 ---
 title: "1.1 — İlk raketi çiz"
 description: "Pong penceresine ilk raketi çiz."
+section: Temel hareket
 ---
 
 # 1.1 — İlk raketi çiz
@@ -72,5 +73,7 @@ Odin binding'inin kendi referansı; parametre sırasını ve tiplerini C
 dokümanından değil buradan doğrula.
 
 **Kazanım:** Kendi çizim kodunla Pong'un ilk raketini ekrana koydun.
+
 **“Pong 1.1 denememi değerlendir”** yaz; kodunu inceleyelim.
+
 Sonraki adım: [1.2 — Oyun state'ini kur](/worlds/01-pong/02-game-state).

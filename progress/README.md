@@ -8,6 +8,11 @@ ister. Tahmin, gözlem, journal veya sohbet raporu istenmez.
 okur; tarayıcıda ayrı bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya
 değişikliklerini izler; üretim çıktısına yansıtmak için site yeniden derlenir.
 
+Ders adı da elle yazılmaz. `title`, `world` ve `url` alanları ders dosyasının
+frontmatter'ındaki `title` alanından türetilir: `npm run academy:sync` bu üç
+alanı tazeler, `npm run academy:check` fark varsa hata verir. Bir dersin adı
+değişince frontmatter düzeltilir ve sync çalıştırılır; JSON elle düzenlenmez.
+
 Güncel ders hiçbir doküman metninde elle yazılmaz. Çalışma alanı sayfası
 `AcademyDashboard.vue` ile; yol haritası, çalışma rehberi ve bölüm planı
 `<CurrentLesson />` bileşeni ile bu dosyadan okur. `README.md` ders adı yerine

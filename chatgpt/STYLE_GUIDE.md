@@ -68,7 +68,7 @@ Bir challenge review'u mümkünse şu sırayı izlesin:
 2. Kavramsal riskler
 3. Ölçüm / gözlem eksikleri
 4. Bir sonraki düşünme sorusu
-5. Gerekirse Hint 1
+5. Gerekirse İpucu 1
 
 Doğrudan final çözümü en sona bırak.
 
@@ -113,23 +113,44 @@ Temel kural:
 
 > **Bir lesson sana bilmen gereken her şeyi anlatmaz. Bir sonraki problemi çözebilmen için bilmen gereken en küçük şeyi verir.**
 
-Tercih edilen ders akışı:
+Ders bölümlerinin sırası ve başlıkları bütün pakette aynıdır; emoji kullanılmaz:
 
 ```text
-🎯 Goal
+# <numara> — <ders adı>
+**Hedef:** tek cümle
 ↓
-çok kısa context
+## Görev
 ↓
-⚔️ Challenge
+## Ne zaman bitti?        (kabul koşulu; sayfanın üstünde kalır)
 ↓
-Constraints
+## Bilmen gereken küçük parça   (göreve yetecek kadar context)
 ↓
-✅ Acceptance Criteria
+## Sınırlar               (yalnız eğitsel gerekçesi olan kısıtlar)
 ↓
-💡 Hint 1 / Hint 2 / Hint 3 (kapalı)
+::: details İpucu 1 / İpucu 2 / İpucu 3 (kapalı)
 ↓
-📚 Deep Dive (opsiyonel)
+::: details Deep Dive (opsiyonel, kapalı)
+↓
+## Birincil kaynak
+↓
+**Kazanım:** tek paragraf
+↓
+inceleme çağrısı: **“Pong <numara> denememi değerlendir”** yaz; kodunu inceleyelim.
+↓
+Sonraki adım: [<sonraki dersin adı>](<sonraki dersin yolu>)   (son derste yok)
 ```
+
+Ders adı yalnız frontmatter `title` alanında yazılır ve `1.N — Ad` biçimindedir;
+sidebar, bölüm planı, progress kataloğu ve ders içi linkler onu türetir. Kapanış
+üç ayrı paragraftır: kazanım, inceleme çağrısı, sonraki adım linki. Çağrı her
+derste aynı cümledir — `academy/workflow.md` her dersin sonunda inceleme
+istendiğini söyler.
+
+Kabul koşulu bilerek Sınırlar bölümünden önce gelir: `AGENTS.md` dersin hedef, görev
+ve kabul koşulu ile başlamasını ister, okuyucu da "ne zaman bitti?" cevabını ilk
+ekranda görmelidir. Sınırlar bölümü bir derste hiç kısıt yoksa atlanabilir;
+bulunduğunda başlığı her zaman `## Sınırlar`'dır. Sohbetteki ipucu merdiveni de
+aynı `İpucu 1/2/3` adlarını kullanır.
 
 Şunlardan kaçın:
 

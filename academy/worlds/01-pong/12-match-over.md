@@ -1,6 +1,7 @@
 ---
 title: "1.12 — Maç sonu ve restart"
 description: "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat."
+section: Oynanış
 ---
 
 # 1.12 — Maç sonu ve restart
@@ -16,6 +17,15 @@ ulaştıysa state'i `Serving` yerine `Match_Over` yap. `Match_Over` sırasında 
 hareket etmesin, skor artmasın; ekranda kazananın kim olduğu yazsın. `R` her
 state'ten temiz bir yeni maç başlatsın: iki skor da sıfır, top merkezde, state
 `Serving`.
+
+## Ne zaman bitti?
+
+- Bir oyuncu `WIN_SCORE` değerine ulaştığında maç bitiyor ve top duruyor.
+- Ekranda hangi oyuncunun kazandığı okunuyor.
+- `R`, `Serving`, `Playing` ve `Match_Over` state'lerinin üçünden de sıfır–sıfır
+  ve merkezdeki topla yeni bir maç başlatıyor.
+- Yeni maç ilk servisi yine Space ile bekliyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -43,15 +53,6 @@ skoru karşılaştırmak yeterli bilgi verir; kazananın kimliği başka kuralla
   hareket eden bir top state'in yalan söylediğinin işaretidir.
 - Kazanan metni için şimdilik `rl.DrawText` yeterli. Menü, buton veya ekran
   geçişi efekti bu dersin konusu değil.
-
-## Ne zaman bitti?
-
-- Bir oyuncu `WIN_SCORE` değerine ulaştığında maç bitiyor ve top duruyor.
-- Ekranda hangi oyuncunun kazandığı okunuyor.
-- `R`, `Serving`, `Playing` ve `Match_Over` state'lerinin üçünden de sıfır–sıfır
-  ve merkezdeki topla yeni bir maç başlatıyor.
-- Yeni maç ilk servisi yine Space ile bekliyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Kazanma kontrolü nereye girer?
 Skoru artırdığın satırın hemen ardına. O an elinde yeni skor var; hedefe
@@ -87,5 +88,8 @@ semantiği burada; kazanan metnini çizeceğin `DrawText` ile `TextFormat` de ay
 binding sayfasında.
 
 **Kazanım:** Maç artık başlayıp bitiyor ve yeniden başlıyor — Pong oynanabilir.
-Sonraki adım bu büyüyen update kodunu çizimden ayırmak:
-[1.13 — Update ve render sınırı](/worlds/01-pong/13-update-render).
+
+**“Pong 1.12 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu büyüyen update kodunu çizimden ayırmak: [1.13 — Update ve render
+sınırı](/worlds/01-pong/13-update-render).

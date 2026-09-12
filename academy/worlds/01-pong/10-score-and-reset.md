@@ -1,6 +1,7 @@
 ---
 title: "1.10 — Sayı ve servis"
 description: "Top saha dışına çıktığında skoru güncelle ve topu belirli bir yöne sıfırla."
+section: Oynanış
 ---
 
 # 1.10 — Sayı ve servis
@@ -16,6 +17,13 @@ sağ sınırdan çıkarsa sol oyuncunun skorunu artır. Yatay sınırlar 1.3'te
 tanımladığın `SCREEN_WIDTH` sabitinden gelsin. Ardından topu sahanın merkezine
 (`SCREEN_WIDTH / 2`, `SCREEN_HEIGHT / 2`) koy ve hızı, sayı kaybeden oyuncuya
 doğru gidecek şekilde sabit bir değere ayarla. Skorları ekrana çiz.
+
+## Ne zaman bitti?
+
+- Top soldan çıkınca sağ skor bir artıyor; top sağdan çıkınca sol skor bir artıyor.
+- Her sayıdan sonra top merkezde beliriyor ve kaybeden oyuncuya doğru ilerliyor.
+- Skor ekranda okunuyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -42,13 +50,6 @@ Skor sayılarını `rl.TextFormat` ile raylib'in beklediği `cstring` metnine ç
   ileride hata üretir.
 - Servis hızı sabit ve yönü deterministic kalsın. Rastgelelik game feel için
   daha sonra anlamlı bir karar olacak.
-
-## Ne zaman bitti?
-
-- Top soldan çıkınca sağ skor bir artıyor; top sağdan çıkınca sol skor bir artıyor.
-- Her sayıdan sonra top merkezde beliriyor ve kaybeden oyuncuya doğru ilerliyor.
-- Skor ekranda okunuyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Hangi sınır geçti?
 Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. Bunları oyun
@@ -79,5 +80,9 @@ Skoru çizerken kullanacağın imza; sayıyı `cstring`e çevirmek için aynı s
 [`TextFormat`](https://pkg.odin-lang.org/vendor/raylib/#TextFormat).
 
 **Kazanım:** Sahanın sınır kuralını, skor state'ini ve tam reset'i birlikte
-kurmuş oldun. Sonraki adım bu kuralların maç içinde hangi sırayla geçerli
-olduğunu açıkça tanımlamak.
+kurmuş oldun.
+
+**“Pong 1.10 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu kuralların maç içinde hangi sırayla geçerli olduğunu açıkça
+tanımlamak: [1.11 — Servis state'i](/worlds/01-pong/11-serve-state).

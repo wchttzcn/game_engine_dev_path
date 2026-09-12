@@ -1,6 +1,7 @@
 ---
 title: "1.15 — Collision shape'lerini çiz"
 description: "Topun ve raketlerin görünmeyen collision shape'lerini, collision hesabının kendi değerlerinden çiz."
+section: Kod sınırları ve araç
 next: false
 ---
 
@@ -16,6 +17,15 @@ collision shape'ini, iki raketin rectangle collision shape'ini outline olarak ve
 sahanın merkez çizgisini çiz. Bu shape'leri, collision testinin okuduğu **aynı**
 `Game` field'larından üret; debug için yeni sayı yazma. Overlay kapalıyken bu
 çizimler görünmesin.
+
+## Ne zaman bitti?
+
+- Overlay açıkken top circle outline'ı ve iki raket rectangle outline'ı görünür.
+- Merkez çizgisi sahayı ikiye bölüyor.
+- Outline'lar raketler hareket ettikçe onlarla birlikte geliyor ve gerçek
+  shape'lerin üstüne oturuyor.
+- Overlay kapalıyken hiçbir debug çizimi kalmıyor.
+- `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -43,15 +53,6 @@ olur.
   görünmeye devam etmeli.
 - Çizim sırası kendi konusu değil; overlay'i normal sahnenin üstüne koyman
   yeterli.
-
-## Ne zaman bitti?
-
-- Overlay açıkken top circle outline'ı ve iki raket rectangle outline'ı görünür.
-- Merkez çizgisi sahayı ikiye bölüyor.
-- Outline'lar raketler hareket ettikçe onlarla birlikte geliyor ve gerçek
-  shape'lerin üstüne oturuyor.
-- Overlay kapalıyken hiçbir debug çizimi kalmıyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Hangi değerler zaten elinde?
 `draw_game` içinde raketleri çizmek için kurduğun `player_rect` ve
@@ -89,6 +90,8 @@ Bu dersteki üç çizim çağrısının — `DrawRectangleLinesEx`, `DrawCircleL
 `DrawLineEx` — parametre sırası ve tipleri aynı binding sayfasında.
 
 **Kazanım:** Collision bug'ını artık tahmin ederek değil, gözle görerek
-inceleyebiliyorsun. Pong'un temel sürümü oynanabilir ve debug edilebilir bir
-maç döngüsüne sahip; ses ve game-feel adımları bu sürümü oynadıktan sonra
-doğacak ihtiyaca kalıyor.
+inceleyebiliyorsun. Pong'un temel sürümü oynanabilir ve debug edilebilir bir maç
+döngüsüne sahip; ses ve game-feel adımları bu sürümü oynadıktan sonra doğacak
+ihtiyaca kalıyor.
+
+**“Pong 1.15 denememi değerlendir”** yaz; kodunu inceleyelim.

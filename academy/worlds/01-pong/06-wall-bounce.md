@@ -1,6 +1,7 @@
 ---
 title: "1.6 — Duvarlardan sek"
 description: "Topun dikey hızını sınırda tersine çevir."
+section: Oynanış
 ---
 
 # 1.6 — Duvarlardan sek
@@ -26,14 +27,15 @@ velocity'yi o duvardan uzağa yönlendir.
 
 Velocity bir frame'de position'a eklenen yönlü hızdır. `y` aşağı doğru arttığı
 için negatif dikey velocity topu yukarı, pozitif değer aşağı götürür. Hızın
-magnitude'ını koruyup işaretini duvardan uzağa göre seçmek yönü güvenceye alır.
+magnitude'ını `abs` ile koruyup işaretini duvardan uzağa göre seçmek yönü
+güvenceye alır.
 
 Bu collision bir alan çakışması değildir: topun bir sınırı geçip geçmediğini
 kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `SCREEN_HEIGHT` ile
 karşılaştırmak yeterli değildir; dairenin kenarı merkezinden `game.ball.radius`
 kadar uzaktadır.
 
-## Sınır
+## Sınırlar
 
 Bu derste yalnızca `game.ball.y` ile `game.ball.velocity_y` değişsin. Topun hızını artırma, skorlama
 ekleme veya paddle collision'ına geçme; hedef duvarın hareket yönüne etkisini
@@ -65,10 +67,13 @@ paddle overlap'ine uygulayacağız.
 
 ## Birincil kaynak
 
-[Odin builtin — `clamp`](https://pkg.odin-lang.org/base/builtin/#clamp).
-Topu sınır içine geri almak için import gerektirmeyen builtin; `min`/`max` ile
-aynı sayfada.
+[Odin builtin — `abs`](https://pkg.odin-lang.org/base/builtin/#abs).
+Velocity'nin magnitude'ını almak için import gerektirmeyen builtin; `clamp`,
+`min` ve `max` ile aynı sayfada.
 
 **Kazanım:** Position ile velocity'nin ayrı state olduğunu, collision'ın da
-velocity'yi değiştirebildiğini kullandın. Sonraki adım:
-[1.7 — Rakete değdi mi?](/worlds/01-pong/07-paddle-collision).
+velocity'yi değiştirebildiğini kullandın.
+
+**“Pong 1.6 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.7 — Rakete değdi mi?](/worlds/01-pong/07-paddle-collision).
