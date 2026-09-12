@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-02-game-state",
+  "currentLessonId": "pong-03-player-input",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -22,8 +22,10 @@
       "description": "İki raket ile topun verisini çizim çağrılarından ayır ve sahneyi bu state'ten çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/02-game-state",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-03-player-input",
@@ -157,6 +159,19 @@
         "games/pong/main.odin",
         "progress/notes/2026-09-11-world0-pong-review.md"
       ]
+    },
+    {
+      "id": "state-render-separation",
+      "title": "State ve render ayrımı",
+      "status": "learning",
+      "lessons": [
+        "pong-02-game-state"
+      ],
+      "note": "Paddle/Ball/Game struct'ları ile çizim çağrılarını ayırdı. Rectangle değerlerinin game loop dışında bir kez kurulduğunu ve state değişince güncellenmeyeceğini sorulunca kendisi söyledi; 1.3'te uygulamada görülecek.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     }
   ],
   "reviews": [
@@ -181,6 +196,16 @@
         "progress/notes/2026-09-11-gameplay-workflow.md"
       ],
       "summary": "Kullanıcının tercihiyle x değiştirme ve tahmin/gözlem raporu koşulları kaldırıldı. Doğru raket implementasyonu ve önceki başarılı compiler kontrolü güncel çizim görevi için yeterli. GUI agent tarafından çalıştırılmadı.",
+      "hintLevel": 0
+    },
+    {
+      "lessonId": "pong-02-game-state",
+      "reviewedAt": "2026-09-12T00:00:00Z",
+      "outcome": "passed",
+      "evidence": [
+        "games/pong/main.odin"
+      ],
+      "summary": "Paddle, Ball ve Game main dışında; tek Game değeri iki raket ile topu taşıyor; her raket kendi rl.Rectangle değişkeni ile DrawRectangleRec üzerinden çiziliyor; odin check geçti. İki not açık bırakıldı: rectangle'lar game loop dışında bir kez hesaplanıyor (1.3'te stale olacak) ve görevde olmayan, kullanılmayan score: f32 field'ı duruyor. GUI agent tarafından çalıştırılmadı.",
       "hintLevel": 0
     }
   ],
