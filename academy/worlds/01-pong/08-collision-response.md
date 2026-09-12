@@ -38,7 +38,7 @@ kenarı `game.opponent.x` olur. Topun merkezi ilgili kenarın dışında en az
 `game.ball.radius` kadar uzakta olmalıdır. Yatay velocity'nin magnitude'ını koruyup
 işaretini paddle tarafına göre seçmek hızı değiştirmeden yönü güvenceye alır.
 
-## Sınır
+## Sınırlar
 
 Bu response iki paddle için de yalnızca yatay yönü belirler ve yandan gelen
 temas için doğrudur: top raketin üst veya alt kenarına yukarıdan değerse

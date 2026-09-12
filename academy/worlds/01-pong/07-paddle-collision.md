@@ -39,7 +39,7 @@ ayrı görmeni sağlar.
 için bu temsil yeterli. Topu rectangle gibi yaklaşık almak yerine gerçek circle
 shape'i kullandığımızdan köşelerde daha doğru bir temas sınırı elde ederiz.
 
-## Sınır
+## Sınırlar
 
 Bu derste bir `hit` bool'u veya doğrudan renk seçimi yeterli. Skor, ses,
 velocity değişikliği ve yeni collision kuralı ekleme; sonraki ders overlap'in

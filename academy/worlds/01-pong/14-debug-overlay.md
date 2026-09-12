@@ -15,6 +15,15 @@ tersine çevir. `draw_game` içinde overlay açıksa FPS'i, topun position ve
 velocity değerlerini ve match state'in adını ekrana yaz. Overlay kapalıyken
 bu metinler görünmesin.
 
+## Ne zaman bitti?
+
+- F1, overlay'i her basışta bir kez açıp kapatıyor; tuşu basılı tutmak yanıp
+  sönmeye yol açmıyor.
+- Açık overlay FPS, top position/velocity ve match state adını gösteriyor.
+- Overlay kapalıyken ekranda normal maç görüntüsünden başka bir şey yok.
+- Normal maç akışı değişmiyor.
+- `odin check games/pong` geçiyor.
+
 ## Bilmen gereken küçük parça
 
 Bir oyun bug'ında ekrandaki görüntü çoğu zaman yetmez. Top yanlış yönde
@@ -36,15 +45,6 @@ bıraktığın yerde kalması tamamen şansa bağlı olur.
   Pong'un ihtiyacı değil; Breakout'ta runtime tuning problemiyle gelecek.
 - Overlay için ayrı bir procedure, panel abstraction'ı veya satır listesi kurma.
   `draw_game` içindeki bir `if` bloğu bu kadar bilgi için yeterli.
-
-## Ne zaman bitti?
-
-- F1, overlay'i her basışta bir kez açıp kapatıyor; tuşu basılı tutmak yanıp
-  sönmeye yol açmıyor.
-- Açık overlay FPS, top position/velocity ve match state adını gösteriyor.
-- Overlay kapalıyken ekranda normal maç görüntüsünden başka bir şey yok.
-- Normal maç akışı değişmiyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Toggle formülü
 F1 basıldıysa `game.debug_visible = !game.debug_visible` ataması yap. Bunu

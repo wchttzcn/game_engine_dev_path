@@ -17,6 +17,15 @@ sahanın merkez çizgisini çiz. Bu shape'leri, collision testinin okuduğu **ay
 `Game` field'larından üret; debug için yeni sayı yazma. Overlay kapalıyken bu
 çizimler görünmesin.
 
+## Ne zaman bitti?
+
+- Overlay açıkken top circle outline'ı ve iki raket rectangle outline'ı görünür.
+- Merkez çizgisi sahayı ikiye bölüyor.
+- Outline'lar raketler hareket ettikçe onlarla birlikte geliyor ve gerçek
+  shape'lerin üstüne oturuyor.
+- Overlay kapalıyken hiçbir debug çizimi kalmıyor.
+- `odin check games/pong` geçiyor.
+
 ## Bilmen gereken küçük parça
 
 1.7'de collision testi yaptın, 1.8'de response yazdın; ikisi de gözle
@@ -43,15 +52,6 @@ olur.
   görünmeye devam etmeli.
 - Çizim sırası kendi konusu değil; overlay'i normal sahnenin üstüne koyman
   yeterli.
-
-## Ne zaman bitti?
-
-- Overlay açıkken top circle outline'ı ve iki raket rectangle outline'ı görünür.
-- Merkez çizgisi sahayı ikiye bölüyor.
-- Outline'lar raketler hareket ettikçe onlarla birlikte geliyor ve gerçek
-  shape'lerin üstüne oturuyor.
-- Overlay kapalıyken hiçbir debug çizimi kalmıyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Hangi değerler zaten elinde?
 `draw_game` içinde raketleri çizmek için kurduğun `player_rect` ve

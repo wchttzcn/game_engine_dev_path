@@ -38,7 +38,7 @@ sağlar.
 opponent update'inden sonra uygula ki hareket kaynağı ne olursa olsun oyun alanı
 kuralı tek yerde kalsın.
 
-## Sınır
+## Sınırlar
 
 Rakip sadece topun güncel `y` konumunu takip etsin. Prediction, reaction delay,
 hedef sapması veya farklı zorluk seviyeleri ekleme; bunlar çalışır temel AI'ın

@@ -34,7 +34,7 @@ kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `SCREEN_HEIGHT` ile
 karşılaştırmak yeterli değildir; dairenin kenarı merkezinden `game.ball.radius`
 kadar uzaktadır.
 
-## Sınır
+## Sınırlar
 
 Bu derste yalnızca `game.ball.y` ile `game.ball.velocity_y` değişsin. Topun hızını artırma, skorlama
 ekleme veya paddle collision'ına geçme; hedef duvarın hareket yönüne etkisini

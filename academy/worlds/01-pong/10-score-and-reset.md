@@ -17,6 +17,13 @@ tanımladığın `SCREEN_WIDTH` sabitinden gelsin. Ardından topu sahanın merke
 (`SCREEN_WIDTH / 2`, `SCREEN_HEIGHT / 2`) koy ve hızı, sayı kaybeden oyuncuya
 doğru gidecek şekilde sabit bir değere ayarla. Skorları ekrana çiz.
 
+## Ne zaman bitti?
+
+- Top soldan çıkınca sağ skor bir artıyor; top sağdan çıkınca sol skor bir artıyor.
+- Her sayıdan sonra top merkezde beliriyor ve kaybeden oyuncuya doğru ilerliyor.
+- Skor ekranda okunuyor.
+- `odin check games/pong` geçiyor.
+
 ## Bilmen gereken küçük parça
 
 Sayı bir collision değildir; topun sahanın sahip olduğu çıkış kuralını
@@ -42,13 +49,6 @@ Skor sayılarını `rl.TextFormat` ile raylib'in beklediği `cstring` metnine ç
   ileride hata üretir.
 - Servis hızı sabit ve yönü deterministic kalsın. Rastgelelik game feel için
   daha sonra anlamlı bir karar olacak.
-
-## Ne zaman bitti?
-
-- Top soldan çıkınca sağ skor bir artıyor; top sağdan çıkınca sol skor bir artıyor.
-- Her sayıdan sonra top merkezde beliriyor ve kaybeden oyuncuya doğru ilerliyor.
-- Skor ekranda okunuyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Hangi sınır geçti?
 Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. Bunları oyun

@@ -73,10 +73,11 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
   or hazy answer is teaching signal: set that skill to `revisit` and fold the
   concept into a later lesson rather than assigning a separate exercise.
 - Review observed strengths and the most important concrete issue. Ask a focused
-  question or offer Hint 1 only when it helps resolve that issue. Hint 1 gives direction;
-  Hint 2 a stronger conceptual clue; Hint 3 a near-solution. Increase depth on
-  request. Give a full explanation when requested or appropriate after that
-  progression. Assess independent mastery through later learner-owned game work
+  question or offer İpucu 1 only when it helps resolve that issue. İpucu 1 gives
+  direction; İpucu 2 a stronger conceptual clue; İpucu 3 a near-solution. The
+  lessons use these same İpucu labels; do not call them Hint in chat. Increase
+  depth on request. Give a full explanation when requested or appropriate after
+  that progression. Assess independent mastery through later learner-owned game work
   that applies the concept in a new situation, without a separate reporting task.
 - Review correctness, ownership/lifetimes, data layout, relevant performance,
   architecture, game feel, and debuggability in proportion to the current lesson.

@@ -20,6 +20,14 @@ olsun. `Playing` sırasında 1.5–1.10'da kurduğun top hareketi, collision ve 
 kuralları çalışsın. Sayı verildikten sonra reset'i çağır ve state'i yeniden
 `Serving` yap.
 
+## Ne zaman bitti?
+
+- Oyun açıldığında top merkezde duruyor; Space'e basılana kadar kıpırdamıyor.
+- Space topu 1.10'un belirlediği yöne gönderiyor ve state `Playing` oluyor.
+- Sayıdan sonra top merkeze dönüyor ve yeniden Space bekliyor.
+- `Serving` sırasında ne top hareket ediyor ne de skor artıyor.
+- `odin check games/pong` geçiyor.
+
 ## Bilmen gereken küçük parça
 
 Burada sessizce yeni bir davranış eklemiyorsun; bir ders önce yazdığın davranışı
@@ -47,14 +55,6 @@ tutmak her frame aynı transition'ı tetikler.
 - Maç sonu bu dersin konusu değil. Şimdilik iki state yeter; `Match_Over` bir
   sonraki derste gelir.
 - 1.10'un deterministic servis yönü kuralı aynı kalsın; rastgelelik ekleme.
-
-## Ne zaman bitti?
-
-- Oyun açıldığında top merkezde duruyor; Space'e basılana kadar kıpırdamıyor.
-- Space topu 1.10'un belirlediği yöne gönderiyor ve state `Playing` oluyor.
-- Sayıdan sonra top merkeze dönüyor ve yeniden Space bekliyor.
-- `Serving` sırasında ne top hareket ediyor ne de skor artıyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — State nerede yaşar?
 `match_state: Match_State` alanını `Game` içine koy. Skor, top ve maç aşaması

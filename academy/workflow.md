@@ -36,7 +36,7 @@ bir ana fikir taşır; sonraki sorun için gerekmeyen teori sonraya kalır.
 
 İncelemede kodunu, compiler sonucunu ve kontrol edebildiğim oyun davranışını
 değerlendiririm. Geçerse sıradaki derse geçeriz. Somut bir hata veya karar için
-yararlıysa soru ya da Hint 1 ile ilerleriz. İstersen Hint 2, Hint 3 ve tam
+yararlıysa soru ya da İpucu 1 ile ilerleriz. İstersen İpucu 2, İpucu 3 ve tam
 açıklamaya geçeriz. Çözümü senin yerine yazmam; açıkça istediğinde koduna
 düzenleme yaparım.
 

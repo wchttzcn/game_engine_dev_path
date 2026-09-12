@@ -17,6 +17,13 @@ bloğu içinde draw çağır. Input, raket hareketi, top hareketi, skor ve match
 state transition'ları update tarafında kalsın. Rectangle, text ve arka plan
 çizimi draw tarafında kalsın.
 
+## Ne zaman bitti?
+
+- `main` oyunu oluşturuyor, `dt` alıyor, update ediyor ve çiziyor.
+- Oynanış sonuçları önceki dersle aynı: input, sayı, servis ve restart çalışıyor.
+- `update_game` gerçek `Game` değerini pointer üzerinden değiştiriyor.
+- `odin check games/pong` geçiyor.
+
 ## Bilmen gereken küçük parça
 
 Update, bir frame sonunda oyunun hangi state'e geldiğini belirler. Render o
@@ -37,13 +44,6 @@ sorumluluğu ver.
   `main` içinde tut; `draw_game` yalnızca sahneyi çizsin.
 - Update içinde raylib çizim çağrısı, draw içinde state ataması yapma. Bu sınır
   sonraki debug overlay'i güvenle eklememizi sağlar.
-
-## Ne zaman bitti?
-
-- `main` oyunu oluşturuyor, `dt` alıyor, update ediyor ve çiziyor.
-- Oynanış sonuçları önceki dersle aynı: input, sayı, servis ve restart çalışıyor.
-- `update_game` gerçek `Game` değerini pointer üzerinden değiştiriyor.
-- `odin check games/pong` geçiyor.
 
 ::: details İpucu 1 — Taşınacak satırları ayır
 Position, velocity, score veya match state yazan her satır update'e gider.
