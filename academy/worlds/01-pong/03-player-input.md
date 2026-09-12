@@ -73,5 +73,11 @@ tek-atımlı hareketlerde `IsKeyPressed`, devam eden yürüyüşte `IsKeyDown`
 arasındaki fark oyuncu hissini doğrudan belirleyecek.
 :::
 
+## Birincil kaynak
+
+[Odin vendor:raylib — `IsKeyDown`](https://pkg.odin-lang.org/vendor/raylib/#IsKeyDown).
+Basılı tutma ile tek atımlık basışın (`IsKeyPressed`) imzalarını yan yana
+gördüğün yer.
+
 **Kazanım:** Input'un game state'i değiştirdiği, render'ın da sonucu gösterdiği
 ilk frame akışını kurdun. Sonraki adım: [1.4 — Delta time](/worlds/01-pong/04-delta-time).

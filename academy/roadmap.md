@@ -4,9 +4,10 @@ Oyun yaparak oyunların altındaki sistemleri öğreneceksin. React ve TypeScrip
 
 **Ana mentor arayüzü sohbet.** Burada görev alır, takıldığında yardım veya kod incelemesi istersin. Yerel araçlarla kod, derleme ve davranış incelenir. Tahmin, gözlem veya journal raporu gerekmez. Mevcut academy sitesi isteğe bağlı ders okuyucusudur; ilerlemek için siteyi geliştirmen gerekmez. Egzersizleri ve oyunları sen yazarsın.
 
-**Şimdi:** [Pong 1.2 — Game state'i kur](/worlds/01-pong/02-game-state).
-Pong'un 1.1–1.13 dersleri (13 ders) hazır; 1.1 tamamlandı. Paket oynanabilir
-maç ve debug overlay'e kadar gider.
+<CurrentLesson />
+
+Pong'un 1.1–1.13 dersleri (13 ders) hazır. Paket oynanabilir maç ve debug
+overlay'e kadar gider.
 
 ## Ders döngüsü
 
@@ -50,7 +51,7 @@ Bu isimler mekanik ilhamını belirtir; ilgili oyunların iç mimarisi hakkında
 
 ## Dünya 1 — Pong
 
-[Dünya planı](/worlds/01-pong/). [1.1 — İlk raketi çiz](/worlds/01-pong/01-first-paddle) tamamlandı. Kalan 1.2–1.13 dersleri game state, input, delta time, hareket, collision, skor, match state, update/render ayrımı ve debug overlay üzerinden oynanabilir Pong'a gider. Ses, parçacık, hit pause, iz ve kamera tepkisi; bu temel sürüm oynandıktan sonra ihtiyaç geldikçe ayrı küçük görevler olur.
+[Dünya planı](/worlds/01-pong/). 1.1–1.13 dersleri game state, input, delta time, hareket, collision, skor, match state, update/render ayrımı ve debug overlay üzerinden oynanabilir Pong'a gider. Ses, parçacık, hit pause, iz ve kamera tepkisi; bu temel sürüm oynandıktan sonra ihtiyaç geldikçe ayrı küçük görevler olur.
 
 **Soru:** “Top kodu neden kamera sarsıntısını biliyor?” **Kanıt:** Tamamlanıp yeniden başlayan maç, efektlerin açılıp kapatıldığı karşılaştırma ve bağımsız bir kural değişikliği. Engine Thinking burada bağımlılıkları fark etmektir; evrensel motor API’si çıkarma zorunluluğu değildir.
 

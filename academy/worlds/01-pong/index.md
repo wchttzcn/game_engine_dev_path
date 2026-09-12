@@ -5,9 +5,7 @@ aynı `games/pong/main.odin` dosyası adım adım oynanabilir maça dönüşür.
 
 ## Şimdi
 
-[1.2 — Game state'i kur](/worlds/01-pong/02-game-state)
-
-İlk raket hazır. Şimdi iki raket ile topu state olarak temsil edip o state'ten çiz.
+<CurrentLesson />
 
 ```sh
 odin run games/pong -out:/tmp/mucahit-pong

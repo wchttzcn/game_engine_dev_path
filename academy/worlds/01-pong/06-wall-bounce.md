@@ -62,6 +62,12 @@ Position correction o frame'i tekrar geçerli state'e getirir; 1.8'de aynı fikr
 paddle overlap'ine uygulayacağız.
 :::
 
+## Birincil kaynak
+
+[Odin builtin — `clamp`](https://pkg.odin-lang.org/base/builtin/#clamp).
+Topu sınır içine geri almak için import gerektirmeyen builtin; `min`/`max` ile
+aynı sayfada.
+
 **Kazanım:** Position ile velocity'nin ayrı state olduğunu, collision'ın da
 velocity'yi değiştirebildiğini kullandın. Sonraki adım:
 [1.7 — Rakete değdi mi?](/worlds/01-pong/07-paddle-collision).

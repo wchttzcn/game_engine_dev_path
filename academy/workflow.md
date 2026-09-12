@@ -8,8 +8,11 @@ Sohbet ana mentor kanalın. Academy, istersen dersleri tarayıcıda okuyacağın
 
 ## Şimdi ne yapacağım?
 
-1. [1.2 — Game state'i kur](/worlds/01-pong/02-game-state) dersini aç.
-2. `games/pong/main.odin` içinde raketler ile topun state'ini kur.
+1. Güncel dersi aç:
+
+<CurrentLesson />
+
+2. Dersin görevini `games/pong/main.odin` içinde uygula.
 3. Çalıştır:
 
 ```sh

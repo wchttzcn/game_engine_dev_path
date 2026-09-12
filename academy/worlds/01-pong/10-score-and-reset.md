@@ -71,6 +71,12 @@ bir yöne gittiğini ayırman gerekmez. Rastgele servis eklendiğinde rastgele
 state'i de oyunun state'i olarak ele almak gerekir.
 :::
 
+## Birincil kaynak
+
+[Odin vendor:raylib — `DrawText`](https://pkg.odin-lang.org/vendor/raylib/#DrawText).
+Skoru çizerken kullanacağın imza; sayıyı `cstring`e çevirmek için aynı sayfadaki
+[`TextFormat`](https://pkg.odin-lang.org/vendor/raylib/#TextFormat).
+
 **Kazanım:** Sahanın sınır kuralını, skor state'ini ve tam reset'i birlikte
 kurmuş oldun. Sonraki adım bu kuralların maç içinde hangi sırayla geçerli
 olduğunu açıkça tanımlamak.

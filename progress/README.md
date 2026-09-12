@@ -4,9 +4,15 @@ Bu belge agent içindir. Kaydı, şemayı ve dashboard bağlantısını agent y�
 Mücahit yalnızca Odin kodunu yazar, oynar/debug eder ve işi bittiğinde inceleme
 ister. Tahmin, gözlem, journal veya sohbet raporu istenmez.
 
-`current.json` tek doğruluk kaynağıdır. Academy buradan okur; tarayıcıda ayrı
-bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya değişikliklerini izler;
-üretim çıktısına yansıtmak için site yeniden derlenir.
+`current.json` tek doğruluk kaynağıdır ve şema sürümü `2`'dir. Academy buradan
+okur; tarayıcıda ayrı bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya
+değişikliklerini izler; üretim çıktısına yansıtmak için site yeniden derlenir.
+
+Güncel ders hiçbir doküman metninde elle yazılmaz. Çalışma alanı sayfası
+`AcademyDashboard.vue` ile; yol haritası, çalışma rehberi ve bölüm planı
+`<CurrentLesson />` bileşeni ile bu dosyadan okur. `README.md` ders adı yerine
+bu dosyaya bağlanır. Yeni bir sayfa güncel dersi göstermek isterse aynı bileşeni
+gömer, ders adını kopyalamaz.
 
 ## Basit akış
 
@@ -34,9 +40,29 @@ ilerlemesi değildir. `description`, çalışma alanında gösterilen tek görev
 | `review_needed` | Öğrenci değerlendirme istedi; kanıtları incelenmeyi bekliyor |
 | `completed` | Dersin kabul ölçütleri incelendi ve karşılandı |
 
-`evidence`, `skills`, `reviews` ve `openQuestions` alanlarındaki mevcut veriler
-tarihsel olarak korunur; olağan ders akışında bunlara yeni kayıt eklenmez. Yeni
-bir ders tamamlandığında yalnızca ders durumu ve `currentLessonId` güncellenir.
+`evidence`, `reviews` ve `openQuestions` alanlarındaki mevcut veriler tarihsel
+olarak korunur; olağan ders akışında bunlara yeni kayıt eklenmez. Yeni bir ders
+tamamlandığında ders durumu, `currentLessonId` ve — kanıt varsa — `skills`
+güncellenir.
+
+## Beceri kaydı
+
+`skills`, sıradaki dersin ne olacağını belirleyen öğretim sinyalidir; bir
+ilerleme sayacı değildir. Yalnızca öğrencinin kavramı gerçekten uyguladığı
+durumda kayıt açılır; işlenmiş olmak yeterli değil.
+
+| Alan | Anlamı |
+| --- | --- |
+| `status` | `unassessed`, `learning`, `independent`, `revisit` |
+| `lessons` | Kavramı çalıştıran ders kimlikleri |
+| `note` | Neyin gösterildiği, neyin gösterilmediği — tek satır |
+| `lastRecallAt` | Bu kavramın en son ne zaman recall sorusuna konu olduğu |
+| `evidence` | İlgili kod veya tarihsel not dosyaları |
+
+`independent` yalnızca kavram sonraki ve farklı bir durumda doğru uygulandığında
+verilir. İncelemedeki recall sorusu cevaplandığında ilgili becerinin
+`lastRecallAt` değeri güncellenir; cevap zayıfsa `status` `revisit` olur ve
+kavram sonraki derse dokunur. Ayrı bir tekrar egzersizi veya rapor açılmaz.
 Basit çizim görevleri kod incelemesi ve compiler kontrolüyle tamamlanabilir;
 görülmeyen GUI davranışı görülmüş sayılmaz.
 

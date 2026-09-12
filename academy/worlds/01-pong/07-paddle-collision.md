@@ -66,5 +66,12 @@ duvar olsaydı bu shape gerçek sınırı temsil etmezdi; Pong'un dikdörtgen
 paddle'ları için gereksiz karmaşıklık taşımaz.
 :::
 
+## Birincil kaynak
+
+[Odin vendor:raylib — `CheckCollisionCircleRec`](https://pkg.odin-lang.org/vendor/raylib/#CheckCollisionCircleRec).
+Circle-rectangle testinin gerçek imzası. Detection ile response ayrımının daha
+geniş anlatımı için [MDN 2D collision
+detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection).
+
 **Kazanım:** Detection ile response'u ayırıp collision'ı görünür hale getirdin.
 Sonraki adım: [1.8 — Çakışmayı çöz](/worlds/01-pong/08-collision-response).

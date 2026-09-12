@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "learner": "Mücahit",
   "currentLessonId": "pong-02-game-state",
   "lessons": [
@@ -122,7 +122,15 @@
     }
   ],
   "skills": [
-    { "id": "screen-coordinates", "title": "Screen coordinates", "status": "learning", "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md"] }
+    {
+      "id": "screen-coordinates",
+      "title": "Screen coordinates",
+      "status": "learning",
+      "lessons": ["pong-01-first-paddle"],
+      "note": "Sol üst köşe (0,0), y aşağı artar. Raketi doğru konuma çizdi; farklı bir bağlamda (ör. sınır kontrolü) tekrar uygulanışı henüz görülmedi.",
+      "lastRecallAt": null,
+      "evidence": ["games/pong/main.odin", "progress/notes/2026-09-11-world0-pong-review.md"]
+    }
   ],
   "reviews": [
     {

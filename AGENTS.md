@@ -39,6 +39,13 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
   topic list is background, not a prerequisite checklist; use the short scope below.
   The current learner preferences here override the source pack's prediction,
   observation-report and reflection routines.
+- Ground lesson content in `RESOURCES.md`, never in recalled API knowledge. Every
+  lesson ends with a **Birincil kaynak** section naming one entry from that file
+  and one line on why it is the source for this lesson. Before writing any API
+  claim, verify the symbol against the installed compiler and the Odin binding
+  documentation. When a lesson needs a source the file lacks, verify the source,
+  add it to `RESOURCES.md` with its one-line note, then cite it. Record missing
+  areas under that file's `## Boşluklar` heading instead of citing a weak source.
 - Give exactly one primary idea and one small challenge per lesson. Lead with a
   one-sentence goal, challenge and acceptance criteria; required context stays
   within a few short paragraphs. Include constraints only with an educational
@@ -59,6 +66,12 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
 - When a task feels confusing or burdensome, reduce its scope and use a visible
   game experiment. Do not require Mücahit to prove systems fundamentals before a
   game creates a concrete need for them.
+- Open each review with exactly one short recall question about a concept from an
+  earlier lesson, not the current one. Prefer the skill in `progress/current.json`
+  whose `lastRecallAt` is oldest or null; spacing is the point. It is answered in
+  chat in a sentence, never written up, and never gates lesson completion. A wrong
+  or hazy answer is teaching signal: set that skill to `revisit` and fold the
+  concept into a later lesson rather than assigning a separate exercise.
 - Review observed strengths and the most important concrete issue. Ask a focused
   question or offer Hint 1 only when it helps resolve that issue. Hint 1 gives direction;
   Hint 2 a stronger conceptual clue; Hint 3 a near-solution. Increase depth on
@@ -100,6 +113,15 @@ says a task is finished, inspect the implementation and run the relevant compile
 check. If it passes the acceptance criteria, update completion/current lesson once;
 otherwise report the most important concrete issue and keep the current lesson.
 
+Maintain `skills` in `progress/current.json` as the teaching signal for what to
+teach next. Add a skill only when the learner has actually applied the concept,
+with `status` (`unassessed`, `learning`, `independent`, `revisit`), the `lessons`
+that exercised it, a one-line `note` on what was and was not demonstrated, and
+`lastRecallAt` set when a recall question touched it. Move a skill to
+`independent` only after it is applied correctly in a later, different situation.
+This record is teaching state, not progress tracking: no counters, no streaks, no
+entry for a concept that was merely covered.
+
 Do not create routine review notes, evidence logs, XP, streaks or other tracking
 work. The dated files already in `progress/notes/` predate this rule; keep them as
 history and add no new ones. Do not require or create a commit for a lesson or learning checkpoint;
@@ -112,7 +134,12 @@ changes to check rendering and links. Validate Odin examples against the install
 compiler. Keep experimental verification files outside learner directories.
 Treat `labs/`, `games/`, and `journal/` as learner work once attempts begin.
 Future-world outlines are plans; only authored, reviewed lessons are ready. Author
-the next needed lesson when learning calls for it, never merely to fill the roadmap.
+at most one pack ahead of the learner: a pack is the coherent slice that takes the
+current game to playable and debuggable, and it ends there. Inside that horizon,
+writing lessons ahead is allowed; past it, author the next needed lesson only when
+learning calls for it, never merely to fill the roadmap. Treat a pack's
+`not_started` lessons as revisable drafts — when learner work, difficulty or
+interest diverges, rewrite or drop them instead of defending the planned order.
 
 ## Agent skills
 

@@ -67,6 +67,13 @@ için oynanabilir bir başlangıçtır. Daha sonra zorluk sorusu doğarsa reacti
 delay, hedef sapması veya prediction'i ayrı ayrı ekleyebiliriz.
 :::
 
+## Birincil kaynak
+
+[Update Method — Robert Nystrom, Game Programming
+Patterns](https://gameprogrammingpatterns.com/update-method.html).
+Her entity'nin kendi davranışını frame başına bir adım ilerletmesi fikri; rakip
+raketin update'i bunun en küçük hali.
+
 **Kazanım:** Hedefe yönelen, delta time kullanan ve oyun alanı sınırını koruyan
 bir AI controller yazdın. Sonraki adım:
 [1.10 — Skor ve yeni servis](/worlds/01-pong/10-score-and-reset).

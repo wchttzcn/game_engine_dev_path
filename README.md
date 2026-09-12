@@ -4,9 +4,10 @@ Odin ile oyun yaparak Game Engine Developer olma çalışma alanı. Sohbet ana m
 
 ## Başla
 
-Şimdi [1.2 — Game state'i kur](academy/worlds/01-pong/02-game-state.md) dersinden
-devam et. İlk raketi çizdin; sırada iki raket ile topun verisini çizim
-çağrılarından ayırmak var.
+Güncel ders tek yerde tutulur: [`progress/current.json`](progress/current.json).
+Academy okuyucusunda çalışma alanı sayfası, yol haritası ve bölüm planı bu
+dosyadan okur; burada ders adı tekrar edilmez. Hangi derste olduğunu sohbette de
+sorabilirsin.
 
 Repo kökünden çalıştır:
 
@@ -27,6 +28,7 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 | `journal/` | İstersen tuttuğun gözlem notları |
 | `progress/` | Agent'ın yönettiği mevcut ders bilgisi |
 | `AGENTS.md` | Mentorun uygulayacağı eğitim kuralları |
+| `RESOURCES.md` | Derslerin dayandığı doğrulanmış kaynaklar ve topluluklar |
 
 Pong'un 1.1–1.13 dersleri (13 ders) hazırdır. Bu paket oynanabilir maç, açık
 match state, update/render ayrımı ve ilk debug overlay'e kadar gider. Sonraki

@@ -81,5 +81,11 @@ opponent ve ball değerlerinin ömrü game loop boyunca sürer; owner `game`dir.
 sorulara dönüşecek; şimdiden heap allocation gerekmez.
 :::
 
+## Birincil kaynak
+
+[Odin Overview — Structs](https://odin-lang.org/docs/overview/#structs).
+`struct` declaration'ı, field sözdizimi ve struct değerlerinin nasıl
+oluşturulduğu.
+
 **Kazanım:** Pong nesnelerinin verisini çizim literal'larından ayırdın.
 Sonraki adım: [1.3 — Oyuncu input'u](/worlds/01-pong/03-player-input).

@@ -68,5 +68,12 @@ state güncellemesine taşır. Deterministik replay ya da sağlam collision gere
 fixed timestep'i ayrıca ele alacağız.
 :::
 
+## Birincil kaynak
+
+[Fix Your Timestep! — Glenn Fiedler](https://gafferongames.com/post/fix_your_timestep/).
+Delta time'ın neden ölçülüp hesaba katıldığını ve variable timestep'in nerede
+bozulduğunu anlatan klasik yazı. Pong'un ihtiyacından derin; accumulator
+bölümünü şimdi okuman gerekmiyor.
+
 **Kazanım:** Hareketi frame sayısına değil geçen zamana bağladın.
 Sonraki adım: [1.5 — Top velocity'si](/worlds/01-pong/05-ball-velocity).

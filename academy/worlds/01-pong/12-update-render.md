@@ -68,6 +68,12 @@ ve render ayrımı gerçekten ihtiyaç duyduğunda gelecek. Bu dersin sınırı 
 bir frame'in sorumluluklarını ayırmak.
 :::
 
+## Birincil kaynak
+
+[Game Loop — Robert Nystrom, Game Programming
+Patterns](https://gameprogrammingpatterns.com/game-loop.html).
+Bir frame'in "input al → update → render" sorumluluklarına neden ayrıldığı.
+
 **Kazanım:** Pong'un state'i tek bir update yolunda değişiyor, render ise onu
 yansıtıyor. Bu sınır, görünmeyen state'i oyun oynarken inceleyecek overlay için
 temel oluşturuyor.

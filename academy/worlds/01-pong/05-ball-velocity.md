@@ -67,5 +67,11 @@ collision'ında hangi yönden geldiğini kaybettirir. Acceleration veya spin anc
 oyun bunları gerektirdiğinde bu modele eklenir.
 :::
 
+## Birincil kaynak
+
+[Integration Basics — Glenn Fiedler](https://gafferongames.com/post/integration_basics/).
+`position += velocity * dt` ifadesinin adı semi-implicit Euler entegrasyonudur;
+yazı bu adımın neden bu sırayla yapıldığını gösterir.
+
 **Kazanım:** Pong'un ilk zaman-temelli hareketini kurdun. Sonraki adım:
 [1.6 — Duvarlardan sek](/worlds/01-pong/06-wall-bounce).

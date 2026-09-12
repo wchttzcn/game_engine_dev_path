@@ -70,5 +70,11 @@ fikir grid ve allocation sayaçlarına, Breakout'ta ise runtime tuning paneline
 genişleyecek.
 :::
 
+## Birincil kaynak
+
+[Odin vendor:raylib — `DrawFPS`](https://pkg.odin-lang.org/vendor/raylib/#DrawFPS).
+Overlay'de kullanacağın FPS, metin ve outline çizim çağrılarının imzaları;
+`DrawRectangleLines` ve `DrawCircleLinesV` aynı sayfada.
+
 **Kazanım:** Oyun içindeki state'i bir geliştirici aracıyla görünür yaptın.
 Pong'un temel sürümü artık oynanabilir, debug edilebilir bir maç döngüsüne sahip.

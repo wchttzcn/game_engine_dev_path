@@ -66,6 +66,14 @@ durumun hangi input ve update'e izin verdiği açık kalır. Şimdilik bir frame
 çıkarma ihtiyacı yok; game state içindeki `switch` yeterli sınırdır.
 :::
 
+## Birincil kaynak
+
+[State — Robert Nystrom, Game Programming
+Patterns](https://gameprogrammingpatterns.com/state.html).
+Finite state machine'in enum ve `switch` ile en yalın kurulumu; bölümün ilerisi
+nesne tabanlı varyantlara gider, Pong'un ihtiyacı ilk kısımdır. Odin tarafı için
+[Overview — Enumerations](https://odin-lang.org/docs/overview/#enumerations).
+
 **Kazanım:** Maç kurallarını skor kontrollerinin arasına dağıtmak yerine açık
 state transition'larla yönetiyorsun. Sonraki adım bu state'i update ve render
 kodunun daha okunur sınırlarına yerleştirmek.

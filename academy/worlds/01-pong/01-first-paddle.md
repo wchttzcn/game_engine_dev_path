@@ -65,6 +65,12 @@ Bu yüzden raketi yalnızca programın başında bir kez çizmek yerine her fram
 ve [DrawRectangle referansına](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangle) bakabilirsin.
 :::
 
+## Birincil kaynak
+
+[Odin vendor:raylib — `DrawRectangle`](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangle).
+Odin binding'inin kendi referansı; parametre sırasını ve tiplerini C
+dokümanından değil buradan doğrula.
+
 **Kazanım:** Kendi çizim kodunla Pong'un ilk raketini ekrana koydun.
 **“Pong 1.1 denememi değerlendir”** yaz; kodunu inceleyelim.
 Sonraki adım: [1.2 — Oyun state'ini kur](/worlds/01-pong/02-game-state).

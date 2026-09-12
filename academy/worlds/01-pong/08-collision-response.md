@@ -69,6 +69,13 @@ correction topu geçerli tarafa çıkarır; bu küçük Pong response'u sürekli
 physics engine gerektirmeden kararlı yapar.
 :::
 
+## Birincil kaynak
+
+[MDN — 2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection).
+Narrow phase testlerini ve overlap'in neden ayrı bir adımda çözüldüğünü
+JavaScript örnekleriyle anlatır; circle-rectangle durumunu kapsamaz, onu raylib
+üstlenir.
+
 **Kazanım:** Collision response'un position correction ve yön kararından
 oluştuğunu kullandın. Sonraki adım:
 [1.9 — Rakip kendi kendine hareket etsin](/worlds/01-pong/09-opponent-ai).
