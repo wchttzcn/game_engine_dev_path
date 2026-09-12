@@ -16,8 +16,9 @@ olup olmadığını tespit et. İki sonucu ayrı bool'larda tutabilir veya tek b
 
 raylib'in `rl.CheckCollisionCircleRec(center, radius, rec)` fonksiyonu circle
 ve rectangle için `bool` döndürür. `center` bir `rl.Vector2`, raket ise
-`rl.Rectangle` olmalı. `game.ball` ile `game.player` ve `game.opponent`
-field'larından bu geçici shape'leri kurabilirsin.
+`rl.Rectangle` olmalı. Raketin rectangle'ı zaten elinde: 1.2'de
+`DrawRectangleRec`'e verdiğin `player_rect` ve `opponent_rect` değerleri
+collision testine olduğu gibi gider.
 
 ## Ne zaman bitti?
 
@@ -48,10 +49,11 @@ sonucunu ele alacak.
 `rl.Vector2{game.ball.x, game.ball.y}` topun merkezi için gereken shape'tir.
 :::
 
-::: details İpucu 2 — Rectangle kur
-Her `Paddle`ın `x`, `y`, `width`, `height` field'larından birer `rl.Rectangle`
-oluştur. `Rectangle` field'ları `f32` olduğundan integer boyutları dönüştür. Bu
-shape'ler render için çizdiğin raketlerle aynı ölçülere sahip olmalı.
+::: details İpucu 2 — Aynı rectangle'ı kullan
+Yeni bir rectangle kurma. 1.2'de çizim için oluşturduğun `player_rect` ve
+`opponent_rect` değişkenlerini `CheckCollisionCircleRec`'e olduğu gibi ver. Tek
+değeri hem çizime hem teste vermek, gördüğün raketle test edilen shape'in
+zamanla ayrışmasını engeller.
 :::
 
 ::: details İpucu 3 — Rengi seç

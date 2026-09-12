@@ -42,7 +42,7 @@ benzer. Aynı anda iki tuş basılıysa iki koşul da çalışabilir; bu Pong i�
 edilebilir bir başlangıç davranışı.
 
 Sınır kontrolünde yalnızca `game.player.y` değil, raketin tamamı önemlidir. Alt sınır
-`game.player.y + f32(game.player.height)` ile hesaplanır.
+`game.player.y + game.player.height` ile hesaplanır.
 
 ## Sınırlar
 
@@ -57,8 +57,8 @@ değişikliğinde görünmeyen bir gameplay bug birikmesini önler.
 
 ::: details İpucu 2 — Alt kenar
 Yukarı hareketten sonra `game.player.y < 0` ise `game.player.y = 0` yap. Aşağı için
-`game.player.y + f32(game.player.height) > 450` durumunda `game.player.y`yi
-`450 - f32(game.player.height)` değerine sabitle.
+`game.player.y + game.player.height > 450` durumunda `game.player.y`yi
+`450 - game.player.height` değerine sabitle.
 :::
 
 ::: details İpucu 3 — Tuş adları

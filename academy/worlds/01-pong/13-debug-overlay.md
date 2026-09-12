@@ -57,9 +57,12 @@ state'i göstermek; text helper'ı ortak API'ye dönüştürme.
 :::
 
 ::: details İpucu 3 — Outline çizimi
-Paddle'lar için `rl.DrawRectangleLines`, top için `rl.DrawCircleLinesV`
-kullanabilirsin. Render çağrılarına collision hesabındaki aynı position, size ve
-radius değerlerini ver.
+Paddle'lar için `rl.DrawRectangleLinesEx`, top için `rl.DrawCircleLinesV`
+kullanabilirsin. `DrawRectangleLinesEx` de `DrawRectangleRec` gibi bir
+`rl.Rectangle` alır; 1.7'de collision testine verdiğin `player_rect` ve
+`opponent_rect` değişkenlerini olduğu gibi ona da ver, ikinci argüman çizgi
+kalınlığıdır. Top için de collision hesabındaki merkez ve radius değerlerini
+kullan.
 :::
 
 ::: details Deep Dive — FPS neyi söyler?
@@ -74,7 +77,7 @@ genişleyecek.
 
 [Odin vendor:raylib — `DrawFPS`](https://pkg.odin-lang.org/vendor/raylib/#DrawFPS).
 Overlay'de kullanacağın FPS, metin ve outline çizim çağrılarının imzaları;
-`DrawRectangleLines` ve `DrawCircleLinesV` aynı sayfada.
+`DrawRectangleLinesEx` ve `DrawCircleLinesV` aynı sayfada.
 
 **Kazanım:** Oyun içindeki state'i bir geliştirici aracıyla görünür yaptın.
 Pong'un temel sürümü artık oynanabilir, debug edilebilir bir maç döngüsüne sahip.

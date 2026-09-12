@@ -33,7 +33,7 @@ hareketten dolayı raketin içinde kalmışsa, aynı collision bir sonraki frame
 de true olur. Bu yüzden response iki iş yapar: penetration'ı çözer ve sonraki
 hareket yönünü belirler.
 
-Sol raketin sağ kenarı `game.player.x + f32(game.player.width)`, sağ raketin sol
+Sol raketin sağ kenarı `game.player.x + game.player.width`, sağ raketin sol
 kenarı `game.opponent.x` olur. Topun merkezi ilgili kenarın dışında en az
 `game.ball.radius` kadar uzakta olmalıdır. Yatay velocity'nin magnitude'ını koruyup
 işaretini paddle tarafına göre seçmek hızı değiştirmeden yönü güvenceye alır.
