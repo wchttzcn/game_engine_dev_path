@@ -40,9 +40,11 @@ işaretini paddle tarafına göre seçmek hızı değiştirmeden yönü güvence
 
 ## Sınır
 
-Bu response iki paddle için de yalnızca yatay yönü belirler. Açıya göre sekme,
-hızlanma ve skor sonraki küçük problemlerdir. Amaç güvenilir bir temas sonrası
-state'i kurmak.
+Bu response iki paddle için de yalnızca yatay yönü belirler ve yandan gelen
+temas için doğrudur: top raketin üst veya alt kenarına yukarıdan değerse
+yatay düzeltme onu yanlış tarafa iter. Bu durumu şimdilik kabul ediyoruz.
+Açıya göre sekme, hızlanma ve skor sonraki küçük problemlerdir. Amaç
+güvenilir bir temas sonrası state'i kurmak.
 
 ::: details İpucu 1 — Yeni güvenli merkez
 Sol hit'te sol raketin sağ kenarına `game.ball.radius` ekle. Sağ hit'te sağ raketin

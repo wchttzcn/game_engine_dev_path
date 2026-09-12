@@ -26,7 +26,8 @@ velocity'yi o duvardan uzağa yönlendir.
 
 Velocity bir frame'de position'a eklenen yönlü hızdır. `y` aşağı doğru arttığı
 için negatif dikey velocity topu yukarı, pozitif değer aşağı götürür. Hızın
-magnitude'ını koruyup işaretini duvardan uzağa göre seçmek yönü güvenceye alır.
+magnitude'ını `abs` ile koruyup işaretini duvardan uzağa göre seçmek yönü
+güvenceye alır.
 
 Bu collision bir alan çakışması değildir: topun bir sınırı geçip geçmediğini
 kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `SCREEN_HEIGHT` ile
@@ -65,9 +66,9 @@ paddle overlap'ine uygulayacağız.
 
 ## Birincil kaynak
 
-[Odin builtin — `clamp`](https://pkg.odin-lang.org/base/builtin/#clamp).
-Topu sınır içine geri almak için import gerektirmeyen builtin; `min`/`max` ile
-aynı sayfada.
+[Odin builtin — `abs`](https://pkg.odin-lang.org/base/builtin/#abs).
+Velocity'nin magnitude'ını almak için import gerektirmeyen builtin; `clamp`,
+`min` ve `max` ile aynı sayfada.
 
 **Kazanım:** Position ile velocity'nin ayrı state olduğunu, collision'ın da
 velocity'yi değiştirebildiğini kullandın. Sonraki adım:
