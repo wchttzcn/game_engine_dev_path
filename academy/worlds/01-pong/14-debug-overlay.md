@@ -1,9 +1,9 @@
 ---
-title: "1.13 — Debug overlay"
+title: "1.14 — Debug overlay"
 description: "F1 ile açılan bir overlay üzerinden Pong'un sayısal state'ini görünür yap."
 ---
 
-# 1.13 — Debug overlay
+# 1.14 — Debug overlay
 
 **Hedef:** F1 ile açılıp kapanan bir overlay ile oyunun görünmeyen sayısal
 state'ini oynarken oku.
@@ -31,7 +31,7 @@ bıraktığın yerde kalması tamamen şansa bağlı olur.
 ## Sınırlar
 
 - Overlay yalnızca state gösterir; position, velocity, skor veya match state
-  değiştirmez. 1.12'de kurduğun sınır burada işe yarıyor: `draw_game` okur.
+  değiştirmez. 1.13'te kurduğun sınır burada işe yarıyor: `draw_game` okur.
 - Metinleri mevcut raylib fontuyla `rl.DrawText` kullanarak çiz. Dear ImGui bu
   Pong'un ihtiyacı değil; Breakout'ta runtime tuning problemiyle gelecek.
 - Overlay için ayrı bir procedure, panel abstraction'ı veya satır listesi kurma.
@@ -81,4 +81,4 @@ binding sayfasında; `TextFormat`in Odin tarafındaki gövdesi de orada.
 
 **Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun. Sonraki adım
 görünmeyen shape'leri de çizmek:
-[1.14 — Collision shape'lerini çiz](/worlds/01-pong/14-collision-shapes).
+[1.15 — Collision shape'lerini çiz](/worlds/01-pong/15-collision-shapes).

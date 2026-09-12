@@ -1,17 +1,17 @@
 ---
-title: "1.14 — Collision shape'lerini çiz"
+title: "1.15 — Collision shape'lerini çiz"
 description: "Topun ve raketlerin görünmeyen collision shape'lerini, collision hesabının kendi değerlerinden çiz."
 next: false
 ---
 
-# 1.14 — Collision shape'lerini çiz
+# 1.15 — Collision shape'lerini çiz
 
 **Hedef:** 1.7 ve 1.8'in kullandığı collision shape'leri, aynı değerlerden
 üretilmiş outline'lar olarak overlay'e ekle.
 
 ## Görev
 
-1.13'teki `debug_visible` bloğunu genişlet. Overlay açıkken topun circle
+1.14'teki `debug_visible` bloğunu genişlet. Overlay açıkken topun circle
 collision shape'ini, iki raketin rectangle collision shape'ini outline olarak ve
 sahanın merkez çizgisini çiz. Bu shape'leri, collision testinin okuduğu **aynı**
 `Game` field'larından üret; debug için yeni sayı yazma. Overlay kapalıyken bu
