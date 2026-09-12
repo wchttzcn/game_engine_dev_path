@@ -7,8 +7,7 @@
   "scripts": {
     "academy:dev": "vitepress dev academy --host 127.0.0.1",
     "academy:build": "vitepress build academy",
-    "academy:preview": "vitepress preview academy --host 127.0.0.1",
-    "lab:check": "node scripts/check-lab.mjs"
+    "academy:preview": "vitepress preview academy --host 127.0.0.1"
   },
   "devDependencies": {
     "vitepress": "2.0.0-alpha.20",

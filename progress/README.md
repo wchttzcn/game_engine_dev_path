@@ -1,14 +1,22 @@
 # İlerleme kaydı
 
 Bu belge agent içindir. Kaydı, şemayı ve dashboard bağlantısını agent yönetir;
-Mücahit yalnızca tahminini, Odin denemesini ve gözlemini paylaşır. Platform veya
-içerik denetimi öğrenci girişimi değildir; aktif ders, durumlar ve geçmiş korunur.
-Öğrenci rota değişikliği istediğinde hazır bir derse geçilebilir; önceki dersler
-tamamlanmış sayılmaz, girişimler ve kanıtları korunur. World 0 isteğe bağlıdır.
+Mücahit yalnızca Odin kodunu yazar, oynar/debug eder ve işi bittiğinde inceleme
+ister. Tahmin, gözlem, journal veya sohbet raporu istenmez.
 
 `current.json` tek doğruluk kaynağıdır. Academy buradan okur; tarayıcıda ayrı
 bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya değişikliklerini izler;
 üretim çıktısına yansıtmak için site yeniden derlenir.
+
+## Basit akış
+
+1. Mücahit mevcut dersi uygular ve bittiğini söyler.
+2. Agent learner code'u ve ilgili oyun davranışını inceler, gerekli kontrolleri çalıştırır.
+3. Kabul ölçütleri karşılanıyorsa dersi `completed` yapar.
+4. Sıradaki gerekli ders hazır değilse yazar; `currentLessonId` değerini o derse taşır.
+
+Bu akış için commit, journal, manuel progress düzenlemesi veya ayrı rapor gerekmez.
+Git geçmişi ilerleme mekanizması değildir.
 
 ## Dersler
 
@@ -17,52 +25,20 @@ oranına katılmaz. `currentLessonId`, bu dizideki bir derse işaret eder.
 
 Yeni hazırlanan dersler `not_started` olarak kataloğa eklenir; bu bir öğrenci
 ilerlemesi değildir. `description`, çalışma alanında gösterilen tek görevlik
-özettir. Ders bölünürken mevcut girişim/kanıt korunur ve kendiliğinden sonraki
-derse geçilmez.
+özettir. Ders bölünürken mevcut girişim ve kanıt korunur.
 
-| Durum | Gereken kanıt |
+| Durum | Anlamı |
 | --- | --- |
 | `not_started` | Henüz öğrenci girişimi yok |
-| `in_progress` | Öğrencinin tahmini, kod denemesi veya sorusu gözlemlendi |
+| `in_progress` | Öğrencinin kod denemesi veya sorusu gözlemlendi |
 | `review_needed` | Öğrenci değerlendirme istedi; kanıtları incelenmeyi bekliyor |
-| `completed` | Dersin kabul ölçütleri incelendi; sonuçlar değerlendirmeye yazıldı |
+| `completed` | Dersin kabul ölçütleri incelendi ve karşılandı |
 
-`evidence` alanları repo köküne göre dosya yollarıdır. Tamamlanma, dersin kabul
-koşullarını karşılayan gözleme ve değerlendirme kaydına dayanır. Kod görevlerinde
-kod yolu eklenir; davranış ve kısa sohbet açıklaması agent'ın `progress/notes/`
-notuyla kaydedilebilir. Journal ve tablo doldurmak zorunlu değildir. İpuçlarıyla
-tamamlanan ders de tamamlanabilir; bağımsız beceri durumu ayrıca değerlendirilir.
-
-İsteğe bağlı World 0 dersleri aynı lab ve journal dosyasını paylaşır. Bu dosyalar
-mevcut girişimi korur; tamamlanmaları Pong'a geçiş şartı değildir. Yeniden
-çalışılırsa journal yerine sohbetten tahmin/gözlem kabul edilir. Kayda yalnızca
-incelenen bölümü yaz; cache yorumları ve AoS/SoA ek geçme koşulu değildir.
-
-## Beceriler
-
-`unassessed`, `learning`, `independent`, `revisit` durumlarını kullan.
-`independent` için yeni bir örnekte veya transfer görevinde desteksiz uygulama
-kanıtı gerekir. Derlenebilir kod bu kanıtın tek başına yerine geçmez.
-
-## Değerlendirme kaydı
-
-İnceleme bittikten sonra `reviews` dizisine bir nesne ekle:
-
-```json
-{
-  "lessonId": "systems-01-memory-layout",
-  "reviewedAt": "gerçek ISO 8601 zamanı",
-  "outcome": "needs_revision",
-  "evidence": ["journal/00-memory-layout.md"],
-  "summary": "Gözlemlenen başarılar ve açık kalan konu.",
-  "hintLevel": 1
-}
-```
-
-Bu bir şema örneğidir, yapılmış değerlendirme değildir. `outcome` değeri
-`needs_revision` veya `passed`; `hintLevel` 0–3 olur. Açık soruları
-`openQuestions` dizisinde metin olarak tut. Önceki değerlendirmeleri koru.
+`evidence`, `skills`, `reviews` ve `openQuestions` alanlarındaki mevcut veriler
+tarihsel olarak korunur; olağan ders akışında bunlara yeni kayıt eklenmez. Yeni
+bir ders tamamlandığında yalnızca ders durumu ve `currentLessonId` güncellenir.
+Basit çizim görevleri kod incelemesi ve compiler kontrolüyle tamamlanabilir;
+görülmeyen GUI davranışı görülmüş sayılmaz.
 
 Bir sonraki ders henüz yazılmadıysa mevcut dersi tamamlanmış olarak bırak ve
-sonraki dersi hazırla; hayali bir ders kimliğine geçme. XP ve seviye puanı V0'da
-yok; mevcut kayıt gözlemlenmiş öğrenme kanıtlarını takip eder.
+sonraki dersi hazırla; hayali bir ders kimliğine geçme. XP ve seviye puanı yok.

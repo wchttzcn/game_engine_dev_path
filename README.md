@@ -4,7 +4,9 @@ Odin ile oyun yaparak Game Engine Developer olma çalışma alanı. Sohbet ana m
 
 ## Başla
 
-Şimdi [1.1 — İlk raketi çiz](academy/worlds/01-pong/01-first-paddle.md) dersinden başla veya sohbette **“Pong 1.1'den devam edelim”** yaz. Hazır pencereye tek bir `DrawRectangle` çağrısı ekle, `x` coordinate'ini değiştir ve ekrandaki sonucu gözlemle.
+Şimdi [1.2 — Game state'i kur](academy/worlds/01-pong/02-game-state.md) dersinden
+devam et. İlk raketi çizdin; sırada iki raket ile topun verisini çizim
+çağrılarından ayırmak var.
 
 Repo kökünden çalıştır:
 
@@ -12,9 +14,8 @@ Repo kökünden çalıştır:
 odin run games/pong -out:/tmp/mucahit-pong
 ```
 
-Kısa gözlemini sohbette anlatıp inceleme iste. Journal tutmak isteğe bağlıdır.
-Progress JSON ve Academy altyapısını agent yönetir. World 0 memory dersleri
-isteğe bağlı kaynaktır; Pong için ön koşul değildir.
+Bitirdiğinde kod incelemesi istemen yeterli. Kod ve compiler kontrolünden sonra
+sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez.
 
 ## İçerik ve sorumluluk
 
@@ -24,10 +25,17 @@ isteğe bağlı kaynaktır; Pong için ön koşul değildir.
 | `games/` | Senin oyun implementasyonların |
 | `labs/` | İsteğe bağlı kısa Odin deneylerin |
 | `journal/` | İstersen tuttuğun gözlem notları |
-| `progress/` | Agent'ın kanıtla yönettiği öğrenme kaydı |
+| `progress/` | Agent'ın yönettiği mevcut ders bilgisi |
 | `AGENTS.md` | Mentorun uygulayacağı eğitim kuralları |
 
-Pong'un yalnızca ilk dersi hazırdır. Sonraki dersler, oyunda karşılaştığın gerçek problemlerden hazırlanır.
+Pong'un 1.1–1.13 dersleri (13 ders) hazırdır. Bu paket oynanabilir maç, açık
+match state, update/render ayrımı ve ilk debug overlay'e kadar gider. Sonraki
+dersler, mevcut iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre
+hazırlanır.
+
+`labs/00-memory-layout/` ile `journal/00-memory-layout.md`, Pong'dan önce
+denenen memory layout çalışmasının arşividir. Rotanın parçası değildir; memory
+konuları artık oyun ihtiyacı doğdukça Pong ve Snake içinde gelir.
 
 <details>
 <summary>Agent için: okuyucu kurulumu ve doğrulama</summary>

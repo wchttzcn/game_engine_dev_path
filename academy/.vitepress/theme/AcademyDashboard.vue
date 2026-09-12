@@ -34,7 +34,7 @@ const skillLabels: Record<string, string> = {
       <div class="lesson-aside">
         <span class="status-pill">{{ lessonLabels[current.status] }}</span>
         <div class="memory-blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <p>TAHMİN → ÖLÇÜM → AÇIKLAMA</p>
+        <p>YAZ → OYNA → DEBUG ET</p>
       </div>
     </section>
 
@@ -51,15 +51,15 @@ const skillLabels: Record<string, string> = {
         <ul class="skill-list">
           <li v-for="skill in progress.skills" :key="skill.id"><span>{{ skill.title }}</span><small>{{ skillLabels[skill.status] }}</small></li>
         </ul>
-        <p class="panel-note">Bu liste ön koşul değildir. Aktif görevin yukarıda; World 0 isteğe bağlıdır.</p>
+        <p class="panel-note">Bu liste ön koşul değildir. Aktif görevin yukarıda.</p>
       </section>
       <section class="academy-panel" aria-labelledby="routine-heading">
         <p class="eyebrow">ÇALIŞMA DÖNGÜN</p>
-        <h2 id="routine-heading">Oku. Yaz. Gözlemle.</h2>
+        <h2 id="routine-heading">Oku. Yaz. Oyna.</h2>
         <ol class="routine-list">
           <li><span>01</span>Sohbette veya burada tek görevi oku.</li>
-          <li><span>02</span>Editöründe tahminini ve kodunu yaz.</li>
-          <li><span>03</span>Ölç, açıkla, değerlendirme iste.</li>
+          <li><span>02</span>Editöründe oyun kodunu yaz.</li>
+          <li><span>03</span>Oyna, debug et, inceleme iste.</li>
         </ol>
         <a class="text-link" :href="withBase('/workflow')">Çalışma rehberini aç →</a>
       </section>

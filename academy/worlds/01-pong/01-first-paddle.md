@@ -1,7 +1,6 @@
 ---
 title: "1.1 — İlk raketi çiz"
-description: "Pong penceresine bir raket çiz; x değişince yerinin nasıl değiştiğini gözle."
-next: false
+description: "Pong penceresine ilk raketi çiz."
 ---
 
 # 1.1 — İlk raketi çiz
@@ -12,14 +11,14 @@ next: false
 
 `games/pong/main.odin` dosyasındaki TODO yerine beyaz bir raket çiz:
 `x = 40`, `y = 160`, `width = 20`, `height = 100`.
-Sonra yalnızca `x` değerini `100` yap. Çalıştırmadan önce hangi yöne
-gideceğini tahmin et; çalıştırıp sonucu gör.
 
 ## Ne zaman bitti?
 
-Siyah pencerenin içinde raketin görünüyor. `x` değişikliğinin etkisini
-gördün ve sohbette **“Şunu bekledim, şunu gördüm”** diyebiliyorsun.
-Journal veya tablo doldurman gerekmiyor.
+- Çizim döngüsünde siyah arka planın ardından beyaz raketi çizen bir çağrı var.
+- Raket görevde verilen konum ve boyutta duruyor.
+- `odin check games/pong` geçiyor.
+
+Programı oynama/debugging için çalıştırabilirsin; ayrıca gözlem raporu gerekmiyor.
 
 ## Bilmen gereken küçük parça
 
@@ -42,8 +41,8 @@ Kapatıp kodu değiştirebilir, aynı komutla yeniden çalıştırabilirsin.
 Kurulum veya compiler hatası olursa çıktıyı sohbete getir; birlikte çözeriz.
 
 ::: details İpucu 1 — Konum mu, boyut mu?
-Raketi başka yere taşımakla onu daha geniş çizmek farklı işlemler.
-Değiştirdiğin argüman bunlardan hangisini belirliyor?
+Çağrının ilk iki argümanı konumu, sonraki ikisi boyutu belirler.
+Görevdeki değerleri bu sırayla eşleştir.
 :::
 
 ::: details İpucu 2 — Dikdörtgenin hangi köşesi?
@@ -53,7 +52,7 @@ o köşeden itibaren ne kadar geniş ve yüksek çizileceğini söyler.
 
 ::: details İpucu 3 — Çağrıyı kur
 Görevdeki değerleri sırasıyla `x, y, width, height` yerlerine koy;
-son argüman `rl.WHITE` kalsın. İkinci denemede yalnızca ilk argümanı değiştir.
+son argüman `rl.WHITE` kalsın.
 :::
 
 ::: details Deep Dive — Çizim neden döngünün içinde?
@@ -67,5 +66,5 @@ ve [DrawRectangle referansına](https://pkg.odin-lang.org/vendor/raylib/#DrawRec
 :::
 
 **Kazanım:** Kendi çizim kodunla Pong'un ilk raketini ekrana koydun.
-**“1.1 denememi değerlendir”** yaz; kodunu ve gözlemini inceleyelim.
-Sonraki küçük adım ikinci raket ve top; henüz ayrı ders olarak hazırlanmadı.
+**“Pong 1.1 denememi değerlendir”** yaz; kodunu inceleyelim.
+Sonraki adım: [1.2 — Oyun state'ini kur](/worlds/01-pong/02-game-state).

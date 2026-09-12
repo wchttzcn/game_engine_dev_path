@@ -2,15 +2,17 @@
 
 Oyun yaparak oyunların altındaki sistemleri öğreneceksin. React ve TypeScript deneyimin karar verme, debugging ve ürün geliştirme için temel; yeni çalışma alanın memory, simulation, oyun hissi ve araçlar. Dil Odin, ortam macOS, kod yazma yeri kendi editörün. Takvim veya haftalık kota yok.
 
-**Ana mentor arayüzü sohbet.** Burada görev alır, tahminini ve denemeni paylaşırsın. Yerel araçlarla kod, derleme ve davranış incelenir. Mevcut academy sitesi isteğe bağlı ders okuyucusudur; ilerlemek için siteyi geliştirmen gerekmez. Egzersizleri ve oyunları sen yazarsın.
+**Ana mentor arayüzü sohbet.** Burada görev alır, takıldığında yardım veya kod incelemesi istersin. Yerel araçlarla kod, derleme ve davranış incelenir. Tahmin, gözlem veya journal raporu gerekmez. Mevcut academy sitesi isteğe bağlı ders okuyucusudur; ilerlemek için siteyi geliştirmen gerekmez. Egzersizleri ve oyunları sen yazarsın.
 
-**Şimdi:** [Pong 1.1 — İlk raketi çiz](/worlds/01-pong/01-first-paddle). Dünya 0'daki memory deneyleri optional reference'tır; Pong için bitirilmeleri veya journal'a yazılmaları gerekmez. İlk Pong dersinden sonrası, karşılaşacağın oyun problemlerine göre hazırlanır.
+**Şimdi:** [Pong 1.2 — Game state'i kur](/worlds/01-pong/02-game-state).
+Pong'un 1.1–1.13 dersleri (13 ders) hazır; 1.1 tamamlandı. Paket oynanabilir
+maç ve debug overlay'e kadar gider.
 
 ## Ders döngüsü
 
-Bir ders bir ana fikir ve küçük bir görev taşır: hedef, kısa bağlam, tahmin, deneme, kabul koşulu. İpuçları kademeli açılır; ayrıntılı teori isteğe bağlıdır. İnceleme gözlenen kanıtla ve tek odaklı soruyla başlar. Derlenmesi, doğru davranması ve nedenini açıklayabilmen ayrı değerlendirilir. Bir çözümü gördükten sonra bağımsızlık, yeni bir aktarım göreviyle sınanır.
+Bir ders bir ana fikir ve küçük bir görev taşır: hedef, kısa bağlam, uygulama, kabul koşulu. İpuçları kademeli açılır; ayrıntılı teori isteğe bağlıdır. İnceleme kod ve ilgili oyun davranışı üzerinden yapılır. Sorular somut bir hatayı veya kararı çözmeye yardım ettiğinde kullanılır. Derleme, davranış ve kavrayış ayrı değerlendirilir; kavrayış sonraki oyun işlerinde de görünür olur.
 
-Oyun problemi → küçük kavram → tahmin → uygulama → gözlem → inceleme → kısa değerlendirme → tekrarlanan ihtiyaç → ortak engine sistemi. Başta görev ve sınırlar verilir; ortada arayüzleri sen tasarlarsın; ileride görevi ve ölçüm yöntemini de sen çıkarırsın. İlerlemeyi mentor gözlenmiş kanıtla kaydeder. Academy bakımı ve ilerleme dosyalarının yönetimi agente aittir.
+Oyun problemi → küçük kavram → uygulama → oynama/debugging → inceleme → tekrarlanan ihtiyaç → ortak engine sistemi. Deneyler gerçek bir mekanik, bug veya oyun hissi sorusuna bağlıdır: topun raketten sekmesi, hızın kontrol hissine etkisi ya da hitstop gibi. Anlamı açık bir coordinate değişikliğini ayrıca yapıp raporlama görevi yoktur. Başta görev ve sınırlar verilir; ortada arayüzleri sen tasarlarsın; ileride görevi ve ölçüm yöntemini de sen çıkarırsın. Bir iş bittiğinde mentor kodu ve compiler sonucunu kontrol eder, mevcut ders işaretini tek seferde ilerletir. Ara denemelerde tracking dosyası veya commit gerekmez.
 
 ## Sekiz beceri hattı
 
@@ -34,7 +36,6 @@ Araçlar küçük adımlarla büyür: debug yazısı → overlay → Dear ImGui 
 | Dünya | Küçük proje | Araç teslimi |
 | --- | --- | --- |
 | 1 | Pong | İlk raket; sonra ihtiyaçla debug text ve overlay |
-| 0 | Optional memory reference | İstenirse küçük ölçüm deneyi |
 | 2 | Snake | Grid görünümü, state ve memory sayaçları |
 | 3 | Breakout / Juice Laboratory | İlk Dear ImGui runtime ayar paneli |
 | 4 | Precision Platformer / Dead Cells DNA | Player inspector ve hitbox çizimleri |
@@ -47,15 +48,9 @@ Araçlar küçük adımlarla büyür: debug yazısı → overlay → Dear ImGui 
 
 Bu isimler mekanik ilhamını belirtir; ilgili oyunların iç mimarisi hakkında iddia değildir. Sıra ve kapsam, öğrendiklerine ve keyif aldığın mekaniklere göre değişebilir. İlerideki dünyalar yaklaştıkça küçük derslere bölünecek; aylarca sürecek görevleri şimdiden sabitlemiyoruz.
 
-## Dünya 0 — Optional memory reference
-
-[Dünya planı](/worlds/00-systems/). Bu deneyler erişilebilir bir reference olarak korunur; Pong'a geçişi engellemez. Memory layout, pointer, slice veya allocation bilgisi bir oyun problemiyle gerektiğinde kısa bir görev olarak açılır. Cache ve AoS/SoA, Snake’te somut erişim deneyine bırakılır.
-
-**Soru:** “Bu oyun problemi memory hakkında hangi soruyu doğuruyor?” Kısa gözlem sohbette yeterlidir; journal tablosu veya tamamlanma kapısı yoktur. İleri allocator tasarımı, ECS, SIMD ve ileri profiling oyun ihtiyacını bekler.
-
 ## Dünya 1 — Pong
 
-[Dünya planı](/worlds/01-pong/). İlk hazır ders [1.1 — İlk raketi çiz](/worlds/01-pong/01-first-paddle): hazır pencereye bir raket çizerek screen coordinates ile çalış. Sonraki tek problem, bu denemeden sonra seçilir. Çalışan maç, ses, parçacık, hit pause, iz, kamera tepkisi ve debug overlay; ihtiyaç geldikçe ayrı küçük görevlerdir.
+[Dünya planı](/worlds/01-pong/). [1.1 — İlk raketi çiz](/worlds/01-pong/01-first-paddle) tamamlandı. Kalan 1.2–1.13 dersleri game state, input, delta time, hareket, collision, skor, match state, update/render ayrımı ve debug overlay üzerinden oynanabilir Pong'a gider. Ses, parçacık, hit pause, iz ve kamera tepkisi; bu temel sürüm oynandıktan sonra ihtiyaç geldikçe ayrı küçük görevler olur.
 
 **Soru:** “Top kodu neden kamera sarsıntısını biliyor?” **Kanıt:** Tamamlanıp yeniden başlayan maç, efektlerin açılıp kapatıldığı karşılaştırma ve bağımsız bir kural değişikliği. Engine Thinking burada bağımlılıkları fark etmektir; evrensel motor API’si çıkarma zorunluluğu değildir.
 
@@ -127,4 +122,4 @@ Bu teslimler, birkaç oyundaki tekrar görünür oldukça küçük adımlarla pl
 
 Uzun vadede ortak simulation, farklı algılar, değişen rules ve zaman mekanikleri birleşebilir; final tasarım sabit değildir. İlk vertical slice en fazla iki ana mekanik taşır: örneğin yerel co-op ve farklı bilgi ya da hareket ve geri sarma. Küçük, başı ve sonu olan oynanabilir sonuç çıkarırsın.
 
-Teslim; çalıştırma talimatı, dışarıdan oynama bulguları, performans ölçümleri ve teknik değerlendirmedir. Günlükte “hangi abstraction erkendi, hangi araç eksikti, hangi allocation beklenmedikti?” sorularını yanıtlarsın. Sonraki kapsamı bu kanıtlar belirler.
+Teslim oynanabilir oyun ve çalıştırma talimatıdır. Dışarıdan oynama bulguları, gerektiğinde performans ölçümleri ve kod incelemesi sonraki kapsamı belirler. Erken abstraction, eksik araç veya beklenmedik allocation gibi konuları oyunda karşılaştıkça ele alırız; ayrı günlük veya değerlendirme raporu gerekmez.

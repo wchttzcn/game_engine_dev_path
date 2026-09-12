@@ -76,6 +76,3 @@ Bu layout değişikliği memory kullanımı ve cache için neyi iyileştirebilir
 Neden daha küçük struct otomatik olarak daha hızlı değildir?
 
 
-## Mentor inceleme notu
-
-İki layout'u çiz, padding’in konumlarını göster ve ölçümün hedefe bağlı olduğunu açıkla.
