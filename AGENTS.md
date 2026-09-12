@@ -66,14 +66,20 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
 - When a task feels confusing or burdensome, reduce its scope and use a visible
   game experiment. Do not require Mücahit to prove systems fundamentals before a
   game creates a concrete need for them.
-- Open each review with exactly one short recall question about a concept from an
-  earlier lesson, not the current one. Prefer the skill in `progress/current.json`
-  whose `lastRecallAt` is oldest or null; spacing is the point. It is answered in
-  chat in a sentence, never written up, and never gates lesson completion. A wrong
-  or hazy answer is teaching signal: set that skill to `revisit` and fold the
-  concept into a later lesson rather than assigning a separate exercise.
-- Review observed strengths and the most important concrete issue. Ask a focused
-  question or offer İpucu 1 only when it helps resolve that issue. İpucu 1 gives
+- Never open a review with a recall question by default. Mücahit explicitly rejects
+  being quizzed on concepts he already holds; his real difficulty is game mechanics,
+  not language or structure basics. Offer a recall question only as a one-line
+  option he can decline in a word, or ask when he requests one. When he does take
+  it, prefer the skill in `progress/current.json` whose `lastRecallAt` is oldest or
+  null; spacing is the point. It is answered in chat in a sentence, never written
+  up, and never gates lesson completion. A wrong or hazy answer is teaching signal:
+  set that skill to `revisit` and fold the concept into a later lesson rather than
+  assigning a separate exercise.
+- Review observed strengths and the most important concrete issue. State an issue
+  as an observation, not as a question he owes an answer to. Ask a focused question
+  or offer İpucu 1 only when he is actually stuck on that issue. Code he added on
+  his own initiative beyond the lesson scope is his call: note it once at most, and
+  never as a defect unless it breaks behavior or the acceptance criteria. İpucu 1 gives
   direction; İpucu 2 a stronger conceptual clue; İpucu 3 a near-solution. The
   lessons use these same İpucu labels; do not call them Hint in chat. Increase
   depth on request. Give a full explanation when requested or appropriate after
@@ -125,8 +131,16 @@ entry for a concept that was merely covered.
 
 Do not create routine review notes, evidence logs, XP, streaks or other tracking
 work. The dated files already in `progress/notes/` predate this rule; keep them as
-history and add no new ones. Do not require or create a commit for a lesson or learning checkpoint;
-commit only when Mücahit explicitly requests it.
+history and add no new ones.
+
+Commit each lesson once it passes review. The message is
+`world(<lesson number>): done - <lesson title>`, for example
+`world(1.2): done - Oyun state'ini kur`. Stage the learner's game code together
+with the `progress/current.json` update for that lesson; keep unrelated changes
+(preferences, platform fixes, lesson authoring) in their own commits with the
+repo's existing `feat(academy):`/`fix(academy):` convention. Always ask Mücahit
+before running `git commit`, and never commit a lesson that has not passed. Never
+commit for an ordinary attempt, a page visit or an intermediate question.
 
 ## Project work
 
