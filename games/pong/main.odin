@@ -54,6 +54,15 @@ main :: proc() {
 		game.ball.x += game.ball.velocity_x * dt
 		game.ball.y += game.ball.velocity_y * dt
 
+		if game.ball.y - game.ball.radius < 0 {
+			game.ball.y = game.ball.radius
+			game.ball.velocity_y = abs(game.ball.velocity_y)
+		}
+		if game.ball.y + game.ball.radius > SCREEN_HEIGHT {
+			game.ball.y = SCREEN_HEIGHT - game.ball.radius
+			game.ball.velocity_y = -abs(game.ball.velocity_y)
+		}
+
 		player_rect := rl.Rectangle {
 			game.player.x,
 			game.player.y,

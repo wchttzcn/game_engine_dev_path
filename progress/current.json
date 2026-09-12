@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-06-wall-bounce",
+  "currentLessonId": "pong-07-paddle-collision",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -66,8 +66,10 @@
       "description": "Top üst veya alt sınıra değdiğinde dikey velocity yönünü değiştir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/06-wall-bounce",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-07-paddle-collision",
@@ -211,11 +213,25 @@
     {
       "id": "velocity-state",
       "title": "Velocity state'i",
+      "status": "independent",
+      "lessons": [
+        "pong-05-ball-velocity",
+        "pong-06-wall-bounce"
+      ],
+      "note": "Velocity'yi çalışma anında değiştirdi: duvar response'unda magnitude'ı abs ile koruyup işareti duvara dayattı. Position correction ile yön değişikliğinin ayrı iki iş olduğunu, İpucu 2 ve 3'ten sonra uyguladı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "collision-response",
+      "title": "Collision response",
       "status": "learning",
       "lessons": [
-        "pong-05-ball-velocity"
+        "pong-06-wall-bounce"
       ],
-      "note": "Konum ile velocity'yi ayrı field'larda tuttu ve başlangıç velocity'sini oyun hissini gözeterek seçti (yatay 300 < PLAYER_SPEED 400, dikey 180). Velocity'nin çalışma anında değiştirilmesi 1.6 duvar response'unda görülecek.",
+      "note": "Sınır testini merkez artı radius ile kendi kurdu; position'ı sınıra oturtup yönü ayrı vermeyi ipucu sonrası yaptı. İlk denemede yalnız position'ı düzeltip velocity'ye dokunmamıştı. Alan çakışmasına (paddle overlap) uygulanışı 1.7-1.8'de görülecek.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -295,6 +311,26 @@
       ],
       "summary": "Başlangıç velocity'si velocity_x 300.0 ve velocity_y 180.0 olarak set edildi; top sağa ve aşağı çapraz hareket ediyor, konum güncellemesi velocity × dt kullanıyor, odin check geçti. Değerler oynanabilirliği gözetiyor: yatay hız PLAYER_SPEED'in altında. GUI agent tarafından çalıştırılmadı.",
       "hintLevel": 0
+    },
+    {
+      "lessonId": "pong-06-wall-bounce",
+      "reviewedAt": "2026-09-13T00:00:00Z",
+      "outcome": "needs_revision",
+      "evidence": [
+        "games/pong/main.odin"
+      ],
+      "summary": "Sınır testleri merkez ve radius ile doğru kuruldu, ama iki branch de yalnız position'ı değiştiriyordu: velocity_y hiç güncellenmediği için top alt kenarda titreşip kalıyor, üst branch ise topu sınırın daha da dışına itiyordu. odin check bu davranışı yakalamaz. Öğrenci takıldığını söyledi; İpucu 2 (yönü abs ile duvardan uzağa dayat) ve talebi üzerine İpucu 3 (kontrolün yeri, üst duvar branch'i örnek) verildi, alt duvar ona bırakıldı.",
+      "hintLevel": 3
+    },
+    {
+      "lessonId": "pong-06-wall-bounce",
+      "reviewedAt": "2026-09-13T00:00:00Z",
+      "outcome": "passed",
+      "evidence": [
+        "games/pong/main.odin"
+      ],
+      "summary": "Her iki duvarda position sınıra oturtuluyor ve velocity_y işareti abs ile duvardan uzağa dayatılıyor; alt duvar branch'ini kendisi yazdı. velocity_x 300.0'a geri alınmış, yatay hareket etkilenmiyor, odin check geçti. Açık gözlem: yeni satırlar space ile girintili, dosyanın kalanı tab; odinfmt önerildi. GUI agent tarafından çalıştırılmadı.",
+      "hintLevel": 3
     }
   ],
   "openQuestions": []
