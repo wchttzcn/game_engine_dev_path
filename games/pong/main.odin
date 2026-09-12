@@ -2,10 +2,12 @@ package main
 
 import rl "vendor:raylib"
 
+SCREEN_WIDTH :: 800
+SCREEN_HEIGHT :: 450
+
 Game :: struct {
 	player, opponent: Paddle,
 	ball:             Ball,
-	score:            f32,
 }
 
 Paddle :: struct {
@@ -16,7 +18,7 @@ Ball :: struct {
 }
 
 main :: proc() {
-	rl.InitWindow(800, 450, "Pong")
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong")
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
@@ -26,21 +28,39 @@ main :: proc() {
 		ball = Ball{x = 400, y = 225, radius = 5},
 	}
 
-	player_rect := rl.Rectangle {
-		game.player.x,
-		game.player.y,
-		game.player.width,
-		game.player.height,
-	}
-	opponent_rect := rl.Rectangle {
-		game.opponent.x,
-		game.opponent.y,
-		game.opponent.width,
-		game.opponent.height,
-	}
-
 
 	for !rl.WindowShouldClose() {
+		//        === Update ===
+
+		if rl.IsKeyDown(.W) {
+			game.player.y -= 5.0
+		}
+		if rl.IsKeyDown(.S) {
+			game.player.y += 5.0
+		}
+
+
+		if game.player.y + game.player.height > SCREEN_HEIGHT {
+			game.player.y = SCREEN_HEIGHT - game.player.height
+		}
+		if game.player.y < 0 {
+			game.player.y = 0
+		}
+
+		player_rect := rl.Rectangle {
+			game.player.x,
+			game.player.y,
+			game.player.width,
+			game.player.height,
+		}
+		opponent_rect := rl.Rectangle {
+			game.opponent.x,
+			game.opponent.y,
+			game.opponent.width,
+			game.opponent.height,
+		}
+
+		//        === Draw ===
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
 

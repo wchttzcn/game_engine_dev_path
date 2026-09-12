@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-03-player-input",
+  "currentLessonId": "pong-04-delta-time",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -33,8 +33,10 @@
       "description": "W/S input'u ile oyuncu raketini hareket ettir ve oyun alanında tut.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/03-player-input",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-04-delta-time",
@@ -149,11 +151,12 @@
     {
       "id": "screen-coordinates",
       "title": "Screen coordinates",
-      "status": "learning",
+      "status": "independent",
       "lessons": [
-        "pong-01-first-paddle"
+        "pong-01-first-paddle",
+        "pong-03-player-input"
       ],
-      "note": "Sol üst köşe (0,0), y aşağı artar. Raketi doğru konuma çizdi; farklı bir bağlamda (ör. sınır kontrolü) tekrar uygulanışı henüz görülmedi.",
+      "note": "Raketi doğru konuma çizdi, sonra aynı koordinat modelini yeni bir bağlamda sınır kontrolüne uyguladı: üst kenar y, alt kenar y + height.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -163,11 +166,25 @@
     {
       "id": "state-render-separation",
       "title": "State ve render ayrımı",
+      "status": "independent",
+      "lessons": [
+        "pong-02-game-state",
+        "pong-03-player-input"
+      ],
+      "note": "1.3'te rectangle kurulumunu kendi inisiyatifiyle game loop'un içine taşıdı; update ile draw'u yorumla da ayırdı. State değişince render'ın tazelenmesi gerektiğini uyguladı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "frame-input",
+      "title": "Frame başına input",
       "status": "learning",
       "lessons": [
-        "pong-02-game-state"
+        "pong-03-player-input"
       ],
-      "note": "Paddle/Ball/Game struct'ları ile çizim çağrılarını ayırdı. Rectangle değerlerinin game loop dışında bir kez kurulduğunu ve state değişince güncellenmeyeceğini sorulunca kendisi söyledi; 1.3'te uygulamada görülecek.",
+      "note": "IsKeyDown ile basılı tuşu her frame okuyup state'i değiştirdi. Tek atımlık IsKeyPressed ayrımı ve delta time'dan bağımsız sabit hareket miktarı henüz görülmedi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -206,6 +223,16 @@
         "games/pong/main.odin"
       ],
       "summary": "Paddle, Ball ve Game main dışında; tek Game değeri iki raket ile topu taşıyor; her raket kendi rl.Rectangle değişkeni ile DrawRectangleRec üzerinden çiziliyor; odin check geçti. İki not açık bırakıldı: rectangle'lar game loop dışında bir kez hesaplanıyor (1.3'te stale olacak) ve görevde olmayan, kullanılmayan score: f32 field'ı duruyor. GUI agent tarafından çalıştırılmadı.",
+      "hintLevel": 0
+    },
+    {
+      "lessonId": "pong-03-player-input",
+      "reviewedAt": "2026-09-13T00:00:00Z",
+      "outcome": "passed",
+      "evidence": [
+        "games/pong/main.odin"
+      ],
+      "summary": "W/S ile player raketi hareket ediyor, SCREEN_WIDTH ve SCREEN_HEIGHT dosya seviyesinde tanımlı ve InitWindow onları kullanıyor, iki yönde de sınır clamp'i doğru, rakip ile top sabit, odin check geçti. Ders istemeden rectangle kurulumunu game loop'un içine taşıyarak 1.2'deki stale render sorununu kendi kapattı. Açık gözlem: opponent.x hâlâ 740 literal'i. GUI agent tarafından çalıştırılmadı.",
       "hintLevel": 0
     }
   ],
