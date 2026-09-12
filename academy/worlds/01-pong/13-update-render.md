@@ -1,9 +1,9 @@
 ---
-title: "1.12 — Update ve render sınırı"
+title: "1.13 — Update ve render sınırı"
 description: "Game state'ini update eden kodu, state'i çizen koddan ayır."
 ---
 
-# 1.12 — Update ve render sınırı
+# 1.13 — Update ve render sınırı
 
 **Hedef:** Bir frame'in state değişimini çiziminden ayırarak Pong döngüsünü
 okunur hale getir.

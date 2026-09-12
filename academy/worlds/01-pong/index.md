@@ -28,13 +28,14 @@ odin run games/pong -out:/tmp/mucahit-pong
 8. [1.8 — Collision response](/worlds/01-pong/08-collision-response)
 9. [1.9 — Rakip AI](/worlds/01-pong/09-opponent-ai)
 10. [1.10 — Skor ve servis](/worlds/01-pong/10-score-and-reset)
-11. [1.11 — Match state](/worlds/01-pong/11-match-state)
+11. [1.11 — Servis state'i](/worlds/01-pong/11-serve-state)
+12. [1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over)
 
 ### Kod sınırları ve araç
 
-12. [1.12 — Update / render](/worlds/01-pong/12-update-render)
-13. [1.13 — Debug overlay](/worlds/01-pong/13-debug-overlay)
-14. [1.14 — Collision shape'lerini çiz](/worlds/01-pong/14-collision-shapes)
+13. [1.13 — Update / render](/worlds/01-pong/13-update-render)
+14. [1.14 — Debug overlay](/worlds/01-pong/14-debug-overlay)
+15. [1.15 — Collision shape'lerini çiz](/worlds/01-pong/15-collision-shapes)
 
 Bu paket bittiğinde maç oynanabilir, yeniden başlatılabilir; önemli state ve
 collision shape'leri F1 ile görünür olur. Ses ve game-feel adımları sonraki

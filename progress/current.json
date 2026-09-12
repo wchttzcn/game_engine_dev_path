@@ -94,38 +94,47 @@
       "evidence": []
     },
     {
-      "id": "pong-11-match-state",
-      "title": "Maç state'i",
-      "description": "Maçın servis, oyun ve bitiş geçişlerini açık bir state ile yönet.",
+      "id": "pong-11-serve-state",
+      "title": "Servis state'i",
+      "description": "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın.",
       "world": "World 1 · Pong",
-      "url": "/worlds/01-pong/11-match-state",
+      "url": "/worlds/01-pong/11-serve-state",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pong-12-update-render",
+      "id": "pong-12-match-over",
+      "title": "Maç sonu ve restart",
+      "description": "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat.",
+      "world": "World 1 · Pong",
+      "url": "/worlds/01-pong/12-match-over",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pong-13-update-render",
       "title": "Update ve render sınırı",
       "description": "State mutation ile çizimi ayrı procedure'lara taşı.",
       "world": "World 1 · Pong",
-      "url": "/worlds/01-pong/12-update-render",
+      "url": "/worlds/01-pong/13-update-render",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pong-13-debug-overlay",
+      "id": "pong-14-debug-overlay",
       "title": "Debug overlay ekle",
       "description": "F1 ile açılan overlay'de oyunun görünmeyen sayısal state'ini ekrana getir.",
       "world": "World 1 · Pong",
-      "url": "/worlds/01-pong/13-debug-overlay",
+      "url": "/worlds/01-pong/14-debug-overlay",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pong-14-collision-shapes",
+      "id": "pong-15-collision-shapes",
       "title": "Collision shape'lerini çiz",
       "description": "Top ve raketlerin collision shape'lerini, collision hesabının kendi değerlerinden outline olarak çiz.",
       "world": "World 1 · Pong",
-      "url": "/worlds/01-pong/14-collision-shapes",
+      "url": "/worlds/01-pong/15-collision-shapes",
       "status": "not_started",
       "evidence": []
     }
