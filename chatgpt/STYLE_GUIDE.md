@@ -133,8 +133,18 @@ Ders bölümlerinin sırası ve başlıkları bütün pakette aynıdır; emoji k
 ↓
 ## Birincil kaynak
 ↓
-**Kazanım:** ve sonraki adım
+**Kazanım:** tek paragraf
+↓
+inceleme çağrısı: **“Pong <numara> denememi değerlendir”** yaz; kodunu inceleyelim.
+↓
+Sonraki adım: [<sonraki dersin adı>](<sonraki dersin yolu>)   (son derste yok)
 ```
+
+Ders adı yalnız frontmatter `title` alanında yazılır ve `1.N — Ad` biçimindedir;
+sidebar, bölüm planı, progress kataloğu ve ders içi linkler onu türetir. Kapanış
+üç ayrı paragraftır: kazanım, inceleme çağrısı, sonraki adım linki. Çağrı her
+derste aynı cümledir — `academy/workflow.md` her dersin sonunda inceleme
+istendiğini söyler.
 
 Kabul koşulu bilerek Sınırlar bölümünden önce gelir: `AGENTS.md` dersin hedef, görev
 ve kabul koşulu ile başlamasını ister, okuyucu da "ne zaman bitti?" cevabını ilk

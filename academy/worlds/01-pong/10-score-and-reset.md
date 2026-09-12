@@ -1,6 +1,7 @@
 ---
 title: "1.10 — Sayı ve servis"
 description: "Top saha dışına çıktığında skoru güncelle ve topu belirli bir yöne sıfırla."
+section: Oynanış
 ---
 
 # 1.10 — Sayı ve servis
@@ -79,5 +80,9 @@ Skoru çizerken kullanacağın imza; sayıyı `cstring`e çevirmek için aynı s
 [`TextFormat`](https://pkg.odin-lang.org/vendor/raylib/#TextFormat).
 
 **Kazanım:** Sahanın sınır kuralını, skor state'ini ve tam reset'i birlikte
-kurmuş oldun. Sonraki adım bu kuralların maç içinde hangi sırayla geçerli
-olduğunu açıkça tanımlamak.
+kurmuş oldun.
+
+**“Pong 1.10 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu kuralların maç içinde hangi sırayla geçerli olduğunu açıkça
+tanımlamak: [1.11 — Servis state'i](/worlds/01-pong/11-serve-state).

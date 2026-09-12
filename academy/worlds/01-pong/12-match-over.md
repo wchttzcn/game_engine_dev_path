@@ -1,6 +1,7 @@
 ---
 title: "1.12 — Maç sonu ve restart"
 description: "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat."
+section: Oynanış
 ---
 
 # 1.12 — Maç sonu ve restart
@@ -87,5 +88,8 @@ semantiği burada; kazanan metnini çizeceğin `DrawText` ile `TextFormat` de ay
 binding sayfasında.
 
 **Kazanım:** Maç artık başlayıp bitiyor ve yeniden başlıyor — Pong oynanabilir.
-Sonraki adım bu büyüyen update kodunu çizimden ayırmak:
-[1.13 — Update ve render sınırı](/worlds/01-pong/13-update-render).
+
+**“Pong 1.12 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu büyüyen update kodunu çizimden ayırmak: [1.13 — Update ve render
+sınırı](/worlds/01-pong/13-update-render).

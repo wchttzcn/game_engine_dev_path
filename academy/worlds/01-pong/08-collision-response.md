@@ -1,6 +1,7 @@
 ---
 title: "1.8 — Çakışmayı çöz"
 description: "Topu raketin dışına al ve yatay yönünü doğru tarafa çevir."
+section: Oynanış
 ---
 
 # 1.8 — Çakışmayı çöz
@@ -79,5 +80,9 @@ JavaScript örnekleriyle anlatır; circle-rectangle durumunu kapsamaz, onu rayli
 üstlenir.
 
 **Kazanım:** Collision response'un position correction ve yön kararından
-oluştuğunu kullandın. Sonraki adım:
-[1.9 — Rakip kendi kendine hareket etsin](/worlds/01-pong/09-opponent-ai).
+oluştuğunu kullandın.
+
+**“Pong 1.8 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.9 — Rakip kendi kendine hareket
+etsin](/worlds/01-pong/09-opponent-ai).

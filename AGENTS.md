@@ -130,7 +130,10 @@ commit only when Mücahit explicitly requests it.
 
 ## Project work
 
-Read package scripts for academy commands. Build the academy after content/theme
+Read package scripts for academy commands. A lesson's name lives in one place:
+its markdown frontmatter `title`, written as `1.N — Ad`. Sidebar, chapter plan
+and `progress/current.json` derive from it (`npm run academy:sync`); `npm test`
+checks names, next-step links and the review call across the pack. Build the academy after content/theme
 changes to check rendering and links. Validate Odin examples against the installed
 compiler. Keep experimental verification files outside learner directories.
 Treat `labs/`, `games/`, and `journal/` as learner work once attempts begin.

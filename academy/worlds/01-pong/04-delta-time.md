@@ -1,6 +1,7 @@
 ---
 title: "1.4 — Delta time"
 description: "Raket hızını frame sayısından saniyeye bağla."
+section: Temel hareket
 ---
 
 # 1.4 — Delta time
@@ -76,4 +77,7 @@ bozulduğunu anlatan klasik yazı. Pong'un ihtiyacından derin; accumulator
 bölümünü şimdi okuman gerekmiyor.
 
 **Kazanım:** Hareketi frame sayısına değil geçen zamana bağladın.
+
+**“Pong 1.4 denememi değerlendir”** yaz; kodunu inceleyelim.
+
 Sonraki adım: [1.5 — Top velocity'si](/worlds/01-pong/05-ball-velocity).

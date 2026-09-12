@@ -1,6 +1,7 @@
 ---
 title: "1.15 — Collision shape'lerini çiz"
 description: "Topun ve raketlerin görünmeyen collision shape'lerini, collision hesabının kendi değerlerinden çiz."
+section: Kod sınırları ve araç
 next: false
 ---
 
@@ -89,6 +90,8 @@ Bu dersteki üç çizim çağrısının — `DrawRectangleLinesEx`, `DrawCircleL
 `DrawLineEx` — parametre sırası ve tipleri aynı binding sayfasında.
 
 **Kazanım:** Collision bug'ını artık tahmin ederek değil, gözle görerek
-inceleyebiliyorsun. Pong'un temel sürümü oynanabilir ve debug edilebilir bir
-maç döngüsüne sahip; ses ve game-feel adımları bu sürümü oynadıktan sonra
-doğacak ihtiyaca kalıyor.
+inceleyebiliyorsun. Pong'un temel sürümü oynanabilir ve debug edilebilir bir maç
+döngüsüne sahip; ses ve game-feel adımları bu sürümü oynadıktan sonra doğacak
+ihtiyaca kalıyor.
+
+**“Pong 1.15 denememi değerlendir”** yaz; kodunu inceleyelim.

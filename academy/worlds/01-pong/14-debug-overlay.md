@@ -1,6 +1,7 @@
 ---
 title: "1.14 — Debug overlay"
 description: "F1 ile açılan bir overlay üzerinden Pong'un sayısal state'ini görünür yap."
+section: Kod sınırları ve araç
 ---
 
 # 1.14 — Debug overlay
@@ -79,6 +80,9 @@ allocation sayaçlarına, Breakout'ta runtime tuning paneline genişleyecek.
 Overlay'in kullandığı `DrawFPS`, `DrawText` ve `IsKeyPressed` imzaları aynı
 binding sayfasında; `TextFormat`in Odin tarafındaki gövdesi de orada.
 
-**Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun. Sonraki adım
-görünmeyen shape'leri de çizmek:
-[1.15 — Collision shape'lerini çiz](/worlds/01-pong/15-collision-shapes).
+**Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun.
+
+**“Pong 1.14 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım görünmeyen shape'leri de çizmek: [1.15 — Collision shape'lerini
+çiz](/worlds/01-pong/15-collision-shapes).

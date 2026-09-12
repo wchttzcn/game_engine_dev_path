@@ -1,6 +1,7 @@
 ---
 title: "1.11 — Servis state'i"
 description: "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın."
+section: Oynanış
 ---
 
 # 1.11 — Servis state'i
@@ -92,6 +93,10 @@ adlandırmanın dayanağı ise [Odin adlandırma
 konvansiyonu](https://github.com/odin-lang/Odin/blob/master/base/runtime/core.odin):
 kuralı dilin kendi kaynak dosyası söyler.
 
-**Kazanım:** Maçın en belirsiz anı — "top ne zaman kalkar?" — artık kodda yazılı.
-Sonraki adım aynı enum'a maçın sonunu eklemek:
-[1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over).
+**Kazanım:** Maçın en belirsiz anı — "top ne zaman kalkar?" — artık kodda
+yazılı.
+
+**“Pong 1.11 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım aynı enum'a maçın sonunu eklemek: [1.12 — Maç sonu ve
+restart](/worlds/01-pong/12-match-over).

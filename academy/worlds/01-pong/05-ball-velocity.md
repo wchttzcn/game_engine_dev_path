@@ -1,6 +1,7 @@
 ---
 title: "1.5 — Top velocity'si"
 description: "Topun konumunu velocity ve delta time ile güncelle."
+section: Temel hareket
 ---
 
 # 1.5 — Top velocity'si
@@ -73,5 +74,8 @@ oyun bunları gerektirdiğinde bu modele eklenir.
 `position += velocity * dt` ifadesinin adı semi-implicit Euler entegrasyonudur;
 yazı bu adımın neden bu sırayla yapıldığını gösterir.
 
-**Kazanım:** Pong'un ilk zaman-temelli hareketini kurdun. Sonraki adım:
-[1.6 — Duvarlardan sek](/worlds/01-pong/06-wall-bounce).
+**Kazanım:** Pong'un ilk zaman-temelli hareketini kurdun.
+
+**“Pong 1.5 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.6 — Duvarlardan sek](/worlds/01-pong/06-wall-bounce).

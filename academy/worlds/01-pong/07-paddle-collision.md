@@ -1,6 +1,7 @@
 ---
 title: "1.7 — Rakete değdi mi?"
 description: "Circle ile rectangle'ın çakışmasını AABB üzerinden tespit et."
+section: Oynanış
 ---
 
 # 1.7 — Rakete değdi mi?
@@ -76,4 +77,7 @@ geniş anlatımı için [MDN 2D collision
 detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection).
 
 **Kazanım:** Detection ile response'u ayırıp collision'ı görünür hale getirdin.
+
+**“Pong 1.7 denememi değerlendir”** yaz; kodunu inceleyelim.
+
 Sonraki adım: [1.8 — Çakışmayı çöz](/worlds/01-pong/08-collision-response).

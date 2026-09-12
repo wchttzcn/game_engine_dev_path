@@ -1,6 +1,7 @@
 ---
 title: "1.3 — Oyuncu input'u"
 description: "Klavye input'u ile player raketini ekran sınırları içinde hareket ettir."
+section: Temel hareket
 ---
 
 # 1.3 — Oyuncu input'u
@@ -99,4 +100,8 @@ gördüğün yer. Bu derste tanıtılan `::` sabit tanımı için [Odin Overview
 Constant declarations](https://odin-lang.org/docs/overview/#constant-declarations).
 
 **Kazanım:** Input'un game state'i değiştirdiği, render'ın da sonucu gösterdiği
-ilk frame akışını kurdun. Sonraki adım: [1.4 — Delta time](/worlds/01-pong/04-delta-time).
+ilk frame akışını kurdun.
+
+**“Pong 1.3 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.4 — Delta time](/worlds/01-pong/04-delta-time).

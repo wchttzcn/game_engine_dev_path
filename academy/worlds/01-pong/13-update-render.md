@@ -1,6 +1,7 @@
 ---
 title: "1.13 — Update ve render sınırı"
 description: "Game state'ini update eden kodu, state'i çizen koddan ayır."
+section: Kod sınırları ve araç
 ---
 
 # 1.13 — Update ve render sınırı
@@ -75,5 +76,9 @@ Patterns](https://gameprogrammingpatterns.com/game-loop.html).
 Bir frame'in "input al → update → render" sorumluluklarına neden ayrıldığı.
 
 **Kazanım:** Pong'un state'i tek bir update yolunda değişiyor, render ise onu
-yansıtıyor. Bu sınır, görünmeyen state'i oyun oynarken inceleyecek overlay için
-temel oluşturuyor.
+yansıtıyor.
+
+**“Pong 1.13 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım bu sınırın ayırdığı state'i oynarken okunur kılmak:
+[1.14 — Debug overlay](/worlds/01-pong/14-debug-overlay).

@@ -1,6 +1,7 @@
 ---
 title: "1.2 — Oyun state'ini kur"
 description: "Raket ve top verisini literal çizim çağrılarından ayır."
+section: Temel hareket
 ---
 
 # 1.2 — Oyun state'ini kur
@@ -113,4 +114,7 @@ imzaları için [Odin vendor:raylib binding
 referansı](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangleRec).
 
 **Kazanım:** Pong nesnelerinin verisini çizim literal'larından ayırdın.
+
+**“Pong 1.2 denememi değerlendir”** yaz; kodunu inceleyelim.
+
 Sonraki adım: [1.3 — Oyuncu input'u](/worlds/01-pong/03-player-input).

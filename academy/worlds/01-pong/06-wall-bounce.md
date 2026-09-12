@@ -1,6 +1,7 @@
 ---
 title: "1.6 — Duvarlardan sek"
 description: "Topun dikey hızını sınırda tersine çevir."
+section: Oynanış
 ---
 
 # 1.6 — Duvarlardan sek
@@ -71,5 +72,8 @@ Velocity'nin magnitude'ını almak için import gerektirmeyen builtin; `clamp`,
 `min` ve `max` ile aynı sayfada.
 
 **Kazanım:** Position ile velocity'nin ayrı state olduğunu, collision'ın da
-velocity'yi değiştirebildiğini kullandın. Sonraki adım:
-[1.7 — Rakete değdi mi?](/worlds/01-pong/07-paddle-collision).
+velocity'yi değiştirebildiğini kullandın.
+
+**“Pong 1.6 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım: [1.7 — Rakete değdi mi?](/worlds/01-pong/07-paddle-collision).
