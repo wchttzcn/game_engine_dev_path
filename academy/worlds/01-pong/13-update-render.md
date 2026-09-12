@@ -21,7 +21,7 @@ state transition'ları update tarafında kalsın. Rectangle, text ve arka plan
 ## Ne zaman bitti?
 
 - `main` oyunu oluşturuyor, `dt` alıyor, update ediyor ve çiziyor.
-- Oynanış sonuçları önceki dersle aynı: input, sayı, servis ve restart çalışıyor.
+- Oynanış sonuçları önceki dersle aynı: input, skor, servis ve restart çalışıyor.
 - `update_game` gerçek `Game` değerini pointer üzerinden değiştiriyor.
 - `odin check games/pong` geçiyor.
 
@@ -73,7 +73,7 @@ bir frame'in sorumluluklarını ayırmak.
 
 [Game Loop — Robert Nystrom, Game Programming
 Patterns](https://gameprogrammingpatterns.com/game-loop.html).
-Bir frame'in "input al → update → render" sorumluluklarına neden ayrıldığı.
+Bir frame'in “input al → update → render” sorumluluklarına neden ayrıldığı.
 
 **Kazanım:** Pong'un state'i tek bir update yolunda değişiyor, render ise onu
 yansıtıyor.

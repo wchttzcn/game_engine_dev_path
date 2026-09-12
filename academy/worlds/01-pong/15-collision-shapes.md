@@ -47,7 +47,7 @@ olur.
 
 - Outline'lar yalnızca çizim yapar; hiçbir position, velocity veya skor
   değiştirmez.
-- Ayrı "debug hitbox" sayıları tanımlama. `game.player`, `game.opponent` ve
+- Ayrı “debug hitbox” sayıları tanımlama. `game.player`, `game.opponent` ve
   `game.ball` field'ları girdinin tamamıdır.
 - Shape'leri outline olarak çiz, dolu değil: altlarındaki gerçek raket ve top
   görünmeye devam etmeli.
@@ -79,8 +79,8 @@ burada da işini görüyor.
 Bu, oyun kodunda sık görülen bir hatadır: render shape, collision shape ve debug
 shape ayrı ayrı tutulur, biri değişince diğerleri unutulur. Sonuç, gördüğün
 kutunun çarpışan kutu olmadığı bir oyundur. Tek değerden türetmek bunu yapısal
-olarak imkânsız kılar. Daha büyük oyunlarda aynı fikir "collider component'i tek
-doğruluk kaynağıdır, debug renderer onu okur" biçiminde geri gelir.
+olarak imkânsız kılar. Daha büyük oyunlarda aynı fikir “collider component'i tek
+doğruluk kaynağıdır, debug renderer onu okur” biçiminde geri gelir.
 :::
 
 ## Birincil kaynak

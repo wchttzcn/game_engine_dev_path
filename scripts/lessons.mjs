@@ -100,3 +100,34 @@ export function progressDrift(lessons, progress) {
   }
   return drift;
 }
+
+// Ders gövdesi: frontmatter ve fenced kod blokları çıkarılmış satırlar.
+// Dil denetimleri yalnız bu satırlarda çalışır; kod dokunulmaz kalır.
+export function bodyLines(source) {
+  const lines = source.split(/\r?\n/);
+  const body = [];
+  let i = 0;
+  if (lines[0] === '---') {
+    i = 1;
+    while (i < lines.length && lines[i] !== '---') i += 1;
+    i += 1;
+  }
+  let inFence = false;
+  for (; i < lines.length; i += 1) {
+    if (/^\s*```/.test(lines[i])) {
+      inFence = !inFence;
+      continue;
+    }
+    if (!inFence) body.push({ number: i + 1, text: lines[i] });
+  }
+  return body;
+}
+
+// Satırdaki inline kod span'leri; dil denetimleri span içini okumaz.
+export function codeSpans(line) {
+  return [...line.matchAll(/`[^`]*`/g)].map((match) => ({
+    start: match.index,
+    end: match.index + match[0].length,
+    text: match[0],
+  }));
+}

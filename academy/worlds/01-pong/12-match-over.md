@@ -12,8 +12,8 @@ section: Oynanış
 ## Görev
 
 1.11'de kurduğun enum'a üçüncü üyeyi ekle: `Match_Over`. Kazanma hedefi için bir
-constant tanımla (`WIN_SCORE :: 5` gibi). Sayı verdiğin yerde skor bu hedefe
-ulaştıysa state'i `Serving` yerine `Match_Over` yap. `Match_Over` sırasında top
+constant tanımla (`WIN_SCORE :: 5` gibi). Skoru artırdığın yerde hedefe
+ulaşıldıysa state'i `Serving` yerine `Match_Over` yap. `Match_Over` sırasında top
 hareket etmesin, skor artmasın; ekranda kazananın kim olduğu yazsın. `R` her
 state'ten temiz bir yeni maç başlatsın: iki skor da sıfır, top merkezde, state
 `Serving`.
@@ -30,11 +30,11 @@ state'ten temiz bir yeni maç başlatsın: iki skor da sıfır, top merkezde, st
 ## Bilmen gereken küçük parça
 
 Restart bir state transition değil, state'in tamamının yeniden kurulmasıdır. Bu
-yüzden `R` kontrolü `switch`in içinde bir kola değil, `switch`ten önce gelir:
+yüzden `R` kontrolü `switch`'in içinde bir kola değil, `switch`'ten önce gelir:
 hangi state'te olursan ol aynı işi yapar. `Match_Over` ekranında kilitlenmiş bir
 oyundan çıkışın tek yolu da budur.
 
-Skorları sıfırlarken topu da 1.11'deki yola sokmayı unutma; yalnızca sayıları
+Skorları sıfırlarken topu da 1.11'deki yola sokmayı unutma; yalnızca skorları
 sıfırlarsan yeni maç, önceki maçın son servis yönüyle ve yarı yolda kalmış bir
 topla başlar. Reset procedure'ı zaten elinde — restart onu çağırsın, kendi
 position/velocity atamalarını kopyalamasın.
@@ -74,7 +74,7 @@ alanına gerek yok.
 ::: details Deep Dive — Bu enum nereye kadar büyür?
 Üç state ve aralarındaki geçişler artık küçük bir finite state machine. Serve
 countdown, pause veya replay eklediğinde her yeni durumun hangi input'a ve
-hangi update'e izin verdiği tek `switch`te görünür kalır. State sayısı
+hangi update'e izin verdiği tek `switch`'te görünür kalır. State sayısı
 büyüdüğünde sorun `switch` değil, geçiş kurallarının dağılmasıdır: transition'ı
 her yerde değil, tek bir yerde yapan bir procedure o noktada anlam kazanır.
 Pong'un buna ihtiyacı yok; framework çıkarmak için erken.

@@ -52,7 +52,7 @@ karşılaştır; eşitliğin etrafında küçük bir dead zone bırakmak titreş
 
 ::: details İpucu 2 — Frame başına mesafe
 Bir frame'deki hareket `opponent_speed * dt` kadar olmalı. Top yukarıdaysa bu
-değeri `game.opponent.y`den çıkar, aşağıdaysa ekle.
+değeri `game.opponent.y`'den çıkar, aşağıdaysa ekle.
 :::
 
 ::: details İpucu 3 — Clamp API'si
@@ -80,4 +80,4 @@ bir AI controller yazdın.
 
 **“Pong 1.9 denememi değerlendir”** yaz; kodunu inceleyelim.
 
-Sonraki adım: [1.10 — Sayı ve servis](/worlds/01-pong/10-score-and-reset).
+Sonraki adım: [1.10 — Skor ve servis](/worlds/01-pong/10-score-and-reset).

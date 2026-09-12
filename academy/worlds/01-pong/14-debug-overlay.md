@@ -33,7 +33,7 @@ state'ini sayı olarak gösterir; böylece gördüğün davranışla o anki stat
 yana koyarsın. Oyuncuya sunulan UI değildir: bilgi yoğun, çirkin ve geçici
 olabilir.
 
-F1 toggle bir "basılı mı?" kontrolü değil, tek seferlik input olmalıdır.
+F1 toggle bir “basılı mı?” kontrolü değil, tek seferlik input olmalıdır.
 `rl.IsKeyPressed(.F1)` yalnızca tuşun basıldığı frame'de `true` döner;
 `IsKeyDown` kullanırsan tuş tutulduğu sürece overlay her frame açılıp kapanır ve
 bıraktığın yerde kalması tamamen şansa bağlı olur.
@@ -63,7 +63,7 @@ için ayrıca `rl.DrawFPS(x, y)` hazır çağrısı var.
 
 ::: details İpucu 3 — Satırları yerleştir
 Her metni bir öncekinden sabit bir miktar aşağıya koy: örneğin `10, 10`,
-`10, 32`, `10, 54`. `DrawText`in `posX`, `posY` ve `fontSize` parametreleri
+`10, 32`, `10, 54`. `DrawText`'in `posX`, `posY` ve `fontSize` parametreleri
 `c.int`'tir; buraya sabit sayılar yazdığın için dönüşüm gerekmez.
 :::
 
@@ -78,7 +78,7 @@ allocation sayaçlarına, Breakout'ta runtime tuning paneline genişleyecek.
 
 [Odin vendor:raylib — `DrawFPS`](https://pkg.odin-lang.org/vendor/raylib/#DrawFPS).
 Overlay'in kullandığı `DrawFPS`, `DrawText` ve `IsKeyPressed` imzaları aynı
-binding sayfasında; `TextFormat`in Odin tarafındaki gövdesi de orada.
+binding sayfasında; `TextFormat`'in Odin tarafındaki gövdesi de orada.
 
 **Kazanım:** Oyunun sayısal state'ini oynarken okuyabiliyorsun.
 

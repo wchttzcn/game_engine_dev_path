@@ -19,7 +19,7 @@ Sınırı kontrol edebilmek için önce ona bir isim ver: `SCREEN_WIDTH` ve
 boyutunu değiştirdiğin gün sınır kontrolü sessizce yanlış kalır. Bu derste
 dikey sınır yeter; `SCREEN_WIDTH` 1.10'da yatay sınır olarak işini görecek.
 
-Input ve `game.player.y` güncellemesini `BeginDrawing`den önce, game loop'un içinde yap;
+Input ve `game.player.y` güncellemesini `BeginDrawing`'den önce, game loop'un içinde yap;
 render kodu yalnızca güncel game state'ini çizsin. Bu ders için frame başına
 sabit bir hareket miktarı kullanabilirsin.
 
@@ -28,7 +28,7 @@ sabit bir hareket miktarı kullanabilirsin.
 - W basılıyken player raketi yukarı, S basılıyken aşağı gider.
 - `SCREEN_WIDTH` ve `SCREEN_HEIGHT` dosya seviyesinde tanımlı; pencere de bu
   sabitlerle açılıyor.
-- Raketin üst kenarı `0`ın üstüne çıkmaz; alt kenarı `SCREEN_HEIGHT`i geçmez.
+- Raketin üst kenarı `0`'ın üstüne çıkmaz; alt kenarı `SCREEN_HEIGHT`'i geçmez.
 - Rakip ve top sabit kalır.
 - `odin check games/pong` geçiyor.
 
@@ -55,7 +55,7 @@ sınır, `game.player.y + game.player.height` değerini `SCREEN_HEIGHT` ile
 karşılaştırarak bulunur.
 
 Sabitleri 1.2'de `Paddle` için kullandığın `::` ile yazarsın; untyped
-kaldıkları için hem `rl.InitWindow`ın integer parametresine hem de `f32` raket
+kaldıkları için hem `rl.InitWindow`'ın integer parametresine hem de `f32` raket
 hesabına dönüşümsüz girerler:
 
 ```odin
@@ -70,13 +70,13 @@ delta time henüz gerekli değil. Sınır kontrolünü eklemek, bir sonraki hız
 değişikliğinde görünmeyen bir gameplay bug birikmesini önler.
 
 ::: details İpucu 1 — Tuş kontrolünün yeri
-`for !rl.WindowShouldClose()` bloğunda, `BeginDrawing()`den önce iki ayrı
+`for !rl.WindowShouldClose()` bloğunda, `BeginDrawing()`'den önce iki ayrı
 `rl.IsKeyDown` koşulu yaz. Böylece çizim güncel state'i görür.
 :::
 
 ::: details İpucu 2 — Alt kenar
 Yukarı hareketten sonra `game.player.y < 0` ise `game.player.y = 0` yap. Aşağı için
-`game.player.y + game.player.height > SCREEN_HEIGHT` durumunda `game.player.y`yi
+`game.player.y + game.player.height > SCREEN_HEIGHT` durumunda `game.player.y`'yi
 `SCREEN_HEIGHT - game.player.height` değerine sabitle.
 :::
 
