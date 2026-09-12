@@ -30,7 +30,7 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 | `AGENTS.md` | Mentorun uygulayacağı eğitim kuralları |
 | `RESOURCES.md` | Derslerin dayandığı doğrulanmış kaynaklar ve topluluklar |
 
-Pong'un 1.1–1.13 dersleri (13 ders) hazırdır. Bu paket oynanabilir maç, açık
+Pong'un 1.1–1.14 dersleri (14 ders) hazırdır. Bu paket oynanabilir maç, açık
 match state, update/render ayrımı ve ilk debug overlay'e kadar gider. Sonraki
 dersler, mevcut iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre
 hazırlanır.

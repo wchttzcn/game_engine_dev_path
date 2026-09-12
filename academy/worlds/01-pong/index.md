@@ -34,6 +34,7 @@ odin run games/pong -out:/tmp/mucahit-pong
 
 12. [1.12 — Update / render](/worlds/01-pong/12-update-render)
 13. [1.13 — Debug overlay](/worlds/01-pong/13-debug-overlay)
+14. [1.14 — Collision shape'lerini çiz](/worlds/01-pong/14-collision-shapes)
 
-Bu paket bittiğinde maç oynanabilir, yeniden başlatılabilir ve önemli state F1
-ile görünür olur. Ses ve game-feel adımları sonraki paket için açık kalır.
+Bu paket bittiğinde maç oynanabilir, yeniden başlatılabilir; önemli state ve
+collision shape'leri F1 ile görünür olur. Ses ve game-feel adımları sonraki paket için açık kalır.
