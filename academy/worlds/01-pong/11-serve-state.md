@@ -90,7 +90,7 @@ işini görür.
 
 ::: details Deep Dive — Neden state'i skordan türetmiyoruz?
 Türetilmiş state, kaynağı ile arasındaki kuralı her okuyan yerde yeniden yazmanı
-ister. `score_left == 0 && score_right == 0` “maç yeni başladı” demek olabilir,
+ister. `player_score == 0 && opponent_score == 0` “maç yeni başladı” demek olabilir,
 ama skor sonrası bekleyişi anlatamaz. Saklanan state ise tek yerde değişir ve
 her okuyan aynı cevabı görür. Kural şu: bir bilgi input'tan veya zamandan
 doğuyorsa sakla; mevcut state'ten her seferinde aynı şekilde hesaplanıyorsa

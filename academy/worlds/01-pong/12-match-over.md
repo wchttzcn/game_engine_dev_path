@@ -60,14 +60,14 @@ ulaştıysa `Match_Over`, ulaşmadıysa `Serving`.
 :::
 
 ::: details İpucu 2 — R'nin yeri
-`update_game` içinde `switch game.match_state` satırından **önce**
+Game loop'ta `switch game.match_state` satırından **önce**
 `if rl.IsKeyPressed(.R)` bloğunu koy. Blok skorları sıfırlar, reset'i çağırır,
 state'i `Serving` yapar.
 :::
 
 ::: details İpucu 3 — Kazananı yazdırmak
 `rl.TextFormat` ile metni kurup `rl.DrawText` ile çiz. Hangi metni yazacağını
-`game.score_left > game.score_right` karşılaştırması seçer; ayrı bir `winner`
+`game.player_score > game.opponent_score` karşılaştırması seçer; ayrı bir `winner`
 alanına gerek yok.
 :::
 
