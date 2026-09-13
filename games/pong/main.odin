@@ -17,10 +17,12 @@ Game :: struct {
 Paddle :: struct {
 	x, y, width, height: f32,
 	speed:               f32,
+	rect:                rl.Rectangle,
 }
 Ball :: struct {
 	x, y, radius:           f32,
 	velocity_x, velocity_y: f32,
+	color:                  rl.Color,
 }
 Match_State :: enum {
 	Serving,
@@ -52,135 +54,138 @@ main :: proc() {
 		ball = Ball{radius = 5},
 		match_state = .Serving,
 	}
-  game_reset(&game)
+	game_reset(&game)
 
 	for !rl.WindowShouldClose() {
-		//        === Update ===
 		dt := rl.GetFrameTime()
+		update_game(&game, dt)
 
-		if rl.IsKeyDown(.W) {
-			game.player.y -= game.player.speed * dt
-		}
-		if rl.IsKeyDown(.S) {
-			game.player.y += game.player.speed * dt
-		}
-
-		if rl.IsKeyPressed(.R) {
-			game_reset(&game)
-		}
-
-		if game.player.y + game.player.height > SCREEN_HEIGHT {
-			game.player.y = SCREEN_HEIGHT - game.player.height
-		}
-		if game.player.y < 0 {
-			game.player.y = 0
-		}
-
-		opponent_center := game.opponent.y + game.opponent.height / 2
-		diff := game.ball.y - opponent_center
-		if diff > OPPONENT_DEAD_ZONE {
-			game.opponent.y += game.opponent.speed * dt
-		} else if diff < -OPPONENT_DEAD_ZONE {
-			game.opponent.y -= game.opponent.speed * dt
-		}
-
-		game.opponent.y = clamp(game.opponent.y, 0, SCREEN_HEIGHT - game.opponent.height)
-
-		player_rect := rl.Rectangle {
-			game.player.x,
-			game.player.y,
-			game.player.width,
-			game.player.height,
-		}
-		opponent_rect := rl.Rectangle {
-			game.opponent.x,
-			game.opponent.y,
-			game.opponent.width,
-			game.opponent.height,
-		}
-		ball_color := rl.WHITE
-
-		switch game.match_state {
-		case .Serving:
-			if rl.IsKeyPressed(.SPACE) do game.match_state = .Playing
-
-		case .Playing:
-			game.ball.y += game.ball.velocity_y * dt
-			game.ball.x += game.ball.velocity_x * dt
-			if game.ball.y - game.ball.radius < 0 {
-				game.ball.y = game.ball.radius
-				game.ball.velocity_y = abs(game.ball.velocity_y)
-			}
-			if game.ball.y + game.ball.radius > SCREEN_HEIGHT {
-				game.ball.y = SCREEN_HEIGHT - game.ball.radius
-				game.ball.velocity_y = -abs(game.ball.velocity_y)
-			}
-
-			if game.ball.x + game.ball.radius < 0 {
-				ball_reset(&game.ball, -1)
-				game.opponent_score += 1
-				game.match_state = .Serving
-				if game.opponent_score == WIN_SCORE {
-					game.match_state = .Match_Over
-				}
-			}
-			if game.ball.x - game.ball.radius > SCREEN_WIDTH {
-				ball_reset(&game.ball, 1)
-				game.player_score += 1
-				game.match_state = .Serving
-				if game.player_score == WIN_SCORE {
-					game.match_state = .Match_Over
-				}
-			}
-
-			if rl.CheckCollisionCircleRec(
-				rl.Vector2{game.ball.x, game.ball.y},
-				game.ball.radius,
-				opponent_rect,
-			) {
-				ball_color = rl.RED
-				game.ball.x = game.opponent.x - game.ball.radius
-				game.ball.velocity_x = -abs(game.ball.velocity_x)
-			}
-			if rl.CheckCollisionCircleRec(
-				rl.Vector2{game.ball.x, game.ball.y},
-				game.ball.radius,
-				player_rect,
-			) {
-				ball_color = rl.RED
-				game.ball.x = game.player.x + game.player.width + game.ball.radius
-				game.ball.velocity_x = abs(game.ball.velocity_x)
-			}
-		case .Match_Over:
-		}
-
-		//        === Draw ===
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+		draw_game(&game)
+		rl.EndDrawing()
+	}
+}
 
-		switch game.match_state {
-		case .Playing, .Serving:
-			rl.DrawText(rl.TextFormat("%d", game.player_score), 150, 40, 32, rl.WHITE)
-			rl.DrawText(rl.TextFormat("%d", game.opponent_score), 650, 40, 32, rl.WHITE)
+update_game :: proc(game: ^Game, dt: f32) {
+	if rl.IsKeyDown(.W) {
+		game.player.y -= game.player.speed * dt
+	}
+	if rl.IsKeyDown(.S) {
+		game.player.y += game.player.speed * dt
+	}
 
-			rl.DrawRectangleRec(player_rect, rl.WHITE)
-			rl.DrawRectangleRec(opponent_rect, rl.WHITE)
-			rl.DrawCircleV(rl.Vector2{game.ball.x, game.ball.y}, game.ball.radius, ball_color)
-		case .Match_Over:
-			rl.DrawText(
-				rl.TextFormat(
-					"%d - %d %s Won",
-					game.player_score,
-					game.opponent_score,
-					game.player_score == WIN_SCORE ? "Player" : "AI",
-				),
-				SCREEN_WIDTH / 2,
-				SCREEN_HEIGHT / 2,
-				32,
-				rl.WHITE,
-			)
+	if rl.IsKeyPressed(.R) {
+		game_reset(game)
+	}
+
+	if game.player.y + game.player.height > SCREEN_HEIGHT {
+		game.player.y = SCREEN_HEIGHT - game.player.height
+	}
+	if game.player.y < 0 {
+		game.player.y = 0
+	}
+
+	opponent_center := game.opponent.y + game.opponent.height / 2
+	diff := game.ball.y - opponent_center
+	if diff > OPPONENT_DEAD_ZONE {
+		game.opponent.y += game.opponent.speed * dt
+	} else if diff < -OPPONENT_DEAD_ZONE {
+		game.opponent.y -= game.opponent.speed * dt
+	}
+
+	game.opponent.y = clamp(game.opponent.y, 0, SCREEN_HEIGHT - game.opponent.height)
+
+	game.player.rect = rl.Rectangle {
+		game.player.x,
+		game.player.y,
+		game.player.width,
+		game.player.height,
+	}
+	game.opponent.rect = rl.Rectangle {
+		game.opponent.x,
+		game.opponent.y,
+		game.opponent.width,
+		game.opponent.height,
+	}
+	game.ball.color = rl.WHITE
+
+	switch game.match_state {
+	case .Serving:
+		if rl.IsKeyPressed(.SPACE) do game.match_state = .Playing
+
+	case .Playing:
+		game.ball.y += game.ball.velocity_y * dt
+		game.ball.x += game.ball.velocity_x * dt
+		if game.ball.y - game.ball.radius < 0 {
+			game.ball.y = game.ball.radius
+			game.ball.velocity_y = abs(game.ball.velocity_y)
+		}
+		if game.ball.y + game.ball.radius > SCREEN_HEIGHT {
+			game.ball.y = SCREEN_HEIGHT - game.ball.radius
+			game.ball.velocity_y = -abs(game.ball.velocity_y)
 		}
 
-		rl.EndDrawing()
+		if game.ball.x + game.ball.radius < 0 {
+			ball_reset(&game.ball, -1)
+			game.opponent_score += 1
+			game.match_state = .Serving
+			if game.opponent_score == WIN_SCORE {
+				game.match_state = .Match_Over
+			}
+		}
+		if game.ball.x - game.ball.radius > SCREEN_WIDTH {
+			ball_reset(&game.ball, 1)
+			game.player_score += 1
+			game.match_state = .Serving
+			if game.player_score == WIN_SCORE {
+				game.match_state = .Match_Over
+			}
+		}
+
+		if rl.CheckCollisionCircleRec(
+			rl.Vector2{game.ball.x, game.ball.y},
+			game.ball.radius,
+			game.opponent.rect,
+		) {
+			game.ball.color = rl.RED
+			game.ball.x = game.opponent.x - game.ball.radius
+			game.ball.velocity_x = -abs(game.ball.velocity_x)
+		}
+		if rl.CheckCollisionCircleRec(
+			rl.Vector2{game.ball.x, game.ball.y},
+			game.ball.radius,
+			game.player.rect,
+		) {
+			game.ball.color = rl.RED
+			game.ball.x = game.player.x + game.player.width + game.ball.radius
+			game.ball.velocity_x = abs(game.ball.velocity_x)
+		}
+	case .Match_Over:
+	}
+}
+
+draw_game :: proc(game: ^Game) {
+	switch game.match_state {
+	case .Playing, .Serving:
+		rl.DrawText(rl.TextFormat("%d", game.player_score), 150, 40, 32, rl.WHITE)
+		rl.DrawText(rl.TextFormat("%d", game.opponent_score), 650, 40, 32, rl.WHITE)
+
+		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
+		rl.DrawRectangleRec(game.opponent.rect, rl.WHITE)
+		rl.DrawCircleV(rl.Vector2{game.ball.x, game.ball.y}, game.ball.radius, game.ball.color)
+	case .Match_Over:
+		rl.DrawText(
+			rl.TextFormat(
+				"%d - %d %s Won",
+				game.player_score,
+				game.opponent_score,
+				game.player_score == WIN_SCORE ? "Player" : "AI",
+			),
+			SCREEN_WIDTH / 2,
+			SCREEN_HEIGHT / 2,
+			32,
+			rl.WHITE,
+		)
 	}
 }
