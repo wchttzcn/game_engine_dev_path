@@ -29,10 +29,8 @@ main :: proc() {
 	game := Game {
 		player = Paddle{x = 40, y = 160, width = 20, height = 100, speed = 400.0},
 		opponent = Paddle{x = 740, y = 160, width = 20, height = 100, speed = 400.0},
-		ball = Ball{x = 400, y = 225, radius = 5, velocity_x = 300.0, velocity_y = 180.0},
+		ball = Ball{x = 400, y = 225, radius = 5, velocity_x = -300.0, velocity_y = 180.0},
 	}
-
-
 
 	for !rl.WindowShouldClose() {
 		//        === Update ===
@@ -52,8 +50,8 @@ main :: proc() {
 			game.player.y = 0
 		}
 
-		game.ball.x += game.ball.velocity_x * dt
 		game.ball.y += game.ball.velocity_y * dt
+		game.ball.x += game.ball.velocity_x * dt
 
 		if game.ball.y - game.ball.radius < 0 {
 			game.ball.y = game.ball.radius
@@ -77,19 +75,25 @@ main :: proc() {
 			game.opponent.height,
 		}
 		// hit ball logic
-    ball_color := rl.WHITE
+		ball_color := rl.WHITE
 
 		if rl.CheckCollisionCircleRec(
-			   rl.Vector2{game.ball.x, game.ball.y},
-			   game.ball.radius,
-			   opponent_rect,
-		   ) ||
-		   rl.CheckCollisionCircleRec(
-			   rl.Vector2{game.ball.x, game.ball.y},
-			   game.ball.radius,
-			   player_rect,
-		   ) {
+			rl.Vector2{game.ball.x, game.ball.y},
+			game.ball.radius,
+			opponent_rect,
+		) {
 			ball_color = rl.RED
+			game.ball.x = game.opponent.x - game.ball.radius
+			game.ball.velocity_x = -abs(game.ball.velocity_x)
+		}
+		if rl.CheckCollisionCircleRec(
+			rl.Vector2{game.ball.x, game.ball.y},
+			game.ball.radius,
+			player_rect,
+		) {
+			ball_color = rl.RED
+			game.ball.x = game.player.x + game.player.width + game.ball.radius
+			game.ball.velocity_x = abs(game.ball.velocity_x)
 		}
 
 		//        === Draw ===

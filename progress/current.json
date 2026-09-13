@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-08-collision-response",
+  "currentLessonId": "pong-09-opponent-ai",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -88,8 +88,10 @@
       "description": "Topu raketin dışına çıkar ve horizontal velocity'yi raketten uzağa yönlendir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/08-collision-response",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-09-opponent-ai",
@@ -231,9 +233,10 @@
       "title": "Collision response",
       "status": "learning",
       "lessons": [
-        "pong-06-wall-bounce"
+        "pong-06-wall-bounce",
+        "pong-08-collision-response"
       ],
-      "note": "Sınır testini merkez artı radius ile kendi kurdu; position'ı sınıra oturtup yönü ayrı vermeyi ipucu sonrası yaptı. İlk denemede yalnız position'ı düzeltip velocity'ye dokunmamıştı. Alan çakışmasına (paddle overlap) uygulanışı 1.7-1.8'de görülecek.",
+      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -244,9 +247,10 @@
       "title": "Collision detection",
       "status": "learning",
       "lessons": [
-        "pong-07-paddle-collision"
+        "pong-07-paddle-collision",
+        "pong-08-collision-response"
       ],
-      "note": "Circle-rectangle overlap testini CheckCollisionCircleRec ile iki rakete uyguladı ve sonucu her frame tazelenen bir renk state'ine bağladı; detection ile response ayrımını velocity'ye dokunmayarak korudu. Kendi collision testini elle yazması henüz görülmedi.",
+      "note": "Overlap testini iki rakete ayrı ayrı uyguladı; hangi rakete çarptığını ayırt etmesi gerektiğini yapısal uyarı sonrası tek || ifadesini bölerek çözdü. Detection ile response ayrımını koruyor. Kendi collision testini elle yazması henüz görülmedi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
