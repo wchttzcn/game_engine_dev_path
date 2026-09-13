@@ -131,7 +131,9 @@ entry for a concept that was merely covered.
 
 Do not create routine review notes, evidence logs, XP, streaks or other tracking
 work. The dated files already in `progress/notes/` predate this rule; keep them as
-history and add no new ones.
+history and add no new ones. The same applies to the `reviews` array in
+`current.json`: keep the existing entries as history, add none, and record what a
+review found — the hint level it took included — in the relevant `skills` note.
 
 Commit each lesson once it passes review. The message is
 `world(<lesson number>): done - <lesson title>`, for example
