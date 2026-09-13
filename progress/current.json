@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-11-serve-state",
+  "currentLessonId": "pong-13-update-render",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -121,8 +121,10 @@
       "description": "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/11-serve-state",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-12-match-over",
@@ -130,8 +132,10 @@
       "description": "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/12-match-over",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-13-update-render",
@@ -196,11 +200,13 @@
     {
       "id": "frame-input",
       "title": "Frame başına input",
-      "status": "learning",
+      "status": "independent",
       "lessons": [
-        "pong-03-player-input"
+        "pong-03-player-input",
+        "pong-11-serve-state",
+        "pong-12-match-over"
       ],
-      "note": "IsKeyDown ile basılı tuşu her frame okuyup state'i değiştirdi. Tek atımlık IsKeyPressed ayrımı ve delta time'dan bağımsız sabit hareket miktarı henüz görülmedi.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -269,7 +275,7 @@
       "lessons": [
         "pong-09-opponent-ai"
       ],
-      "note": "Merkez farkından yön seçen, speed * dt ile sınırlı, dead zone'lu opponent update'ini yazdı ve clamp'i kendi başına doğru yere koydu. İlk denemesi teleport atamasıydı. Dead zone'u türetememesi öğrenci boşluğu değil ders boşluğuydu: kavram yalnızca İpucu 1'de tek yan cümle olarak geçiyordu, Görev metni ise iki dallı karar tarif ediyordu; ders 1.9 bu değerlendirmeden sonra düzeltildi. Bağımsızlık 1.11 servis state'inde yeniden sınanmalı.",
+      "note": "Merkez farkından yön seçen, speed * dt ile sınırlı, dead zone'lu opponent update'ini yazdı ve clamp'i kendi başına doğru yere koydu. İlk denemesi teleport atamasıydı. Dead zone'u türetememesi öğrenci boşluğu değil ders boşluğuydu: kavram yalnızca İpucu 1'de tek yan cümle olarak geçiyordu, Görev metni ise iki dallı karar tarif ediyordu; ders 1.9 bu değerlendirmeden sonra düzeltildi. 1.11 opponent AI'a dokunmadı; bağımsızlık rakip davranışını değiştiren sonraki bir işte sınanmalı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -278,11 +284,26 @@
     {
       "id": "procedure-extraction",
       "title": "Procedure'a çıkarma",
+      "status": "independent",
+      "lessons": [
+        "pong-10-score-and-reset",
+        "pong-12-match-over"
+      ],
+      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "explicit-state-machine",
+      "title": "Açık state machine",
       "status": "learning",
       "lessons": [
-        "pong-10-score-and-reset"
+        "pong-11-serve-state",
+        "pong-12-match-over"
       ],
-      "note": "main dışındaki ilk procedure'ını yazdı: ball_reset ^Ball pointer'ı ve yön parametresi alıyor, skor artışını çağırana bırakıyor. Pointer'ı 1.13 öğretmeden önce doğru kullandı. Başlangıç servisini de aynı procedure'dan geçirerek tek kaynak kurdu; ders bunu istememişti. İlk denemede reset mevcut velocity_y'yi okuyordu — reset'in state kurup okumaması gerektiği uyarı sonrası oturdu.",
+      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde).",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
