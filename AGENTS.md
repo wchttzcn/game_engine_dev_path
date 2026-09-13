@@ -39,6 +39,16 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
   topic list is background, not a prerequisite checklist; use the short scope below.
   The current learner preferences here override the source pack's prediction,
   observation-report and reflection routines.
+- Show the shape, never the solution. When a lesson needs an Odin construct or a
+  raylib call the learner has not met, put a minimal worked example in the body —
+  the call signature and one line using it — not buried in a hint. Withhold the
+  game logic he is meant to derive, never the syntax of the language feature he
+  has never seen. Before writing a lesson, list the language features and API
+  calls it requires and confirm each was taught in an earlier lesson or is taught
+  in this one; a concept named in passing is not taught. A lesson that states its
+  acceptance criteria without teaching what they require is a defect, not rigour.
+- Verify every signature against the installed compiler under
+  `$ODIN_ROOT/vendor` and `$ODIN_ROOT/core` before it appears in a lesson.
 - Ground lesson content in `RESOURCES.md`, never in recalled API knowledge. Every
   lesson ends with a **Birincil kaynak** section naming one entry from that file
   and one line on why it is the source for this lesson. Before writing any API

@@ -9,6 +9,12 @@ section: Oynanış
 **Hedef:** Top sol veya sağ sınırı geçtiğinde doğru oyuncunun skorunu artırıp
 topu belirli bir servis yönüyle yeniden oyuna sok.
 
+## Ön koşul
+
+1.9'un sonundaki hız ayarını yaptığından emin ol: rakip topu ıskalayabiliyor
+olmalı. Rakip her topa yetişiyorsa top sağ sınırdan hiç çıkmaz ve bu dersin
+kabul ölçütlerinin yarısını gözleyemezsin.
+
 ## Görev
 
 Mevcut `Game` state'ine iki skor alanı ekle. Update sırasında topun tamamının
@@ -37,9 +43,45 @@ tekrarlanabilir bir kural kurmak.
 değil, velocity'yi de belirlemelidir; aksi halde merkezde duran ama önceki
 yönde kaçmaya devam eden bir top üretirsin.
 
-Skor sayılarını `rl.TextFormat` ile raylib'in beklediği `cstring` metnine çevirip
-`rl.DrawText` ile çizebilirsin. Bu metin render state'idir; skorun kaynağı
-`Game` içindeki sayısal field'lar olarak kalır.
+### Ekrana sayı yazmak: `cstring` meselesi
+
+Bu paketin ilk kez metin çizdiğin dersi, ve araya Odin'e özgü bir çevrim
+giriyor. Kurulu binding'deki imza şu:
+
+```odin
+DrawText :: proc(text: cstring, posX, posY: c.int, fontSize: c.int, color: Color)
+```
+
+İstediği tip `string` değil, `cstring`. İkisi Odin'de farklı şeyler. Odin'in
+`string` tipi uzunluğunu kendi içinde taşır. `cstring` ise C'nin temsili:
+uzunluk yoktur, metnin bittiği yeri sonundaki `0` byte belirtir. raylib bir C
+kütüphanesi olduğu için `cstring` bekler. Yani elindeki `i32` skoru önce metne,
+sonra bu temsile çevirmen gerekiyor.
+
+Bunu yapan hazır çağrı binding'in içinde:
+
+```odin
+TextFormat :: proc(text: cstring, args: ..any) -> cstring
+```
+
+İlk parametre bir **format string**: `printf` biçimini kullanır, `%d` tam sayı
+yerine geçer. Kalan argümanlar oraya yerleşir. Dönüş değeri doğrudan
+`DrawText`'e verebileceğin `cstring`. Çağrının biçimi:
+
+```odin
+rl.DrawText(rl.TextFormat("%d", game.player_score), 150, 40, 32, rl.WHITE)
+```
+
+Bu tek satır çevrimin tamamını yapar. `core:fmt` veya `core:strings` import
+etmene, kendi çevrim procedure'ını yazmana gerek yok — `TextFormat` sonucu
+kendi içindeki sabit buffer'a yazar, allocation yapmaz.
+
+Bir uyarı: o buffer sabit sayıda (`MAX_TEXTFORMAT_BUFFERS`, varsayılan `4`) ve
+sırayla dönüyor. Yani dönen `cstring` kalıcı değil; dört çağrı sonra üzerine
+yazılır. Çiz ve unut — sakladığın bir field'a koyma.
+
+Bu metin render state'idir; skorun kaynağı `Game` içindeki sayısal field'lar
+olarak kalır.
 
 ## Sınırlar
 
@@ -52,8 +94,11 @@ Skor sayılarını `rl.TextFormat` ile raylib'in beklediği `cstring` metnine ç
   daha sonra anlamlı bir karar olacak.
 
 ::: details İpucu 1 — Hangi sınır geçti?
-Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. Bunları oyun
-alanının yatay sınırlarıyla — `0` ve `SCREEN_WIDTH` — karşılaştır.
+Topun sol kenarı `x - radius`, sağ kenarı `x + radius` olur. “Tamamen çıktı”
+demek için topun **uzak** kenarına bakarsın, yakın kenarına değil: soldan
+çıkışta topun sağ kenarı `0`'ın solunda kalmalı, sağdan çıkışta sol kenarı
+`SCREEN_WIDTH`'in sağında. Yakın kenarı kullanırsan top duvara değdiği anda skor
+olur ve ekrandan hiç çıkmaz.
 :::
 
 ::: details İpucu 2 — Reset procedure'ın girdisi

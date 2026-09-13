@@ -23,6 +23,11 @@ Hızı raketin kendi `speed` field'ı ile sınırla ve her frame hareketi `dt` i
 Bu AI topun konumuna “teleport” etmemeli. Capped speed yüzünden hızlı bir top
 raketi geçebilmeli; bu, oyunun zorluk ayarı için kullanışlı bir davranış.
 
+Çalışan controller'ı yazdıktan sonra bir adım daha var: rakibin hızını topun
+ıskalanabileceği bir değere **ayarla**. Aşağıdaki bölüm hangi değerin işe
+yaradığını ve nedenini anlatıyor. Ayar yapılmazsa ders teknik olarak çalışır
+ama oynanamaz bir rakip üretir.
+
 ## Ne zaman bitti?
 
 - Sağ paddle topun dikey hareketini takip ediyor.
@@ -30,6 +35,7 @@ raketi geçebilmeli; bu, oyunun zorluk ayarı için kullanışlı bir davranış
 - Rakibin hızı `dt` ile frame rate'ten bağımsız güncelleniyor.
 - Rakip, topun tam merkezini her frame anında yakalamıyor.
 - Top dikey olarak durduğunda raket hedefin etrafında titremiyor, duruyor.
+- Rakip her topa yetişmiyor: çapraz giden bir top onu geçebiliyor.
 - `odin check games/pong` geçiyor.
 
 ## Bilmen gereken küçük parça
@@ -59,6 +65,30 @@ Eşik bir frame'lik adımdan büyük olmalı. Küçük seçersen raket eşiği h
 aşar, karşı tarafta yine eşiğin dışında kalır ve titreme devam eder — yani eşik
 hiç yokmuş gibi davranır. Yukarıdaki 6.7 pixel'lik adım için `10.0` rahat bir
 seçim. Sabit adı `SCREAMING_SNAKE_CASE` olmalı, dilin konvansiyonu bu.
+
+### Rakibin hızı oyunun zorluk ayarıdır
+
+Bir AI'ın “iyi” olması burada hız sabitinin tek bir sayısına bağlı, ve varsayılan
+değer seni yanıltır.
+
+Raket `speed` `400` ile başlıyor, topun dikey hızı ise `180`. Top sahayı yatayda
+`300` hızla geçiyor: iki raket arası ~670 pixel, yani ~2.2 saniye. Rakip o sürede
+`400 × 2.2` ≈ 890 pixel yol alabilir, oysa tüm saha 450 pixel yüksekliğinde.
+Rakip her topa, her seferinde yetişir. Asla gol yemez.
+
+Kuralı sayılardan bağımsız yaz: raket ile top aynı süre boyunca dikeyde yol
+alır. Raket `speed × t`, top `|velocity_y| × t` kadar. `speed` topun dikey
+hızından büyükse raket aradaki farkı her zaman kapatır — ıskalaması matematiksel
+olarak imkânsızdır. Rakibin ıskalayabilmesi için **`speed` topun dikey hızının
+altında** olmalı.
+
+`velocity_y` `180` iken `speed` değerini `150` civarına indir: rakip hâlâ
+yetkin görünür, ama çapraz giden hızlı bir topu kaçırır. Değeri `:29`'daki
+`opponent` kurulumunda değiştiriyorsun; `player` hızına dokunma, o senin
+kontrolünde kalsın.
+
+Bu ayar 1.10'un ön koşulu. Skor eklediğinde rakip hiç gol yemiyorsa skorun yarısı
+hiç çalışmaz ve bunu test edemezsin.
 
 ### Sınırı tek yerde tut
 

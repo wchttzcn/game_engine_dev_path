@@ -28,7 +28,15 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
 - [Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/)
   Odin'in kendi raylib binding'inin üretilmiş dokümantasyonu — C değil, gerçekte
   çağırdığın imzalar. Şunun için: her raylib çağrısının parametre sırası ve
-  tipleri. Anchor biçimi `#DrawRectangle`, `#IsKeyDown` şeklindedir.
+  tipleri. Anchor biçimi `#DrawRectangle`, `#IsKeyDown` şeklindedir. Kurulu
+  derleyicideki karşılığı `$ODIN_ROOT/vendor/raylib/raylib.odin`; bir imza
+  tartışmalıysa asıl doğrulama oradan yapılır.
+- `string` ile `cstring` ayrımı — kurulu derleyicideki
+  `vendor/raylib/raylib.odin` (`DrawText`, `TextFormat` gövdesi) ve
+  `core/strings/strings.odin` (`clone_to_cstring`). Şunun için: raylib'e metin
+  verirken hangi temsilin beklendiği, `TextFormat`'in sabit buffer davranışı ve
+  `fmt.bprintf` üzerinden Odin verb'lerini kullanması. 1.10 bu iki dosyadan
+  doğrulandı.
 - [Odin vendor:raylib README — çalışan başlangıç örneği](https://github.com/odin-lang/Odin/blob/master/vendor/raylib/README.md#basic-example)
   Pencere açan en küçük tam program. Şunun için: game loop iskeletinin
   doğrulanması.
