@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-10-score-and-reset",
+  "currentLessonId": "pong-11-serve-state",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -110,8 +110,10 @@
       "description": "Top sahadan çıkınca doğru skoru artır ve yeni servis için topu sıfırla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/10-score-and-reset",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-11-serve-state",
@@ -167,9 +169,10 @@
       "lessons": [
         "pong-01-first-paddle",
         "pong-03-player-input",
-        "pong-09-opponent-ai"
+        "pong-09-opponent-ai",
+        "pong-10-score-and-reset"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam, ama 1.9'da paddle position'ının üst kenar olduğunu gözden kaçırdı: game.opponent.y = game.ball.y yazarak top ile merkezi eşitlediğini sandı. Merkez = y + height/2 ayrımını İpucu 1 sonrası uyguladı. Aynı ayrım 1.15 collision shape overlay'inde yeniden sınanmalı.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -267,6 +270,19 @@
         "pong-09-opponent-ai"
       ],
       "note": "Merkez farkından yön seçen, speed * dt ile sınırlı, dead zone'lu opponent update'ini yazdı ve clamp'i kendi başına doğru yere koydu. İlk denemesi teleport atamasıydı. Dead zone'u türetememesi öğrenci boşluğu değil ders boşluğuydu: kavram yalnızca İpucu 1'de tek yan cümle olarak geçiyordu, Görev metni ise iki dallı karar tarif ediyordu; ders 1.9 bu değerlendirmeden sonra düzeltildi. Bağımsızlık 1.11 servis state'inde yeniden sınanmalı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "procedure-extraction",
+      "title": "Procedure'a çıkarma",
+      "status": "learning",
+      "lessons": [
+        "pong-10-score-and-reset"
+      ],
+      "note": "main dışındaki ilk procedure'ını yazdı: ball_reset ^Ball pointer'ı ve yön parametresi alıyor, skor artışını çağırana bırakıyor. Pointer'ı 1.13 öğretmeden önce doğru kullandı. Başlangıç servisini de aynı procedure'dan geçirerek tek kaynak kurdu; ders bunu istememişti. İlk denemede reset mevcut velocity_y'yi okuyordu — reset'in state kurup okumaması gerektiği uyarı sonrası oturdu.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"

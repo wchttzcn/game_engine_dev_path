@@ -8,8 +8,9 @@ SCREEN_HEIGHT :: 450
 OPPONENT_DEAD_ZONE :: 10.0
 
 Game :: struct {
-	player, opponent: Paddle,
-	ball:             Ball,
+	player, opponent:             Paddle,
+	ball:                         Ball,
+	player_score, opponent_score: i32,
 }
 
 Paddle :: struct {
@@ -21,6 +22,13 @@ Ball :: struct {
 	velocity_x, velocity_y: f32,
 }
 
+ball_reset :: proc(ball: ^Ball, dir: f32) {
+	ball.x = SCREEN_WIDTH / 2
+	ball.y = SCREEN_HEIGHT / 2
+	ball.velocity_x = 300.0 * dir
+	ball.velocity_y = 180.0
+}
+
 main :: proc() {
 	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong")
 	defer rl.CloseWindow()
@@ -28,9 +36,10 @@ main :: proc() {
 
 	game := Game {
 		player = Paddle{x = 40, y = 160, width = 20, height = 100, speed = 400.0},
-		opponent = Paddle{x = 740, y = 160, width = 20, height = 100, speed = 400.0},
-		ball = Ball{x = 400, y = 225, radius = 5, velocity_x = -300.0, velocity_y = 180.0},
+		opponent = Paddle{x = 740, y = 160, width = 20, height = 100, speed = 150.0},
+		ball = Ball{radius = 5},
 	}
+	ball_reset(&game.ball, 1)
 
 	for !rl.WindowShouldClose() {
 		//        === Update ===
@@ -60,6 +69,15 @@ main :: proc() {
 		if game.ball.y + game.ball.radius > SCREEN_HEIGHT {
 			game.ball.y = SCREEN_HEIGHT - game.ball.radius
 			game.ball.velocity_y = -abs(game.ball.velocity_y)
+		}
+
+		if game.ball.x + game.ball.radius < 0 {
+			ball_reset(&game.ball, -1)
+			game.opponent_score += 1
+		}
+		if game.ball.x - game.ball.radius > SCREEN_WIDTH {
+			ball_reset(&game.ball, 1)
+			game.player_score += 1
 		}
 
 		opponent_center := game.opponent.y + game.opponent.height / 2
@@ -109,6 +127,9 @@ main :: proc() {
 		//        === Draw ===
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+
+		rl.DrawText(rl.TextFormat("%d", game.player_score), 150, 40, 32, rl.WHITE)
+		rl.DrawText(rl.TextFormat("%d", game.opponent_score), 650, 40, 32, rl.WHITE)
 
 		rl.DrawRectangleRec(player_rect, rl.WHITE)
 		rl.DrawRectangleRec(opponent_rect, rl.WHITE)
