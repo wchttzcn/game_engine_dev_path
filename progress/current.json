@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-07-paddle-collision",
+  "currentLessonId": "pong-08-collision-response",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -77,8 +77,10 @@
       "description": "Top ile raket çakışmasını tespit et ve debug rengiyle göster.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/07-paddle-collision",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-08-collision-response",
@@ -232,6 +234,19 @@
         "pong-06-wall-bounce"
       ],
       "note": "Sınır testini merkez artı radius ile kendi kurdu; position'ı sınıra oturtup yönü ayrı vermeyi ipucu sonrası yaptı. İlk denemede yalnız position'ı düzeltip velocity'ye dokunmamıştı. Alan çakışmasına (paddle overlap) uygulanışı 1.7-1.8'de görülecek.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "collision-detection",
+      "title": "Collision detection",
+      "status": "learning",
+      "lessons": [
+        "pong-07-paddle-collision"
+      ],
+      "note": "Circle-rectangle overlap testini CheckCollisionCircleRec ile iki rakete uyguladı ve sonucu her frame tazelenen bir renk state'ine bağladı; detection ile response ayrımını velocity'ye dokunmayarak korudu. Kendi collision testini elle yazması henüz görülmedi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"

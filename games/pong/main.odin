@@ -33,6 +33,7 @@ main :: proc() {
 	}
 
 
+
 	for !rl.WindowShouldClose() {
 		//        === Update ===
 		dt := rl.GetFrameTime()
@@ -75,6 +76,21 @@ main :: proc() {
 			game.opponent.width,
 			game.opponent.height,
 		}
+		// hit ball logic
+    ball_color := rl.WHITE
+
+		if rl.CheckCollisionCircleRec(
+			   rl.Vector2{game.ball.x, game.ball.y},
+			   game.ball.radius,
+			   opponent_rect,
+		   ) ||
+		   rl.CheckCollisionCircleRec(
+			   rl.Vector2{game.ball.x, game.ball.y},
+			   game.ball.radius,
+			   player_rect,
+		   ) {
+			ball_color = rl.RED
+		}
 
 		//        === Draw ===
 		rl.BeginDrawing()
@@ -82,7 +98,7 @@ main :: proc() {
 
 		rl.DrawRectangleRec(player_rect, rl.WHITE)
 		rl.DrawRectangleRec(opponent_rect, rl.WHITE)
-		rl.DrawCircleV(rl.Vector2{game.ball.x, game.ball.y}, game.ball.radius, rl.WHITE)
+		rl.DrawCircleV(rl.Vector2{game.ball.x, game.ball.y}, game.ball.radius, ball_color)
 
 		rl.EndDrawing()
 	}
