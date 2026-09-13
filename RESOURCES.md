@@ -83,6 +83,11 @@ yazılmadan önce araştırılacak.
 - **Collision response** (penetrasyon çözme, sekme açısı): Pong seviyesinde
   güvenilir tek bir kaynak yok. 1.8 şimdilik raylib referansı ve MDN'in
   narrow-phase bölümüne dayanıyor.
+- **Dead zone / hysteresis** (sabit adımlı controller'ın hedef etrafında
+  titremesi ve eşikle bastırılması): 1.9 bunu dersin kendi aritmetiğinden
+  türetiyor — `speed * dt` adımı hedefe kalan mesafeden büyükse salınım
+  kaçınılmazdır — ama control theory tarafında doğrulanmış bir birincil kaynak
+  henüz seçilmedi.
 - **Dear ImGui Odin binding'i**: Breakout'ta (Dünya 3) gerekecek; kurulum ve
   binding seçimi o ders yazılırken güncel kaynaklarla doğrulanacak.
 - **macOS grafik API'si / kendi renderer'ın**: Dünya 1-2 kapsamı dışında.
