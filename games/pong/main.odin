@@ -5,7 +5,7 @@ import rl "vendor:raylib"
 SCREEN_WIDTH :: 800
 SCREEN_HEIGHT :: 450
 
-PLAYER_SPEED :: 400.0
+OPPONENT_DEAD_ZONE :: 10.0
 
 Game :: struct {
 	player, opponent: Paddle,
@@ -37,10 +37,10 @@ main :: proc() {
 		dt := rl.GetFrameTime()
 
 		if rl.IsKeyDown(.W) {
-			game.player.y -= PLAYER_SPEED * dt
+			game.player.y -= game.player.speed * dt
 		}
 		if rl.IsKeyDown(.S) {
-			game.player.y += PLAYER_SPEED * dt
+			game.player.y += game.player.speed * dt
 		}
 
 		if game.player.y + game.player.height > SCREEN_HEIGHT {
@@ -61,6 +61,16 @@ main :: proc() {
 			game.ball.y = SCREEN_HEIGHT - game.ball.radius
 			game.ball.velocity_y = -abs(game.ball.velocity_y)
 		}
+
+		opponent_center := game.opponent.y + game.opponent.height / 2
+		diff := game.ball.y - opponent_center
+		if diff > OPPONENT_DEAD_ZONE {
+			game.opponent.y += game.opponent.speed * dt
+		} else if diff < -OPPONENT_DEAD_ZONE {
+			game.opponent.y -= game.opponent.speed * dt
+		}
+
+		game.opponent.y = clamp(game.opponent.y, 0, SCREEN_HEIGHT - game.opponent.height)
 
 		player_rect := rl.Rectangle {
 			game.player.x,

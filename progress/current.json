@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-09-opponent-ai",
+  "currentLessonId": "pong-10-score-and-reset",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -99,8 +99,10 @@
       "description": "Rakip raketin topu sınırlı hızla takip etmesini sağla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/09-opponent-ai",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-10-score-and-reset",
@@ -161,12 +163,13 @@
     {
       "id": "screen-coordinates",
       "title": "Screen coordinates",
-      "status": "independent",
+      "status": "revisit",
       "lessons": [
         "pong-01-first-paddle",
-        "pong-03-player-input"
+        "pong-03-player-input",
+        "pong-09-opponent-ai"
       ],
-      "note": "Raketi doğru konuma çizdi, sonra aynı koordinat modelini yeni bir bağlamda sınır kontrolüne uyguladı: üst kenar y, alt kenar y + height.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam, ama 1.9'da paddle position'ının üst kenar olduğunu gözden kaçırdı: game.opponent.y = game.ball.y yazarak top ile merkezi eşitlediğini sandı. Merkez = y + height/2 ayrımını İpucu 1 sonrası uyguladı. Aynı ayrım 1.15 collision shape overlay'inde yeniden sınanmalı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -251,6 +254,19 @@
         "pong-08-collision-response"
       ],
       "note": "Overlap testini iki rakete ayrı ayrı uyguladı; hangi rakete çarptığını ayırt etmesi gerektiğini yapısal uyarı sonrası tek || ifadesini bölerek çözdü. Detection ile response ayrımını koruyor. Kendi collision testini elle yazması henüz görülmedi.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "target-seeking-controller",
+      "title": "Hedefe yönelen controller",
+      "status": "learning",
+      "lessons": [
+        "pong-09-opponent-ai"
+      ],
+      "note": "Merkez farkından yön seçen, speed * dt ile sınırlı, dead zone'lu opponent update'ini yazdı ve clamp'i kendi başına doğru yere koydu. İlk denemesi teleport atamasıydı. Dead zone'u türetememesi öğrenci boşluğu değil ders boşluğuydu: kavram yalnızca İpucu 1'de tek yan cümle olarak geçiyordu, Görev metni ise iki dallı karar tarif ediyordu; ders 1.9 bu değerlendirmeden sonra düzeltildi. Bağımsızlık 1.11 servis state'inde yeniden sınanmalı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
