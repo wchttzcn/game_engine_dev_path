@@ -17,6 +17,7 @@ Game :: struct {
 	length:         int,
 	direction:      Direction,
 	next_direction: Direction,
+	state:          Game_State,
 	tick_timer:     f32,
 	tick_count:     int,
 }
@@ -32,6 +33,11 @@ Direction :: enum {
 	Right,
 }
 
+Game_State :: enum {
+	Playing,
+	Dead,
+}
+
 cell_rect :: proc(col, row: i32) -> rl.Rectangle {
 	return rl.Rectangle {
 		x = f32(col) * CELL_SIZE,
@@ -41,16 +47,22 @@ cell_rect :: proc(col, row: i32) -> rl.Rectangle {
 	}
 }
 
-main :: proc() {
-	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mucahit - Snake")
-	defer rl.CloseWindow()
-	rl.SetTargetFPS(60)
-
-
-	game := Game {
-		next_direction = .Right,
-		direction      = .Right,
+head_hits_body :: proc(game: ^Game) -> bool {
+	for i in 1 ..< game.length {
+		if game.body[i] == game.body[0] {
+			return true
+		}
 	}
+	return false
+}
+
+game_reset :: proc(game: ^Game) {
+	game.tick_timer = 0
+	game.state = .Playing
+
+	game.next_direction = .Right
+	game.direction = .Right
+
 	game.body[0] = {
 		col = GRID_COLS / 2,
 		row = GRID_ROWS / 2,
@@ -63,7 +75,26 @@ main :: proc() {
 		col = GRID_COLS / 2 - 2,
 		row = GRID_ROWS / 2,
 	}
-	game.length = 3
+	game.body[3] = {
+		col = GRID_COLS / 2 - 3,
+		row = GRID_ROWS / 2,
+	}
+	game.body[4] = {
+		col = GRID_COLS / 2 - 4,
+		row = GRID_ROWS / 2,
+	}
+	game.length = 5
+
+}
+
+main :: proc() {
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mucahit - Snake")
+	defer rl.CloseWindow()
+	rl.SetTargetFPS(60)
+
+
+	game := Game{}
+	game_reset(&game)
 
 
 	opposite := [Direction]Direction {
@@ -74,51 +105,64 @@ main :: proc() {
 	}
 
 	for !rl.WindowShouldClose() {
-		dt := rl.GetFrameTime()
-		game.tick_timer += dt
+		switch game.state {
+		case .Playing:
+			dt := rl.GetFrameTime()
+			game.tick_timer += dt
 
-		if rl.IsKeyPressed(.W) do game.next_direction = .Up
-		if rl.IsKeyPressed(.S) do game.next_direction = .Down
-		if rl.IsKeyPressed(.A) do game.next_direction = .Left
-		if rl.IsKeyPressed(.D) do game.next_direction = .Right
+			if rl.IsKeyPressed(.W) do game.next_direction = .Up
+			if rl.IsKeyPressed(.S) do game.next_direction = .Down
+			if rl.IsKeyPressed(.A) do game.next_direction = .Left
+			if rl.IsKeyPressed(.D) do game.next_direction = .Right
 
-		for game.tick_timer >= TICK_SECONDS {
-			game.tick_timer -= TICK_SECONDS
-			game.tick_count += 1
+			for game.tick_timer >= TICK_SECONDS {
+				game.tick_timer -= TICK_SECONDS
+				game.tick_count += 1
 
-			if game.next_direction != opposite[game.direction] {
-				game.direction = game.next_direction
+				if game.next_direction != opposite[game.direction] {
+					game.direction = game.next_direction
+				}
+
+				head := game.body[0]
+				for i := game.length - 1; i > 0; i -= 1 {
+					game.body[i] = game.body[i - 1]
+				}
+				delta_col, delta_row: i32
+				switch game.direction {
+				case .Up:
+					delta_row = -1
+				case .Down:
+					delta_row = 1
+				case .Left:
+					delta_col = -1
+				case .Right:
+					delta_col = 1
+				}
+				head.col = (head.col + delta_col + GRID_COLS) % GRID_COLS
+				head.row = (head.row + delta_row + GRID_ROWS) % GRID_ROWS
+				game.body[0] = head
+
+				if head_hits_body(&game) {
+					game.state = .Dead
+					break
+				}
 			}
-
-			head := game.body[0]
-			for i := game.length - 1; i > 0; i -= 1 {
-				game.body[i] = game.body[i - 1]
+		case .Dead:
+			if rl.IsKeyPressed(.R) {
+				game_reset(&game)
 			}
-			delta_col, delta_row: i32
-			switch game.direction {
-			case .Up:
-				delta_row = -1
-			case .Down:
-				delta_row = 1
-			case .Left:
-				delta_col = -1
-			case .Right:
-				delta_col = 1
-			}
-			head.col = (head.col + delta_col + GRID_COLS) % GRID_COLS
-			head.row = (head.row + delta_row + GRID_ROWS) % GRID_ROWS
-			game.body[0] = head
 		}
-
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
 
-		rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
-
 		for col in 0 ..< GRID_COLS {
 			for row in 0 ..< GRID_ROWS {
-				rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.WHITE)
+				rl.DrawRectangleLinesEx(
+					cell_rect(i32(col), i32(row)),
+					1,
+					rl.Color{255, 255, 255, 30},
+				)
 			}
 		}
 
@@ -128,6 +172,17 @@ main :: proc() {
 				i == 0 ? rl.LIME : rl.GREEN,
 			)
 		}
+		if game.state == .Dead {
+			rl.DrawText(
+				rl.TextFormat("Game Over Score: %d", game.length),
+				SCREEN_WIDTH / 2 - 100,
+				SCREEN_HEIGHT / 2,
+				20,
+				rl.RED,
+			)
+		}
+
+		rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
 		rl.EndDrawing()
 	}
 }

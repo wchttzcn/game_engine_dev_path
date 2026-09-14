@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-06-self-collision",
+  "currentLessonId": "snake-07-occupancy-grid",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -231,8 +231,10 @@
       "description": "Yeni head'in gövdeye çarpıp çarpmadığını baştan sona tarayarak tespit et, oyunu durdur ve R ile yeniden başlat.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/06-self-collision",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-07-occupancy-grid",
@@ -431,12 +433,14 @@
       "lessons": [
         "pong-10-score-and-reset",
         "pong-12-match-over",
-        "pong-13-update-render"
+        "pong-13-update-render",
+        "snake-06-self-collision"
       ],
-      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. 1.13'te frame döngüsünü update_game/draw_game olarak ikiye ayırdı; parametreyi ^Game seçip çağrıyı &game ile yaptı. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı.",
+      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. 1.13'te frame döngüsünü update_game/draw_game olarak ikiye ayırdı; parametreyi ^Game seçip çağrıyı &game ile yaptı. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı. 2.6'da game_reset'i kendi inisiyatifiyle çıkardı ve 1.12'de açık kalan noktayı kapattı: başlangıç kurulumu da game_reset'ten geçiyor, 'yeni oyun' tek yerde tanımlı. İlk denemede tick_timer'ı reset kapsamı dışında bıraktı, uyarı sonrası ekledi.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -445,24 +449,27 @@
       "status": "learning",
       "lessons": [
         "pong-11-serve-state",
-        "pong-12-match-over"
+        "pong-12-match-over",
+        "snake-06-self-collision"
       ],
-      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde).",
+      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde). 2.6'da Playing/Dead enum'ını, update ve draw'un state'e göre dallanmasını ve R restart'ını kurdu; restart'ı yine switch içinde Dead kolunda tuttu, bu kez doğru yerde (transition değil, Dead'e özel input). 1.12'de açık kalan nokta burada tekrarladı: state .Dead olduktan sonra tick catch-up döngüsü aynı frame devam ediyordu, uyarı sonrası break ekledi. State'i ekrana yansıtmada iki tur gerekti: önce Dead'de yalnız metin çizip tahtayı gizledi, sonra draw switch'ini tamamen kaldırırken Dead metnini de sildi; üçüncü denemede kalıcı çizim + state'e bağlı overlay ayrımını doğru kurdu.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     },
     {
       "id": "pointer-parameters",
       "title": "Pointer parametreler",
-      "status": "learning",
+      "status": "independent",
       "lessons": [
         "pong-10-score-and-reset",
         "pong-12-match-over",
-        "pong-13-update-render"
+        "pong-13-update-render",
+        "snake-06-self-collision"
       ],
-      "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı. 2.2'de game'i önce package-level global yaptı; Pong'daki ^Game ile dolaştırma alışkanlığını yeni bir dosyaya taşımadı, uyarı sonrası main içinde local'e çevirdi. Henüz Snake tarafında procedure'a pointer geçmesi gereken bir durum çıkmadı.",
+      "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı. 2.2'de game'i önce package-level global yaptı; Pong'daki ^Game ile dolaştırma alışkanlığını yeni bir dosyaya taşımadı, uyarı sonrası main içinde local'e çevirdi. Henüz Snake tarafında procedure'a pointer geçmesi gereken bir durum çıkmadı. 2.6'da head_hits_body'yi ^Game alan, bool döndüren read-only bir procedure olarak kendi yazdı ve &game ile çağırdı; 400 hücrelik array'i değer olarak kopyalamamayı uyarısız seçti. Pong'daki mutasyon kalıbını yeni bir bağlama (sorgu procedure'ı) taşıdı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -530,9 +537,10 @@
       "status": "learning",
       "lessons": [
         "snake-03-tick-timer",
-        "snake-04-direction-step"
+        "snake-04-direction-step",
+        "snake-06-self-collision"
       ],
-      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak. 2.4'te tick bloğu ilk kez gerçek state değiştirdi: kaydırma ve yeni head yalnız tick içinde, input okuma her frame'de kaldı — ayrımı uyarısız doğru yerleştirdi.",
+      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak. 2.4'te tick bloğu ilk kez gerçek state değiştirdi: kaydırma ve yeni head yalnız tick içinde, input okuma her frame'de kaldı — ayrımı uyarısız doğru yerleştirdi. 2.6'da catch-up döngüsünün tek frame'de birden çok adım atabildiğini hâlâ modellemiyordu: çarpışmada state'i .Dead yapıp döngüyü kırmadı, yani hitch anında yılan öldükten sonra adım atabiliyordu. Uyarı sonrası break ekledi. 2.3'teki aynı boşluğun ikinci tekrarı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
@@ -573,6 +581,19 @@
         "snake-05-input-buffer"
       ],
       "note": "2.5'te next_direction'ı frame'de yazıp tick'te tükettiği yapıyı doğru kurdu. Asıl takıldığı yer kontrolün nasıl reddedeceğiydi: ilk denemede dört if'in gövdesine kendine atama yazdı (game.direction = .Right) ve ardından koşulsuz game.direction = game.next_direction bıraktı, yani yasak hiç çalışmadı. 'Reddetmek = atama yapmamak' fikri İpucu 2 ve değer izleyen bir tablo ile oturdu, hint level 3. Kontrolü direction'a karşı yapması gerektiğini uyarısız doğru yaptı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "linear-scan-query",
+      "title": "Doğrusal tarama ile sorgu",
+      "status": "learning",
+      "lessons": [
+        "snake-06-self-collision"
+      ],
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
