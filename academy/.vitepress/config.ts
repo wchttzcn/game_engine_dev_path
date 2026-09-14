@@ -10,6 +10,9 @@ const repoRoot = repoRootFrom(import.meta.url, 2);
 function worldSidebar(worldSlug: string) {
   return {
     text: WORLDS[worldSlug].label,
+    // `collapsed: true` grubu katlanabilir yapar ve kapalı açar. VitePress aktif
+    // link'i içeren grubu kendisi açtığı için okuduğun dünya hep açık gelir.
+    collapsed: true,
     items: [
       { text: 'Bölüm', link: `/worlds/${worldSlug}/` },
       ...worldLessons(repoRoot, worldSlug).map((lesson) => ({ text: lesson.title, link: lesson.url })),
@@ -34,6 +37,7 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Başlangıç',
+        collapsed: false,
         items: [
           { text: 'Çalışma düzeni', link: '/workflow' },
           { text: 'Yol haritası', link: '/roadmap' },
