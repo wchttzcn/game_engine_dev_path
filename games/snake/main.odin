@@ -10,10 +10,16 @@ SCREEN_WIDTH :: GRID_COLS * CELL_SIZE
 SCREEN_HEIGHT :: GRID_ROWS * CELL_SIZE
 
 MAX_BODY :: GRID_COLS * GRID_ROWS
+TICK_SECONDS :: 0.12
 
 Game :: struct {
-	body:   [MAX_BODY]Cell,
-	length: int,
+	body:       [MAX_BODY]Cell,
+	length:     int,
+
+
+	// TICK
+	tick_timer: f32,
+	tick_count: int,
 }
 
 Cell :: struct {
@@ -50,8 +56,19 @@ main :: proc() {
 	game.length = 3
 
 	for !rl.WindowShouldClose() {
+		dt := rl.GetFrameTime()
+		game.tick_timer += dt
+
+		for game.tick_timer >= TICK_SECONDS {
+			game.tick_timer -= TICK_SECONDS
+			game.tick_count += 1
+		}
+
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+
+		rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
+
 		for col in 0 ..< GRID_COLS {
 			for row in 0 ..< GRID_ROWS {
 				rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.WHITE)

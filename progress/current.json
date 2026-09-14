@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-03-tick-timer",
+  "currentLessonId": "snake-04-direction-step",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -198,8 +198,10 @@
       "description": "Simülasyon adımını frame'den ayıran bir tick timer kur.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/03-tick-timer",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-04-direction-step",
@@ -351,12 +353,14 @@
       "status": "independent",
       "lessons": [
         "pong-04-delta-time",
-        "pong-05-ball-velocity"
+        "pong-05-ball-velocity",
+        "snake-03-tick-timer"
       ],
-      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı.",
+      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı. 2.3'te dt'yi doğrudan harekete değil, bir akümülatöre besledi; sürekli hareket ile ayrık adım arasındaki farkı uyarısız doğru tarafa yerleştirdi.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -509,6 +513,19 @@
         "snake-02-snake-body"
       ],
       "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "fixed-timestep",
+      "title": "Sabit adımlı simülasyon",
+      "status": "learning",
+      "lessons": [
+        "snake-03-tick-timer"
+      ],
+      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
