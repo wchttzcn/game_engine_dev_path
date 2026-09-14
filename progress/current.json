@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-04-direction-step",
+  "currentLessonId": "snake-05-input-buffer",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -206,11 +206,13 @@
     {
       "id": "snake-04-direction-step",
       "title": "2.4 — Yön ve adım",
-      "description": "Ok tuşlarıyla yön belirle, her tick'te gövdeyi kaydırarak bir hücre ilerle.",
+      "description": "WASD ile yön belirle, her tick'te gövdeyi kaydırarak bir hücre ilerle.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/04-direction-step",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-05-input-buffer",
@@ -339,9 +341,10 @@
         "pong-03-player-input",
         "pong-11-serve-state",
         "pong-12-match-over",
-        "pong-14-debug-overlay"
+        "pong-14-debug-overlay",
+        "snake-04-direction-step"
       ],
-      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -523,9 +526,36 @@
       "title": "Sabit adımlı simülasyon",
       "status": "learning",
       "lessons": [
-        "snake-03-tick-timer"
+        "snake-03-tick-timer",
+        "snake-04-direction-step"
       ],
-      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak.",
+      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak. 2.4'te tick bloğu ilk kez gerçek state değiştirdi: kaydırma ve yeni head yalnız tick içinde, input okuma her frame'de kaldı — ayrımı uyarısız doğru yerleştirdi.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "value-semantics",
+      "title": "Değer semantiği ve kopya",
+      "status": "learning",
+      "lessons": [
+        "snake-04-direction-step"
+      ],
+      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "grid-wrapping",
+      "title": "Grid sınırında sarma",
+      "status": "learning",
+      "lessons": [
+        "snake-04-direction-step"
+      ],
+      "note": "2.4'te wrap'i ilk denemede hiç yazmadı, sonra % operatörünün negatif davranışını anlamadığını söyledi; tam açıklama (kalan/modulo farkı, (x + N) % N ve Odin'in %% operatörü) sonrası doğru kurdu, col'a GRID_COLS row'a GRID_ROWS eşleşmesini uyarı sonrası doğru yaptı. Hint level 3.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"

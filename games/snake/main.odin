@@ -15,6 +15,7 @@ TICK_SECONDS :: 0.12
 Game :: struct {
 	body:       [MAX_BODY]Cell,
 	length:     int,
+	direction:  Direction,
 
 
 	// TICK
@@ -24,6 +25,13 @@ Game :: struct {
 
 Cell :: struct {
 	col, row: i32,
+}
+
+Direction :: enum {
+	Up,
+	Down,
+	Left,
+	Right,
 }
 
 cell_rect :: proc(col, row: i32) -> rl.Rectangle {
@@ -40,7 +48,9 @@ main :: proc() {
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
-	game := Game{}
+	game := Game {
+		direction = .Right,
+	}
 	game.body[0] = {
 		col = GRID_COLS / 2,
 		row = GRID_ROWS / 2,
@@ -59,10 +69,35 @@ main :: proc() {
 		dt := rl.GetFrameTime()
 		game.tick_timer += dt
 
+		if rl.IsKeyPressed(.W) do game.direction = .Up
+		if rl.IsKeyPressed(.S) do game.direction = .Down
+		if rl.IsKeyPressed(.A) do game.direction = .Left
+		if rl.IsKeyPressed(.D) do game.direction = .Right
+
 		for game.tick_timer >= TICK_SECONDS {
 			game.tick_timer -= TICK_SECONDS
 			game.tick_count += 1
+
+			head := game.body[0]
+			for i := game.length - 1; i > 0; i -= 1 {
+				game.body[i] = game.body[i - 1]
+			}
+			delta_col, delta_row: i32
+			switch game.direction {
+			case .Up:
+				delta_row = -1
+			case .Down:
+				delta_row = 1
+			case .Left:
+				delta_col = -1
+			case .Right:
+				delta_col = 1
+			}
+			head.col = (head.col + delta_col + GRID_COLS) % GRID_COLS
+			head.row = (head.row + delta_row + GRID_ROWS) % GRID_ROWS
+			game.body[0] = head
 		}
+
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
