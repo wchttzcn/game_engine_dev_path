@@ -5,6 +5,21 @@ import progress from '../../../progress/current.json';
 
 const current = computed(() => progress.lessons.find((lesson) => lesson.id === progress.currentLessonId));
 const completed = computed(() => progress.lessons.filter((lesson) => lesson.status === 'completed').length);
+
+// Üzerinde çalışılan oyun güncel dersin url'inden gelir; burada elle yazılan
+// bir dünya adı yok.
+const worldCopy: Record<string, { heading: string; blurb: string }> = {
+  '01-pong': {
+    heading: 'Pong · İlk raketten oynanabilir maça',
+    blurb: 'Önce ekranda bir raket. Sonra input, top ve collision.',
+  },
+  '02-snake': {
+    heading: 'Snake · Grid üzerinde veri temsili',
+    blurb: 'Gövde hangi yapıda duruyor, hücre doluluğunu kim biliyor, allocation nerede?',
+  },
+};
+const worldSlug = computed(() => current.value?.url.split('/')[2] ?? '01-pong');
+const world = computed(() => worldCopy[worldSlug.value] ?? worldCopy['01-pong']);
 const lessonLabels: Record<string, string> = {
   not_started: 'Başlamaya hazır', in_progress: 'Çalışılıyor',
   review_needed: 'Değerlendirme bekliyor', completed: 'Tamamlandı',
@@ -66,8 +81,8 @@ const skillLabels: Record<string, string> = {
     </div>
 
     <section class="academy-next" aria-labelledby="next-heading">
-      <div><p class="eyebrow">ÜZERİNDE ÇALIŞTIĞIN OYUN</p><h2 id="next-heading">Pong · İlk raketten oynanabilir maça</h2><p>Önce ekranda bir raket. Sonra input, top ve collision.</p></div>
-      <a class="text-link" :href="withBase('/worlds/01-pong/')">Bölüm planı →</a>
+      <div><p class="eyebrow">ÜZERİNDE ÇALIŞTIĞIN OYUN</p><h2 id="next-heading">{{ world.heading }}</h2><p>{{ world.blurb }}</p></div>
+      <a class="text-link" :href="withBase(`/worlds/${worldSlug}/`)">Bölüm planı →</a>
     </section>
     <p class="academy-footnote">{{ progress.lessons.length }} kısa ders hazır. Sohbet ana mentor kanalın; burası isteğe bağlı ders arşivin.</p>
   </div>

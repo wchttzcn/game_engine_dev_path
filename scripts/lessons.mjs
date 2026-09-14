@@ -9,7 +9,8 @@ const LESSON_FILE = /^(\d{2})-([a-z0-9-]+)\.md$/;
 const TITLE = /^(\d+\.\d+)\s+—\s+(.+)$/;
 
 export const WORLDS = {
-  '01-pong': { idPrefix: 'pong', label: 'World 1 · Pong', chapter: 1 },
+  '01-pong': { idPrefix: 'pong', label: 'World 1 · Pong', chapter: 1, game: 'Pong', dir: 'games/pong' },
+  '02-snake': { idPrefix: 'snake', label: 'World 2 · Snake', chapter: 2, game: 'Snake', dir: 'games/snake' },
 };
 
 // Bu modülü kullanan dosyalar repo kökünü kendi konumlarından bulur.

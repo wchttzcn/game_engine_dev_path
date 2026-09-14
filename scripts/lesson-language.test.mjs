@@ -5,18 +5,21 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { bodyLines, codeSpans, repoRootFrom, worldLessons } from './lessons.mjs';
+import { WORLDS, bodyLines, codeSpans, repoRootFrom, worldLessons } from './lessons.mjs';
 
 const repoRoot = repoRootFrom(import.meta.url, 1);
-const lessons = worldLessons(repoRoot, '01-pong');
+const worldSlugs = Object.keys(WORLDS);
+const allWorldLessons = worldSlugs.flatMap((slug) =>
+  worldLessons(repoRoot, slug).map((lesson) => ({ ...lesson, slug })),
+);
 const lessonBody = (lesson) =>
-  bodyLines(readFileSync(join(repoRoot, 'academy/worlds/01-pong', lesson.file), 'utf8'));
+  bodyLines(readFileSync(join(repoRoot, 'academy/worlds', lesson.slug, lesson.file), 'utf8'));
 
 const SUFFIX_START = /[A-Za-zÇĞİÖŞÜçğıöşü]/;
 
 test("kod span'ine gelen Türkçe ek kesme işaretiyle bağlanır", () => {
   const missing = [];
-  for (const lesson of lessons) {
+  for (const lesson of allWorldLessons) {
     for (const { number, text } of lessonBody(lesson)) {
       for (const span of codeSpans(text)) {
         const after = text[span.end];
@@ -31,7 +34,7 @@ test("kod span'ine gelen Türkçe ek kesme işaretiyle bağlanır", () => {
 
 test('gövde metni düz tırnak yerine kıvrık tırnak kullanır', () => {
   const straight = [];
-  for (const lesson of lessons) {
+  for (const lesson of allWorldLessons) {
     for (const { number, text } of lessonBody(lesson)) {
       const spans = codeSpans(text);
       const outsideCode = [...text.matchAll(/"/g)].some(

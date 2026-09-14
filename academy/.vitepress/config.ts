@@ -40,6 +40,7 @@ export default defineConfig({
         ],
       },
       worldSidebar('01-pong'),
+      worldSidebar('02-snake'),
     ],
     outline: { level: [2, 3], label: 'Bu derste' },
     docFooter: { prev: 'Önceki', next: 'Sonraki' },

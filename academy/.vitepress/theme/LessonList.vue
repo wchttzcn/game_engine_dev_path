@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { withBase } from 'vitepress';
 // Ders adları frontmatter'dan gelir; bu liste hiçbir adı elle taşımaz.
-import { data as sections } from '../../worlds/01-pong/lessons.data.js';
+import { data as pongSections } from '../../worlds/01-pong/lessons.data.js';
+import { data as snakeSections } from '../../worlds/02-snake/lessons.data.js';
+
+// Data loader'lar dosya başına tanımlı olduğu için hepsi burada toplanır ve
+// sayfa hangi dünyayı istiyorsa o seçilir.
+const byWorld: Record<string, typeof pongSections> = {
+  '01-pong': pongSections,
+  '02-snake': snakeSections,
+};
+
+const props = defineProps<{ world: string }>();
+const sections = computed(() => byWorld[props.world] ?? []);
 </script>
 
 <template>
