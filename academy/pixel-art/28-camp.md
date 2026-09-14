@@ -2,7 +2,6 @@
 title: "1.28 — 32×16 kamp alanı kur"
 description: "Zemin, ağaç ve çadırla idle oyununun küçük dış mekânını kur."
 section: Idle RPG · UI ve çevre
-next: false
 ---
 
 # {{ $frontmatter.title }}
@@ -64,3 +63,5 @@ Tepesi 7. satırın 21–22. sütunlarında. Her alt satırda iki yandan birer p
 **Kazanım:** Küçük nesne, karakter, UI ve dış mekânın farklı ölçülerde bir araya gelebileceği bir idle RPG görsel setine başladın.
 
 **“Pixel Art 1.28 denememi değerlendir”** yaz; çizimini inceleyelim.
+
+Sonraki adım: [1.29 — Asset'lerini tek sprite sheet'e topla](/pixel-art/29-sprite-sheet).

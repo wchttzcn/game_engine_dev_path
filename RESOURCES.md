@@ -84,6 +84,8 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   Şunun için: frame sırası ve playback; [Timeline](https://www.aseprite.org/docs/timeline/) layer/frame görünümünü açıklar.
 - [Aseprite — New Frame](https://www.aseprite.org/docs/new-frame/)
   Şunun için: yeni, boş veya kopyalanmış frame oluşturmak; [Linked Cels](https://www.aseprite.org/docs/linked-cels/) aynı görüntüyü paylaşan kopyaların davranışını açıklar.
+- [Aseprite — Sprite Sheets](https://www.aseprite.org/docs/sprite-sheet/)
+  Şunun için: `File > Export Sprite Sheet` ile tek görüntüye aktarma, sheet düzenleri ve frame'lerin tag'e göre seçilmesi; [Tags](https://www.aseprite.org/docs/tags/) tag oluşturmayı ve yön seçeneklerini açıklar.
 - [Aseprite — Frame Duration](https://www.aseprite.org/docs/frame-duration/)
   Şunun için: Frame Properties ile her pozun ekranda kalma süresini ayarlamak.
 - [Aseprite — Onion Skinning](https://www.aseprite.org/docs/onion-skinning/)

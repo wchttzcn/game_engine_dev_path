@@ -254,6 +254,15 @@
       "url": "/pixel-art/28-camp",
       "status": "not_started",
       "evidence": []
+    },
+    {
+      "id": "pixel-art-29-sprite-sheet",
+      "title": "1.29 — Asset'lerini tek sprite sheet'e topla",
+      "description": "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/29-sprite-sheet",
+      "status": "not_started",
+      "evidence": []
     }
   ],
   "skills": []
