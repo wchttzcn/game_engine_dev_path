@@ -2,7 +2,6 @@
 title: "1.29 — Asset'lerini tek sprite sheet'e topla"
 description: "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir."
 section: Oyuna bağlanma
-next: false
 ---
 
 # {{ $frontmatter.title }}
@@ -73,3 +72,5 @@ Export penceresinin Output bölümünde bir veri dosyası da çıkarabilirsin. B
 **Kazanım:** Ayrı ayrı çizdiğin asset'ler artık tek bir oyun dosyası. Yeni bir asset çizdiğinde sheet'e bir frame eklemen yeterli.
 
 **“Pixel Art 1.29 denememi değerlendir”** yaz; çizimini inceleyelim.
+
+Sonraki adım: [1.30 — 8×8 ok çiz](/pixel-art/30-arrow).

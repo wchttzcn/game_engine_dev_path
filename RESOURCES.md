@@ -84,6 +84,14 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   Şunun için: frame sırası ve playback; [Timeline](https://www.aseprite.org/docs/timeline/) layer/frame görünümünü açıklar.
 - [Aseprite — New Frame](https://www.aseprite.org/docs/new-frame/)
   Şunun için: yeni, boş veya kopyalanmış frame oluşturmak; [Linked Cels](https://www.aseprite.org/docs/linked-cels/) aynı görüntüyü paylaşan kopyaların davranışını açıklar.
+- [Aseprite — FX](https://www.aseprite.org/docs/fx/)
+  Şunun için: `Edit > FX > Outline` ile dış kenarlık eklemek, kenarlık rengi ve Inside/Outside seçeneği.
+- [Aseprite — Replace Color](https://www.aseprite.org/docs/replace-color/)
+  Şunun için: From/To alanlarıyla bir rengi seçili alanda veya bütün frame'lerde değiştirmek; Tolerance yakın tonları kapsar.
+- [Aseprite — Slices](https://www.aseprite.org/docs/slices/)
+  Şunun için: Slice aracıyla bölge işaretlemek ve Slice Properties içindeki 9-slices alanını kullanmak.
+- [Aseprite — Tiled Mode](https://www.aseprite.org/docs/tiled-mode/)
+  Şunun için: `View > Tiled Mode` ile deseni tekrarlayarak çizmek ve ek yerini kontrol etmek.
 - [Aseprite — Sprite Sheets](https://www.aseprite.org/docs/sprite-sheet/)
   Şunun için: `File > Export Sprite Sheet` ile tek görüntüye aktarma, sheet düzenleri ve frame'lerin tag'e göre seçilmesi; [Tags](https://www.aseprite.org/docs/tags/) tag oluşturmayı ve yön seçeneklerini açıklar.
 - [Aseprite — Frame Duration](https://www.aseprite.org/docs/frame-duration/)
