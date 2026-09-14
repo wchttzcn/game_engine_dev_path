@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-02-snake-body",
+  "currentLessonId": "snake-03-tick-timer",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -187,8 +187,10 @@
       "description": "Yılanın gövdesini sabit kapasiteli bir array ve canlı uzunlukla tut.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/02-snake-body",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-03-tick-timer",
@@ -450,10 +452,11 @@
         "pong-12-match-over",
         "pong-13-update-render"
       ],
-      "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı.",
+      "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı. 2.2'de game'i önce package-level global yaptı; Pong'daki ^Game ile dolaştırma alışkanlığını yeni bir dosyaya taşımadı, uyarı sonrası main içinde local'e çevirdi. Henüz Snake tarafında procedure'a pointer geçmesi gereken bir durum çıkmadı.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -495,6 +498,19 @@
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "fixed-capacity-storage",
+      "title": "Sabit kapasite ve canlı uzunluk",
+      "status": "learning",
+      "lessons": [
+        "snake-02-snake-body"
+      ],
+      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı.",
+      "lastRecallAt": null,
+      "evidence": [
         "games/snake/main.odin"
       ]
     }
