@@ -135,14 +135,18 @@ challenge; copying the first example is allowed. Store teacher visuals under
 objects, characters, movement and skill VFX, per the user's explicit request.
 Treat a larger canvas as a later choice, never an automatic next milestone. Saint11's
 first article is a visual companion, not a required list of completed exercises.
-The current authorized pack runs to lesson 1.54 and covers objects,
-mage/warrior/priest/archer, two-frame idle/stepping, skill effects, the idle RPG
-item/monster/UI/environment set, the sprite sheet kit, the completed skill chains,
-hit/death/loot/level-up feedback, the monster roster, the remaining idle UI, a
-repeatable ground tile with a second region, and the craft lessons (silhouette
-test, outline, dithering, timing, anticipation). Mücahit authorized this whole
-range explicitly; do not extend past 1.54 without a new request. Show both
-playable examples and individual frames. Use supplied flat colors; keep color/volume lessons an
+The current authorized pack runs to lesson 1.60 and is split into two phases.
+Phase 1 (1.1-1.21) teaches technique on small objects only - key, sword, heart,
+potion, shield, chest, coin - covering shape, export, silhouette test, outline,
+value/ramp/shading/dithering, two-frame and four-frame animation, frame timing,
+anticipation, repeatable tiles, 9-slice and 3x5 digits. Phase 2 (1.22-1.60)
+applies those techniques to the idle game: one block per character
+(mage/warrior/priest/archer, each running draw to pose to animation to VFX),
+then connecting effects to characters, items and monsters, UI, world and the
+sprite sheet kit. Every Phase 2 lesson opens with a bold "Önce şu teknik" line
+linking back to the Phase 1 lesson it uses; keep that line when editing.
+Mücahit authorized this whole range explicitly; do not extend past 1.60 without
+a new request. Show both playable examples and individual frames. Use supplied flat colors; keep color/volume lessons an
 optional detour and defer 60–30–10 and scene composition until requested.
 HSV color controls generate new
 foreground colors (W/S value, A/D saturation; Q/E hue is optional). Keep

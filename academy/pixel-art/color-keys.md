@@ -58,8 +58,8 @@ değiştirme davranışı doğrulanmadı.
 
 ## Shading için nasıl kullanacağım?
 
-Önce [renk rampası dersinde](/pixel-art/07-color-ramp) birbirinden ayrılan
-üç renk seç. Sonra [ışık yönü dersinde](/pixel-art/08-shading) o renkleri
+Önce [renk rampası dersinde](/pixel-art/12-color-ramp) birbirinden ayrılan
+üç renk seç. Sonra [ışık yönü dersinde](/pixel-art/13-shading) o renkleri
 şeklin üzerine yerleştir. Tuşa her basışta üretilen renk yeni bir adaydır;
 hepsini bitmiş sprite'a eklemen gerekmez.
 

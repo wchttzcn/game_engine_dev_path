@@ -1,7 +1,7 @@
 ---
 title: "1.5 — 8×8 iksir şişesi çiz"
 description: "Dar boyun ile geniş gövdeyi ayırarak küçük bir şişe şekli kur."
-section: 8×8 nesneler
+section: Teknik · ilk şekiller
 ---
 
 # {{ $frontmatter.title }}
@@ -69,8 +69,10 @@ kurma yaklaşımını destekler. Buradaki 8×8 örnek ve adımlar ders için öz
 
 **“Pixel Art 1.5 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-1.6–1.8 küçük renk çalışmaları isteğe bağlı. Şimdi daha fazla şekil çizmek
-istiyorsan [1.9 — 8×8 kalkan çiz](/pixel-art/09-shield) ile devam edebilirsin;
+1.11–1.13 küçük renk çalışmaları isteğe bağlı. Şimdi daha fazla şekil çizmek
+istiyorsan [1.6 — 8×8 kalkan çiz](/pixel-art/06-shield) ile devam edebilirsin;
 renk dersleri karakter veya animasyon için ön koşul değil.
 
-Sonraki adım (isteğe bağlı renk çalışması): [1.6 — Üç value ile ayır](/pixel-art/06-value).
+Sonraki adım (isteğe bağlı renk çalışması): [1.11 — Üç value ile ayır](/pixel-art/11-value).
+
+Sonraki adım: [1.6 — 8×8 kalkan çiz](/pixel-art/06-shield).

@@ -11,55 +11,47 @@ description: 8×8 nesneler, karakterler, küçük hareketler ve skill efektleri 
 
 <CurrentLesson track="pixel-art" />
 
-## Neler çizeceğiz?
+## Nasıl ilerliyoruz?
 
-**54 kısa ders hazır.** Anahtar, kılıç, kalp ve şişenin yanına kalkan,
-sandık ve dört karakter eklendi. Ardından iki frame ile hareket ve
-küçük skill efektleri geliyor. Sonraki sekiz ders bir idle RPG'nin
-parçalarını kurar: coin, armor, trinket, slime, can barı, eşya slotu,
-düğme durumları ve küçük bir kamp. 1.29 hepsini oyunun tek seferde
-yükleyebileceği bir sprite sheet'te toplar.
+**60 kısa ders, iki faz.** Önce tekniği küçük bir nesne üzerinde öğreniyorsun,
+sonra aynı tekniği oyununun gerçek parçasında kullanıyorsun.
 
-Kalan dersler aynı seti derinleştirir: her karakterin skill zincirini
-tamamlar (ok, hazırlık pozu, isabet, koruma), vuruş ve ölüm gibi tepkileri
-ekler, monster kadrosunu büyütür, rakam ve panel gibi eksik UI parçalarını
-çizer, ikinci bir bölge kurar ve son beş derste aynı çizimi geliştirmenin
-yollarını gösterir. Her çizim dersinde görünür adımlar; animasyon
-derslerinde oynatılabilir örnek ve tek tek seçilebilir frame'ler var.
+| Faz | Dersler | Ne yapıyorsun? |
+| --- | --- | --- |
+| **1 · Teknik** | 1.1–1.21 | Anahtar, kılıç, sandık ve coin üzerinde şekil, renk, hareket, süre ve tekrar eden parçaları öğren |
+| **2 · Idle oyun** | 1.22–1.60 | Mage, warrior, priest, archer, monster, UI ve dünyayı aynı tekniklerle kur |
 
-Karakter, eşya ve animasyonda **8×8'de kalıyoruz.** UI ve dış mekân
-parçaları yalnız işleri gerektirdiği için büyür: can barı 32×8, eşya slotu
-12×12, düğme 24×12, kamp 32×16. Bu, büyük canvas'a geçiş değil; ölçüyü
-parçanın işine göre seçme kararı.
+İkinci fazdaki her dersin başında **“Önce şu teknik”** satırı var; hangi dersi
+kullandığını söyler ve oraya link verir. Böylece bir şeyi nerede öğrendiğini
+aramak zorunda kalmazsın.
 
 <div class="pixel-preview">
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/characters/mage.svg" width="96" height="96" alt="Sivri şapkalı mor mage." /></div>
-    <figcaption><strong>Mage</strong><br />Şapka → idle → büyü atışı</figcaption>
+    <div class="pixel-canvas"><img src="/pixel-art/craft/chest-open.svg" width="96" height="96" alt="Kapağı açılmış sandık." /></div>
+    <figcaption><strong>Faz 1</strong><br />Sandıkta sabit ve hareketli parçayı ayırırsın</figcaption>
   </figure>
   <figure>
     <div class="pixel-canvas"><img src="/pixel-art/characters/warrior.svg" width="96" height="96" alt="Miğferli ve kalkanlı warrior." /></div>
-    <figcaption><strong>Warrior</strong><br />Ekipman → adımlama → kılıç izi</figcaption>
+    <figcaption><strong>Faz 2</strong><br />Aynı kuralla warrior'ın ayaklarını yürütürsün</figcaption>
   </figure>
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/characters/priest.svg" width="96" height="96" alt="Açık renk cübbeli, asalı priest." /></div>
-    <figcaption><strong>Priest</strong><br />Cübbe ve asa → iyileştirme ışığı</figcaption>
+    <div class="pixel-canvas"><img src="/pixel-art/craft/coin-spin-2.svg" width="96" height="96" alt="Yarı dönmüş coin." /></div>
+    <figcaption><strong>Faz 1</strong><br />Coin'de frame süresinin gücünü ölçersin</figcaption>
   </figure>
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/characters/archer.svg" width="96" height="96" alt="Yeşil başlıklı, yay tutan archer." /></div>
-    <figcaption><strong>Archer</strong><br />Yay → ok isabeti</figcaption>
+    <div class="pixel-canvas"><img src="/pixel-art/fx/mage-cast.svg" width="96" height="96" alt="Kolunu kaldırmış, elinde ışık toplanan mage." /></div>
+    <figcaption><strong>Faz 2</strong><br />Aynı süre bilgisiyle mage'in büyüsünü kurarsın</figcaption>
   </figure>
 </div>
 
-**Önerilen akış:** 1.1–1.5 ile ilk nesneler → 1.9–1.14 ile yeni
-nesneler ve karakterler → 1.15–1.16 ile hareket → 1.17–1.20 ile VFX →
-1.21–1.28 ile idle RPG eşyaları, monster'ı, UI'ı ve kampı → 1.29 ile
-hepsini tek dosyada topla → 1.30'dan sonrası bu seti derinleştirir.
-1.6–1.8 renk çalışmaları, istediğinde dönebileceğin bir yan yol.
-Karakterlerde hazır düz renkler kullanacağız; renk teorisi ön koşul değil.
+**Önerilen akış:** 1.1–1.8 ile ilk şekiller → 1.9–1.14 ile okunurluk ve renk →
+1.15–1.18 ile hareket → 1.19–1.21 ile tekrar eden parçalar. Teknikler bitince
+1.22'den itibaren idle oyunun kendisi geliyor: karakterler, skiller, monster,
+UI ve dünya. Sırayı takip etmek zorunda değilsin, ama ikinci fazdaki bir ders
+takıldığında başındaki teknik dersi doğru adrestir.
 
-Dört karakteri aynı oturuşta çizmen gerekmez. Birini seçip onunla hareket
-çalışmak da mümkün; sohbette seçtiğin küçük iş üzerinden ilerleriz.
+Her çizim dersinde görünür adımlar; animasyon derslerinde oynatılabilir örnek
+ve tek tek seçilebilir frame'ler var.
 
 <LessonList track="pixel-art" />
 
@@ -78,7 +70,7 @@ Büyük bir çizime ancak sen istediğinde ve çizim ona ihtiyaç duyduğunda ba
 - [Renk seçimi rehberi](/pixel-art/color-guide): renk ve shading merak ettiğinde seçilmiş sanatçı makaleleri.
 - [Klavyeyle renk değiştir](/pixel-art/color-keys): Academy Color Keys, WASD ile yeni renk üretme ve çizgi denemesi.
 - [Skill fikirleri](/pixel-art/skill-guide): büyü atışı, koruma, iyileştirme ve isabetten çıkabilecek küçük VFX denemeleri.
-- [Idle RPG görsel seti](/pixel-art/idle-kit): 1.21–1.28 parçalarının aynı ekranda buluştuğu örnek yerleşim ve sonraki küçük iş fikirleri.
+- [Idle RPG görsel seti](/pixel-art/idle-kit): ikinci fazın parçalarının aynı ekranda buluştuğu örnek yerleşim.
 
 Script kurulumu veya bir makale listesini bitirmek, çizime başlamanın koşulu değil.
 

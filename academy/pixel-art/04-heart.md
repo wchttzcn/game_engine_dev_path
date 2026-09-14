@@ -1,7 +1,7 @@
 ---
 title: "1.4 — 8×8 kalp çiz"
 description: "İki tarafın dengesini ve üstteki boşluğu kullanarak okunur bir kalp çiz."
-section: 8×8 nesneler
+section: Teknik · ilk şekiller
 ---
 
 # {{ $frontmatter.title }}

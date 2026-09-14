@@ -49,443 +49,497 @@
       "evidence": []
     },
     {
-      "id": "pixel-art-06-value",
-      "title": "1.6 — Üç value ile ayır",
-      "description": "8×8 şişede tıpa, gövde ve sıvıyı üç gri tonla ayır.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/06-value",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-07-color-ramp",
-      "title": "1.7 — Kendi renk rampanı kur",
-      "description": "Bir temel renkten, birlikte kullanılabilecek koyu ve açık renkler üret.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/07-color-ramp",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-08-shading",
-      "title": "1.8 — Tek ışık yönüyle hacim ver",
-      "description": "8×8 kalpte aydınlık ve gölge alanlarını tek bir ışık yönüne göre yerleştir.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/08-shading",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-09-shield",
-      "title": "1.9 — 8×8 kalkan çiz",
+      "id": "pixel-art-06-shield",
+      "title": "1.6 — 8×8 kalkan çiz",
       "description": "Düz bir gövdeyi aşağı doğru daraltarak kalkan silüeti kur.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/09-shield",
+      "url": "/pixel-art/06-shield",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-10-chest",
-      "title": "1.10 — 8×8 sandık çiz",
+      "id": "pixel-art-07-chest",
+      "title": "1.7 — 8×8 sandık çiz",
       "description": "Kapak ile gövdeyi tek bir çizgiyle ayırarak küçük bir sandık çiz.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/10-chest",
+      "url": "/pixel-art/07-chest",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-11-mage",
-      "title": "1.11 — 8×8 mage çiz",
-      "description": "Sivri şapka ve geniş cübbeyle ilk küçük karakterini kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/11-mage",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-12-warrior",
-      "title": "1.12 — 8×8 warrior çiz",
-      "description": "Miğfer ve eldeki küçük kalkanla warrior'ı ayırt edilir yap.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/12-warrior",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-13-priest",
-      "title": "1.13 — 8×8 priest çiz",
-      "description": "Uzun cübbe ve ince asayı birbirinden ayırarak priest çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/13-priest",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-14-archer",
-      "title": "1.14 — 8×8 archer çiz",
-      "description": "Birkaç pixel'lik kıvrımla karakterin yayını tanınır hale getir.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/14-archer",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-15-idle",
-      "title": "1.15 — İki frame ile idle yap",
-      "description": "Mage'in ayaklarını sabit tutup iki poz arasında küçük bir idle hareketi oluştur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/15-idle",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-16-walk",
-      "title": "1.16 — İki pozla yerinde adımla",
-      "description": "Warrior'ın ayaklarını sırayla kaldırarak iki pozlu yerinde adımlama çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/16-walk",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-17-mage-bolt",
-      "title": "1.17 — Mage için büyü atışı çiz",
-      "description": "Küçük bir büyünün sağa gidişini, kuyruk ve uç biçimiyle anlat.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/17-mage-bolt",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-18-warrior-slash",
-      "title": "1.18 — Warrior için kılıç izi çiz",
-      "description": "Kısa bir yay çizerek kılıcın sallanma yolunu görünür yap.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/18-warrior-slash",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-19-priest-heal",
-      "title": "1.19 — Priest için iyileştirme çiz",
-      "description": "Yukarı yükselen küçük bir parıltıyla iyileştirme etkisi tasarla.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/19-priest-heal",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-20-archer-impact",
-      "title": "1.20 — Archer için isabet parıltısı çiz",
-      "description": "Temas noktasından dışa yayılan kısa bir impact oluştur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/20-archer-impact",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-21-coin",
-      "title": "1.21 — 8×8 coin çiz",
+      "id": "pixel-art-08-coin",
+      "title": "1.8 — 8×8 coin çiz",
       "description": "Tek bir iç işaretle idle oyununun coin ikonunu çiz.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/21-coin",
+      "url": "/pixel-art/08-coin",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-22-armor",
-      "title": "1.22 — 8×8 armor ikonu çiz",
-      "description": "Omuz ve yaka boşluğuyla bağımsız bir armor ikonu kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/22-armor",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-23-trinket",
-      "title": "1.23 — 8×8 trinket çiz",
-      "description": "Zincir ve taşla küçük bir amulet oluştur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/23-trinket",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-24-slime",
-      "title": "1.24 — 8×8 slime çiz",
-      "description": "İki göz ekleyerek basit bir kütleyi küçük bir monster'a dönüştür.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/24-slime",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-25-health-bar",
-      "title": "1.25 — 32×8 can barı çiz",
-      "description": "Dolu alanın uzunluğuyla can miktarını gösteren küçük bir bar kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/25-health-bar",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-26-item-slot",
-      "title": "1.26 — 12×12 eşya slotu çiz",
-      "description": "8×8 eşya ikonuna kenar payı bırakan bir UI slotu çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/26-item-slot",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-27-button-states",
-      "title": "1.27 — 24×12 düğme durumları çiz",
-      "description": "Düğmenin yüzeyini aşağı kaydırarak basılı durumunu göster.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/27-button-states",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-28-camp",
-      "title": "1.28 — 32×16 kamp alanı kur",
-      "description": "Zemin, ağaç ve çadırla idle oyununun küçük dış mekânını kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/28-camp",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-29-sprite-sheet",
-      "title": "1.29 — Asset'lerini tek sprite sheet'e topla",
-      "description": "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/29-sprite-sheet",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-30-arrow",
-      "title": "1.30 — 8×8 ok çiz",
-      "description": "Uç, gövde ve tüyü ayırarak yönü belli bir ok sprite'ı kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/30-arrow",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-31-archer-draw",
-      "title": "1.31 — Archer'ın yay germe pozunu çiz",
-      "description": "Aynı gövdeyi koruyup yalnız kolu ve yayı değiştirerek ikinci bir poz kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/31-archer-draw",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-32-arrow-flight",
-      "title": "1.32 — Okun uçuşunu iki frame'de göster",
-      "description": "Dar bir oku canvas içinde taşıyarak uçuş hissi kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/32-arrow-flight",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-33-mage-impact",
-      "title": "1.33 — Mage için isabet efekti çiz",
-      "description": "Büyü atışının bittiği anı, merkezden açılıp sönen dört frame'le çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/33-mage-impact",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-34-warrior-windup",
-      "title": "1.34 — Warrior'ın hazırlık pozunu çiz",
-      "description": "Silahı geriye çekerek vuruşa ağırlık veren bir poz kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/34-warrior-windup",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-35-priest-guard",
-      "title": "1.35 — Priest için koruma kubbesi çiz",
-      "description": "Karakterin etrafında kurulup bir süre kalan, sonra kırılan bir kalkan çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/35-priest-guard",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-36-hit-flash",
-      "title": "1.36 — Hasar flash'ı çiz",
-      "description": "Siluetin tamamını tek renge boyayarak vuruş anını göster.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/36-hit-flash",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-37-slime-death",
-      "title": "1.37 — Slime'ın ölüşünü çiz",
-      "description": "Gövdeyi kademe kademe yassılaştırarak bir monster'ın yok oluşunu çiz.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/37-slime-death",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-38-coin-drop",
-      "title": "1.38 — Düşen coin'i çiz",
-      "description": "Aynı coin'i yalnız yukarı aşağı taşıyarak loot düşme hissi kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/38-coin-drop",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-39-level-up",
-      "title": "1.39 — Level up parıltısı çiz",
-      "description": "Yukarı doğru açılan kısa bir parıltıyla ilerleme anını kutla.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/39-level-up",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-40-slime-tiers",
-      "title": "1.40 — Tek slime'dan üç tier üret",
-      "description": "Aynı çizimi yeniden çizmeden renk seti değiştirerek güç seviyesi anlat.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/40-slime-tiers",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-41-bat",
-      "title": "1.41 — İki frame'lik bat çiz",
-      "description": "Kanatları yukarı ve aşağı alarak yerinde duran bir uçuş kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/41-bat",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-42-slime-attack",
-      "title": "1.42 — Slime'ın saldırı pozunu çiz",
-      "description": "Gövdeyi hedefe doğru uzatarak tek karelik bir saldırı kur.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/42-slime-attack",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-43-digits",
-      "title": "1.43 — 3×5 rakam seti çiz",
-      "description": "Idle oyunun en çok kullanacağı çizimi, on küçük rakamı üret.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/43-digits",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-44-nine-slice",
-      "title": "1.44 — 9-slice çerçeve kur",
-      "description": "Tek küçük çizimden istediğin boyda panel üretmeyi öğren.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/44-nine-slice",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-45-xp-bar",
-      "title": "1.45 — 32×4 XP barı çiz",
-      "description": "Can barından ince ve farklı renkte ikinci bir göstergeyi ayırt edilir kıl.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/45-xp-bar",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-46-tier-frames",
-      "title": "1.46 — Eşya slotuna tier rengi ver",
-      "description": "Slot kenarının rengiyle eşyanın değerini anlat.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/46-tier-frames",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-47-slot-states",
-      "title": "1.47 — Kilitli slot ve artı düğmesi çiz",
-      "description": "Aynı slot kalıbından kapalı ve eyleme çağıran iki durum üret.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/47-slot-states",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-48-tile",
-      "title": "1.48 — Tekrarlanabilir zemin tile'ı çiz",
-      "description": "Yan yana dizildiğinde ek yeri görünmeyen bir zemin parçası üret.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/48-tile",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-49-cave",
-      "title": "1.49 — 32×16 mağara kur",
-      "description": "Kampla aynı kalıptan, farklı paletle ikinci bir bölge çıkar.",
-      "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/49-cave",
-      "status": "not_started",
-      "evidence": []
-    },
-    {
-      "id": "pixel-art-50-silhouette-test",
-      "title": "1.50 — Silüet testi yap",
+      "id": "pixel-art-09-silhouette-test",
+      "title": "1.9 — Silüet testi yap",
       "description": "Çizimlerini tek renge boyayarak şeklin tek başına yeterli olup olmadığını ölç.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/50-silhouette-test",
+      "url": "/pixel-art/09-silhouette-test",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-51-outline",
-      "title": "1.51 — Kenarlığın farkını gör",
+      "id": "pixel-art-10-outline",
+      "title": "1.10 — Kenarlığın farkını gör",
       "description": "Aynı sprite'ı kenarlıklı ve kenarlıksız karşılaştırarak ne zaman gerektiğini seç.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/51-outline",
+      "url": "/pixel-art/10-outline",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-52-dithering",
-      "title": "1.52 — Dithering ile geçiş yap",
+      "id": "pixel-art-11-value",
+      "title": "1.11 — Üç value ile ayır",
+      "description": "8×8 şişede tıpa, gövde ve sıvıyı üç gri tonla ayır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/11-value",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-12-color-ramp",
+      "title": "1.12 — Kendi renk rampanı kur",
+      "description": "Bir temel renkten, birlikte kullanılabilecek koyu ve açık renkler üret.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/12-color-ramp",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-13-shading",
+      "title": "1.13 — Tek ışık yönüyle hacim ver",
+      "description": "8×8 kalpte aydınlık ve gölge alanlarını tek bir ışık yönüne göre yerleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/13-shading",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-14-dithering",
+      "title": "1.14 — Dithering ile geçiş yap",
       "description": "İki rengi dama deseniyle karıştırarak ara ton üretmeden yumuşak geçiş kur.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/52-dithering",
+      "url": "/pixel-art/14-dithering",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-53-timing",
-      "title": "1.53 — Aynı iki frame'i üç süreyle dene",
+      "id": "pixel-art-15-chest-open",
+      "title": "1.15 — Sandığı iki frame ile aç",
+      "description": "Kapağı kaldırıp altında karanlık açarak bir nesneye hareket kazandır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/15-chest-open",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-16-coin-spin",
+      "title": "1.16 — Coin'i dört frame'de döndür",
+      "description": "Genişliği daraltıp açarak düz bir ikona dönme illüzyonu ver.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/16-coin-spin",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-17-timing",
+      "title": "1.17 — Aynı frame'leri üç farklı süreyle dene",
       "description": "Tek pixel değiştirmeden, yalnız süreyle üç farklı his üret.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/53-timing",
+      "url": "/pixel-art/17-timing",
       "status": "not_started",
       "evidence": []
     },
     {
-      "id": "pixel-art-54-anticipation",
-      "title": "1.54 — Üç frame ile vuruşa ağırlık ver",
+      "id": "pixel-art-18-chest-weight",
+      "title": "1.18 — Hazırlık karesiyle ağırlık ver",
+      "description": "Hareketin tersine giden bir kare ekleyerek açılışa ağırlık kazandır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/18-chest-weight",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-19-tile",
+      "title": "1.19 — Tekrarlanabilir zemin tile'ı çiz",
+      "description": "Yan yana dizildiğinde ek yeri görünmeyen bir zemin parçası üret.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/19-tile",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-20-nine-slice",
+      "title": "1.20 — 9-slice çerçeve kur",
+      "description": "Tek küçük çizimden istediğin boyda panel üretmeyi öğren.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/20-nine-slice",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-21-digits",
+      "title": "1.21 — 3×5 rakam seti çiz",
+      "description": "Idle oyunun en çok kullanacağı çizimi, on küçük rakamı üret.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/21-digits",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-22-mage",
+      "title": "1.22 — 8×8 mage çiz",
+      "description": "Sivri şapka ve geniş cübbeyle ilk küçük karakterini kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/22-mage",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-23-idle",
+      "title": "1.23 — İki frame ile idle yap",
+      "description": "Mage'in ayaklarını sabit tutup iki poz arasında küçük bir idle hareketi oluştur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/23-idle",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-24-mage-cast",
+      "title": "1.24 — Mage'in büyü yapma pozunu çiz",
+      "description": "Kolu kaldırıp elde ışık toplayarak büyünün başladığı anı göster.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/24-mage-cast",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-25-mage-bolt",
+      "title": "1.25 — Mage için büyü atışı çiz",
+      "description": "Küçük bir büyünün sağa gidişini, kuyruk ve uç biçimiyle anlat.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/25-mage-bolt",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-26-mage-impact",
+      "title": "1.26 — Mage için isabet efekti çiz",
+      "description": "Büyü atışının bittiği anı, merkezden açılıp sönen dört frame'le çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/26-mage-impact",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-27-warrior",
+      "title": "1.27 — 8×8 warrior çiz",
+      "description": "Miğfer ve eldeki küçük kalkanla warrior'ı ayırt edilir yap.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/27-warrior",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-28-walk",
+      "title": "1.28 — İki pozla yerinde adımla",
+      "description": "Warrior'ın ayaklarını sırayla kaldırarak iki pozlu yerinde adımlama çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/28-walk",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-29-warrior-windup",
+      "title": "1.29 — Warrior'ın hazırlık pozunu çiz",
+      "description": "Silahı geriye çekerek vuruşa ağırlık veren bir poz kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/29-warrior-windup",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-30-warrior-slash",
+      "title": "1.30 — Warrior için kılıç izi çiz",
+      "description": "Kısa bir yay çizerek kılıcın sallanma yolunu görünür yap.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/30-warrior-slash",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-31-anticipation",
+      "title": "1.31 — Üç frame ile vuruşa ağırlık ver",
       "description": "Hazırlık, vuruş ve duruşu birleştirerek iki frame'in veremediği ağırlığı kur.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/54-anticipation",
+      "url": "/pixel-art/31-anticipation",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-32-priest",
+      "title": "1.32 — 8×8 priest çiz",
+      "description": "Uzun cübbe ve ince asayı birbirinden ayırarak priest çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/32-priest",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-33-priest-heal",
+      "title": "1.33 — Priest için iyileştirme çiz",
+      "description": "Yukarı yükselen küçük bir parıltıyla iyileştirme etkisi tasarla.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/33-priest-heal",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-34-priest-guard",
+      "title": "1.34 — Priest için koruma kubbesi çiz",
+      "description": "Karakterin etrafında kurulup bir süre kalan, sonra kırılan bir kalkan çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/34-priest-guard",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-35-archer",
+      "title": "1.35 — 8×8 archer çiz",
+      "description": "Birkaç pixel'lik kıvrımla karakterin yayını tanınır hale getir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/35-archer",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-36-archer-draw",
+      "title": "1.36 — Archer'ın yay germe pozunu çiz",
+      "description": "Aynı gövdeyi koruyup yalnız kolu ve yayı değiştirerek ikinci bir poz kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/36-archer-draw",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-37-arrow",
+      "title": "1.37 — 8×8 ok çiz",
+      "description": "Uç, gövde ve tüyü ayırarak yönü belli bir ok sprite'ı kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/37-arrow",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-38-arrow-flight",
+      "title": "1.38 — Okun uçuşunu iki frame'de göster",
+      "description": "Dar bir oku canvas içinde taşıyarak uçuş hissi kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/38-arrow-flight",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-39-archer-impact",
+      "title": "1.39 — Archer için isabet parıltısı çiz",
+      "description": "Temas noktasından dışa yayılan kısa bir impact oluştur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/39-archer-impact",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-40-effect-origin",
+      "title": "1.40 — Efekt karakterin neresinden çıkar?",
+      "description": "Her karakterin efekt çıkış noktasını bulup efekti oraya hizala.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/40-effect-origin",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-41-combine",
+      "title": "1.41 — Karakteri ve efekti aynı zaman çizgisine koy",
+      "description": "Hazırlık, çıkış ve dönüşü tek bir animasyonda birleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/41-combine",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-42-armor",
+      "title": "1.42 — 8×8 armor ikonu çiz",
+      "description": "Omuz ve yaka boşluğuyla bağımsız bir armor ikonu kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/42-armor",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-43-trinket",
+      "title": "1.43 — 8×8 trinket çiz",
+      "description": "Zincir ve taşla küçük bir amulet oluştur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/43-trinket",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-44-slime",
+      "title": "1.44 — 8×8 slime çiz",
+      "description": "İki göz ekleyerek basit bir kütleyi küçük bir monster'a dönüştür.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/44-slime",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-45-slime-tiers",
+      "title": "1.45 — Tek slime'dan üç tier üret",
+      "description": "Aynı çizimi yeniden çizmeden renk seti değiştirerek güç seviyesi anlat.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/45-slime-tiers",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-46-bat",
+      "title": "1.46 — İki frame'lik bat çiz",
+      "description": "Kanatları yukarı ve aşağı alarak yerinde duran bir uçuş kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/46-bat",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-47-slime-attack",
+      "title": "1.47 — Slime'ın saldırı pozunu çiz",
+      "description": "Gövdeyi hedefe doğru uzatarak tek karelik bir saldırı kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/47-slime-attack",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-48-hit-flash",
+      "title": "1.48 — Hasar flash'ı çiz",
+      "description": "Siluetin tamamını tek renge boyayarak vuruş anını göster.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/48-hit-flash",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-49-slime-death",
+      "title": "1.49 — Slime'ın ölüşünü çiz",
+      "description": "Gövdeyi kademe kademe yassılaştırarak bir monster'ın yok oluşunu çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/49-slime-death",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-50-coin-drop",
+      "title": "1.50 — Düşen coin'i çiz",
+      "description": "Aynı coin'i yalnız yukarı aşağı taşıyarak loot düşme hissi kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/50-coin-drop",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-51-level-up",
+      "title": "1.51 — Level up parıltısı çiz",
+      "description": "Yukarı doğru açılan kısa bir parıltıyla ilerleme anını kutla.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/51-level-up",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-52-health-bar",
+      "title": "1.52 — 32×8 can barı çiz",
+      "description": "Dolu alanın uzunluğuyla can miktarını gösteren küçük bir bar kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/52-health-bar",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-53-xp-bar",
+      "title": "1.53 — 32×4 XP barı çiz",
+      "description": "Can barından ince ve farklı renkte ikinci bir göstergeyi ayırt edilir kıl.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/53-xp-bar",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-54-item-slot",
+      "title": "1.54 — 12×12 eşya slotu çiz",
+      "description": "8×8 eşya ikonuna kenar payı bırakan bir UI slotu çiz.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/54-item-slot",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-55-tier-frames",
+      "title": "1.55 — Eşya slotuna tier rengi ver",
+      "description": "Slot kenarının rengiyle eşyanın değerini anlat.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/55-tier-frames",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-56-slot-states",
+      "title": "1.56 — Kilitli slot ve artı düğmesi çiz",
+      "description": "Aynı slot kalıbından kapalı ve eyleme çağıran iki durum üret.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/56-slot-states",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-57-button-states",
+      "title": "1.57 — 24×12 düğme durumları çiz",
+      "description": "Düğmenin yüzeyini aşağı kaydırarak basılı durumunu göster.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/57-button-states",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-58-camp",
+      "title": "1.58 — 32×16 kamp alanı kur",
+      "description": "Zemin, ağaç ve çadırla idle oyununun küçük dış mekânını kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/58-camp",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-59-cave",
+      "title": "1.59 — 32×16 mağara kur",
+      "description": "Kampla aynı kalıptan, farklı paletle ikinci bir bölge çıkar.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/59-cave",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-60-sprite-sheet",
+      "title": "1.60 — Asset'lerini tek sprite sheet'e topla",
+      "description": "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/60-sprite-sheet",
       "status": "not_started",
       "evidence": []
     }

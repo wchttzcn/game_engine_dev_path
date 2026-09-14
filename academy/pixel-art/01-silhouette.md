@@ -1,7 +1,7 @@
 ---
 title: "1.1 — 8×8 anahtarını çiz"
 description: "Görsel adımları takip ederek 8×8 canvas'ta küçük bir oyun anahtarı çiz."
-section: 8×8 başlangıç
+section: Teknik · ilk şekiller
 ---
 
 # {{ $frontmatter.title }}

@@ -1,79 +1,77 @@
 ---
 title: Pixel Art yol haritası
-description: 8×8 asset'lerden kendi idle oyununun görsel setine giden yol.
+description: Önce teknikleri öğren, sonra aynı teknikleri kullanarak idle oyununun görsellerini üret.
 ---
 
 # Pixel Art yol haritası
 
 Hedef, **kendi küçük oyununun asset'lerini kendin üretebilmek.** Idle oyun bu
 hedefin en sade hali: az sayıda nesne, birkaç karakter, küçük bir UI ve
-tekrar eden kısa hareketler. Bu yüzden pakette idle bir oyunun ihtiyaç
-duyduğu parçaları çiziyoruz.
+tekrar eden kısa hareketler.
+
+Pakette iki faz var ve sıraları önemli:
+
+1. **Teknik (1.1–1.21).** Her ders tek bir tekniği, küçük bir nesne üzerinde
+   öğretir. Anahtar, kılıç, sandık, coin. Burada oyun yok — yalnız beceri var.
+2. **Idle oyun (1.22–1.60).** Aynı teknikleri bu kez oyunun gerçek
+   parçalarında kullanırsın: mage, warrior, monster, UI, dünya. Her dersin
+   başında **hangi tekniği kullandığın** yazılı ve o derse link veriyor.
 
 **Nesnede, karakterde ve animasyonda 8×8'de kalıyoruz.** UI ve dış mekân
-parçaları yalnız işleri gerektirdiği kadar büyür. Bir aşamayı bitirmek,
-canvas'ı büyütme zorunluluğu doğurmuyor.
+parçaları yalnız işleri gerektirdiği kadar büyür.
 
 <CurrentLesson track="pixel-art" />
 
-## Dersler küçük, çıktı tek
+## Faz 1 · Teknikler
 
-Her ders tek bir karar öğretir; bu yüzden kısadır. Ama dersler birbirinden
-bağımsız çizimler yığını değil, **üç çıktıda toplanır:**
-
-| Çıktı | Hangi dersler | Elinde ne kalır? |
+| Aşama | Neyi öğretir | Hangi nesneyle |
 | --- | --- | --- |
-| Tek tek asset'ler | 1.1–1.20 | Nesne, karakter, iki frame'lik hareket ve skill efekti |
-| Idle oyunun görsel seti | 1.21–1.28 | Eşya, monster, can barı, slot, düğme ve dış mekân |
-| Oyunun yükleyeceği tek dosya | 1.29 | Tag'lenmiş tek sprite sheet |
-| Tam skill zincirleri ve tepkiler | 1.30–1.42 | Ok, pozlar, isabet, flash, ölüm, loot, level up ve monster kadrosu |
-| Tamamlanmış UI ve ikinci bölge | 1.43–1.49 | Rakamlar, 9-slice panel, XP barı, tier çerçeveleri, tile ve mağara |
-| Aynı çizimi geliştiren teknikler | 1.50–1.54 | Silüet testi, kenarlık, dithering, süre ve ağırlık |
+| 1.1–1.8 · İlk şekiller | Dış şekil, boşluk, dar/geniş parçalar, PNG çıkarma | Anahtar, kılıç, kalp, şişe, kalkan, sandık, coin |
+| 1.9–1.10 · Okunurluk | Silüet testi ve kenarlığın ne zaman gerektiği | Yedi nesne ve sandık |
+| 1.11–1.14 · Renk ve hacim | Üç value, renk rampası, tek ışık yönü, dithering | Şişe, kalp, zemin |
+| 1.15–1.18 · Hareket | Sabit/hareketli parça, döngü, frame süresi, hazırlık | Sandık ve coin |
+| 1.19–1.21 · Tekrar eden parçalar | Ek yerini gizleme, 9-slice, 3×5 rakamlar | Zemin tile'ı, çerçeve, rakam seti |
 
-Bir dersi bitirdiğinde ortaya tek bir dosya çıkar; 1.29'da o dosyalar tek bir
-kit olur. 1.30'dan sonrası aynı kit'i büyütür: yeni bir asset çizdiğinde
-sheet'e bir frame eklemen yeterli. [Idle RPG görsel seti](/pixel-art/idle-kit) parçaların aynı ekranda
-nasıl durduğunu şimdiden gösterir.
+Bu fazda karakter yok. Amaç, bir şeyin **nasıl** çizildiğini ve
+canlandırıldığını küçük, tek amaçlı örneklerle öğrenmek.
 
-## Hazır olan yol
+## Faz 2 · Idle oyunu kur
 
-| Aşama | Küçük sonuç | Tek tek çalışacağımız kararlar |
+| Aşama | Küçük sonuç | Hangi tekniğe dayanır |
 | --- | --- | --- |
-| 1.1–1.5 · İlk nesneler | Anahtar, kılıç, kalp, şişe ve PNG | Dış şekil, boşluk, dar/geniş parçalar |
-| 1.9–1.10 · Nesnelerle devam | Kalkan ve sandık | Daralan alt kenar, kapak/gövde ayrımı |
-| 1.11–1.14 · Karakterler | Mage, warrior, priest, archer | Şapka, ekipman, cübbe ve yay gibi rol işaretleri |
-| 1.15–1.16 · İlk hareket | İki frame'lik idle ve yerinde adımlama | Sabit parça, değişen poz, sırayla kalkan ayaklar |
-| 1.17–1.20 · İlk skill VFX | Büyü atışı, kılıç izi, iyileştirme ve isabet | Yön, yay, yükseliş, merkezden dağılma ve bitiş |
-| 1.21–1.24 · Idle eşya ve monster | Coin, armor, trinket ve slime | Tek işaretle tanınma, bağımsız ikon, gövdeden monster çıkarma |
-| 1.25–1.28 · Idle UI ve çevre | Can barı, eşya slotu, düğme durumları ve kamp | Miktar uzunluğu, kenar payı, durum farkı, aynı zemine oturan şekiller |
-| 1.29 · Oyuna bağlanma | Tag'li tek sprite sheet | Frame sırası, tag ile gruplama, aynı ölçüdekileri birlikte tutma |
-| 1.30–1.35 · Skill zincirini tamamla | Ok, yay germe, uçuş, mage isabeti, hazırlık pozu, koruma kubbesi | Yönü taşıyan uç, sabit gövde, hareket için boşluk, yerinde duran efekt |
-| 1.36–1.39 · Tepki ve geri bildirim | Hasar flash'ı, ölüm, düşen coin, level up | Şekli bozmadan renk değiştirme, çöküş kademeleri, zıplama, yukarı açılma |
-| 1.40–1.42 · Monster kadrosu | Üç tier, iki frame'lik bat, saldırı pozu | Palette swap, sabit gövde ile değişen kanat, hacmi koruyarak uzama |
-| 1.43–1.47 · Idle UI'ı tamamla | Rakamlar, 9-slice panel, XP barı, tier çerçeveleri, slot durumları | 3×5 okunurluk, köşe payı, iki yönlü ayrım, tek renk dili, parlaklıkla durum |
-| 1.48–1.49 · Çevre ilerlemesi | Zemin tile'ı ve mağara | Ek yerini gizleme, aynı kalıbı farklı paletle tekrarlama |
-| 1.50–1.54 · Aynı çizimde derinleşme | Silüet testi, kenarlık, dithering, süre, ağırlık | Renkten bağımsız okunurluk, zeminden ayrılma, ara ton, ritim, hazırlık |
-| 1.6–1.8 · İsteğe bağlı renk | Üç value, ramp ve tek ışık yönü | Renk ihtiyacı hissettiğinde döneceğin kısa çalışmalar |
+| 1.22–1.26 · Mage | Çiz, idle, büyü pozu, atış, isabet | Silüet testi, sabit parça, hazırlık, süre |
+| 1.27–1.31 · Warrior | Çiz, adımlama, hazırlık pozu, kılıç izi, üç frame ağırlık | Aynı teknikler, bu kez bir vuruşta |
+| 1.32–1.34 · Priest | Çiz, iyileştirme, koruma kubbesi | Süre dağılımı ve yön |
+| 1.35–1.39 · Archer | Çiz, yay germe, ok, uçuş, isabet | Hazırlık, sabit sprite, süre |
+| 1.40–1.41 · Skilleri bağla | Efektin çıkış noktası ve zaman çizgisi | Kenarlık ve süre |
+| 1.42–1.51 · Eşya ve monster | Armor, trinket, slime, tier, bat, tepkiler | Silüet, renk, hareket |
+| 1.52–1.57 · UI | Can barı, XP barı, slot, tier çerçevesi, düğme | Rakamlar ve 9-slice |
+| 1.58–1.59 · Dünya | Kamp ve mağara | Value ayrımı ve dithering |
+| 1.60 · Oyuna bağlan | Tag'li tek sprite sheet | 1.2'deki export |
 
 [Derslerin tamamı](/pixel-art/) görsel örneklerle hazır. Liste bir oturuşta
-bitirilecek ödevler dizisi değil. Aynı karakterde kalmak, bir başka nesne
-çizmek veya beğendiğin skill'i tekrar çalışmak mümkün.
+bitirilecek ödevler dizisi değil. Bir karakterde kalmak, bir nesneyi tekrar
+çizmek veya beğendiğin bir tekniği başka bir şeyde denemek mümkün.
 
-Ölçüyü stil değil, parçanın işi belirler: eşya ve monster 8×8 kalır; can barı
-32×8, eşya slotu 12×12, düğme 24×12, kamp 32×16 olur. Karakter ve efekt de
-**ayrı ayrı 8×8 sprite** olabilir; bir büyünün hem karakterini hem bütün
-yolunu aynı canvas'a sığdırman gerekmiyor.
+[Idle RPG görsel seti](/pixel-art/idle-kit) ikinci fazın parçalarının aynı
+ekranda nasıl durduğunu gösterir.
+
+## Ölçüler
+
+Ölçüyü stil değil, parçanın işi belirler: nesne, karakter ve monster 8×8
+kalır; can barı 32×8, eşya slotu 12×12, düğme 24×12, kamp 32×16 olur.
+Karakter ve efekt de **ayrı ayrı 8×8 sprite** olabilir; bir büyünün hem
+karakterini hem bütün yolunu aynı canvas'a sığdırman gerekmiyor.
 
 ## Oyun hattıyla nasıl birleşiyor?
 
 Art hattı oyun geliştirme derslerini bekletmez, onlar da bunu bekletmez.
-Sıra sende: Snake'te ilerlerken buraya istediğin aralıkta girebilir, Snake'i
-bitirdikten sonra bir süre yalnız pixel art çalışabilirsin.
+Snake'te ilerlerken buraya istediğin aralıkta girebilir, Snake'i bitirdikten
+sonra bir süre yalnız pixel art çalışabilirsin.
 
-Birleşme noktası 1.29'daki kit. Idle oyunu yazacak kadar ilerlediğinde
-elinde yükleyeceğin hazır bir dosya olur; o noktada texture ownership,
-asset data'sı ve animasyonun kodla bağlanması **oyunun kendi ihtiyacıyla**
-gelir. İlk VFX ve hareket dosyaları o güne kadar görsel çalışmalardır.
+Birleşme noktası 1.60'taki kit. Idle oyunu yazacak kadar ilerlediğinde elinde
+yükleyeceğin hazır bir dosya olur; o noktada texture ownership, asset data'sı
+ve animasyonun kodla bağlanması **oyunun kendi ihtiyacıyla** gelir.
 
 ## Öğrenme döngüsü
 
@@ -93,7 +91,7 @@ ve mevcut küçük iş tamamlandığında sıradaki tek dersi hazırlarız.
 | --- | --- |
 | Karakter başka yöne baksın | Aynı karakterin tek bir yan veya arka pozu |
 | Yürüyüş gerçekten yürüsün | İki frame yerine dört frame'lik yürüyüş döngüsü |
-| Nesne tepki versin | Açılan sandık veya kırılan küçük taş |
+| Nesne kırılsın | Kırılan küçük taş veya patlayan fıçı |
 | Yazı da çizilebilsin | Rakamların yanına 3×5 harf seti |
 | Kritik vuruş ayrı hissettirsin | Normal vuruştan farklı renk ve süredeki ikinci flash |
 | Skill çeşitlensin | Aynı efektin ateş, buz ve zehir varyantı |

@@ -10,7 +10,7 @@ Bir nesne için bütün renk teorisini aynı anda kullanman gerekmez. İlk karar
 Buradaki bilgiler derslerin yanında açabileceğin bir başvuru; ayrı bir ödev yok.
 
 **Şimdilik nesne ve karakter çizmeye odaklanabilirsin.** Derslerde verilen
-hazır renkler yeterli. Bu rehber ve 1.6–1.8 çalışmaları, renk seçimini merak
+hazır renkler yeterli. Bu rehber ve 1.11–1.13 çalışmaları, renk seçimini merak
 ettiğinde dönebileceğin bir yan yol; animasyon veya VFX için ön koşul değil.
 
 ## İlk rengimi nasıl seçeceğim?
@@ -20,7 +20,7 @@ kolayca seçmek istiyorsan önce sade bir şekil ve çevresiyle ayrılan bir ren
 dene. Kırmızı tek doğru cevap değildir; oyunundaki background ve diğer
 pickup'larla birlikte nasıl okunduğuna bakacağız.
 
-İlk denemede [renk rampası dersinin](/pixel-art/07-color-ramp) orta mavisini
+İlk denemede [renk rampası dersinin](/pixel-art/12-color-ramp) orta mavisini
 kullanabilirsin. Üç renk seçmek, bütün bir palette oluşturmayı daha küçük
 bir karara indirir. Beğendiğin bir fotoğraf veya oyun karesinden renk alırken
 tek swatch kadar, yanındaki renkleri ve kapladığı alanı da incele.
@@ -111,4 +111,4 @@ orada çalışacağız. Oranı ekibin belgelenmiş üretim kuralı olarak kullan
 Kaynaklar sanatçıların kendi anlatımlarıdır; `RESOURCES.md` içinde de kayıtlı.
 Saint11 görsel başlangıç, Arne ve Gurney ise belirli bir renk kararında
 derinleşmek için kullanılabilir. Şimdi uygulamaya geçmek için
-[1.6 — Üç value ile ayır](/pixel-art/06-value) dersini açabilirsin.
+[1.11 — Üç value ile ayır](/pixel-art/11-value) dersini açabilirsin.

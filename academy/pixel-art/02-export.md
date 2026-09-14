@@ -1,7 +1,7 @@
 ---
 title: "1.2 — 8×8 PNG çıkar"
 description: "Aseprite kaynağından aynı ölçüde, transparent bir PNG üret."
-section: 8×8 başlangıç
+section: Teknik · ilk şekiller
 ---
 
 # {{ $frontmatter.title }}

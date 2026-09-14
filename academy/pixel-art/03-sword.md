@@ -1,7 +1,7 @@
 ---
 title: "1.3 — 8×8 kılıç çiz"
 description: "Kılıcın parçalarını farklı genişliklerde kurarak küçük boyutta ayırt edilmesini sağla."
-section: 8×8 nesneler
+section: Teknik · ilk şekiller
 ---
 
 # {{ $frontmatter.title }}
