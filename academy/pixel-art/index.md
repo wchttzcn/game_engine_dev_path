@@ -13,11 +13,12 @@ description: 8×8 nesneler, karakterler, küçük hareketler ve skill efektleri 
 
 ## Neler çizeceğiz?
 
-**28 kısa ders hazır.** Anahtar, kılıç, kalp ve şişenin yanına kalkan,
+**29 kısa ders hazır.** Anahtar, kılıç, kalp ve şişenin yanına kalkan,
 sandık ve dört karakter eklendi. Ardından iki frame ile hareket ve
-küçük skill efektleri geliyor. Son sekiz ders bir idle RPG'nin
+küçük skill efektleri geliyor. Sonraki sekiz ders bir idle RPG'nin
 parçalarını kurar: coin, armor, trinket, slime, can barı, eşya slotu,
-düğme durumları ve küçük bir kamp. Her çizim dersinde görünür adımlar;
+düğme durumları ve küçük bir kamp. Sonuncusu hepsini oyunun tek seferde
+yükleyebileceği bir sprite sheet'te toplar. Her çizim dersinde görünür adımlar;
 animasyon derslerinde oynatılabilir örnek ve tek tek seçilebilir frame'ler var.
 
 Karakter, eşya ve animasyonda **8×8'de kalıyoruz.** UI ve dış mekân
@@ -46,7 +47,8 @@ parçanın işine göre seçme kararı.
 
 **Önerilen akış:** 1.1–1.5 ile ilk nesneler → 1.9–1.14 ile yeni
 nesneler ve karakterler → 1.15–1.16 ile hareket → 1.17–1.20 ile VFX →
-1.21–1.28 ile idle RPG eşyaları, monster'ı, UI'ı ve kampı.
+1.21–1.28 ile idle RPG eşyaları, monster'ı, UI'ı ve kampı → 1.29 ile
+hepsini tek dosyada topla.
 1.6–1.8 renk çalışmaları, istediğinde dönebileceğin bir yan yol.
 Karakterlerde hazır düz renkler kullanacağız; renk teorisi ön koşul değil.
 

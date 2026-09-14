@@ -49,6 +49,10 @@ canvas'a sığmaları gerekmiyor; oyunda hangi ölçekte çizileceği ayrı bir 
 | Düğme durumları | [1.27 — 24×12 düğme durumları çiz](/pixel-art/27-button-states) |
 | Kamp | [1.28 — 32×16 kamp alanı kur](/pixel-art/28-camp) |
 
+Hepsini tek bir oyun dosyasında toplamak
+[1.29 — Asset'lerini tek sprite sheet'e topla](/pixel-art/29-sprite-sheet)
+dersinin işi.
+
 Mage, [1.11 — 8×8 mage çiz](/pixel-art/11-mage) dersinden geliyor. Karakter
 paketi ile idle paketi aynı ekranda buluşur; ders sırası bir zorunluluk değil.
 
@@ -76,7 +80,8 @@ ders hazırlarız.
 | Coin toplanması görünsün | Yukarı süzülüp kaybolan üç frame'lik coin |
 | Kamp kalabalıklaşsın | Zemine oturan tek bir yeni nesne: ateş, kasa veya taş |
 
-[Skill fikirleri rehberi](/pixel-art/skill-guide) VFX tarafında aynı işi görür.
+[Skill fikirleri rehberi](/pixel-art/skill-guide) VFX tarafında aynı işi görür;
+[yol haritası](/pixel-art/roadmap) bu seçeneklerin tamamını gruplar.
 Tam bir idle oyun UI'ı, tile sistemi veya asset pipeline bu aşamanın işi değil.
 
 ## Birincil kaynak
