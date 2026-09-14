@@ -13,6 +13,7 @@ Game :: struct {
 	ball:                         Ball,
 	player_score, opponent_score: i32,
 	match_state:                  Match_State,
+	debug_visible:                bool,
 }
 Paddle :: struct {
 	x, y, width, height: f32,
@@ -63,11 +64,18 @@ main :: proc() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
 		draw_game(&game)
+		if game.debug_visible {
+			draw_debugui(&game)
+		}
 		rl.EndDrawing()
 	}
 }
 
 update_game :: proc(game: ^Game, dt: f32) {
+	if rl.IsKeyPressed(.F1) {
+		game.debug_visible = !game.debug_visible
+	}
+
 	if rl.IsKeyDown(.W) {
 		game.player.y -= game.player.speed * dt
 	}
@@ -188,4 +196,13 @@ draw_game :: proc(game: ^Game) {
 			rl.WHITE,
 		)
 	}
+}
+
+draw_debugui :: proc(game: ^Game) {
+	rl.DrawFPS(10, 10)
+	rl.DrawText(rl.TextFormat("Ball:posX : %.1f", game.ball.x), 10, 30, 8, rl.GREEN)
+	rl.DrawText(rl.TextFormat("Ball:posY : %.1f", game.ball.y), 10, 40, 8, rl.GREEN)
+	rl.DrawText(rl.TextFormat("Ball:velocity_x : %f", game.ball.velocity_x), 10, 50, 8, rl.GREEN)
+	rl.DrawText(rl.TextFormat("Ball:velocity_y : %f", game.ball.velocity_y), 10, 60, 8, rl.GREEN)
+	rl.DrawText(rl.TextFormat("Match State : %v", game.match_state), 10, 70, 8, rl.GREEN)
 }

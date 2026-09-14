@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-14-debug-overlay",
+  "currentLessonId": "pong-15-collision-shapes",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -154,8 +154,10 @@
       "description": "F1 ile açılan overlay'de oyunun görünmeyen sayısal state'ini ekrana getir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/14-debug-overlay",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-15-collision-shapes",
@@ -192,9 +194,10 @@
       "lessons": [
         "pong-02-game-state",
         "pong-03-player-input",
-        "pong-13-update-render"
+        "pong-13-update-render",
+        "pong-14-debug-overlay"
       ],
-      "note": "1.3'te rectangle kurulumunu kendi inisiyatifiyle game loop'un içine taşıdı; update ile draw'u yorumla da ayırdı. 1.13'te ayrımı procedure sınırına taşıdı: update_game içinde çizim, draw_game içinde state ataması yok. BeginDrawing/EndDrawing'i ilk denemede draw_game içine aldı; incelemede sınırın 1.14 overlay'ini nasıl bloke edeceği gösterilince ipucu almadan main'e taşıdı.",
+      "note": "1.3'te rectangle kurulumunu kendi inisiyatifiyle game loop'un içine taşıdı; update ile draw'u yorumla da ayırdı. 1.13'te ayrımı procedure sınırına taşıdı: update_game içinde çizim, draw_game içinde state ataması yok. BeginDrawing/EndDrawing'i ilk denemede draw_game içine aldı; incelemede sınırın 1.14 overlay'ini nasıl bloke edeceği gösterilince ipucu almadan main'e taşıdı. 1.14'te overlay'i kendi kararıyla ayrı bir draw_debugui procedure'ına aldı (ders draw_game içinde bir if diyordu) ve toggle state'ini update tarafında tuttu; araç çizimi sahne çiziminden ayrı, okuma-yazma sınırı bozulmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -207,9 +210,10 @@
       "lessons": [
         "pong-03-player-input",
         "pong-11-serve-state",
-        "pong-12-match-over"
+        "pong-12-match-over",
+        "pong-14-debug-overlay"
       ],
-      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -323,6 +327,32 @@
         "pong-13-update-render"
       ],
       "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "debug-tooling",
+      "title": "Debug aracı",
+      "status": "learning",
+      "lessons": [
+        "pong-14-debug-overlay"
+      ],
+      "note": "İlk debug aracını kurdu: F1 ile açılan overlay, debug_visible'ı Game içinde tutuyor, FPS/position/velocity/match state basıyor. Match state satırını ilk denemede atladı, inceleme sonrası ekledi. Aracın kendi okunurluğu (%f altı ondalık, fontSize 8) henüz umurunda değil.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "borrowed-memory",
+      "title": "Ödünç bellek ve lifetime",
+      "status": "unassessed",
+      "lessons": [
+        "pong-14-debug-overlay"
+      ],
+      "note": "1.14 incelemesinde rl.TextFormat'in dönüşümlü 4 static buffer'a cstring döndürdüğü gösterildi; kodu şu an doğru (her cstring hemen tüketiliyor) ama bunu bilerek yazmadı. Kavram anlatıldı, uygulanmadı — ownership/lifetime dersinin tutamağı burası.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
