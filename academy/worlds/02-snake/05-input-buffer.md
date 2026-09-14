@@ -44,7 +44,7 @@ karşı yapılmalı.
   grid veya yem bu dersin konusu değil.
 
 ::: details İpucu 1 — Nerede okunur, nerede uygulanır
-Ok tuşu kontrolü her frame çalışan koddadır — `next_direction`'ı orada
+Tuş kontrolü her frame çalışan koddadır — `next_direction`'ı orada
 güncelle. Yön değişimini gövdeye uygulayan satır ise yalnızca tick olduğunda
 çalışan koddadır; `direction`'ı orada güncelle.
 :::

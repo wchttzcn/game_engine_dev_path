@@ -1,6 +1,6 @@
 ---
 title: "2.4 — Yön ve adım"
-description: "Ok tuşlarıyla yön belirle, her tick'te gövdeyi kaydırarak bir hücre ilerle."
+description: "WASD ile yön belirle, her tick'te gövdeyi kaydırarak bir hücre ilerle."
 section: Grid ve hareket
 ---
 
@@ -12,7 +12,8 @@ etsin.
 ## Görev
 
 `Direction :: enum { Up, Down, Left, Right }` ekle ve `Game`'e `direction: Direction`
-koy. Ok tuşlarıyla `direction`'ı değiştir. 2.3'teki tick olayı geldiğinde:
+koy. WASD tuşlarıyla `direction`'ı değiştir (Pong 1.3'teki `rl.IsKeyDown(.W)`
+kalıbının aynısı). 2.3'teki tick olayı geldiğinde:
 önce gövdeyi **sondan başa doğru** bir slot kaydır (`body[i] = body[i - 1]`),
 sonra yeni head'i `direction`'a göre hesaplayıp `body[0]`'a yaz. Grid dışına
 çıkan head karşı kenardan girsin (wrap).
@@ -20,7 +21,7 @@ sonra yeni head'i `direction`'a göre hesaplayıp `body[0]`'a yaz. Grid dışın
 ## Ne zaman bitti?
 
 - Yılan sabit bir hızda, tick başına bir hücre ilerliyor.
-- Ok tuşları yönü değiştiriyor.
+- WASD yönü değiştiriyor.
 - Grid'in bir kenarından çıkan baş, karşı kenardan giriyor.
 - Gövde başı adım adım takip ediyor, kendi üstüne yığılmıyor.
 - `odin check games/snake` geçiyor.
@@ -45,7 +46,7 @@ kaldıracağız; şimdilik en açık hali bu, ve doğruluğu anlamak performans�
 ## Sınırlar
 
 - Ring buffer veya dairesel index kurma; bu ders düz kaydırmayla çalışıyor.
-- 180° dönüş yasağı bu derste yok — o 2.5'te geliyor, burada ok tuşuna basınca
+- 180° dönüş yasağı bu derste yok — o 2.5'te geliyor, burada tuşa basınca
   yön doğrudan değişir.
 - Yem yok, kendine çarpma kontrolü yok.
 
