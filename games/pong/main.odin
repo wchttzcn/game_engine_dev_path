@@ -178,6 +178,12 @@ draw_game :: proc(game: ^Game) {
 	case .Playing, .Serving:
 		rl.DrawText(rl.TextFormat("%d", game.player_score), 150, 40, 32, rl.WHITE)
 		rl.DrawText(rl.TextFormat("%d", game.opponent_score), 650, 40, 32, rl.WHITE)
+		rl.DrawLineEx(
+			rl.Vector2{SCREEN_WIDTH / 2, 0},
+			rl.Vector2{SCREEN_WIDTH / 2, SCREEN_HEIGHT},
+			1,
+			rl.WHITE,
+		)
 
 		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
 		rl.DrawRectangleRec(game.opponent.rect, rl.WHITE)
@@ -205,4 +211,8 @@ draw_debugui :: proc(game: ^Game) {
 	rl.DrawText(rl.TextFormat("Ball:velocity_x : %f", game.ball.velocity_x), 10, 50, 8, rl.GREEN)
 	rl.DrawText(rl.TextFormat("Ball:velocity_y : %f", game.ball.velocity_y), 10, 60, 8, rl.GREEN)
 	rl.DrawText(rl.TextFormat("Match State : %v", game.match_state), 10, 70, 8, rl.GREEN)
+
+	rl.DrawRectangleLinesEx(game.player.rect, 2, rl.GREEN)
+	rl.DrawRectangleLinesEx(game.opponent.rect, 2, rl.GREEN)
+	rl.DrawCircleLinesV(rl.Vector2{game.ball.x, game.ball.y}, game.ball.radius, rl.GREEN)
 }

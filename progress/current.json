@@ -165,8 +165,10 @@
       "description": "Top ve raketlerin collision shape'lerini, collision hesabının kendi değerlerinden outline olarak çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/15-collision-shapes",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     }
   ],
   "skills": [
@@ -178,9 +180,10 @@
         "pong-01-first-paddle",
         "pong-03-player-input",
         "pong-09-opponent-ai",
-        "pong-10-score-and-reset"
+        "pong-10-score-and-reset",
+        "pong-15-collision-shapes"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -337,9 +340,10 @@
       "title": "Debug aracı",
       "status": "learning",
       "lessons": [
-        "pong-14-debug-overlay"
+        "pong-14-debug-overlay",
+        "pong-15-collision-shapes"
       ],
-      "note": "İlk debug aracını kurdu: F1 ile açılan overlay, debug_visible'ı Game içinde tutuyor, FPS/position/velocity/match state basıyor. Match state satırını ilk denemede atladı, inceleme sonrası ekledi. Aracın kendi okunurluğu (%f altı ondalık, fontSize 8) henüz umurunda değil.",
+      "note": "İlk debug aracını kurdu: F1 ile açılan overlay, debug_visible'ı Game içinde tutuyor, FPS/position/velocity/match state basıyor. Match state satırını ilk denemede atladı, inceleme sonrası ekledi. 1.15'te collision outline'larını tek kaynaktan türetti: DrawRectangleLinesEx'e collision testinin okuduğu game.player.rect'i, DrawCircleLinesV'ye ball'un kendi merkez/radius'unu verdi, ayrı debug sayısı yazmadı. Aracın kendi okunurluğu (%f altı ondalık, fontSize 8) henüz umurunda değil.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -353,6 +357,19 @@
         "pong-14-debug-overlay"
       ],
       "note": "1.14 incelemesinde rl.TextFormat'in dönüşümlü 4 static buffer'a cstring döndürdüğü gösterildi; kodu şu an doğru (her cstring hemen tüketiliyor) ama bunu bilerek yazmadı. Kavram anlatıldı, uygulanmadı — ownership/lifetime dersinin tutamağı burası.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "single-source-of-truth",
+      "title": "Tek doğruluk kaynağı",
+      "status": "learning",
+      "lessons": [
+        "pong-15-collision-shapes"
+      ],
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. Kavram tek derste görüldü, farklı bir durumda sınanmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
