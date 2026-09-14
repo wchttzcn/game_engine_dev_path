@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-01-draw-grid",
+  "currentLessonId": "snake-02-snake-body",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -176,8 +176,10 @@
       "description": "Grid coordinate'ten pixel coordinate'e giden tek bir dönüşüm yaz ve grid'i çiz.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/01-draw-grid",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-02-snake-body",
@@ -298,13 +300,15 @@
         "pong-03-player-input",
         "pong-09-opponent-ai",
         "pong-10-score-and-reset",
-        "pong-15-collision-shapes"
+        "pong-15-collision-shapes",
+        "snake-01-draw-grid"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "progress/notes/2026-09-11-world0-pong-review.md"
+        "progress/notes/2026-09-11-world0-pong-review.md",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -482,14 +486,16 @@
     {
       "id": "single-source-of-truth",
       "title": "Tek doğruluk kaynağı",
-      "status": "learning",
+      "status": "independent",
       "lessons": [
-        "pong-15-collision-shapes"
+        "pong-15-collision-shapes",
+        "snake-01-draw-grid"
       ],
-      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. Kavram tek derste görüldü, farklı bir durumda sınanmadı.",
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0).",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     }
   ],
