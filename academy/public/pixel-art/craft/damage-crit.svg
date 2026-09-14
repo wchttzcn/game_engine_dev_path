@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" shape-rendering="crispEdges" role="img" aria-label="Kritik vuruş sayısı altın renkte">
+  <rect x="3" y="3" width="1" height="1" fill="#e3ab52"/>
+  <rect x="5" y="3" width="1" height="1" fill="#e3ab52"/>
+  <rect x="7" y="3" width="3" height="1" fill="#e3ab52"/>
+  <rect x="3" y="4" width="1" height="1" fill="#e3ab52"/>
+  <rect x="5" y="4" width="1" height="1" fill="#e3ab52"/>
+  <rect x="7" y="4" width="1" height="1" fill="#e3ab52"/>
+  <rect x="9" y="4" width="1" height="1" fill="#e3ab52"/>
+  <rect x="3" y="5" width="3" height="1" fill="#e3ab52"/>
+  <rect x="7" y="5" width="3" height="1" fill="#e3ab52"/>
+  <rect x="5" y="6" width="1" height="1" fill="#e3ab52"/>
+  <rect x="7" y="6" width="1" height="1" fill="#e3ab52"/>
+  <rect x="9" y="6" width="1" height="1" fill="#e3ab52"/>
+  <rect x="5" y="7" width="1" height="1" fill="#e3ab52"/>
+  <rect x="7" y="7" width="3" height="1" fill="#e3ab52"/>
+</svg>

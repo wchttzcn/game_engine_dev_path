@@ -23,16 +23,16 @@ olması ekranın da küçük olacağı anlamına gelmez.**
 
 | Bölge | Parça | Dersi |
 | --- | --- | --- |
-| HUD | Can barı | [1.57 — 32×8 can barı çiz](/pixel-art/57-health-bar) |
-| HUD | XP barı | [1.58 — 32×4 XP barı çiz](/pixel-art/58-xp-bar) |
+| HUD | Can barı | [1.63 — 32×8 can barı çiz](/pixel-art/63-health-bar) |
+| HUD | XP barı | [1.64 — 32×4 XP barı çiz](/pixel-art/64-xp-bar) |
 | HUD | Altın sayacı | [1.8 — 8×8 coin çiz](/pixel-art/08-coin) ve [1.21 — 3×5 rakam seti çiz](/pixel-art/21-digits) |
 | Sahne | Tekrarlanan zemin | [1.19 — Tekrarlanabilir zemin tile'ı çiz](/pixel-art/19-tile) |
-| Sahne | Ağaç ve çadır | [1.63 — 32×16 kamp alanı kur](/pixel-art/63-camp) |
+| Sahne | Ağaç ve çadır | [1.74 — 32×16 kamp alanı kur](/pixel-art/74-camp) |
 | Sahne | Sandık | [1.7 — 8×8 sandık çiz](/pixel-art/07-chest) |
 | Sahne | Warrior | [1.28 — 8×8 warrior çiz](/pixel-art/28-warrior) |
 | Sahne | Büyü yapan mage ve büyüsü | [1.25 — Mage'in büyü yapma pozunu çiz](/pixel-art/25-mage-cast) ve [1.26 — Mage için büyü atışı çiz](/pixel-art/26-mage-bolt) |
-| Sahne | Bat ve slime'lar | [1.51 — İki frame'lik bat çiz](/pixel-art/51-bat) ve [1.50 — Tek slime'dan üç tier üret](/pixel-art/50-slime-tiers) |
-| Kısayol | Tier renkli slotlar | [1.60 — Eşya slotuna tier rengi ver](/pixel-art/60-tier-frames) |
+| Sahne | Bat ve slime'lar | [1.56 — İki frame'lik bat çiz](/pixel-art/56-bat) ve [1.55 — Tek slime'dan üç tier üret](/pixel-art/55-slime-tiers) |
+| Kısayol | Tier renkli slotlar | [1.66 — Eşya slotuna tier rengi ver](/pixel-art/66-tier-frames) |
 | Düğmeler | 9-slice çerçeve ve yazı | [1.20 — 9-slice çerçeve kur](/pixel-art/20-nine-slice) ve [1.22 — 3×5 harf seti çiz](/pixel-art/22-letters) |
 
 ## 2 · Dükkân
@@ -63,10 +63,10 @@ para biriminden söz edildiğini yazı olmadan söyler.
 
 | Parça | Dersi |
 | --- | --- |
-| Eşya slotu | [1.59 — 12×12 eşya slotu çiz](/pixel-art/59-item-slot) |
-| Tier renkleri | [1.60 — Eşya slotuna tier rengi ver](/pixel-art/60-tier-frames) |
-| Boş ve kilitli slot | [1.61 — Kilitli slot ve artı düğmesi çiz](/pixel-art/61-slot-states) |
-| Eşya ikonları | [1.47 — 8×8 armor ikonu çiz](/pixel-art/47-armor) ve [1.48 — 8×8 trinket çiz](/pixel-art/48-trinket) |
+| Eşya slotu | [1.65 — 12×12 eşya slotu çiz](/pixel-art/65-item-slot) |
+| Tier renkleri | [1.66 — Eşya slotuna tier rengi ver](/pixel-art/66-tier-frames) |
+| Boş ve kilitli slot | [1.67 — Kilitli slot ve artı düğmesi çiz](/pixel-art/67-slot-states) |
+| Eşya ikonları | [1.50 — 8×8 armor ikonu çiz](/pixel-art/50-armor) ve [1.51 — 8×8 trinket çiz](/pixel-art/51-trinket) |
 
 Kuşanılmış dört slot ile çantanın on altı slotu **aynı 12×12 çerçevedir.**
 Fark yalnız kenar rengi ve içinin dolu olup olmaması. Boş slotlar sönük kalır;
@@ -101,13 +101,33 @@ doğrudan karşılığı.
 | Parça | Dersi |
 | --- | --- |
 | Açılan sandık | [1.15 — Sandığı iki frame ile aç](/pixel-art/15-chest-open) |
-| Dönen ve düşen coin | [1.16 — Coin'i dört frame'de döndür](/pixel-art/16-coin-spin) ve [1.55 — Düşen coin'i çiz](/pixel-art/55-coin-drop) |
-| Tier renkli ödüller | [1.60 — Eşya slotuna tier rengi ver](/pixel-art/60-tier-frames) |
+| Dönen ve düşen coin | [1.16 — Coin'i dört frame'de döndür](/pixel-art/16-coin-spin) ve [1.60 — Düşen coin'i çiz](/pixel-art/60-coin-drop) |
+| Tier renkli ödüller | [1.66 — Eşya slotuna tier rengi ver](/pixel-art/66-tier-frames) |
 | Bildirim ve düğme | [1.20 — 9-slice çerçeve kur](/pixel-art/20-nine-slice) |
 
 Ödül ekranında tek bir eylem var: **COLLECT.** Ekranın en parlak öğesi o, geri
 kalan her şey bilgi. Sandığın çevresine saçılan ışık gözü merkeze çeker;
 çerçeve renkleri ise ne kazandığını yazı okumadan söyler.
+
+## 6 · Yokken kazandıkların
+
+<div class="pixel-preview">
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/screens/offline.svg" width="640" height="384" alt="WELCOME BACK başlıklı panel: saat ikonu ve 2H 14M süresi, artı 1840 altın satırı ve yanında X2 rozeti, artı 3 ruh satırı, altta COLLECT düğmesi." /></div>
+    <figcaption><strong>Karşılama ekranı</strong><br />Bir idle oyunu idle yapan ekran: geçen süre, kazanç, tek eylem</figcaption>
+  </figure>
+</div>
+
+| Parça | Dersi |
+| --- | --- |
+| Saat ikonu ve süre | [1.73 — Yokken kazandıkların ekranını kur](/pixel-art/73-offline-screen) |
+| Prestige parası | [1.69 — İkinci para birimini çiz](/pixel-art/69-prestige-currency) |
+| X2 çarpan rozeti | [1.70 — Çarpan rozetini çiz](/pixel-art/70-multiplier) |
+| Panel ve düğme | [1.20 — 9-slice çerçeve kur](/pixel-art/20-nine-slice) |
+
+Üç bilgi, tek eylem: **ne kadar süre geçti, ne kazandın, topla.** Altın satırının
+yanındaki `X2` rozeti 1.70'te çizilmişti; iyi bir UI parçası bir kez çizilir,
+birçok yerde kullanılır.
 
 ## Her parça neden farklı ölçüde?
 

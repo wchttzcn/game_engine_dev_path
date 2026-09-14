@@ -67,6 +67,14 @@ Buradaki açık, ders eksikliği değil **uygulama** eksikliği: hurt ve death
 teknikleri 1.53 ve 1.54'te zaten öğretiliyor, ama yalnız slime üzerinde
 uygulanıyor. Aynı şekilde idle tekniği 1.24'te var, yalnız mage'de kullanılıyor.
 
+## Durum
+
+Bu notta önerilen on iki dersin tamamı 2026-09 itibarıyla yazıldı:
+1.47–1.49 (kadroyu tamamla), 1.52–1.53 (silah ailesi ve durum ikonları),
+1.61 (süzülen hasar sayısı), 1.69–1.73 (ilerleme sistemleri) ve 1.76
+(gelir üreten yapı). Aşağıdaki bölüm, hangi boşluğun hangi derse
+dönüştüğünün kaydı olarak duruyor.
+
 ## Önerilen ekler
 
 Ders sayısını ikiye katlamaya gerek yok. Aşağıdaki on ders iki ölçütteki

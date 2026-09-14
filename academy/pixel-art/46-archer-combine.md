@@ -55,4 +55,4 @@ Ayrılma karesinde ok ile yay arasında en az iki pixel boşluk bırak.
 
 **“Pixel Art 1.46 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-Sonraki adım: [1.47 — 8×8 armor ikonu çiz](/pixel-art/47-armor).
+Sonraki adım: [1.47 — Kadronun tamamına idle ver](/pixel-art/47-hero-idle).

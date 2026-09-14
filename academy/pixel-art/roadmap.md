@@ -13,8 +13,8 @@ Pakette iki faz var ve sıraları önemli:
 
 1. **Teknik (1.1–1.22).** Her ders tek bir tekniği, küçük bir nesne üzerinde
    öğretir. Anahtar, kılıç, sandık, coin. Burada oyun yok — yalnız beceri var.
-2. **Idle oyun (1.23–1.65).** Aynı teknikleri bu kez oyunun gerçek
-   parçalarında kullanırsın: mage, warrior, monster, UI, dünya. Her dersin
+2. **Idle oyun (1.23–1.77).** Aynı teknikleri bu kez oyunun gerçek
+   parçalarında kullanırsın: karakterler, monster, UI, ilerleme sistemleri ve dünya. Her dersin
    başında **hangi tekniği kullandığın** yazılı ve o derse link veriyor.
 
 **Nesnede, karakterde ve animasyonda 8×8'de kalıyoruz.** UI ve dış mekân
@@ -44,10 +44,12 @@ canlandırıldığını küçük, tek amaçlı örneklerle öğrenmek.
 | 1.33–1.36 · Priest | Çiz, dua pozu, iyileştirme, koruma kubbesi | Hazırlık, süre dağılımı ve yön |
 | 1.37–1.41 · Archer | Çiz, yay germe, ok, uçuş, isabet | Hazırlık, sabit sprite, süre |
 | 1.42–1.46 · Skilleri bağla | Efektin çıkış noktası, sonra dört karakterin de zaman çizgisi | Kenarlık, hazırlık ve süre |
-| 1.47–1.56 · Eşya ve monster | Armor, trinket, slime, tier, bat, tepkiler | Silüet, renk, hareket |
-| 1.57–1.62 · UI | Can barı, XP barı, slot, tier çerçevesi, düğme | Rakam, harf ve 9-slice |
-| 1.63–1.64 · Dünya | Kamp ve mağara | Value ayrımı ve dithering |
-| 1.65 · Oyuna bağlan | Tag'li tek sprite sheet | 1.2'deki export |
+| 1.47–1.49 · Kadroyu tamamla | Bütün kadroya idle, hurt ve death; sola çevirme | Sabit parça, süre, silüet |
+| 1.50–1.62 · Eşya ve monster | Silah ailesi, durum ikonları, slime, tier, bat, tepkiler, hasar sayısı | Silüet, renk, hareket, rakamlar |
+| 1.63–1.68 · UI | Can barı, XP barı, slot, tier çerçevesi, düğme | Rakam, harf ve 9-slice |
+| 1.69–1.73 · İlerleme | Prestige parası, çarpan rozeti, AUTO anahtarı, başarım, karşılama ekranı | Value, 9-slice, harf ve rakam |
+| 1.74–1.76 · Dünya | Kamp, mağara ve gelir üreten yapı | Value ayrımı ve dithering |
+| 1.77 · Oyuna bağlan | Tag'li tek sprite sheet | 1.2'deki export |
 
 [Derslerin tamamı](/pixel-art/) görsel örneklerle hazır. Liste bir oturuşta
 bitirilecek ödevler dizisi değil. Bir karakterde kalmak, bir nesneyi tekrar
@@ -69,7 +71,7 @@ Art hattı oyun geliştirme derslerini bekletmez, onlar da bunu bekletmez.
 Snake'te ilerlerken buraya istediğin aralıkta girebilir, Snake'i bitirdikten
 sonra bir süre yalnız pixel art çalışabilirsin.
 
-Birleşme noktası 1.65'teki kit. Idle oyunu yazacak kadar ilerlediğinde elinde
+Birleşme noktası 1.77'deki kit. Idle oyunu yazacak kadar ilerlediğinde elinde
 yükleyeceğin hazır bir dosya olur; o noktada texture ownership, asset data'sı
 ve animasyonun kodla bağlanması **oyunun kendi ihtiyacıyla** gelir.
 

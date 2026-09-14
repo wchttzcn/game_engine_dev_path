@@ -92,6 +92,8 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   Şunun için: Slice aracıyla bölge işaretlemek ve Slice Properties içindeki 9-slices alanını kullanmak.
 - [Aseprite — Tiled Mode](https://www.aseprite.org/docs/tiled-mode/)
   Şunun için: `View > Tiled Mode` ile deseni tekrarlayarak çizmek ve ek yerini kontrol etmek.
+- [Aseprite — Flip](https://www.aseprite.org/docs/flip/)
+  Şunun için: `Edit > Flip Horizontal` (`Shift+H`) ve `Flip Vertical` (`Shift+V`) ile sprite'ı veya seçimi çevirmek; [Transformations](https://www.aseprite.org/docs/transformations/) Edit menüsündeki dönüşümleri listeler.
 - [Aseprite — Sprite Sheets](https://www.aseprite.org/docs/sprite-sheet/)
   Şunun için: `File > Export Sprite Sheet` ile tek görüntüye aktarma, sheet düzenleri ve frame'lerin tag'e göre seçilmesi; [Tags](https://www.aseprite.org/docs/tags/) tag oluşturmayı ve yön seçeneklerini açıklar.
 - [Aseprite — Frame Duration](https://www.aseprite.org/docs/frame-duration/)

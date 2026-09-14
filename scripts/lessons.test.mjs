@@ -47,7 +47,7 @@ test('progress catalogue titles match the lesson frontmatter', async () => {
 test('Pixel Art uses a separate route, namespace and progress catalogue', async () => {
   const lessons = pixelArtLessons(repoRoot);
   const progress = JSON.parse(await (await import('node:fs/promises')).readFile(join(repoRoot, 'progress/pixel-art.json'), 'utf8'));
-  assert.equal(lessons.length, 65);
+  assert.equal(lessons.length, 77);
   assert.equal(lessons[0].id, 'pixel-art-01-silhouette');
   assert.equal(lessons[0].url, '/pixel-art/01-silhouette');
   assert.deepEqual(progressDrift(lessons, progress), []);
