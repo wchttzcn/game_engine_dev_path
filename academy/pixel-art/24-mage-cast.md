@@ -41,7 +41,7 @@ Warrior'ın kılıcı, archer'ın yayı var; mage'in ise elinden başka bir şey
   </figure>
 </div>
 
-Bu poz büyünün **hazırlık** karesi; 1.18'de sandığın kapağını bastırdığın kareyle aynı işi görür. 1.41'de bu pozu büyü atışıyla aynı zaman çizgisine koyacağız ve mage'in ne zaman duruşuna döneceğine karar vereceğiz.
+Bu poz büyünün **hazırlık** karesi; 1.18'de sandığın kapağını bastırdığın kareyle aynı işi görür. 1.42'de bu pozu büyü atışıyla aynı zaman çizgisine koyacağız ve mage'in ne zaman duruşuna döneceğine karar vereceğiz.
 
 ## Sınırlar
 

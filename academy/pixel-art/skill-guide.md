@@ -36,8 +36,8 @@ bir kez oynatılabilir; idle ve yürüyüş ise farklı bir tekrar ihtiyacıdır
 | --- | --- | --- |
 | Mage | [1.25 — Mage için büyü atışı çiz](/pixel-art/25-mage-bolt) | Ateş için kıvrılan kuyruk; buz için köşeli uç. Önce yalnız şekli değiştir. |
 | Warrior | [1.30 — Warrior için kılıç izi çiz](/pixel-art/30-warrior-slash) | Güçlü vuruş için daha uzun hazırlık; hızlı vuruş için daha kısa iz. Önce yalnız süreyi değiştir. |
-| Priest | [1.33 — Priest için iyileştirme çiz](/pixel-art/33-priest-heal) | Koruma için karakterin yanında kısa süre kalan bir yay. Yukarı yükselmek yerine yerinde durmayı dene. |
-| Archer | [1.39 — Archer için isabet parıltısı çiz](/pixel-art/39-archer-impact) | Sert yüzeyde kısa kıvılcım veya yerde dışa açılan toz. Önce yalnız dağılan parçaların yönünü seç. |
+| Priest | [1.34 — Priest için iyileştirme çiz](/pixel-art/34-priest-heal) | Koruma için karakterin yanında kısa süre kalan bir yay. Yukarı yükselmek yerine yerinde durmayı dene. |
+| Archer | [1.40 — Archer için isabet parıltısı çiz](/pixel-art/40-archer-impact) | Sert yüzeyde kısa kıvılcım veya yerde dışa açılan toz. Önce yalnız dağılan parçaların yönünü seç. |
 
 Bunlar tasarım önerileri; her mage ateş, her priest yeşil ışık kullanmak
 zorunda değil. Aynı anda şekil, renk ve süreyi değiştirmek yerine tek

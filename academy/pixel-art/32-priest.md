@@ -66,5 +66,5 @@ Asa 7. sütunda, 2. satırdan 7. satıra uzanır. 8. sütunun 2. satırında kı
 
 **“Pixel Art 1.32 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-Sonraki adım: [1.33 — Priest için iyileştirme çiz](/pixel-art/33-priest-heal).
+Sonraki adım: [1.33 — Priest'in dua pozunu çiz](/pixel-art/33-priest-cast).
 
