@@ -66,22 +66,23 @@ paketi ile idle paketi aynı ekranda buluşur; ders sırası bir zorunluluk değ
 Renk oranı, ışık yönü veya sahne kompozisyonu bu mock'un konusu değil.
 Burada yalnız **ölçü, hizalama ve tekrar** var.
 
-## Buradan çıkabilecek küçük işler
+## Bu parçalar hangi derslerde büyüdü?
 
-Bunlar **henüz ders olarak yazılmamış seçenekler**. Birini istediğinde tek bir
-ders hazırlarız.
+Setin ilk hâli 1.21–1.28'de kuruldu. Sonraki dersler aynı parçaları tamamladı:
 
-| İhtiyaç | Sonraki olası küçük çalışma |
+| Eksik | Tamamlandığı ders |
 | --- | --- |
-| Envanter dolsun | Aynı 8×8 kalıptan ikinci bir armor veya silah ikonu |
-| Monster çeşitlensin | Aynı gövdeden farklı göz veya renkle ikinci bir slime |
-| Slime canlı dursun | İki frame'lik küçük bir slime idle'ı |
-| Vuruş hissedilsin | Slime'a değen kısa bir hasar parıltısı |
-| Coin toplanması görünsün | Yukarı süzülüp kaybolan üç frame'lik coin |
-| Kamp kalabalıklaşsın | Zemine oturan tek bir yeni nesne: ateş, kasa veya taş |
+| Vuruş görünmüyordu | [1.36 — Hasar flash'ı çiz](/pixel-art/36-hit-flash) |
+| Monster ölmüyordu | [1.37 — Slime'ın ölüşünü çiz](/pixel-art/37-slime-death) |
+| Loot düşmüyordu | [1.38 — Düşen coin'i çiz](/pixel-art/38-coin-drop) |
+| Kadro tek monster'dı | [1.40 — Tek slime'dan üç tier üret](/pixel-art/40-slime-tiers) ve [1.41 — İki frame'lik bat çiz](/pixel-art/41-bat) |
+| Sayı gösterilemiyordu | [1.43 — 3×5 rakam seti çiz](/pixel-art/43-digits) |
+| Panel tek boyda kalıyordu | [1.44 — 9-slice çerçeve kur](/pixel-art/44-nine-slice) |
+| Eşyanın değeri belli değildi | [1.46 — Eşya slotuna tier rengi ver](/pixel-art/46-tier-frames) |
+| Tek bölge vardı | [1.49 — 32×16 mağara kur](/pixel-art/49-cave) |
 
-[Skill fikirleri rehberi](/pixel-art/skill-guide) VFX tarafında aynı işi görür;
-[yol haritası](/pixel-art/roadmap) bu seçeneklerin tamamını gruplar.
+[Yol haritası](/pixel-art/roadmap) hâlâ yazılmamış seçenekleri gruplar;
+[skill fikirleri rehberi](/pixel-art/skill-guide) VFX tarafında aynı işi görür.
 Tam bir idle oyun UI'ı, tile sistemi veya asset pipeline bu aşamanın işi değil.
 
 ## Birincil kaynak

@@ -26,9 +26,13 @@ bağımsız çizimler yığını değil, **üç çıktıda toplanır:**
 | Tek tek asset'ler | 1.1–1.20 | Nesne, karakter, iki frame'lik hareket ve skill efekti |
 | Idle oyunun görsel seti | 1.21–1.28 | Eşya, monster, can barı, slot, düğme ve dış mekân |
 | Oyunun yükleyeceği tek dosya | 1.29 | Tag'lenmiş tek sprite sheet |
+| Tam skill zincirleri ve tepkiler | 1.30–1.42 | Ok, pozlar, isabet, flash, ölüm, loot, level up ve monster kadrosu |
+| Tamamlanmış UI ve ikinci bölge | 1.43–1.49 | Rakamlar, 9-slice panel, XP barı, tier çerçeveleri, tile ve mağara |
+| Aynı çizimi geliştiren teknikler | 1.50–1.54 | Silüet testi, kenarlık, dithering, süre ve ağırlık |
 
 Bir dersi bitirdiğinde ortaya tek bir dosya çıkar; 1.29'da o dosyalar tek bir
-kit olur. [Idle RPG görsel seti](/pixel-art/idle-kit) parçaların aynı ekranda
+kit olur. 1.30'dan sonrası aynı kit'i büyütür: yeni bir asset çizdiğinde
+sheet'e bir frame eklemen yeterli. [Idle RPG görsel seti](/pixel-art/idle-kit) parçaların aynı ekranda
 nasıl durduğunu şimdiden gösterir.
 
 ## Hazır olan yol
@@ -43,6 +47,12 @@ nasıl durduğunu şimdiden gösterir.
 | 1.21–1.24 · Idle eşya ve monster | Coin, armor, trinket ve slime | Tek işaretle tanınma, bağımsız ikon, gövdeden monster çıkarma |
 | 1.25–1.28 · Idle UI ve çevre | Can barı, eşya slotu, düğme durumları ve kamp | Miktar uzunluğu, kenar payı, durum farkı, aynı zemine oturan şekiller |
 | 1.29 · Oyuna bağlanma | Tag'li tek sprite sheet | Frame sırası, tag ile gruplama, aynı ölçüdekileri birlikte tutma |
+| 1.30–1.35 · Skill zincirini tamamla | Ok, yay germe, uçuş, mage isabeti, hazırlık pozu, koruma kubbesi | Yönü taşıyan uç, sabit gövde, hareket için boşluk, yerinde duran efekt |
+| 1.36–1.39 · Tepki ve geri bildirim | Hasar flash'ı, ölüm, düşen coin, level up | Şekli bozmadan renk değiştirme, çöküş kademeleri, zıplama, yukarı açılma |
+| 1.40–1.42 · Monster kadrosu | Üç tier, iki frame'lik bat, saldırı pozu | Palette swap, sabit gövde ile değişen kanat, hacmi koruyarak uzama |
+| 1.43–1.47 · Idle UI'ı tamamla | Rakamlar, 9-slice panel, XP barı, tier çerçeveleri, slot durumları | 3×5 okunurluk, köşe payı, iki yönlü ayrım, tek renk dili, parlaklıkla durum |
+| 1.48–1.49 · Çevre ilerlemesi | Zemin tile'ı ve mağara | Ek yerini gizleme, aynı kalıbı farklı paletle tekrarlama |
+| 1.50–1.54 · Aynı çizimde derinleşme | Silüet testi, kenarlık, dithering, süre, ağırlık | Renkten bağımsız okunurluk, zeminden ayrılma, ara ton, ritim, hazırlık |
 | 1.6–1.8 · İsteğe bağlı renk | Üç value, ramp ve tek ışık yönü | Renk ihtiyacı hissettiğinde döneceğin kısa çalışmalar |
 
 [Derslerin tamamı](/pixel-art/) görsel örneklerle hazır. Liste bir oturuşta
@@ -77,71 +87,20 @@ açıkça bulunur; zorunlu rapor veya anatomi/renk teorisi sınavı yok.
 ## Buradan daha nereye gidebiliriz?
 
 Aşağıdakiler **henüz ders olarak yazılmamış seçenekler**. Birini istediğinde
-ve mevcut küçük iş tamamlandığında sıradaki tek dersi hazırlarız. Hepsi 8×8
-veya işinin gerektirdiği küçük ölçüde kalır.
-
-### Kopuk skill zincirleri
-
-Bir skill dört halkadır: hazırlık → uçuş → isabet → bitiş. Her karakterde
-farklı halka eksik.
+ve mevcut küçük iş tamamlandığında sıradaki tek dersi hazırlarız.
 
 | İhtiyaç | Sonraki olası küçük çalışma |
 | --- | --- |
-| Ok görünsün | 8×8 ok sprite'ı: yönü tek bakışta belli |
-| Atışın hazırlığı görülsün | Archer'ın yay germe pozu |
-| Okun yolu izlensin | İki frame'lik ok uçuşu |
-| Büyü hedefe varsın | Mage için isabet efekti |
-| Vuruş ağırlık kazansın | Warrior'ın kılıcı geri çeken hazırlık pozu |
-| Priest korusun | Karakterin yanında kısa süre kalan koruma yayı |
-
-### Tepki ve geri bildirim
-
-Idle oyunda oyuncunun baktığı tek şey budur; pakette henüz hiç yok.
-
-| İhtiyaç | Sonraki olası küçük çalışma |
-| --- | --- |
-| Vuruş hissedilsin | Tek frame'lik hasar flash'ı: siluetin tamamı tek renk |
-| Monster ölsün | Üç frame'lik slime çöküşü |
-| Loot görünsün | Zıplayıp yere düşen coin |
-| İlerleme kutlansın | Karakterin üstünde kısa level up parıltısı |
-
-### Monster kadrosu
-
-| İhtiyaç | Sonraki olası küçük çalışma |
-| --- | --- |
-| Düşman güçlensin | Aynı sprite, farklı renk seti: tek çizimden üç tier |
-| Kadro çeşitlensin | İki frame'lik kanat çırpan bat |
-| Monster saldırsın | Slime'ın tek karelik saldırı pozu |
-
-### Idle UI'ın eksikleri
-
-| İhtiyaç | Sonraki olası küçük çalışma |
-| --- | --- |
-| Sayı gösterilsin | 3×5 rakam seti (0–9): idle oyunun en çok kullandığı çizim |
-| Panel her boyda kurulsun | 9-slice çerçeve: tek küçük çizimden istediğin boyda kutu |
-| İlerleme ayrı okunsun | Can barından ince, farklı renkte XP barı |
-| Eşya değeri belli olsun | Slot kenarına renkli tier çerçevesi |
-| Kilit ve yükseltme görünsün | Kilitli slot ve artı düğmesi |
-
-### Çevre ilerlemesi
-
-| İhtiyaç | Sonraki olası küçük çalışma |
-| --- | --- |
-| Zemin uzayabilsin | Yan yana dizilince eki görünmeyen 8×8 tile |
-| Yeni bölge açılsın | Aynı kamp kalıbından farklı paletle mağara veya orman |
-
-### Aynı çizimde derinleşme
-
-Yeni nesne değil, aynı nesneye yeni karar. “8×8 basit kalıyor” hissinin
-asıl cevabı burada.
-
-| İhtiyaç | Sonraki olası küçük çalışma |
-| --- | --- |
-| Şekil güçlensin | Silüet testi: hepsini tek renge boya, hâlâ tanınıyor mu |
-| Okunurluk artsın | Aynı sprite'ın outline'lı ve outline'sız hali yan yana |
-| İki renk arası yumuşasın | 8×8 içinde dithering ile geçiş |
-| Hareket farklı hissettirsin | Aynı iki frame, üç farklı süre |
-| Vuruşta ağırlık olsun | İki frame yerine üç: geri çekil, sonra vur |
+| Karakter başka yöne baksın | Aynı karakterin tek bir yan veya arka pozu |
+| Yürüyüş gerçekten yürüsün | İki frame yerine dört frame'lik yürüyüş döngüsü |
+| Nesne tepki versin | Açılan sandık veya kırılan küçük taş |
+| Yazı da çizilebilsin | Rakamların yanına 3×5 harf seti |
+| Kritik vuruş ayrı hissettirsin | Normal vuruştan farklı renk ve süredeki ikinci flash |
+| Skill çeşitlensin | Aynı efektin ateş, buz ve zehir varyantı |
+| Bölge saat başı değişsin | Aynı sahnenin gece paleti |
+| Envanter ekranı kurulsun | Slot, çerçeve ve barların tek bir ekranda yerleşimi |
+| Daha büyük bir düşman gerekirse | 16×16 tek istisna olarak boss; ancak sen istediğinde |
+| Asset oyunda görünsün | İlgili oyunun ihtiyacıyla yükleme ve animasyon bağlantısı |
 
 [Skill fikirleri rehberi](/pixel-art/skill-guide) ve
 [Idle RPG görsel seti](/pixel-art/idle-kit) bir sonraki küçük fikri

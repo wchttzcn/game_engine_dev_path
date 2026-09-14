@@ -135,9 +135,14 @@ challenge; copying the first example is allowed. Store teacher visuals under
 objects, characters, movement and skill VFX, per the user's explicit request.
 Treat a larger canvas as a later choice, never an automatic next milestone. Saint11's
 first article is a visual companion, not a required list of completed exercises.
-The current authorized pack includes more objects, mage/warrior/priest/archer,
-two-frame idle/stepping and small skill effects. Show both playable examples
-and individual frames. Use supplied flat colors; keep color/volume lessons an
+The current authorized pack runs to lesson 1.54 and covers objects,
+mage/warrior/priest/archer, two-frame idle/stepping, skill effects, the idle RPG
+item/monster/UI/environment set, the sprite sheet kit, the completed skill chains,
+hit/death/loot/level-up feedback, the monster roster, the remaining idle UI, a
+repeatable ground tile with a second region, and the craft lessons (silhouette
+test, outline, dithering, timing, anticipation). Mücahit authorized this whole
+range explicitly; do not extend past 1.54 without a new request. Show both
+playable examples and individual frames. Use supplied flat colors; keep color/volume lessons an
 optional detour and defer 60–30–10 and scene composition until requested.
 HSV color controls generate new
 foreground colors (W/S value, A/D saturation; Q/E hue is optional). Keep
