@@ -111,6 +111,43 @@ Cache locality and AoS/SoA belong with Snake's data access questions. Deep
 allocator design, ECS, SIMD and advanced profiling wait for game needs.
 Do not teach a large engine architecture upfront.
 
+## Pixel Art / Aseprite
+
+Pixel Art is a parallel learning track for a beginner with no drawing experience.
+Before assigning or reviewing art, read `progress/README.md`,
+`progress/pixel-art.json`, the active lesson under `academy/pixel-art/`, and the
+relevant files under `art/`. Before changing its path, read
+`academy/pixel-art/roadmap.md`. Keep game and art completion/current lessons separate.
+
+Mücahit owns drawings, palettes, animation attempts and artistic decisions in
+`art/`; apply the learner-work ownership rule to them. The agent owns art lessons
+and reader plumbing. Use the same small-task and İpucu workflow, with visual asset
+inspection in place of compiler checks for drawing lessons. Inspect source/export
+when relevant; distinguish a valid file from observed visual quality and later
+independent application. Ask for an image only if the needed artifact cannot be
+inspected. Art completion commits also require Mücahit's approval.
+
+Author at most the current asset pack ahead; keep later art stages as outlines.
+Start with an 8×8 canvas and simple Reventure-inspired objects, per Mücahit's
+preference. Give visible worked examples and step-by-step diagrams alongside the
+challenge; copying the first example is allowed. Store teacher visuals under
+`academy/public/pixel-art/`, not in learner-owned `art/`. Stay at 8×8 for
+objects, characters, movement and skill VFX, per the user's explicit request.
+Treat a larger canvas as a later choice, never an automatic next milestone. Saint11's
+first article is a visual companion, not a required list of completed exercises.
+The current authorized pack includes more objects, mage/warrior/priest/archer,
+two-frame idle/stepping and small skill effects. Show both playable examples
+and individual frames. Use supplied flat colors; keep color/volume lessons an
+optional detour and defer 60–30–10 and scene composition until requested.
+HSV color controls generate new
+foreground colors (W/S value, A/D saturation; Q/E hue is optional). Keep
+tool setup optional and teach it alongside the color task. For tool changes,
+read `tools/aseprite/academy-color-keys/README.md` and verify with isolated
+Aseprite tests; preserve personal shortcuts and learner artwork.
+Teach drawing fundamentals through game asset needs. Treat 60–30–10 as an
+approximate color-area exercise, and attribute Samurai Jack design claims only
+when supported by verified creator sources in `RESOURCES.md`.
+
 ## Progress
 
 `progress/current.json` is the current lesson source read by the dashboard. Read

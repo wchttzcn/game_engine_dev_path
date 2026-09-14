@@ -2,11 +2,22 @@
 
 Odin ile oyun yaparak Game Engine Developer olma çalışma alanı. Sohbet ana mentor kanalı; Academy isteğe bağlı kısa ders okuyucusu.
 
+**Pixel Art / Aseprite** sekmesi, çizim deneyimi olmadan kendi oyun asset'lerini
+üretmek için paralel bir yol sunar. [Başlangıç paketi](academy/pixel-art/index.md)
+yirmi görsel dersle 8×8 nesneler, mage/warrior/priest/archer, iki frame'lik
+hareketler ve dört küçük skill VFX'i sunar. Renk/gölge çalışmaları isteğe bağlıdır.
+[Renk rehberi](academy/pixel-art/color-guide.md) kaynakları seçer;
+[Academy Color Keys](academy/pixel-art/color-keys.md) WASD ile HSV renk ayarlamayı öğretir.
+Reventure gibi sade nesnelerle başlayan [art yol haritası](academy/pixel-art/roadmap.md)
+karakter ve animasyonda da 8×8'de kalır. Daha büyük canvas ve 60–30–10 sonraya
+bırakılır; Samurai Jack ilgisi ileride sahne ihtiyacıyla ele alınır.
+
 ## Başla
 
-Güncel ders tek yerde tutulur: [`progress/current.json`](progress/current.json).
-Academy okuyucusunda çalışma alanı sayfası, yol haritası ve bölüm planı bu
-dosyadan okur; burada ders adı tekrar edilmez. Hangi derste olduğunu sohbette de
+Oyun geliştirmedeki güncel ders [`progress/current.json`](progress/current.json),
+Pixel Art'taki güncel ders [`progress/pixel-art.json`](progress/pixel-art.json) içinde tutulur.
+Academy okuyucusunda çalışma alanı sayfası, yol haritası ve bölüm planı
+ilgili kaydı okur; burada ders adı tekrar edilmez. Hangi derste olduğunu sohbette de
 sorabilirsin.
 
 Repo kökünden çalıştır:
@@ -24,6 +35,7 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 | --- | --- |
 | `academy/` | Agent'ın yönettiği dersler, roadmap ve okuyucu |
 | `games/` | Senin oyun implementasyonların |
+| `art/` | Senin Aseprite kaynakların ve oyun asset'lerin |
 | `labs/` | İsteğe bağlı kısa Odin deneylerin |
 | `journal/` | İstersen tuttuğun gözlem notları |
 | `progress/` | Agent'ın yönettiği mevcut ders bilgisi |
