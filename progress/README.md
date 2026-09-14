@@ -1,11 +1,13 @@
 # İlerleme kaydı
 
 Bu belge agent içindir. Kaydı, şemayı ve dashboard bağlantısını agent yönetir;
-Mücahit yalnızca Odin kodunu yazar, oynar/debug eder ve işi bittiğinde inceleme
-ister. Tahmin, gözlem, journal veya sohbet raporu istenmez.
+Mücahit oyun hattında Odin kodunu yazar ve oynar/debug eder; art hattında
+Aseprite'te çizer. İşi bittiğinde inceleme ister. Tahmin, gözlem, journal
+veya sohbet raporu istenmez.
 
-`current.json` tek doğruluk kaynağıdır ve şema sürümü `2`'dir. Academy buradan
-okur; tarayıcıda ayrı bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya
+Oyun geliştirme için `current.json`, Pixel Art için `pixel-art.json` tek
+doğruluk kaynağıdır; ikisi de şema sürümü `2`'yi kullanır. Academy ilgili
+hattın kaydını okur; tarayıcıda ayrı bir tamamlanma kaydı tutulmaz. Geliştirme sunucusu dosya
 değişikliklerini izler; üretim çıktısına yansıtmak için site yeniden derlenir.
 
 Ders adı da elle yazılmaz. `title`, `world` ve `url` alanları ders dosyasının
@@ -15,9 +17,24 @@ değişince frontmatter düzeltilir ve sync çalıştırılır; JSON elle düzen
 
 Güncel ders hiçbir doküman metninde elle yazılmaz. Çalışma alanı sayfası
 `AcademyDashboard.vue` ile; yol haritası, çalışma rehberi ve bölüm planı
-`<CurrentLesson />` bileşeni ile bu dosyadan okur. `README.md` ders adı yerine
+`<CurrentLesson />` bileşeni ile oyun kaydından okur. Pixel Art sayfaları
+`<CurrentLesson track="pixel-art" />` ile art kaydını kullanır. `README.md` ders adı yerine
 bu dosyaya bağlanır. Yeni bir sayfa güncel dersi göstermek isterse aynı bileşeni
 gömer, ders adını kopyalamaz.
+
+## Pixel Art incelemesi
+
+Çizim işi için `pixel-art.json` ve oradaki güncel ders okunur; `art/` altındaki
+öğrenci dosyası görsel olarak incelenir. Kaynak layer'ları, PNG ölçüsü ve
+transparency yalnız ilgili dersin kabul ölçütüyse kontrol edilir. Dosya mevcut
+veya export geçerli diye görsel okunurluk ve ustalık varsayılmaz. Görsel bu
+ortamda açılamıyorsa gerekli görüntü istenir; ayrı öğrenci raporu istenmez.
+
+Tamamlanma, güncel ders ve uygulanmış beceri sinyali yalnız art kaydında
+güncellenir. Başlangıçta `skills` boştur; ders yazmak bir becerinin öğrenci
+tarafından uygulanmış olduğu anlamına gelmez. Oyun dersinin durumunu art
+çalışması için değiştirme. `academy:sync` ve `academy:check` iki kataloğu da
+ayrı kontrol eder; ders durumlarını veya güncel ders seçimini kendileri ilerletmez.
 
 ## Basit akış
 

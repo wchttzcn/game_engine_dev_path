@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { withBase } from 'vitepress';
-import progress from '../../../progress/current.json';
+import gameProgress from '../../../progress/current.json';
+import pixelArtProgress from '../../../progress/pixel-art.json';
 
-// Tek kaynak: progress/current.json. Doküman sayfaları güncel dersi elle
-// yazmaz; bu bileşeni gömer.
-const current = computed(() => progress.lessons.find((lesson) => lesson.id === progress.currentLessonId));
+const props = defineProps<{ track?: 'game' | 'pixel-art' }>();
+// Her rota kendi kaydını okur; varsayılan rota oyun geliştirme.
+const progress = computed(() => props.track === 'pixel-art' ? pixelArtProgress : gameProgress);
+const current = computed(() => progress.value.lessons.find((lesson) => lesson.id === progress.value.currentLessonId));
 </script>
 
 <template>

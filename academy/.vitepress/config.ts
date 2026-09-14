@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 
 // @ts-expect-error - düz Node modülü, tip bildirimi taşımaz.
-import { WORLDS, repoRootFrom, worldLessons } from '../../scripts/lessons.mjs';
+import { WORLDS, lessonSections, pixelArtLessons, repoRootFrom, worldLessons } from '../../scripts/lessons.mjs';
 
 const repoRoot = repoRootFrom(import.meta.url, 2);
 
@@ -28,19 +28,39 @@ export default defineConfig({
     siteTitle: 'ENGINE ACADEMY',
     nav: [
       { text: 'Çalışma alanı', link: '/' },
+      { text: 'Pixel Art', link: '/pixel-art/' },
       { text: 'Yol haritası', link: '/roadmap' },
       { text: 'Nasıl çalışır?', link: '/workflow' },
     ],
-    sidebar: [
-      {
-        text: 'Başlangıç',
-        items: [
-          { text: 'Çalışma düzeni', link: '/workflow' },
-          { text: 'Yol haritası', link: '/roadmap' },
-        ],
-      },
-      worldSidebar('01-pong'),
-    ],
+    sidebar: {
+      '/pixel-art/': [
+        {
+          text: 'Pixel Art / Aseprite',
+          items: [
+            { text: 'Çalışma alanı', link: '/pixel-art/' },
+            { text: 'Yol haritası', link: '/pixel-art/roadmap' },
+            { text: 'Renk seçimi rehberi', link: '/pixel-art/color-guide' },
+            { text: 'Klavyeyle renk değiştir', link: '/pixel-art/color-keys' },
+            { text: 'Skill fikirleri', link: '/pixel-art/skill-guide' },
+            { text: 'Idle RPG görsel seti', link: '/pixel-art/idle-kit' },
+          ],
+        },
+        ...lessonSections(pixelArtLessons(repoRoot)).map((section) => ({
+          text: section.text,
+          items: section.items.map((lesson) => ({ text: lesson.title, link: lesson.url })),
+        })),
+      ],
+      '/': [
+        {
+          text: 'Başlangıç',
+          items: [
+            { text: 'Çalışma düzeni', link: '/workflow' },
+            { text: 'Yol haritası', link: '/roadmap' },
+          ],
+        },
+        worldSidebar('01-pong'),
+      ],
+    },
     outline: { level: [2, 3], label: 'Bu derste' },
     docFooter: { prev: 'Önceki', next: 'Sonraki' },
     darkModeSwitchLabel: 'Görünüm',

@@ -5,12 +5,12 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { bodyLines, codeSpans, repoRootFrom, worldLessons } from './lessons.mjs';
+import { bodyLines, codeSpans, pixelArtLessons, repoRootFrom, worldLessons } from './lessons.mjs';
 
 const repoRoot = repoRootFrom(import.meta.url, 1);
-const lessons = worldLessons(repoRoot, '01-pong');
+const lessons = [...worldLessons(repoRoot, '01-pong'), ...pixelArtLessons(repoRoot)];
 const lessonBody = (lesson) =>
-  bodyLines(readFileSync(join(repoRoot, 'academy/worlds/01-pong', lesson.file), 'utf8'));
+  bodyLines(readFileSync(join(repoRoot, 'academy', `${lesson.url}.md`), 'utf8'));
 
 const SUFFIX_START = /[A-Za-zÇĞİÖŞÜçğıöşü]/;
 
@@ -33,8 +33,10 @@ test('gövde metni düz tırnak yerine kıvrık tırnak kullanır', () => {
   const straight = [];
   for (const lesson of lessons) {
     for (const { number, text } of lessonBody(lesson)) {
-      const spans = codeSpans(text);
-      const outsideCode = [...text.matchAll(/"/g)].some(
+      // HTML attribute'ları yazı değildir; etiketler arasındaki metin denetlenir.
+      const prose = text.replace(/<[^>]*>/g, '');
+      const spans = codeSpans(prose);
+      const outsideCode = [...prose.matchAll(/"/g)].some(
         (match) => !spans.some((span) => match.index >= span.start && match.index < span.end),
       );
       if (outsideCode) straight.push(`${lesson.file}:${number}: ${text.trim()}`);

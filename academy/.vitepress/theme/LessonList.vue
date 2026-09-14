@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { withBase } from 'vitepress';
 // Ders adları frontmatter'dan gelir; bu liste hiçbir adı elle taşımaz.
-import { data as sections } from '../../worlds/01-pong/lessons.data.js';
+import { data as gameSections } from '../../worlds/01-pong/lessons.data.js';
+import { data as pixelArtSections } from '../../pixel-art/lessons.data.js';
+
+const props = defineProps<{ track?: 'game' | 'pixel-art' }>();
+const sections = computed(() => props.track === 'pixel-art' ? pixelArtSections : gameSections);
 </script>
 
 <template>

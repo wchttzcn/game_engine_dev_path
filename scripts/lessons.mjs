@@ -12,6 +12,8 @@ export const WORLDS = {
   '01-pong': { idPrefix: 'pong', label: 'World 1 · Pong', chapter: 1 },
 };
 
+export const PIXEL_ART = { idPrefix: 'pixel-art', label: "Pixel Art · 8×8 oyun asset'leri" };
+
 // Bu modülü kullanan dosyalar repo kökünü kendi konumlarından bulur.
 export function repoRootFrom(moduleUrl, up) {
   return join(dirname(fileURLToPath(moduleUrl)), ...Array(up).fill('..'));
@@ -29,8 +31,9 @@ export function parseFrontmatter(source) {
   return fields;
 }
 
-export function readLessons(dir, idPrefix) {
+export function readLessons(dir, idPrefix, urlBase) {
   const worldSlug = dir.split('/').filter(Boolean).pop();
+  const base = urlBase ?? `/worlds/${worldSlug}`;
   return readdirSync(dir)
     .map((file) => ({ file, match: LESSON_FILE.exec(file) }))
     .filter(({ match }) => match !== null)
@@ -52,7 +55,7 @@ export function readLessons(dir, idPrefix) {
         title,
         description: frontmatter.description ?? '',
         section: frontmatter.section ?? '',
-        url: `/worlds/${worldSlug}/${slug}`,
+        url: `${base}/${slug}`,
       };
     });
 }
@@ -63,10 +66,16 @@ export function worldLessons(repoRoot, worldSlug) {
   return readLessons(join(repoRoot, 'academy/worlds', worldSlug), world.idPrefix);
 }
 
+// Yalnız oyun rotası; Pixel Art ayrı progress kataloğunda kalır.
 export function allLessons(repoRoot) {
   return Object.entries(WORLDS).flatMap(([worldSlug, world]) =>
     worldLessons(repoRoot, worldSlug).map((lesson) => ({ ...lesson, world: world.label })),
   );
+}
+
+export function pixelArtLessons(repoRoot) {
+  return readLessons(join(repoRoot, 'academy/pixel-art'), PIXEL_ART.idPrefix, '/pixel-art')
+    .map((lesson) => ({ ...lesson, world: PIXEL_ART.label }));
 }
 
 // Bölüm planı için dersleri frontmatter'daki `section` sırasına göre gruplar.
@@ -80,7 +89,7 @@ export function lessonSections(lessons) {
   return sections;
 }
 
-// progress/current.json ile frontmatter arasındaki ad/url farkları.
+// Rotanın progress kataloğu ile frontmatter arasındaki ad/url/bölüm farkları.
 export function progressDrift(lessons, progress) {
   const drift = [];
   const entries = new Map(progress.lessons.map((lesson) => [lesson.id, lesson]));
@@ -90,7 +99,9 @@ export function progressDrift(lessons, progress) {
       drift.push({ id: lesson.id, field: 'lesson', expected: lesson.title, actual: '(kayıt yok)' });
       continue;
     }
-    for (const [field, expected] of [['title', lesson.title], ['url', lesson.url]]) {
+    const fields = [['title', lesson.title], ['url', lesson.url]];
+    if (lesson.world !== undefined) fields.push(['world', lesson.world]);
+    for (const [field, expected] of fields) {
       if (entry[field] !== expected) drift.push({ id: lesson.id, field, expected, actual: entry[field] ?? '(boş)' });
     }
   }

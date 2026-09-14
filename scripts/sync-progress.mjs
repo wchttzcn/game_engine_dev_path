@@ -1,21 +1,24 @@
 #!/usr/bin/env node
-// progress/current.json ders adlarını ve url'lerini ders frontmatter'ından
+// Her rotanın ayrı progress kataloğunu ders frontmatter'ından
 // tazeler. `--check` yazmaz, yalnız farkı bildirir ve farklıysa 1 döner.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { allLessons, progressDrift, repoRootFrom } from './lessons.mjs';
+import { allLessons, pixelArtLessons, progressDrift, repoRootFrom } from './lessons.mjs';
 
 const repoRoot = repoRootFrom(import.meta.url, 1);
-const progressPath = join(repoRoot, 'progress/current.json');
 const check = process.argv.includes('--check');
-
-const progress = JSON.parse(readFileSync(progressPath, 'utf8'));
-const lessons = allLessons(repoRoot);
-const drift = progressDrift(lessons, progress);
+const catalogs = [
+  { path: 'progress/current.json', lessons: allLessons(repoRoot) },
+  { path: 'progress/pixel-art.json', lessons: pixelArtLessons(repoRoot) },
+].map((catalog) => {
+  const progress = JSON.parse(readFileSync(join(repoRoot, catalog.path), 'utf8'));
+  return { ...catalog, progress, drift: progressDrift(catalog.lessons, progress) };
+});
+const drift = catalogs.flatMap((catalog) => catalog.drift);
 
 if (drift.length === 0) {
-  console.log('progress/current.json ders adları güncel.');
+  console.log('Oyun ve Pixel Art ders katalogları güncel.');
   process.exit(0);
 }
 
@@ -34,12 +37,15 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
-for (const entry of progress.lessons) {
-  const lesson = byId.get(entry.id);
-  entry.title = lesson.title;
-  entry.world = lesson.world;
-  entry.url = lesson.url;
+for (const catalog of catalogs) {
+  if (catalog.drift.length === 0) continue;
+  const byId = new Map(catalog.lessons.map((lesson) => [lesson.id, lesson]));
+  for (const entry of catalog.progress.lessons) {
+    const lesson = byId.get(entry.id);
+    entry.title = lesson.title;
+    entry.world = lesson.world;
+    entry.url = lesson.url;
+  }
+  writeFileSync(join(repoRoot, catalog.path), `${JSON.stringify(catalog.progress, null, 2)}\n`);
 }
-writeFileSync(progressPath, `${JSON.stringify(progress, null, 2)}\n`);
 console.log(`\n${drift.length} alan güncellendi.`);
