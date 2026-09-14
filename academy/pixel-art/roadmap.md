@@ -11,9 +11,9 @@ tekrar eden kısa hareketler.
 
 Pakette iki faz var ve sıraları önemli:
 
-1. **Teknik (1.1–1.21).** Her ders tek bir tekniği, küçük bir nesne üzerinde
+1. **Teknik (1.1–1.22).** Her ders tek bir tekniği, küçük bir nesne üzerinde
    öğretir. Anahtar, kılıç, sandık, coin. Burada oyun yok — yalnız beceri var.
-2. **Idle oyun (1.22–1.64).** Aynı teknikleri bu kez oyunun gerçek
+2. **Idle oyun (1.23–1.65).** Aynı teknikleri bu kez oyunun gerçek
    parçalarında kullanırsın: mage, warrior, monster, UI, dünya. Her dersin
    başında **hangi tekniği kullandığın** yazılı ve o derse link veriyor.
 
@@ -30,7 +30,7 @@ parçaları yalnız işleri gerektirdiği kadar büyür.
 | 1.9–1.10 · Okunurluk | Silüet testi ve kenarlığın ne zaman gerektiği | Yedi nesne ve sandık |
 | 1.11–1.14 · Renk ve hacim | Üç value, renk rampası, tek ışık yönü, dithering | Şişe, kalp, zemin |
 | 1.15–1.18 · Hareket | Sabit/hareketli parça, döngü, frame süresi, hazırlık | Sandık ve coin |
-| 1.19–1.21 · Tekrar eden parçalar | Ek yerini gizleme, 9-slice, 3×5 rakamlar | Zemin tile'ı, çerçeve, rakam seti |
+| 1.19–1.22 · Tekrar eden parçalar | Ek yerini gizleme, 9-slice, rakam ve harf seti | Zemin tile'ı, çerçeve, 3×5 metin |
 
 Bu fazda karakter yok. Amaç, bir şeyin **nasıl** çizildiğini ve
 canlandırıldığını küçük, tek amaçlı örneklerle öğrenmek.
@@ -39,15 +39,15 @@ canlandırıldığını küçük, tek amaçlı örneklerle öğrenmek.
 
 | Aşama | Küçük sonuç | Hangi tekniğe dayanır |
 | --- | --- | --- |
-| 1.22–1.26 · Mage | Çiz, idle, büyü pozu, atış, isabet | Silüet testi, sabit parça, hazırlık, süre |
-| 1.27–1.31 · Warrior | Çiz, adımlama, hazırlık pozu, kılıç izi, üç frame ağırlık | Aynı teknikler, bu kez bir vuruşta |
-| 1.32–1.35 · Priest | Çiz, dua pozu, iyileştirme, koruma kubbesi | Hazırlık, süre dağılımı ve yön |
-| 1.36–1.40 · Archer | Çiz, yay germe, ok, uçuş, isabet | Hazırlık, sabit sprite, süre |
-| 1.41–1.45 · Skilleri bağla | Efektin çıkış noktası, sonra dört karakterin de zaman çizgisi | Kenarlık, hazırlık ve süre |
-| 1.46–1.55 · Eşya ve monster | Armor, trinket, slime, tier, bat, tepkiler | Silüet, renk, hareket |
-| 1.56–1.61 · UI | Can barı, XP barı, slot, tier çerçevesi, düğme | Rakamlar ve 9-slice |
-| 1.62–1.63 · Dünya | Kamp ve mağara | Value ayrımı ve dithering |
-| 1.64 · Oyuna bağlan | Tag'li tek sprite sheet | 1.2'deki export |
+| 1.23–1.27 · Mage | Çiz, idle, büyü pozu, atış, isabet | Silüet testi, sabit parça, hazırlık, süre |
+| 1.28–1.32 · Warrior | Çiz, adımlama, hazırlık pozu, kılıç izi, üç frame ağırlık | Aynı teknikler, bu kez bir vuruşta |
+| 1.33–1.36 · Priest | Çiz, dua pozu, iyileştirme, koruma kubbesi | Hazırlık, süre dağılımı ve yön |
+| 1.37–1.41 · Archer | Çiz, yay germe, ok, uçuş, isabet | Hazırlık, sabit sprite, süre |
+| 1.42–1.46 · Skilleri bağla | Efektin çıkış noktası, sonra dört karakterin de zaman çizgisi | Kenarlık, hazırlık ve süre |
+| 1.47–1.56 · Eşya ve monster | Armor, trinket, slime, tier, bat, tepkiler | Silüet, renk, hareket |
+| 1.57–1.62 · UI | Can barı, XP barı, slot, tier çerçevesi, düğme | Rakam, harf ve 9-slice |
+| 1.63–1.64 · Dünya | Kamp ve mağara | Value ayrımı ve dithering |
+| 1.65 · Oyuna bağlan | Tag'li tek sprite sheet | 1.2'deki export |
 
 [Derslerin tamamı](/pixel-art/) görsel örneklerle hazır. Liste bir oturuşta
 bitirilecek ödevler dizisi değil. Bir karakterde kalmak, bir nesneyi tekrar
@@ -69,7 +69,7 @@ Art hattı oyun geliştirme derslerini bekletmez, onlar da bunu bekletmez.
 Snake'te ilerlerken buraya istediğin aralıkta girebilir, Snake'i bitirdikten
 sonra bir süre yalnız pixel art çalışabilirsin.
 
-Birleşme noktası 1.64'teki kit. Idle oyunu yazacak kadar ilerlediğinde elinde
+Birleşme noktası 1.65'teki kit. Idle oyunu yazacak kadar ilerlediğinde elinde
 yükleyeceğin hazır bir dosya olur; o noktada texture ownership, asset data'sı
 ve animasyonun kodla bağlanması **oyunun kendi ihtiyacıyla** gelir.
 

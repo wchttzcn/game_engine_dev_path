@@ -13,13 +13,13 @@ description: 8×8 nesneler, karakterler, küçük hareketler ve skill efektleri 
 
 ## Nasıl ilerliyoruz?
 
-**64 kısa ders, iki faz.** Önce tekniği küçük bir nesne üzerinde öğreniyorsun,
+**65 kısa ders, iki faz.** Önce tekniği küçük bir nesne üzerinde öğreniyorsun,
 sonra aynı tekniği oyununun gerçek parçasında kullanıyorsun.
 
 | Faz | Dersler | Ne yapıyorsun? |
 | --- | --- | --- |
-| **1 · Teknik** | 1.1–1.21 | Anahtar, kılıç, sandık ve coin üzerinde şekil, renk, hareket, süre ve tekrar eden parçaları öğren |
-| **2 · Idle oyun** | 1.22–1.64 | Mage, warrior, priest, archer, monster, UI ve dünyayı aynı tekniklerle kur |
+| **1 · Teknik** | 1.1–1.22 | Anahtar, kılıç, sandık ve coin üzerinde şekil, renk, hareket, süre, tekrar eden parçalar, rakam ve harf setini öğren |
+| **2 · Idle oyun** | 1.23–1.65 | Mage, warrior, priest, archer, monster, UI ve dünyayı aynı tekniklerle kur |
 
 İkinci fazdaki her dersin başında **“Önce şu teknik”** satırı var; hangi dersi
 kullandığını söyler ve oraya link verir. Böylece bir şeyi nerede öğrendiğini
@@ -46,7 +46,7 @@ aramak zorunda kalmazsın.
 
 **Önerilen akış:** 1.1–1.8 ile ilk şekiller → 1.9–1.14 ile okunurluk ve renk →
 1.15–1.18 ile hareket → 1.19–1.21 ile tekrar eden parçalar. Teknikler bitince
-1.22'den itibaren idle oyunun kendisi geliyor: karakterler, skiller, monster,
+1.23'ten itibaren idle oyunun kendisi geliyor: karakterler, skiller, monster,
 UI ve dünya. Sırayı takip etmek zorunda değilsin, ama ikinci fazdaki bir ders
 takıldığında başındaki teknik dersi doğru adrestir.
 

@@ -66,4 +66,4 @@ Bir rakam 1., 3. ve 5. satırlarda yatay çizgi, 2. ve 4. satırlarda dikey pixe
 
 **“Pixel Art 1.21 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-Sonraki adım: [1.22 — 8×8 mage çiz](/pixel-art/22-mage).
+Sonraki adım: [1.22 — 3×5 harf seti çiz](/pixel-art/22-letters).
