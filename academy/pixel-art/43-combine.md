@@ -46,6 +46,21 @@ Hazırlık frame'ini uzat, çıkış frame'ini kısalt. Ağırlığı 1.32'deki 
 Mage her frame'de 1–8. sütunlarda. Büyü üçüncü frame'de 9–13. sütunlarda, dördüncü frame'de 12–16. sütunlarda; ikisinde de elin bulunduğu satırda.
 :::
 
+::: details Deep Dive — Diğer üç karakterde ilişki farklı
+Mage'in büyüsü elinden ayrılır ve kendi yoluna gider. Aynı zaman çizgisi
+kurgusu diğer üç karakterde başka bir şey öğretir:
+
+- [1.44 — Warrior'ı ve kılıç izini birleştir](/pixel-art/44-warrior-combine):
+  iz karakterden **ayrılmaz**, onunla birlikte belirir ve birlikte söner.
+- [1.45 — Priest'i ve iyileştirmesini birleştir](/pixel-art/45-priest-combine):
+  parıltı yukarı gittiği için canvas 8×16 olur — **yönü efekt belirler**.
+- [1.46 — Archer'ı, okunu ve isabetini birleştir](/pixel-art/46-archer-combine):
+  hazırlık, mermi ve isabet tek çizgide; **üç ayrı şey, üç ayrı ömür**.
+
+Dördünü arka arkaya yaptığında bir skill'i tasarlarken soracağın soru netleşir:
+efekt karakterden ayrılıyor mu, onunla mı kalıyor, nereye gidiyor?
+:::
+
 ## Birincil kaynak
 
 [Aseprite — Layers](https://www.aseprite.org/docs/layers/).
