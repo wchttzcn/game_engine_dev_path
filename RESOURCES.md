@@ -40,6 +40,17 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
 - [Odin vendor:raylib README — çalışan başlangıç örneği](https://github.com/odin-lang/Odin/blob/master/vendor/raylib/README.md#basic-example)
   Pencere açan en küçük tam program. Şunun için: game loop iskeletinin
   doğrulanması.
+- [Odin standart kütüphanesi — core:math/rand](https://pkg.odin-lang.org/core/math/rand/)
+  Şunun için: `int_max` gibi rastgele sayı üreten procedure'ların imzaları ve
+  aralık davranışı (`0..<n`, `n <= 0` için panic). Snake'te yem yerleştirme bu
+  pakete dayanıyor.
+- [Odin standart kütüphanesi — core:mem](https://pkg.odin-lang.org/core/mem/)
+  Şunun için: `Tracking_Allocator` ve `context.allocator` ile ilgili
+  procedure'lar (`tracking_allocator_init`, `tracking_allocator`,
+  `tracking_allocator_destroy`). Snake'te oynanış sırasındaki allocation'ları
+  ölçmek bu pakete dayanıyor; ölçümün yalnızca `context.allocator`'dan geçen
+  istekleri kapsadığını unutma — raylib'in kendi C allocator'ı bunun dışında
+  kalır.
 
 ### raylib
 

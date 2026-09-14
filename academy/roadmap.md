@@ -6,8 +6,9 @@ Oyun yaparak oyunların altındaki sistemleri öğreneceksin. React ve TypeScrip
 
 <CurrentLesson />
 
-Pong'un 1.1–1.15 dersleri (15 ders) hazır. Paket oynanabilir maç ve collision
-shape'lerini gösteren debug overlay'e kadar gider.
+Pong'un 1.1–1.15 dersleri (15 ders) tamamlandı; paket oynanabilir maç ve
+collision shape'lerini gösteren debug overlay'e kadar gitti. Snake'in 2.1–2.13
+dersleri (13 ders) hazır ve sırada.
 
 ## Ders döngüsü
 
@@ -56,6 +57,12 @@ Bu isimler mekanik ilhamını belirtir; ilgili oyunların iç mimarisi hakkında
 **Soru:** “Top kodu neden kamera sarsıntısını biliyor?” **Kanıt:** Tamamlanıp yeniden başlayan maç, efektlerin açılıp kapatıldığı karşılaştırma ve bağımsız bir kural değişikliği. Engine Thinking burada bağımlılıkları fark etmektir; evrensel motor API’si çıkarma zorunluluğu değildir.
 
 ## Dünya 2 — Snake
+
+[Dünya planı](/worlds/02-snake/). 2.1–2.13 dersleri grid, sabit kapasiteli gövde
+array'i, tick tabanlı zaman, input tamponu, occupancy grid, ring buffer ve
+allocation ölçümü üzerinden oynanabilir Snake'e gider. AoS/SoA ile cache
+locality ölçümleri bu paketten doğan gerçek bir erişim sorusuyla `labs/` altında
+ayrı deney olarak açılır.
 
 Grid, occupancy, array ve ring buffer üzerinden yılanın gövdesini temsil edersin. Baş/kuyruk sırası, kapasite ve allocation davranışını grid debug görünümü ve memory sayaçlarıyla izlersin. Ayrı erişim deneylerinde contiguous memory, cache locality ve AoS/SoA seçeneklerini ölçersin; küçük struct’ın otomatik hız garantisi olduğunu varsaymazsın.
 
