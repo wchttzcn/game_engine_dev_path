@@ -13,14 +13,12 @@ MAX_BODY :: GRID_COLS * GRID_ROWS
 TICK_SECONDS :: 0.12
 
 Game :: struct {
-	body:       [MAX_BODY]Cell,
-	length:     int,
-	direction:  Direction,
-
-
-	// TICK
-	tick_timer: f32,
-	tick_count: int,
+	body:           [MAX_BODY]Cell,
+	length:         int,
+	direction:      Direction,
+	next_direction: Direction,
+	tick_timer:     f32,
+	tick_count:     int,
 }
 
 Cell :: struct {
@@ -48,8 +46,10 @@ main :: proc() {
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
+
 	game := Game {
-		direction = .Right,
+		next_direction = .Right,
+		direction      = .Right,
 	}
 	game.body[0] = {
 		col = GRID_COLS / 2,
@@ -65,18 +65,30 @@ main :: proc() {
 	}
 	game.length = 3
 
+
+	opposite := [Direction]Direction {
+		.Up    = .Down,
+		.Down  = .Up,
+		.Left  = .Right,
+		.Right = .Left,
+	}
+
 	for !rl.WindowShouldClose() {
 		dt := rl.GetFrameTime()
 		game.tick_timer += dt
 
-		if rl.IsKeyPressed(.W) do game.direction = .Up
-		if rl.IsKeyPressed(.S) do game.direction = .Down
-		if rl.IsKeyPressed(.A) do game.direction = .Left
-		if rl.IsKeyPressed(.D) do game.direction = .Right
+		if rl.IsKeyPressed(.W) do game.next_direction = .Up
+		if rl.IsKeyPressed(.S) do game.next_direction = .Down
+		if rl.IsKeyPressed(.A) do game.next_direction = .Left
+		if rl.IsKeyPressed(.D) do game.next_direction = .Right
 
 		for game.tick_timer >= TICK_SECONDS {
 			game.tick_timer -= TICK_SECONDS
 			game.tick_count += 1
+
+			if game.next_direction != opposite[game.direction] {
+				game.direction = game.next_direction
+			}
 
 			head := game.body[0]
 			for i := game.length - 1; i > 0; i -= 1 {

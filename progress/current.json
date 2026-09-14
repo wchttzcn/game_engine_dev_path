@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-05-input-buffer",
+  "currentLessonId": "snake-06-self-collision",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -220,8 +220,10 @@
       "description": "Input'un frame hızında geldiğini, simülasyonun tick hızında tükettiğini ayıran bir yön tamponu kur.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/05-input-buffer",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-06-self-collision",
@@ -342,9 +344,10 @@
         "pong-11-serve-state",
         "pong-12-match-over",
         "pong-14-debug-overlay",
-        "snake-04-direction-step"
+        "snake-04-direction-step",
+        "snake-05-input-buffer"
       ],
-      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak. 2.5'te IsKeyDown'dan IsKeyPressed'e kendi kararıyla geçti; basılı tutmanın tick başına tek yön değişimi anlamına gelmesi gerektiğini kavradı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -540,9 +543,10 @@
       "title": "Değer semantiği ve kopya",
       "status": "learning",
       "lessons": [
-        "snake-04-direction-step"
+        "snake-04-direction-step",
+        "snake-05-input-buffer"
       ],
-      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü.",
+      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü. 2.5'te enum'ın zero value'sunu (Direction sıfırıncı üye .Up) hesaba katmadı: next_direction'a başlangıç vermeyince oyun ilk tick'te yukarı sapıyordu. Uyarı sonrası ikisini de .Right'a çekti.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
@@ -556,6 +560,19 @@
         "snake-04-direction-step"
       ],
       "note": "2.4'te wrap'i ilk denemede hiç yazmadı, sonra % operatörünün negatif davranışını anlamadığını söyledi; tam açıklama (kalan/modulo farkı, (x + N) % N ve Odin'in %% operatörü) sonrası doğru kurdu, col'a GRID_COLS row'a GRID_ROWS eşleşmesini uyarı sonrası doğru yaptı. Hint level 3.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "input-buffering",
+      "title": "Input tamponu",
+      "status": "learning",
+      "lessons": [
+        "snake-05-input-buffer"
+      ],
+      "note": "2.5'te next_direction'ı frame'de yazıp tick'te tükettiği yapıyı doğru kurdu. Asıl takıldığı yer kontrolün nasıl reddedeceğiydi: ilk denemede dört if'in gövdesine kendine atama yazdı (game.direction = .Right) ve ardından koşulsuz game.direction = game.next_direction bıraktı, yani yasak hiç çalışmadı. 'Reddetmek = atama yapmamak' fikri İpucu 2 ve değer izleyen bir tablo ile oturdu, hint level 3. Kontrolü direction'a karşı yapması gerektiğini uyarısız doğru yaptı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
