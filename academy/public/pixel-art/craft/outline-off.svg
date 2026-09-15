@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Yakın değerli bir zeminin üstünde kenarlıksız sandık">
+  <rect x="0" y="0" width="8" height="1" fill="#3b6149"/>
+  <rect x="0" y="1" width="2" height="1" fill="#3b6149"/>
+  <rect x="2" y="1" width="4" height="1" fill="#b87848"/>
+  <rect x="6" y="1" width="2" height="1" fill="#3b6149"/>
+  <rect x="0" y="2" width="1" height="1" fill="#3b6149"/>
+  <rect x="1" y="2" width="6" height="1" fill="#b87848"/>
+  <rect x="7" y="2" width="1" height="1" fill="#3b6149"/>
+  <rect x="0" y="3" width="1" height="1" fill="#3b6149"/>
+  <rect x="1" y="3" width="6" height="1" fill="#b87848"/>
+  <rect x="7" y="3" width="1" height="1" fill="#3b6149"/>
+  <rect x="0" y="4" width="1" height="1" fill="#3b6149"/>
+  <rect x="1" y="4" width="2" height="1" fill="#593c35"/>
+  <rect x="3" y="4" width="2" height="1" fill="#f2c078"/>
+  <rect x="5" y="4" width="2" height="1" fill="#593c35"/>
+  <rect x="7" y="4" width="1" height="1" fill="#3b6149"/>
+  <rect x="0" y="5" width="1" height="1" fill="#3b6149"/>
+  <rect x="1" y="5" width="2" height="1" fill="#b87848"/>
+  <rect x="3" y="5" width="2" height="1" fill="#f2c078"/>
+  <rect x="5" y="5" width="2" height="1" fill="#b87848"/>
+  <rect x="7" y="5" width="1" height="1" fill="#3b6149"/>
+  <rect x="0" y="6" width="1" height="1" fill="#3b6149"/>
+  <rect x="1" y="6" width="6" height="1" fill="#b87848"/>
+  <rect x="7" y="6" width="1" height="1" fill="#3b6149"/>
+  <rect x="0" y="7" width="8" height="1" fill="#3b6149"/>
+</svg>

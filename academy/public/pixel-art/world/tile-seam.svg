@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Üst satırı ve sol sütunu açık renk olan tile">
+  <rect x="0" y="0" width="8" height="1" fill="#6a9b80"/>
+  <rect x="0" y="1" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="1" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="2" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="2" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="3" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="3" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="4" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="4" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="5" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="5" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="6" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="6" width="7" height="1" fill="#557447"/>
+  <rect x="0" y="7" width="1" height="1" fill="#6a9b80"/>
+  <rect x="1" y="7" width="7" height="1" fill="#557447"/>
+</svg>

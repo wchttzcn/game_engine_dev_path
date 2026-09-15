@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { WORLDS, parseFrontmatter, readLessons, worldLessons, progressDrift, allLessons } from './lessons.mjs';
+import { WORLDS, allLessons, parseFrontmatter, pixelArtLessons, readLessons, worldLessons, progressDrift } from './lessons.mjs';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -39,9 +39,35 @@ test('every lesson title carries its own number and a section', () => {
       assert.ok(lesson.section, `${lesson.file} section frontmatter'ı yok`);
     }
   }
+  for (const lesson of pixelArtLessons(repoRoot)) {
+    assert.equal(lesson.number, `1.${lesson.index}`, `${lesson.file} numarası başlıkla uyuşmuyor`);
+    assert.ok(lesson.name.length > 0, `${lesson.file} adsız`);
+    assert.ok(lesson.section, `${lesson.file} section frontmatter'ı yok`);
+  }
 });
 
 test('progress catalogue titles match the lesson frontmatter', async () => {
   const progress = JSON.parse(await (await import('node:fs/promises')).readFile(join(repoRoot, 'progress/current.json'), 'utf8'));
   assert.deepEqual(progressDrift(allLessons(repoRoot), progress), []);
+});
+
+test('Pixel Art uses a separate route, namespace and progress catalogue', async () => {
+  const lessons = pixelArtLessons(repoRoot);
+  const progress = JSON.parse(await (await import('node:fs/promises')).readFile(join(repoRoot, 'progress/pixel-art.json'), 'utf8'));
+  assert.equal(lessons.length, 86);
+  assert.equal(lessons[0].id, 'pixel-art-01-silhouette');
+  assert.equal(lessons[0].url, '/pixel-art/01-silhouette');
+  assert.deepEqual(progressDrift(lessons, progress), []);
+  assert.ok(lessons.some((lesson) => lesson.id === progress.currentLessonId));
+  const gameIds = new Set(allLessons(repoRoot).map((lesson) => lesson.id));
+  assert.ok(lessons.every((lesson) => !gameIds.has(lesson.id)));
+  assert.ok(allLessons(repoRoot).every((lesson) => lesson.url.startsWith('/worlds/')));
+});
+
+test('Pixel Art drift catches titles, URLs, pack labels and foreign entries', () => {
+  const lesson = pixelArtLessons(repoRoot)[0];
+  const progress = { lessons: [{ ...lesson, title: 'Eski ad', url: '/old', world: 'Eski bölüm' }] };
+  assert.deepEqual(progressDrift([lesson], progress).map((item) => item.field), ['title', 'url', 'world']);
+  progress.lessons.push(allLessons(repoRoot)[0]);
+  assert.ok(progressDrift([lesson], progress).some((item) => item.field === 'lesson' && item.id.startsWith('pong-')));
 });

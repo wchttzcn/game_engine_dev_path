@@ -121,6 +121,54 @@ Cache locality and AoS/SoA belong with Snake's data access questions. Deep
 allocator design, ECS, SIMD and advanced profiling wait for game needs.
 Do not teach a large engine architecture upfront.
 
+## Pixel Art / Aseprite
+
+Pixel Art is a parallel learning track for a beginner with no drawing experience.
+Before assigning or reviewing art, read `progress/README.md`,
+`progress/pixel-art.json`, the active lesson under `academy/pixel-art/`, and the
+relevant files under `art/`. Before changing its path, read
+`academy/pixel-art/roadmap.md`. Keep game and art completion/current lessons separate.
+
+Mücahit owns drawings, palettes, animation attempts and artistic decisions in
+`art/`; apply the learner-work ownership rule to them. The agent owns art lessons
+and reader plumbing. Use the same small-task and İpucu workflow, with visual asset
+inspection in place of compiler checks for drawing lessons. Inspect source/export
+when relevant; distinguish a valid file from observed visual quality and later
+independent application. Ask for an image only if the needed artifact cannot be
+inspected. Art completion commits also require Mücahit's approval.
+
+Author at most the current asset pack ahead; keep later art stages as outlines.
+Start with an 8×8 canvas and simple Reventure-inspired objects, per Mücahit's
+preference. Give visible worked examples and step-by-step diagrams alongside the
+challenge; copying the first example is allowed. Store teacher visuals under
+`academy/public/pixel-art/`, not in learner-owned `art/`. Stay at 8×8 for
+objects, characters, movement and skill VFX, per the user's explicit request.
+Treat a larger canvas as a later choice, never an automatic next milestone. Saint11's
+first article is a visual companion, not a required list of completed exercises.
+The current authorized pack runs to lesson 1.86 and is split into two phases.
+Phase 1 (1.1-1.24) teaches technique on small objects only - key, sword, heart,
+potion, shield, chest, coin - covering shape, export, silhouette test, outline,
+value/ramp/shading/dithering, two-frame and four-frame animation, frame timing,
+anticipation, repeatable tiles, breaking an object, 9-slice and the 3x5 digit, letter and Turkish-letter sets. Phase 2 (1.25-1.86)
+applies those techniques to the idle game: one block per character
+(mage/warrior/priest/archer, each running draw to pose to animation to VFX),
+then connecting effects to characters (origin plus one combine lesson per
+character), completing idle/hurt/death and flipping for the whole roster, items and
+monsters, UI, the idle progression set (prestige currency, multiplier badge,
+AUTO toggle, achievement, offline screen), world and the sprite sheet kit. Every Phase 2 lesson opens with a bold "Önce şu teknik" line
+linking back to the Phase 1 lesson it uses; keep that line when editing.
+Mücahit authorized this whole range explicitly; do not extend past 1.86 without
+a new request. Show both playable examples and individual frames. Use supplied flat colors; keep color/volume lessons an
+optional detour and defer 60–30–10 and scene composition until requested.
+HSV color controls generate new
+foreground colors (W/S value, A/D saturation; Q/E hue is optional). Keep
+tool setup optional and teach it alongside the color task. For tool changes,
+read `tools/aseprite/academy-color-keys/README.md` and verify with isolated
+Aseprite tests; preserve personal shortcuts and learner artwork.
+Teach drawing fundamentals through game asset needs. Treat 60–30–10 as an
+approximate color-area exercise, and attribute Samurai Jack design claims only
+when supported by verified creator sources in `RESOURCES.md`.
+
 ## Progress
 
 `progress/current.json` is the current lesson source read by the dashboard. Read

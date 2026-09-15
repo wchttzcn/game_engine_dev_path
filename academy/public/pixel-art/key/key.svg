@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="8" height="8" shape-rendering="crispEdges" role="img" aria-labelledby="title desc">
+  <title id="title">Piksel anahtar</title>
+  <desc id="desc">Ortası şeffaf halkası, yatay sapı ve iki dişi olan 8 çarpı 8 piksel altın anahtar.</desc>
+  <rect x="1" y="2" width="3" height="1" fill="#f2c078"/>
+  <rect x="1" y="3" width="1" height="1" fill="#f2c078"/>
+  <rect x="3" y="3" width="5" height="1" fill="#f2c078"/>
+  <rect x="1" y="4" width="3" height="1" fill="#f2c078"/>
+  <rect x="5" y="4" width="1" height="1" fill="#f2c078"/>
+  <rect x="7" y="4" width="1" height="1" fill="#f2c078"/>
+</svg>

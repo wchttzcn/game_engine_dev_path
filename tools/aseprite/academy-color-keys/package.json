@@ -1,0 +1,10 @@
+{
+  "name": "academy-color-keys",
+  "displayName": "Academy Color Keys",
+  "description": "Small HSV steps for the foreground color while drawing.",
+  "version": "1.0.0",
+  "categories": ["Scripts"],
+  "contributes": {
+    "scripts": [{ "path": "./main.lua" }]
+  }
+}

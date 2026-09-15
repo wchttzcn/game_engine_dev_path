@@ -16,7 +16,7 @@ odin run games/snake -out:/tmp/mucahit-snake
 
 ## Hazır dersler
 
-<LessonList world="02-snake" />
+<LessonList track="02-snake" />
 
 Paket bittiğinde Snake oynanabilir olacak; gövde sabit kapasiteli bir ring
 buffer'da duracak, occupancy grid hücre sorularını sabit sürede cevaplayacak ve

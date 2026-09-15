@@ -79,6 +79,82 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   collision mantığının JavaScript arka planından okunması. Circle-rectangle
   durumunu kapsamaz; onu raylib `CheckCollisionCircleRec` üstlenir.
 
+### Aseprite ve pixel art
+
+- [Aseprite — New Sprite](https://www.aseprite.org/docs/new-sprite/)
+  Şunun için: yeni canvas'ın ölçüsü, color mode ve transparent başlangıç seçimi.
+- [Aseprite — Drawing ve araçlar](https://www.aseprite.org/docs/drawing/)
+  Şunun için: Pencil, Rectangle, Eraser ve Zoom ile ilk çizimi yapmak;
+  [araç varyantları](https://www.aseprite.org/docs/keyboard-shortcuts/) Filled Rectangle'ı da listeler.
+- [Aseprite — Workflow](https://www.aseprite.org/docs/workflow/)
+  Şunun için: çizim, zoom ve `.aseprite` kaynak dosyasını kaydetme akışı.
+- [Aseprite — Zoom](https://www.aseprite.org/docs/zoom/)
+  Şunun için: küçük canvas üzerinde görünümü büyütmek; zoom tool, status bar slider ve mouse wheel seçenekleri.
+- [Aseprite — Brushes](https://www.aseprite.org/docs/brushes/)
+  Şunun için: painting tool'un context bar'ındaki brush type seçimi; ilk 8×8 çizimde Pencil'in tek-pixel yaklaşımına dönmek.
+- [Aseprite — Layers](https://www.aseprite.org/docs/layers/)
+  Şunun için: nesneyi deneme zemininden ayrı tutmak ve layer görünürlüğünü değiştirmek.
+- [Aseprite — Color Bar](https://www.aseprite.org/docs/color-bar/)
+  Şunun için: foreground color seçimi ve RGB modunda palette ile çizim arasındaki ilişki;
+  [Color Bar tutorial](https://www.aseprite.org/docs/tutorial/color-bar-tutorial/) görsel kullanım rehberidir.
+- [Aseprite — Exporting](https://www.aseprite.org/docs/exporting/)
+  Şunun için: düzenlenebilir kaynaktan PNG çıkarma ve export ölçeğini seçme.
+- [Aseprite — Animation](https://www.aseprite.org/docs/animation/)
+  Şunun için: frame sırası ve playback; [Timeline](https://www.aseprite.org/docs/timeline/) layer/frame görünümünü açıklar.
+- [Aseprite — New Frame](https://www.aseprite.org/docs/new-frame/)
+  Şunun için: yeni, boş veya kopyalanmış frame oluşturmak; [Linked Cels](https://www.aseprite.org/docs/linked-cels/) aynı görüntüyü paylaşan kopyaların davranışını açıklar.
+- [Aseprite — FX](https://www.aseprite.org/docs/fx/)
+  Şunun için: `Edit > FX > Outline` ile dış kenarlık eklemek, kenarlık rengi ve Inside/Outside seçeneği.
+- [Aseprite — Replace Color](https://www.aseprite.org/docs/replace-color/)
+  Şunun için: From/To alanlarıyla bir rengi seçili alanda veya bütün frame'lerde değiştirmek; Tolerance yakın tonları kapsar.
+- [Aseprite — Slices](https://www.aseprite.org/docs/slices/)
+  Şunun için: Slice aracıyla bölge işaretlemek ve Slice Properties içindeki 9-slices alanını kullanmak.
+- [Aseprite — Tiled Mode](https://www.aseprite.org/docs/tiled-mode/)
+  Şunun için: `View > Tiled Mode` ile deseni tekrarlayarak çizmek ve ek yerini kontrol etmek.
+- [Aseprite — Flip](https://www.aseprite.org/docs/flip/)
+  Şunun için: `Edit > Flip Horizontal` (`Shift+H`) ve `Flip Vertical` (`Shift+V`) ile sprite'ı veya seçimi çevirmek; [Transformations](https://www.aseprite.org/docs/transformations/) Edit menüsündeki dönüşümleri listeler.
+- [Aseprite — Sprite Sheets](https://www.aseprite.org/docs/sprite-sheet/)
+  Şunun için: `File > Export Sprite Sheet` ile tek görüntüye aktarma, sheet düzenleri ve frame'lerin tag'e göre seçilmesi; [Tags](https://www.aseprite.org/docs/tags/) tag oluşturmayı ve yön seçeneklerini açıklar.
+- [Aseprite — Frame Duration](https://www.aseprite.org/docs/frame-duration/)
+  Şunun için: Frame Properties ile her pozun ekranda kalma süresini ayarlamak.
+- [Aseprite — Onion Skinning](https://www.aseprite.org/docs/onion-skinning/)
+  Şunun için: komşu frame'leri yalnız çizim referansı olarak görmek.
+- [Aseprite — Keyboard Shortcuts](https://www.aseprite.org/docs/keyboard-shortcuts/)
+  Şunun için: native komutlara tuş atamak ve mevcut tool atamalarını kontrol etmek.
+- [Aseprite — Shading ink](https://www.aseprite.org/docs/shading/)
+  Şunun için: seçili renk sırası üzerinde mevcut pixel renklerini sol/sağ tıkla değiştirmek.
+- [Aseprite — Plugin API](https://www.aseprite.org/api/plugin)
+  Şunun için: Lua komutlarını menüye kaydetmek, tuş atanabilir hale getirmek ve extension paketlemek.
+- [Aseprite — Color API](https://www.aseprite.org/api/color)
+  Şunun için: HSV bileşenlerini ve alpha'yı koruyan foreground renk dönüşümleri.
+- [Aseprite — app API](https://www.aseprite.org/api/app)
+  Şunun için: aktif sprite, foreground color ve batch/UI ayrımını doğrulamak.
+- [CarbsCode — Quick Color Hotkeys](https://carbscode.itch.io/quick-color-hotkeys)
+  Şunun için: kullanıcının istediği klavyeyle HSV değiştirme akışının yaratıcıya ait demosu; Academy aracı özgün kodla uygulanır.
+- [Pedro Medeiros — An Absolute Beginner's Guide](https://saint11.art/pixel_art_articles/article1/)
+  Şunun için: küçük canvas, az renk ve okunabilir bir ilk sprite; sanatçının kendi başlangıç dersi.
+- [Pedro Medeiros — Cluster Sketching and Painting](https://saint11.art/pixel_art_articles/article2/)
+  Şunun için: ayrıntıdan önce büyük renk alanlarıyla şekil ve sahne kurmak.
+- [Pedro Medeiros — A Basic Aseprite Animation](https://saint11.art/pixel_art_articles/article3/)
+  Şunun için: az ayrıntılı pozları sıraya koymak, timing ve basit hareket; yazının 32×32 top örneği yerine derslerde özgün 8×8 karakterler kullanılır.
+- [Jason Lee — Slash Shape Fundamentals](https://jasontomlee.itch.io/slashfx/devlog/629732/tutorial-2-slash-shape-fundamentals)
+  Şunun için: kılıcın hareketini izleyen yay, ince kuyruk ve kısa süre görünen ana vuruş şekli; örnek asset'ler kopyalanmaz.
+- [Pedro Medeiros — Basic Shading](https://saint11.art/pixel_art_articles/article4/)
+  Şunun için: tek ışık yönüyle nesnenin kendi gölgesini ve başka yüzeye düşen gölgeyi ayırmak.
+- [Pedro Medeiros — Basic Color Theory](https://saint11.art/pixel_art_articles/article6/)
+  Şunun için: hue, saturation ve value ile küçük palette renk rampası kurmak; aynı sayısal value'nun her hue'da eşit parlak görünmediğini denemek.
+- [Arne Niklas Jansson — PSG Art tutorial](https://androidarts.com/art_tut.htm)
+  Şunun için: value ve contrast ile formun okunurluğu; ilgili bölüm okunur, bütün rehber ön koşul değildir.
+- [Arne Niklas Jansson — Pixel Art Tutorial WIP](https://www.androidarts.com/pixtut/pixelart.htm)
+  Şunun için: sınırlı palette üç value ile okunurluk ve gereksiz gürültüyü azaltma; tamamlanmamış bölümler kural olarak alınmaz.
+- [James Gurney — Peak Saturation Value](https://gurneyjourney.blogspot.com/2010/03/peak-saturation-value.html)
+  Şunun için: farklı hue'ların en yoğun göründüğü value seviyesinin değiştiğini görmek; sarı ışık ve koyu mavi gölge seçimini mekanik rampaya bağlamamak.
+- [Scott Wills — Museum of the Moving Image röportajı](https://scienceandfilm.org/articles/3346/genndy-tartakovskys-primal-art-director-scott-wills)
+  Şunun için: Samurai Jack ve Primal'ın art director'ünden stilize renk ve görsel anlatım kararları;
+  Samurai Jack'in 60–30–10 formülü kullandığına kanıt olarak kullanılmaz.
+- [Reventure — Pixelatto'nun Steam sayfası](https://store.steampowered.com/app/900270/Reventure/)
+  Şunun için: Pixelatto'nun geliştirdiği pixel-graphics oyunu, sade oyun nesneleri için görsel referans; 8×8 asset ölçüsü veya üretim kuralı kanıtı değildir.
+
 ## Bilgelik (topluluklar)
 
 - [Odin topluluk kanalları](https://odin-lang.org/community/)
@@ -112,3 +188,10 @@ yazılmadan önce araştırılacak.
 - **macOS grafik API'si / kendi renderer'ın**: Dünya 1-2 kapsamı dışında.
 - **Cache locality ve AoS/SoA ölçümü**: Snake'te (Dünya 2) gerekecek; ölçüm
   yöntemi için kaynak henüz seçilmedi.
+- **Samurai Jack ve 60–30–10**: Ekibin bu oranı bir üretim kuralı olarak
+  kullandığı doğrulanmadı. Pixel Art dersindeki oran, yaklaşık renk alanlarını
+  denemek için seçilmiş esnek bir çalışma kılavuzudur; evrensel bir sanat kuralı değildir.
+- **Oyun asset entegrasyonu**: Sprite sheet ve Odin texture yükleme,
+  ilgili oyunda ihtiyaç çıktığında kurulu araç sürümüyle doğrulanacak.
+  İlk 8×8 frame ve timing çalışmaları için kaynaklar yukarıda mevcut;
+  skill örnekleri bu aşamada yalnız görsel asset üretir.

@@ -13,7 +13,7 @@ odin run games/pong -out:/tmp/mucahit-pong
 
 ## Hazır dersler
 
-<LessonList world="01-pong" />
+<LessonList track="01-pong" />
 
 Bu paket bittiğinde maç oynanabilir, yeniden başlatılabilir; önemli state ve
 collision shape'leri F1 ile görünür olur. Ses ve game-feel adımları sonraki
