@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-08-food-and-growth",
+  "currentLessonId": "snake-09-food-placement",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -253,8 +253,10 @@
       "description": "Sabit bir yem hücresini ye; büyüme kararını gövde değişmeden önce, aday new_head üzerinden ver.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/08-food-and-growth",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-09-food-placement",
@@ -526,9 +528,10 @@
       "title": "Sabit kapasite ve canlı uzunluk",
       "status": "learning",
       "lessons": [
-        "snake-02-snake-body"
+        "snake-02-snake-body",
+        "snake-08-food-and-growth"
       ],
-      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı.",
+      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı. 2.8'de uzunluk ilk kez değişti. length'i kaydırma döngüsünden sonra artırdığı için yeni slot (body[eski_length]) hiç yazılmadı ve gövdenin sonunda bayat bir hücre kaldı; artırmanın kaydırmadan önce gelmesi gerektiğini review'da gördükten sonra doğru kurdu. MAX_BODY'nin taşamayacağı gerekçesini kendi sormadı, review'da doğrulandı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
@@ -608,9 +611,23 @@
       "title": "Türetilmiş ikinci temsil",
       "status": "learning",
       "lessons": [
-        "snake-07-occupancy-grid"
+        "snake-07-occupancy-grid",
+        "snake-08-food-and-growth"
       ],
-      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak.",
+      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak. 2.8'de aynı bakım hatasının üçüncü biçimi çıktı: büyüyen tick'te de kuyruğu occupied'den sildi, yani occupied ile length bir hücre ayrıştı ve gövdenin son segmenti grid'de görünmez oldu.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "tick-decision-order",
+      "title": "Tick içinde karar sırası",
+      "status": "learning",
+      "lessons": [
+        "snake-08-food-and-growth"
+      ],
+      "note": "2.8'de büyüme kararını doğru state'ten okudu (aday yeni head, eski body[0] değil) ama kararı gövdeyi değiştirdikten sonra kullandı: kuyruk her tick koşulsuz silindi, karar en sona kaldı. Sonuç bir tick gecikmesi değil, bozuk gövdeydi — grow yolunda hem kuyruk silindi hem yeni slot yazılmadı. İpucu yetmedi, düzeltilmiş tick sırası kod olarak verildi; ikinci denemede kararı gövdeye dokunmadan önce verip kuyruk silmeyi grow'a bağladı. Karar-sonra-mutasyon sırası ring buffer'da (2.10) yeniden sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"

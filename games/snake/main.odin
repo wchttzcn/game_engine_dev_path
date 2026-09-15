@@ -1,5 +1,6 @@
 package main
 
+import "core:math/rand"
 import rl "vendor:raylib"
 
 GRID_COLS :: 20
@@ -19,6 +20,7 @@ Game :: struct {
 	next_direction: Direction,
 	state:          Game_State,
 	occupied:       [GRID_ROWS][GRID_COLS]bool,
+	food:           Cell,
 	tick_timer:     f32,
 	tick_count:     int,
 }
@@ -49,6 +51,7 @@ cell_rect :: proc(col, row: i32) -> rl.Rectangle {
 }
 
 game_reset :: proc(game: ^Game) {
+	game.tick_count = 0
 	game.tick_timer = 0
 	game.state = .Playing
 
@@ -80,6 +83,33 @@ game_reset :: proc(game: ^Game) {
 	for i in 0 ..< game.length {
 		cell := game.body[i]
 		game.occupied[cell.row][cell.col] = true
+	}
+
+	food_spawn(game)
+}
+
+food_spawn :: proc(game: ^Game) {
+	empty_count := 0
+	for row in 0 ..< GRID_ROWS {
+		for col in 0 ..< GRID_COLS {
+			if !game.occupied[row][col] do empty_count += 1
+		}
+	}
+	if empty_count == 0 do return
+
+	target := rand.int_max(empty_count)
+	for row in 0 ..< GRID_ROWS {
+		for col in 0 ..< GRID_COLS {
+			if game.occupied[row][col] do continue
+			if target == 0 {
+				game.food = {
+					col = i32(col),
+					row = i32(row),
+				}
+				return
+			}
+			target -= 1
+		}
 	}
 }
 
@@ -119,12 +149,6 @@ main :: proc() {
 					game.direction = game.next_direction
 				}
 
-				head := game.body[0]
-				tail := game.body[game.length - 1]
-				game.occupied[tail.row][tail.col] = false
-				for i := game.length - 1; i > 0; i -= 1 {
-					game.body[i] = game.body[i - 1]
-				}
 				delta_col, delta_row: i32
 				switch game.direction {
 				case .Up:
@@ -136,15 +160,31 @@ main :: proc() {
 				case .Right:
 					delta_col = 1
 				}
-				head.col = (head.col + delta_col + GRID_COLS) % GRID_COLS
-				head.row = (head.row + delta_row + GRID_ROWS) % GRID_ROWS
-				game.body[0] = head
-        if game.occupied[head.row][head.col]{
+
+				new_head := Cell {
+					col = (game.body[0].col + delta_col + GRID_COLS) % GRID_COLS,
+					row = (game.body[0].row + delta_row + GRID_ROWS) % GRID_ROWS,
+				}
+				grow := new_head == game.food
+
+				if !grow {
+					tail := game.body[game.length - 1]
+					game.occupied[tail.row][tail.col] = false
+				} else {
+					game.length += 1
+				}
+
+				for i := game.length - 1; i > 0; i -= 1 {
+					game.body[i] = game.body[i - 1]
+				}
+				game.body[0] = new_head
+				if game.occupied[new_head.row][new_head.col] {
 					game.state = .Dead
 					break
-        }
-				game.occupied[head.row][head.col] = true
+				}
+				game.occupied[new_head.row][new_head.col] = true
 
+				if grow do food_spawn(&game)
 			}
 		case .Dead:
 			if rl.IsKeyPressed(.R) {
@@ -175,10 +215,12 @@ main :: proc() {
 		for col in 0 ..< GRID_COLS {
 			for row in 0 ..< GRID_ROWS {
 				if game.occupied[row][col] {
-					rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.GREEN)
+					rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.YELLOW)
 				}
 			}
 		}
+
+		rl.DrawRectangleRec(cell_rect(game.food.col, game.food.row), rl.RED)
 
 		if game.state == .Dead {
 			rl.DrawText(
