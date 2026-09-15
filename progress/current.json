@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-09-food-placement",
+  "currentLessonId": "snake-10-ring-buffer",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -264,8 +264,10 @@
       "description": "Occupancy grid'i kullanarak yemi her zaman boş bir hücreye rastgele yerleştir; grid dolduğunda kilitlenme.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/09-food-placement",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-10-ring-buffer",
@@ -598,9 +600,10 @@
       "status": "learning",
       "lessons": [
         "snake-06-self-collision",
-        "snake-07-occupancy-grid"
+        "snake-07-occupancy-grid",
+        "snake-09-food-placement"
       ],
-      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor.",
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor. 2.9'da tarama ilk kez yazma yönünde kullanıldı: tekrar-deneme yerine sabit iki taramalı say-ve-seç yöntemini kendi kurdu ve yöntemin neden her zaman sonlandığını doğru anladı. Üç hata review'da çıktı: sayaç boş hücreleri değil tüm hücreleri saydı, sayaç karşılaştırmadan önce arttığı için target=0 hiç eşleşmedi ve empty_count==0 guard'ı yoktu (rand.int_max(0) panic'ler). Üçünü de gösterildikten sonra düzeltti.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
@@ -612,9 +615,10 @@
       "status": "learning",
       "lessons": [
         "snake-07-occupancy-grid",
-        "snake-08-food-and-growth"
+        "snake-08-food-and-growth",
+        "snake-09-food-placement"
       ],
-      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak. 2.8'de aynı bakım hatasının üçüncü biçimi çıktı: büyüyen tick'te de kuyruğu occupied'den sildi, yani occupied ile length bir hücre ayrıştı ve gövdenin son segmenti grid'de görünmez oldu.",
+      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak. 2.8'de aynı bakım hatasının üçüncü biçimi çıktı: büyüyen tick'te de kuyruğu occupied'den sildi, yani occupied ile length bir hücre ayrıştı ve gövdenin son segmenti grid'de görünmez oldu. 2.9'da occupied'i ilk kez okuma yönünde kullandı — aynı veriden 'nerede yer var' sorusunu cevapladı — ama ilk denemede grid'i hiç okumadan seçim yaptı ve boş sayısını length'ten türetti; türetilmiş verinin sorgu tarafı henüz refleks değil. Ayrıca game_reset yemi yenilemiyordu, yani restart'ta yem gövdenin üstünde kalabiliyordu; hatırlatma sonrası spawn'ı reset'in içine taşıdı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
