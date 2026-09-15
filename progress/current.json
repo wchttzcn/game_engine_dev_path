@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-07-occupancy-grid",
+  "currentLessonId": "snake-08-food-and-growth",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -242,8 +242,10 @@
       "description": "İkinci bir temsil ekleyerek hücre doluluğunu sabit sürede cevapla, gövdeden türet ve kendine çarpma taramasını bununla değiştir.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/07-occupancy-grid",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-08-food-and-growth",
@@ -506,12 +508,13 @@
     {
       "id": "single-source-of-truth",
       "title": "Tek doğruluk kaynağı",
-      "status": "independent",
+      "status": "learning",
       "lessons": [
         "pong-15-collision-shapes",
-        "snake-01-draw-grid"
+        "snake-01-draw-grid",
+        "snake-07-occupancy-grid"
       ],
-      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0).",
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -591,9 +594,23 @@
       "title": "Doğrusal tarama ile sorgu",
       "status": "learning",
       "lessons": [
-        "snake-06-self-collision"
+        "snake-06-self-collision",
+        "snake-07-occupancy-grid"
       ],
-      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak.",
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "derived-representation",
+      "title": "Türetilmiş ikinci temsil",
+      "status": "learning",
+      "lessons": [
+        "snake-07-occupancy-grid"
+      ],
+      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"

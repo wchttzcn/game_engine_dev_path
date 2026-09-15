@@ -18,6 +18,7 @@ Game :: struct {
 	direction:      Direction,
 	next_direction: Direction,
 	state:          Game_State,
+	occupied:       [GRID_ROWS][GRID_COLS]bool,
 	tick_timer:     f32,
 	tick_count:     int,
 }
@@ -47,15 +48,6 @@ cell_rect :: proc(col, row: i32) -> rl.Rectangle {
 	}
 }
 
-head_hits_body :: proc(game: ^Game) -> bool {
-	for i in 1 ..< game.length {
-		if game.body[i] == game.body[0] {
-			return true
-		}
-	}
-	return false
-}
-
 game_reset :: proc(game: ^Game) {
 	game.tick_timer = 0
 	game.state = .Playing
@@ -63,6 +55,7 @@ game_reset :: proc(game: ^Game) {
 	game.next_direction = .Right
 	game.direction = .Right
 
+	game.occupied = {}
 	game.body[0] = {
 		col = GRID_COLS / 2,
 		row = GRID_ROWS / 2,
@@ -84,7 +77,10 @@ game_reset :: proc(game: ^Game) {
 		row = GRID_ROWS / 2,
 	}
 	game.length = 5
-
+	for i in 0 ..< game.length {
+		cell := game.body[i]
+		game.occupied[cell.row][cell.col] = true
+	}
 }
 
 main :: proc() {
@@ -124,6 +120,8 @@ main :: proc() {
 				}
 
 				head := game.body[0]
+				tail := game.body[game.length - 1]
+				game.occupied[tail.row][tail.col] = false
 				for i := game.length - 1; i > 0; i -= 1 {
 					game.body[i] = game.body[i - 1]
 				}
@@ -141,11 +139,12 @@ main :: proc() {
 				head.col = (head.col + delta_col + GRID_COLS) % GRID_COLS
 				head.row = (head.row + delta_row + GRID_ROWS) % GRID_ROWS
 				game.body[0] = head
-
-				if head_hits_body(&game) {
+        if game.occupied[head.row][head.col]{
 					game.state = .Dead
 					break
-				}
+        }
+				game.occupied[head.row][head.col] = true
+
 			}
 		case .Dead:
 			if rl.IsKeyPressed(.R) {
@@ -172,6 +171,15 @@ main :: proc() {
 				i == 0 ? rl.LIME : rl.GREEN,
 			)
 		}
+
+		for col in 0 ..< GRID_COLS {
+			for row in 0 ..< GRID_ROWS {
+				if game.occupied[row][col] {
+					rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.GREEN)
+				}
+			}
+		}
+
 		if game.state == .Dead {
 			rl.DrawText(
 				rl.TextFormat("Game Over Score: %d", game.length),
