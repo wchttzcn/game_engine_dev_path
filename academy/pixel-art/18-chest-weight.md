@@ -53,4 +53,4 @@ Bastırmada kapak 3–4. satırlar. Açılışta kapak 2. satır ve koyu boşluk
 
 **“Pixel Art 1.18 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-Sonraki adım: [1.19 — Tekrarlanabilir zemin tile'ı çiz](/pixel-art/19-tile).
+Sonraki adım: [1.19 — Bir nesneyi parçalara ayır](/pixel-art/19-rock-break).
