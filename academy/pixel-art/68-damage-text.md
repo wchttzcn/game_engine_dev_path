@@ -26,7 +26,7 @@ Idle oyunda ekranın en çok değişen parçası sayıdır. Hasar barın içinde
 
 Yeni çizim yok — 1.22'deki rakamları taşıyorsun. Yükselme, sayının olaya ait olduğunu; kaybolma ise olayın bittiğini söyler. Kritik vuruşu ayırmak için de yeni bir çizim gerekmez: **aynı rakamlar, farklı renk.** Biçimi değiştirmek yerine rengi değiştirmek okunurluğu korur.
 
-<PixelAnimation title="Hasar sayısı" :frames='[{"src":"/pixel-art/craft/damage-1.svg","label":"Belirme","duration":70,"alt":"Sayı alt satırda belirdi."},{"src":"/pixel-art/craft/damage-2.svg","label":"Yükselme","duration":90,"alt":"Sayı canvas&#39;ın ortasına çıktı."},{"src":"/pixel-art/craft/damage-3.svg","label":"Tepe","duration":120,"alt":"Sayı üst satıra ulaştı."},{"src":"/pixel-art/craft/damage-4.svg","label":"Bitiş","duration":200,"alt":"Frame tamamen transparent."}]' />
+<PixelAnimation title="Hasar sayısı" :columns="16" :rows="12" :frames='[{"src":"/pixel-art/craft/damage-1.svg","label":"Belirme","duration":70,"alt":"Sayı alt satırda belirdi."},{"src":"/pixel-art/craft/damage-2.svg","label":"Yükselme","duration":90,"alt":"Sayı canvas&#39;ın ortasına çıktı."},{"src":"/pixel-art/craft/damage-3.svg","label":"Tepe","duration":120,"alt":"Sayı üst satıra ulaştı."},{"src":"/pixel-art/craft/damage-4.svg","label":"Bitiş","duration":200,"alt":"Frame tamamen transparent."}]' />
 
 Kritik vuruş için aynı dört frame'i altın renkle çoğalt; istersen bir pixel daha yükseğe çıkar. Oyunda sayının değeri koddan gelir; senin çizdiğin şey **hareketin biçimi** — nereden başlayıp nerede bittiği.
 

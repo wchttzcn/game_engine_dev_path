@@ -26,7 +26,7 @@ section: Idle oyun · skilleri bağla
 
 Bu iki davranış bir skill'i tasarlarken vereceğin ilk karar. Mermi mi, iz mi? Mermi ayrılır ve ömrü karakterinkinden uzun olur; iz karakterin hareketine yapışıktır ve onunla aynı anda biter. Zaman çizgisi bu farkı doğrudan gösterir.
 
-<PixelAnimation title="Warrior — karakter ve iz birlikte" :frames='[{"src":"/pixel-art/craft/wcombine-1.svg","label":"Duruş","duration":220,"alt":"Warrior duruyor; ekranda iz yok."},{"src":"/pixel-art/craft/wcombine-2.svg","label":"Hazırlık","duration":80,"alt":"Kılıç sola çekilmiş; iz hâlâ yok."},{"src":"/pixel-art/craft/wcombine-3.svg","label":"Vuruş","duration":90,"alt":"Warrior vurdu; kılıç izi hemen yanında belirdi."},{"src":"/pixel-art/craft/wcombine-4.svg","label":"Dönüş","duration":400,"alt":"Warrior duruşuna döndü; izden yalnız parçalar kaldı."}]' />
+<PixelAnimation title="Warrior — karakter ve iz birlikte" :columns="16" :rows="8" :frames='[{"src":"/pixel-art/craft/wcombine-1.svg","label":"Duruş","duration":220,"alt":"Warrior duruyor; ekranda iz yok."},{"src":"/pixel-art/craft/wcombine-2.svg","label":"Hazırlık","duration":80,"alt":"Kılıç sola çekilmiş; iz hâlâ yok."},{"src":"/pixel-art/craft/wcombine-3.svg","label":"Vuruş","duration":90,"alt":"Warrior vurdu; kılıç izi hemen yanında belirdi."},{"src":"/pixel-art/craft/wcombine-4.svg","label":"Dönüş","duration":400,"alt":"Warrior duruşuna döndü; izden yalnız parçalar kaldı."}]' />
 
 İzin ikinci karede hiç görünmemesi önemli: hazırlık sırasında kılıç henüz yol almadı. İz ancak hareket gerçekleştiğinde çizilir. Aynı kural bir yumruk, bir kuyruk vuruşu veya bir çekiç için de geçerli.
 

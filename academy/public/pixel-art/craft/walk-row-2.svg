@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="8" viewBox="0 0 32 8" shape-rendering="crispEdges" role="img" aria-label="Dört karakterin renkli hali yan yana">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="8" viewBox="0 0 32 8" shape-rendering="crispEdges" role="img" aria-label="Dört karakterin yürüyüş frame 2">
   <rect x="3" y="1" width="1" height="1" fill="#9874d3"/>
   <rect x="10" y="1" width="3" height="1" fill="#92afc3"/>
   <rect x="18" y="1" width="3" height="1" fill="#e9dfc2"/>
@@ -31,18 +31,19 @@
   <rect x="31" y="4" width="1" height="1" fill="#9b6b43"/>
   <rect x="2" y="5" width="3" height="1" fill="#9874d3"/>
   <rect x="10" y="5" width="3" height="1" fill="#92afc3"/>
-  <rect x="13" y="5" width="2" height="1" fill="#626080"/>
-  <rect x="18" y="5" width="3" height="1" fill="#e9dfc2"/>
+  <rect x="14" y="5" width="1" height="1" fill="#626080"/>
+  <rect x="17" y="5" width="5" height="1" fill="#e9dfc2"/>
   <rect x="22" y="5" width="1" height="1" fill="#a97842"/>
   <rect x="26" y="5" width="3" height="1" fill="#6eae72"/>
-  <rect x="31" y="5" width="1" height="1" fill="#9b6b43"/>
-  <rect x="1" y="6" width="5" height="1" fill="#9874d3"/>
-  <rect x="10" y="6" width="3" height="1" fill="#92afc3"/>
-  <rect x="14" y="6" width="1" height="1" fill="#626080"/>
-  <rect x="17" y="6" width="5" height="1" fill="#e9dfc2"/>
-  <rect x="22" y="6" width="1" height="1" fill="#a97842"/>
-  <rect x="26" y="6" width="3" height="1" fill="#6eae72"/>
-  <rect x="30" y="6" width="1" height="1" fill="#9b6b43"/>
+  <rect x="30" y="5" width="1" height="1" fill="#9b6b43"/>
+  <rect x="2" y="6" width="1" height="1" fill="#524565"/>
+  <rect x="4" y="6" width="1" height="1" fill="#524565"/>
+  <rect x="10" y="6" width="1" height="1" fill="#626080"/>
+  <rect x="12" y="6" width="1" height="1" fill="#626080"/>
+  <rect x="18" y="6" width="1" height="1" fill="#a97842"/>
+  <rect x="20" y="6" width="1" height="1" fill="#a97842"/>
+  <rect x="26" y="6" width="1" height="1" fill="#9b6b43"/>
+  <rect x="28" y="6" width="1" height="1" fill="#9b6b43"/>
   <rect x="2" y="7" width="1" height="1" fill="#524565"/>
   <rect x="4" y="7" width="1" height="1" fill="#524565"/>
   <rect x="10" y="7" width="1" height="1" fill="#626080"/>

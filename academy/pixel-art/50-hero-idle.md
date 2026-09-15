@@ -26,7 +26,7 @@ section: Idle oyun · kadroyu tamamla
 
 İyi haber: yeni bir karar yok. Kural aynı — sabit parça ayaklar, hareket eden parça üst gövde. Bu ders bir teknik öğretmiyor, bir tekniği **tamamlıyor.** Karşılaştırılabilir 8×8 paketlerde her karakterin idle'ı bulunur; tek karakterde kalan bir animasyon eksik sayılır.
 
-<PixelAnimation title="Bütün kadro nefes alıyor" :frames='[{"src":"/pixel-art/craft/idle-row-1.svg","label":"Yukarı","duration":400,"alt":"Dört karakter de dik duruyor."},{"src":"/pixel-art/craft/idle-row-2.svg","label":"Aşağı","duration":400,"alt":"Dördünün de üst gövdesi bir pixel alçalmış."}]' />
+<PixelAnimation title="Bütün kadro nefes alıyor" :columns="32" :frames='[{"src":"/pixel-art/craft/idle-row-1.svg","label":"Yukarı","duration":400,"alt":"Dört karakter de dik duruyor."},{"src":"/pixel-art/craft/idle-row-2.svg","label":"Aşağı","duration":400,"alt":"Dördünün de üst gövdesi bir pixel alçalmış."}]' />
 
 Dördünü aynı anda oynatmak kadronun ritmini gösterir. Gerçek oyunda her karakterin süresi biraz farklı olursa daha doğal durur; şimdilik aynı süreyle başla, sonra birinin süresini değiştirip farkı gör.
 
