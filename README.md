@@ -24,6 +24,7 @@ Repo kökünden çalıştır:
 
 ```sh
 odin run games/pong -out:/tmp/mucahit-pong
+odin run games/snake -out:/tmp/mucahit-snake
 ```
 
 Bitirdiğinde kod incelemesi istemen yeterli. Kod ve compiler kontrolünden sonra
@@ -42,11 +43,12 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 | `AGENTS.md` | Mentorun uygulayacağı eğitim kuralları |
 | `RESOURCES.md` | Derslerin dayandığı doğrulanmış kaynaklar ve topluluklar |
 
-Pong'un 1.1–1.15 dersleri (15 ders) hazırdır. Bu paket oynanabilir maç, açık
-match state, update/render ayrımı ve collision shape'lerini görünür kılan ilk
-debug overlay'e kadar gider. Sonraki
-dersler, mevcut iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre
-hazırlanır.
+Pong'un 1.1–1.15 dersleri (15 ders) tamamlandı: oynanabilir maç, açık match
+state, update/render ayrımı ve collision shape'lerini görünür kılan ilk debug
+overlay. Snake'in 2.1–2.13 dersleri (13 ders) hazırdır; bu paket grid, sabit
+kapasiteli gövde array'i, tick tabanlı zaman, occupancy grid, ring buffer ve
+allocation ölçümü üzerinden oynanabilir Snake'e gider. Sonraki dersler, mevcut
+iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre hazırlanır.
 
 `labs/00-memory-layout/` ile `journal/00-memory-layout.md`, Pong'dan önce
 denenen memory layout çalışmasının arşividir. Rotanın parçası değildir; memory

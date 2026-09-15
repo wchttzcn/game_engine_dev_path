@@ -54,11 +54,14 @@ tarafı yalnızca sonucu okur.
 :::
 
 ::: details İpucu 2 — Sayıyı metne dönüştürme
-`rl.DrawText` bir `cstring` bekler.
-`rl.TextFormat("ball %.1f, %.1f", game.ball.x, game.ball.y)` sayıları o
-`cstring` içine formatlar. Bu binding'in `TextFormat`'ı Odin'in `fmt`
-verb'lerini kullanır, yani enum'u `%v` ile doğrudan adıyla yazdırabilirsin. FPS
-için ayrıca `rl.DrawFPS(x, y)` hazır çağrısı var.
+`cstring` çevrimini ve `rl.TextFormat`'in nasıl çalıştığını
+[1.10 — Skor ve servis](/worlds/01-pong/10-score-and-reset) anlattı; burada aynı çağrıyı birden
+çok değerle kullanıyorsun:
+`rl.TextFormat("ball %.1f, %.1f", game.ball.x, game.ball.y)`.
+
+İki ek: `TextFormat` Odin'in `fmt` verb'lerini kullandığı için enum'u `%v` ile
+doğrudan adıyla yazdırabilirsin, ve FPS için ayrıca `rl.DrawFPS(x, y)` hazır
+çağrısı var.
 :::
 
 ::: details İpucu 3 — Satırları yerleştir

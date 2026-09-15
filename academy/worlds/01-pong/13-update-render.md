@@ -32,6 +32,20 @@ state'i ekrana yansıtır. Render procedure'ı score, position veya match state
 değiştirirse ekranın görünmesi simülasyonu değiştirmeye başlar; bu da bir debug
 aracı eklerken bile beklenmedik hata üretir.
 
+`^Game` “bir `Game` değerini gösteren pointer” demektir. Çağrı tarafında
+değişkenin adresini `&` ile alırsın. Odin'de pointer üzerinden field'a erişmek
+için ayrı bir sözdizimi yok: `game.ball` yazarsın, derleyici dereference'ı kendi
+yapar.
+
+```odin
+update_game :: proc(game: ^Game, dt: f32) {
+	game.ball.x += game.ball.velocity_x * dt
+}
+
+// main içinde:
+update_game(&game, dt)
+```
+
 `Game` büyük bir struct olmaya başladığında update'in onu pointer ile alması
 mantıklıdır: procedure gerçek game state'ini değiştirir, bir kopyasını değil.
 Draw procedure'ı da şu an aynı imzayı kullanabilir; ancak ona yalnızca okuma

@@ -43,6 +43,20 @@ yalnızca o velocity'nin position'a **ne zaman** uygulandığını state'e bağl
 `Serving` sırasında top güncellenmediği için velocity duruyor ama etki etmiyor;
 Space o beklemeyi bitirir.
 
+Odin'de enum üyesine, tip beklenen bir yerde başına nokta koyarak ulaşırsın —
+`Match_State.Serving` yerine `.Serving` yeter. `switch` de bu biçimi kullanır:
+
+```odin
+switch game.match_state {
+case .Serving:
+	// yalnızca Space bekleniyor
+case .Playing:
+	// top hareketi, collision ve skor buraya
+}
+```
+
+Odin'de `case` kolları kendiliğinden sonlanır; C'deki gibi `break` yazmazsın.
+
 Servis input'u tek seferlik bir olaydır. `rl.IsKeyPressed(.SPACE)` yalnızca
 tuşun basıldığı frame'de `true` döner; `IsKeyDown` kullanırsan tuşu basılı
 tutmak her frame aynı transition'ı tetikler.
@@ -76,7 +90,7 @@ işini görür.
 
 ::: details Deep Dive — Neden state'i skordan türetmiyoruz?
 Türetilmiş state, kaynağı ile arasındaki kuralı her okuyan yerde yeniden yazmanı
-ister. `score_left == 0 && score_right == 0` “maç yeni başladı” demek olabilir,
+ister. `player_score == 0 && opponent_score == 0` “maç yeni başladı” demek olabilir,
 ama skor sonrası bekleyişi anlatamaz. Saklanan state ise tek yerde değişir ve
 her okuyan aynı cevabı görür. Kural şu: bir bilgi input'tan veya zamandan
 doğuyorsa sakla; mevcut state'ten her seferinde aynı şekilde hesaplanıyorsa

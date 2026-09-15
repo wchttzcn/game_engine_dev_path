@@ -5,10 +5,14 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { bodyLines, codeSpans, pixelArtLessons, repoRootFrom, worldLessons } from './lessons.mjs';
+import { WORLDS, bodyLines, codeSpans, pixelArtLessons, repoRootFrom, worldLessons } from './lessons.mjs';
 
 const repoRoot = repoRootFrom(import.meta.url, 1);
-const lessons = [...worldLessons(repoRoot, '01-pong'), ...pixelArtLessons(repoRoot)];
+// Yazım kuralları her iki rotada da geçerli: oyun dünyaları ve Pixel Art.
+const lessons = [
+  ...Object.keys(WORLDS).flatMap((slug) => worldLessons(repoRoot, slug)),
+  ...pixelArtLessons(repoRoot),
+];
 const lessonBody = (lesson) =>
   bodyLines(readFileSync(join(repoRoot, 'academy', `${lesson.url}.md`), 'utf8'));
 

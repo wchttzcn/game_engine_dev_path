@@ -28,10 +28,29 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
 - [Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/)
   Odin'in kendi raylib binding'inin üretilmiş dokümantasyonu — C değil, gerçekte
   çağırdığın imzalar. Şunun için: her raylib çağrısının parametre sırası ve
-  tipleri. Anchor biçimi `#DrawRectangle`, `#IsKeyDown` şeklindedir.
+  tipleri. Anchor biçimi `#DrawRectangle`, `#IsKeyDown` şeklindedir. Kurulu
+  derleyicideki karşılığı `$ODIN_ROOT/vendor/raylib/raylib.odin`; bir imza
+  tartışmalıysa asıl doğrulama oradan yapılır.
+- `string` ile `cstring` ayrımı — kurulu derleyicideki
+  `vendor/raylib/raylib.odin` (`DrawText`, `TextFormat` gövdesi) ve
+  `core/strings/strings.odin` (`clone_to_cstring`). Şunun için: raylib'e metin
+  verirken hangi temsilin beklendiği, `TextFormat`'in sabit buffer davranışı ve
+  `fmt.bprintf` üzerinden Odin verb'lerini kullanması. 1.10 bu iki dosyadan
+  doğrulandı.
 - [Odin vendor:raylib README — çalışan başlangıç örneği](https://github.com/odin-lang/Odin/blob/master/vendor/raylib/README.md#basic-example)
   Pencere açan en küçük tam program. Şunun için: game loop iskeletinin
   doğrulanması.
+- [Odin standart kütüphanesi — core:math/rand](https://pkg.odin-lang.org/core/math/rand/)
+  Şunun için: `int_max` gibi rastgele sayı üreten procedure'ların imzaları ve
+  aralık davranışı (`0..<n`, `n <= 0` için panic). Snake'te yem yerleştirme bu
+  pakete dayanıyor.
+- [Odin standart kütüphanesi — core:mem](https://pkg.odin-lang.org/core/mem/)
+  Şunun için: `Tracking_Allocator` ve `context.allocator` ile ilgili
+  procedure'lar (`tracking_allocator_init`, `tracking_allocator`,
+  `tracking_allocator_destroy`). Snake'te oynanış sırasındaki allocation'ları
+  ölçmek bu pakete dayanıyor; ölçümün yalnızca `context.allocator`'dan geçen
+  istekleri kapsadığını unutma — raylib'in kendi C allocator'ı bunun dışında
+  kalır.
 
 ### raylib
 
@@ -159,6 +178,11 @@ yazılmadan önce araştırılacak.
 - **Collision response** (penetrasyon çözme, sekme açısı): Pong seviyesinde
   güvenilir tek bir kaynak yok. 1.8 şimdilik raylib referansı ve MDN'in
   narrow-phase bölümüne dayanıyor.
+- **Dead zone / hysteresis** (sabit adımlı controller'ın hedef etrafında
+  titremesi ve eşikle bastırılması): 1.9 bunu dersin kendi aritmetiğinden
+  türetiyor — `speed * dt` adımı hedefe kalan mesafeden büyükse salınım
+  kaçınılmazdır — ama control theory tarafında doğrulanmış bir birincil kaynak
+  henüz seçilmedi.
 - **Dear ImGui Odin binding'i**: Breakout'ta (Dünya 3) gerekecek; kurulum ve
   binding seçimi o ders yazılırken güncel kaynaklarla doğrulanacak.
 - **macOS grafik API'si / kendi renderer'ın**: Dünya 1-2 kapsamı dışında.

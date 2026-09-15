@@ -55,10 +55,10 @@ olur.
   yeterli.
 
 ::: details İpucu 1 — Hangi değerler zaten elinde?
-`draw_game` içinde raketleri çizmek için kurduğun `player_rect` ve
-`opponent_rect`, bir de `DrawCircleV`'ye verdiğin
-`rl.Vector2{game.ball.x, game.ball.y}` merkezi. Outline çağrıları tam olarak bu
-üç değeri alır.
+Collision testinin okuduğu `game.player.rect` ve `game.opponent.rect`, bir de
+`DrawCircleV`'ye verdiğin `rl.Vector2{game.ball.x, game.ball.y}` merkezi.
+Outline çağrıları tam olarak bu üç değeri alır; `draw_game` zaten ilk ikisini
+`DrawRectangleRec`'e veriyor.
 :::
 
 ::: details İpucu 2 — Outline çağrıları

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 import { repoRootFrom } from './lessons.mjs';
@@ -12,7 +12,7 @@ const repoRoot = repoRootFrom(import.meta.url, 1);
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'academy-sync-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  for (const dir of ['scripts', 'progress', 'academy/worlds/01-pong', 'academy/pixel-art']) {
+  for (const dir of ['scripts', 'progress']) {
     mkdirSync(join(root, dir), { recursive: true });
   }
   for (const file of ['lessons.mjs', 'sync-progress.mjs']) {
@@ -22,7 +22,10 @@ function fixture(t) {
   const art = JSON.parse(readFileSync(join(repoRoot, 'progress/pixel-art.json'), 'utf8'));
   for (const progress of [game, art]) {
     for (const lesson of progress.lessons) {
-      copyFileSync(join(repoRoot, 'academy', `${lesson.url}.md`), join(root, 'academy', `${lesson.url}.md`));
+      // Dünya sayısı arttıkça klasörler katalogdan türesin; elle listelenmesin.
+      const dest = join(root, 'academy', `${lesson.url}.md`);
+      mkdirSync(dirname(dest), { recursive: true });
+      copyFileSync(join(repoRoot, 'academy', `${lesson.url}.md`), dest);
     }
   }
   const write = (file, progress) => writeFileSync(join(root, 'progress', file), `${JSON.stringify(progress, null, 2)}\n`);

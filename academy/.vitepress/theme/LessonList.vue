@@ -2,11 +2,21 @@
 import { computed } from 'vue';
 import { withBase } from 'vitepress';
 // Ders adları frontmatter'dan gelir; bu liste hiçbir adı elle taşımaz.
-import { data as gameSections } from '../../worlds/01-pong/lessons.data.js';
+import { data as pongSections } from '../../worlds/01-pong/lessons.data.js';
+import { data as snakeSections } from '../../worlds/02-snake/lessons.data.js';
 import { data as pixelArtSections } from '../../pixel-art/lessons.data.js';
 
-const props = defineProps<{ track?: 'game' | 'pixel-art' }>();
-const sections = computed(() => props.track === 'pixel-art' ? pixelArtSections : gameSections);
+// Data loader'lar dosya başına tanımlı olduğu için hepsi burada toplanır ve
+// sayfa hangi rotayı istiyorsa o seçilir. Oyun dünyaları slug'ıyla, Pixel Art
+// kendi adıyla gelir; `track` adı CurrentLesson ile aynı kalsın diye seçildi.
+const byTrack: Record<string, typeof pongSections> = {
+  '01-pong': pongSections,
+  '02-snake': snakeSections,
+  'pixel-art': pixelArtSections,
+};
+
+const props = defineProps<{ track: string }>();
+const sections = computed(() => byTrack[props.track] ?? []);
 </script>
 
 <template>

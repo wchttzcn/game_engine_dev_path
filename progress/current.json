@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "pong-07-paddle-collision",
+  "currentLessonId": "snake-07-occupancy-grid",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -77,8 +77,10 @@
       "description": "Top ile raket çakışmasını tespit et ve debug rengiyle göster.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/07-paddle-collision",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-08-collision-response",
@@ -86,8 +88,10 @@
       "description": "Topu raketin dışına çıkar ve horizontal velocity'yi raketten uzağa yönlendir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/08-collision-response",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-09-opponent-ai",
@@ -95,8 +99,10 @@
       "description": "Rakip raketin topu sınırlı hızla takip etmesini sağla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/09-opponent-ai",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-10-score-and-reset",
@@ -104,8 +110,10 @@
       "description": "Top sahadan çıkınca doğru skoru artır ve yeni servis için topu sıfırla.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/10-score-and-reset",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-11-serve-state",
@@ -113,8 +121,10 @@
       "description": "1.10'un otomatik servisini Serving ve Playing state'lerine bağla; servisi Space başlatsın.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/11-serve-state",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-12-match-over",
@@ -122,8 +132,10 @@
       "description": "Kazanma skorunda maçı bitir, kazananı göster ve R ile temiz bir yeni maç başlat.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/12-match-over",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-13-update-render",
@@ -131,8 +143,10 @@
       "description": "State mutation ile çizimi ayrı procedure'lara taşı.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/13-update-render",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-14-debug-overlay",
@@ -140,8 +154,10 @@
       "description": "F1 ile açılan overlay'de oyunun görünmeyen sayısal state'ini ekrana getir.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/14-debug-overlay",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
     },
     {
       "id": "pong-15-collision-shapes",
@@ -149,6 +165,137 @@
       "description": "Top ve raketlerin collision shape'lerini, collision hesabının kendi değerlerinden outline olarak çiz.",
       "world": "World 1 · Pong",
       "url": "/worlds/01-pong/15-collision-shapes",
+      "status": "completed",
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "snake-01-draw-grid",
+      "title": "2.1 — Grid'i çiz",
+      "description": "Grid coordinate'ten pixel coordinate'e giden tek bir dönüşüm yaz ve grid'i çiz.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/01-draw-grid",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-02-snake-body",
+      "title": "2.2 — Yılanın gövdesi bir array",
+      "description": "Yılanın gövdesini sabit kapasiteli bir array ve canlı uzunlukla tut.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/02-snake-body",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-03-tick-timer",
+      "title": "2.3 — Tick'li zaman",
+      "description": "Simülasyon adımını frame'den ayıran bir tick timer kur.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/03-tick-timer",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-04-direction-step",
+      "title": "2.4 — Yön ve adım",
+      "description": "WASD ile yön belirle, her tick'te gövdeyi kaydırarak bir hücre ilerle.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/04-direction-step",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-05-input-buffer",
+      "title": "2.5 — Input tamponu",
+      "description": "Input'un frame hızında geldiğini, simülasyonun tick hızında tükettiğini ayıran bir yön tamponu kur.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/05-input-buffer",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-06-self-collision",
+      "title": "2.6 — Kendine çarpma",
+      "description": "Yeni head'in gövdeye çarpıp çarpmadığını baştan sona tarayarak tespit et, oyunu durdur ve R ile yeniden başlat.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/06-self-collision",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-07-occupancy-grid",
+      "title": "2.7 — Occupancy grid",
+      "description": "İkinci bir temsil ekleyerek hücre doluluğunu sabit sürede cevapla, gövdeden türet ve kendine çarpma taramasını bununla değiştir.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/07-occupancy-grid",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-08-food-and-growth",
+      "title": "2.8 — Yemi ye ve büyü",
+      "description": "Sabit bir yem hücresini ye; büyüme kararını gövde değişmeden önce, aday new_head üzerinden ver.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/08-food-and-growth",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-09-food-placement",
+      "title": "2.9 — Yemi nereye koyalım?",
+      "description": "Occupancy grid'i kullanarak yemi her zaman boş bir hücreye rastgele yerleştir; grid dolduğunda kilitlenme.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/09-food-placement",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-10-ring-buffer",
+      "title": "2.10 — Ring buffer",
+      "description": "Sabit body array'ini kaydırmak yerine head index'iyle dairesel kullanacak şekilde yeniden yaz.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/10-ring-buffer",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-11-allocation-counter",
+      "title": "2.11 — Allocation sayacı",
+      "description": "main içinde bir tracking allocator kurup context.allocator üzerinden geçen allocation'ları ölç; ölçümün kapsamını doğru yorumla.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/11-allocation-counter",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-12-grid-debug-view",
+      "title": "2.12 — Grid debug görünümü",
+      "description": "F1 ile açılan bir overlay'de occupied grid'i, ring index'lerini ve allocation sayaçlarını göster.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/12-grid-debug-view",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "snake-13-game-over-restart",
+      "title": "2.13 — Oyun sonu ve restart",
+      "description": "Game_State'e Won ekle, R tuşuna tek bir game_reset bağla ve body ile occupied'i birlikte sıfırla.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/13-game-over-restart",
       "status": "not_started",
       "evidence": []
     }
@@ -157,16 +304,21 @@
     {
       "id": "screen-coordinates",
       "title": "Screen coordinates",
-      "status": "independent",
+      "status": "revisit",
       "lessons": [
         "pong-01-first-paddle",
-        "pong-03-player-input"
+        "pong-03-player-input",
+        "pong-09-opponent-ai",
+        "pong-10-score-and-reset",
+        "pong-15-collision-shapes",
+        "snake-01-draw-grid"
       ],
-      "note": "Raketi doğru konuma çizdi, sonra aynı koordinat modelini yeni bir bağlamda sınır kontrolüne uyguladı: üst kenar y, alt kenar y + height.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "progress/notes/2026-09-11-world0-pong-review.md"
+        "progress/notes/2026-09-11-world0-pong-review.md",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -175,9 +327,11 @@
       "status": "independent",
       "lessons": [
         "pong-02-game-state",
-        "pong-03-player-input"
+        "pong-03-player-input",
+        "pong-13-update-render",
+        "pong-14-debug-overlay"
       ],
-      "note": "1.3'te rectangle kurulumunu kendi inisiyatifiyle game loop'un içine taşıdı; update ile draw'u yorumla da ayırdı. State değişince render'ın tazelenmesi gerektiğini uyguladı.",
+      "note": "1.3'te rectangle kurulumunu kendi inisiyatifiyle game loop'un içine taşıdı; update ile draw'u yorumla da ayırdı. 1.13'te ayrımı procedure sınırına taşıdı: update_game içinde çizim, draw_game içinde state ataması yok. BeginDrawing/EndDrawing'i ilk denemede draw_game içine aldı; incelemede sınırın 1.14 overlay'ini nasıl bloke edeceği gösterilince ipucu almadan main'e taşıdı. 1.14'te overlay'i kendi kararıyla ayrı bir draw_debugui procedure'ına aldı (ders draw_game içinde bir if diyordu) ve toggle state'ini update tarafında tuttu; araç çizimi sahne çiziminden ayrı, okuma-yazma sınırı bozulmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -186,11 +340,16 @@
     {
       "id": "frame-input",
       "title": "Frame başına input",
-      "status": "learning",
+      "status": "independent",
       "lessons": [
-        "pong-03-player-input"
+        "pong-03-player-input",
+        "pong-11-serve-state",
+        "pong-12-match-over",
+        "pong-14-debug-overlay",
+        "snake-04-direction-step",
+        "snake-05-input-buffer"
       ],
-      "note": "IsKeyDown ile basılı tuşu her frame okuyup state'i değiştirdi. Tek atımlık IsKeyPressed ayrımı ve delta time'dan bağımsız sabit hareket miktarı henüz görülmedi.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak. 2.5'te IsKeyDown'dan IsKeyPressed'e kendi kararıyla geçti; basılı tutmanın tick başına tek yön değişimi anlamına gelmesi gerektiğini kavradı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
@@ -202,12 +361,14 @@
       "status": "independent",
       "lessons": [
         "pong-04-delta-time",
-        "pong-05-ball-velocity"
+        "pong-05-ball-velocity",
+        "snake-03-tick-timer"
       ],
-      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı.",
+      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı. 2.3'te dt'yi doğrudan harekete değil, bir akümülatöre besledi; sürekli hareket ile ayrık adım arasındaki farkı uyarısız doğru tarafa yerleştirdi.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/snake/main.odin"
       ]
     },
     {
@@ -229,12 +390,213 @@
       "title": "Collision response",
       "status": "learning",
       "lessons": [
-        "pong-06-wall-bounce"
+        "pong-06-wall-bounce",
+        "pong-08-collision-response"
       ],
-      "note": "Sınır testini merkez artı radius ile kendi kurdu; position'ı sınıra oturtup yönü ayrı vermeyi ipucu sonrası yaptı. İlk denemede yalnız position'ı düzeltip velocity'ye dokunmamıştı. Alan çakışmasına (paddle overlap) uygulanışı 1.7-1.8'de görülecek.",
+      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "collision-detection",
+      "title": "Collision detection",
+      "status": "learning",
+      "lessons": [
+        "pong-07-paddle-collision",
+        "pong-08-collision-response"
+      ],
+      "note": "Overlap testini iki rakete ayrı ayrı uyguladı; hangi rakete çarptığını ayırt etmesi gerektiğini yapısal uyarı sonrası tek || ifadesini bölerek çözdü. Detection ile response ayrımını koruyor. Kendi collision testini elle yazması henüz görülmedi.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "target-seeking-controller",
+      "title": "Hedefe yönelen controller",
+      "status": "learning",
+      "lessons": [
+        "pong-09-opponent-ai"
+      ],
+      "note": "Merkez farkından yön seçen, speed * dt ile sınırlı, dead zone'lu opponent update'ini yazdı ve clamp'i kendi başına doğru yere koydu. İlk denemesi teleport atamasıydı. Dead zone'u türetememesi öğrenci boşluğu değil ders boşluğuydu: kavram yalnızca İpucu 1'de tek yan cümle olarak geçiyordu, Görev metni ise iki dallı karar tarif ediyordu; ders 1.9 bu değerlendirmeden sonra düzeltildi. 1.11 opponent AI'a dokunmadı; bağımsızlık rakip davranışını değiştiren sonraki bir işte sınanmalı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "procedure-extraction",
+      "title": "Procedure'a çıkarma",
+      "status": "independent",
+      "lessons": [
+        "pong-10-score-and-reset",
+        "pong-12-match-over",
+        "pong-13-update-render",
+        "snake-06-self-collision"
+      ],
+      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. 1.13'te frame döngüsünü update_game/draw_game olarak ikiye ayırdı; parametreyi ^Game seçip çağrıyı &game ile yaptı. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı. 2.6'da game_reset'i kendi inisiyatifiyle çıkardı ve 1.12'de açık kalan noktayı kapattı: başlangıç kurulumu da game_reset'ten geçiyor, 'yeni oyun' tek yerde tanımlı. İlk denemede tick_timer'ı reset kapsamı dışında bıraktı, uyarı sonrası ekledi.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin",
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "explicit-state-machine",
+      "title": "Açık state machine",
+      "status": "learning",
+      "lessons": [
+        "pong-11-serve-state",
+        "pong-12-match-over",
+        "snake-06-self-collision"
+      ],
+      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde). 2.6'da Playing/Dead enum'ını, update ve draw'un state'e göre dallanmasını ve R restart'ını kurdu; restart'ı yine switch içinde Dead kolunda tuttu, bu kez doğru yerde (transition değil, Dead'e özel input). 1.12'de açık kalan nokta burada tekrarladı: state .Dead olduktan sonra tick catch-up döngüsü aynı frame devam ediyordu, uyarı sonrası break ekledi. State'i ekrana yansıtmada iki tur gerekti: önce Dead'de yalnız metin çizip tahtayı gizledi, sonra draw switch'ini tamamen kaldırırken Dead metnini de sildi; üçüncü denemede kalıcı çizim + state'e bağlı overlay ayrımını doğru kurdu.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin",
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "pointer-parameters",
+      "title": "Pointer parametreler",
+      "status": "independent",
+      "lessons": [
+        "pong-10-score-and-reset",
+        "pong-12-match-over",
+        "pong-13-update-render",
+        "snake-06-self-collision"
+      ],
+      "note": "^T parametre alan procedure'ları doğru yazıyor ve çağrı tarafında &değişken veriyor; pointer üzerinden field erişiminde ayrı sözdizimi aramadı. Aliasing, nil pointer ve lifetime henüz sınanmadı. 2.2'de game'i önce package-level global yaptı; Pong'daki ^Game ile dolaştırma alışkanlığını yeni bir dosyaya taşımadı, uyarı sonrası main içinde local'e çevirdi. Henüz Snake tarafında procedure'a pointer geçmesi gereken bir durum çıkmadı. 2.6'da head_hits_body'yi ^Game alan, bool döndüren read-only bir procedure olarak kendi yazdı ve &game ile çağırdı; 400 hücrelik array'i değer olarak kopyalamamayı uyarısız seçti. Pong'daki mutasyon kalıbını yeni bir bağlama (sorgu procedure'ı) taşıdı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin",
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "debug-tooling",
+      "title": "Debug aracı",
+      "status": "learning",
+      "lessons": [
+        "pong-14-debug-overlay",
+        "pong-15-collision-shapes"
+      ],
+      "note": "İlk debug aracını kurdu: F1 ile açılan overlay, debug_visible'ı Game içinde tutuyor, FPS/position/velocity/match state basıyor. Match state satırını ilk denemede atladı, inceleme sonrası ekledi. 1.15'te collision outline'larını tek kaynaktan türetti: DrawRectangleLinesEx'e collision testinin okuduğu game.player.rect'i, DrawCircleLinesV'ye ball'un kendi merkez/radius'unu verdi, ayrı debug sayısı yazmadı. Aracın kendi okunurluğu (%f altı ondalık, fontSize 8) henüz umurunda değil.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "borrowed-memory",
+      "title": "Ödünç bellek ve lifetime",
+      "status": "unassessed",
+      "lessons": [
+        "pong-14-debug-overlay"
+      ],
+      "note": "1.14 incelemesinde rl.TextFormat'in dönüşümlü 4 static buffer'a cstring döndürdüğü gösterildi; kodu şu an doğru (her cstring hemen tüketiliyor) ama bunu bilerek yazmadı. Kavram anlatıldı, uygulanmadı — ownership/lifetime dersinin tutamağı burası.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin"
+      ]
+    },
+    {
+      "id": "single-source-of-truth",
+      "title": "Tek doğruluk kaynağı",
+      "status": "independent",
+      "lessons": [
+        "pong-15-collision-shapes",
+        "snake-01-draw-grid"
+      ],
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0).",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/pong/main.odin",
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "fixed-capacity-storage",
+      "title": "Sabit kapasite ve canlı uzunluk",
+      "status": "learning",
+      "lessons": [
+        "snake-02-snake-body"
+      ],
+      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "fixed-timestep",
+      "title": "Sabit adımlı simülasyon",
+      "status": "learning",
+      "lessons": [
+        "snake-03-tick-timer",
+        "snake-04-direction-step",
+        "snake-06-self-collision"
+      ],
+      "note": "2.3'te tick akümülatörünü doğru kurdu: tick_timer += dt, eşiği aşınca sıfırlama yerine -= ile fazlalığı devretti. İlk denemede if ve > ile yazdı, uyarı sonrası for ve >= yaptı — birikmiş tick'lerin tek frame'de tüketilmesi gerektiğini kendi başına çıkarmadı. Simülasyon henüz tick'e bağlı bir durum değiştirmiyor, ayrım 2.4'te sınanacak. 2.4'te tick bloğu ilk kez gerçek state değiştirdi: kaydırma ve yeni head yalnız tick içinde, input okuma her frame'de kaldı — ayrımı uyarısız doğru yerleştirdi. 2.6'da catch-up döngüsünün tek frame'de birden çok adım atabildiğini hâlâ modellemiyordu: çarpışmada state'i .Dead yapıp döngüyü kırmadı, yani hitch anında yılan öldükten sonra adım atabiliyordu. Uyarı sonrası break ekledi. 2.3'teki aynı boşluğun ikinci tekrarı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "value-semantics",
+      "title": "Değer semantiği ve kopya",
+      "status": "learning",
+      "lessons": [
+        "snake-04-direction-step",
+        "snake-05-input-buffer"
+      ],
+      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü. 2.5'te enum'ın zero value'sunu (Direction sıfırıncı üye .Up) hesaba katmadı: next_direction'a başlangıç vermeyince oyun ilk tick'te yukarı sapıyordu. Uyarı sonrası ikisini de .Right'a çekti.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "grid-wrapping",
+      "title": "Grid sınırında sarma",
+      "status": "learning",
+      "lessons": [
+        "snake-04-direction-step"
+      ],
+      "note": "2.4'te wrap'i ilk denemede hiç yazmadı, sonra % operatörünün negatif davranışını anlamadığını söyledi; tam açıklama (kalan/modulo farkı, (x + N) % N ve Odin'in %% operatörü) sonrası doğru kurdu, col'a GRID_COLS row'a GRID_ROWS eşleşmesini uyarı sonrası doğru yaptı. Hint level 3.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "input-buffering",
+      "title": "Input tamponu",
+      "status": "learning",
+      "lessons": [
+        "snake-05-input-buffer"
+      ],
+      "note": "2.5'te next_direction'ı frame'de yazıp tick'te tükettiği yapıyı doğru kurdu. Asıl takıldığı yer kontrolün nasıl reddedeceğiydi: ilk denemede dört if'in gövdesine kendine atama yazdı (game.direction = .Right) ve ardından koşulsuz game.direction = game.next_direction bıraktı, yani yasak hiç çalışmadı. 'Reddetmek = atama yapmamak' fikri İpucu 2 ve değer izleyen bir tablo ile oturdu, hint level 3. Kontrolü direction'a karşı yapması gerektiğini uyarısız doğru yaptı.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "linear-scan-query",
+      "title": "Doğrusal tarama ile sorgu",
+      "status": "learning",
+      "lessons": [
+        "snake-06-self-collision"
+      ],
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/snake/main.odin"
       ]
     }
   ],

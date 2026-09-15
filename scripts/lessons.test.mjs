@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { allLessons, parseFrontmatter, pixelArtLessons, readLessons, worldLessons, progressDrift } from './lessons.mjs';
+import { WORLDS, allLessons, parseFrontmatter, pixelArtLessons, readLessons, worldLessons, progressDrift } from './lessons.mjs';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -32,7 +32,14 @@ test('readLessons orders lessons by file number and derives id, url, name', () =
 });
 
 test('every lesson title carries its own number and a section', () => {
-  for (const lesson of [...worldLessons(repoRoot, '01-pong'), ...pixelArtLessons(repoRoot)]) {
+  for (const [slug, world] of Object.entries(WORLDS)) {
+    for (const lesson of worldLessons(repoRoot, slug)) {
+      assert.equal(lesson.number, `${world.chapter}.${lesson.index}`, `${lesson.file} numarası başlıkla uyuşmuyor`);
+      assert.ok(lesson.name.length > 0, `${lesson.file} adsız`);
+      assert.ok(lesson.section, `${lesson.file} section frontmatter'ı yok`);
+    }
+  }
+  for (const lesson of pixelArtLessons(repoRoot)) {
     assert.equal(lesson.number, `1.${lesson.index}`, `${lesson.file} numarası başlıkla uyuşmuyor`);
     assert.ok(lesson.name.length > 0, `${lesson.file} adsız`);
     assert.ok(lesson.section, `${lesson.file} section frontmatter'ı yok`);
