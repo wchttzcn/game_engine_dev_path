@@ -8,11 +8,23 @@ type AnimationFrame = {
   duration: number;
 };
 
-const props = defineProps<{
-  title: string;
-  frames: AnimationFrame[];
-  showNative?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    frames: AnimationFrame[];
+    showNative?: boolean;
+    // Kaynak kaç pixel genişliğinde ve yüksekliğinde? Tek karakter 8 × 8'dir;
+    // kadro şeritleri 16 × 8 veya 32 × 8 olur ve ızgara buna göre kurulur.
+    columns?: number;
+    rows?: number;
+  }>(),
+  { showNative: false, columns: 8, rows: 8 },
+);
+
+const stageStyle = computed(() => ({
+  '--pixel-columns': String(props.columns),
+  '--pixel-rows': String(props.rows),
+}));
 
 const activeFrame = ref(0);
 const isPlaying = ref(false);
@@ -70,21 +82,21 @@ onBeforeUnmount(clearTimer);
       </button>
     </div>
 
-    <div class="pixel-animation__stage">
+    <div class="pixel-animation__stage" :style="stageStyle">
       <img
         class="pixel-animation__image"
         :src="currentFrame.src"
         :alt="currentFrame.alt"
-        width="160"
-        height="160"
+        :width="columns * 20"
+        :height="rows * 20"
       />
       <img
         v-if="showNative"
         class="pixel-animation__native"
         :src="currentFrame.src"
-        :alt="`${currentFrame.alt}; özgün 8 × 8 piksel boyutu`"
-        width="8"
-        height="8"
+        :alt="`${currentFrame.alt}; özgün ${columns} × ${rows} piksel boyutu`"
+        :width="columns"
+        :height="rows"
       />
     </div>
 
@@ -115,6 +127,8 @@ onBeforeUnmount(clearTimer);
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--vp-c-bg-soft);
+  --pixel-cell-max: 20px;
+  --pixel-stage-max: 320px;
 }
 .pixel-animation__heading {
   display: flex;
@@ -148,15 +162,21 @@ onBeforeUnmount(clearTimer);
 .pixel-animation__native,
 .pixel-animation__frame img { image-rendering: pixelated; }
 .pixel-animation__image {
-  width: 160px;
-  height: 160px;
+  /* Izgara hücresi kareyi korur; geniş şeritler kartın içine sığacak kadar küçülür. */
+  --pixel-cell: min(var(--pixel-cell-max), calc(var(--pixel-stage-max) / var(--pixel-columns, 8)));
+  width: calc(var(--pixel-cell) * var(--pixel-columns, 8));
+  height: calc(var(--pixel-cell) * var(--pixel-rows, 8));
   margin: 0;
   background-image: linear-gradient(to right, #486452 1px, transparent 1px),
     linear-gradient(to bottom, #486452 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: var(--pixel-cell) var(--pixel-cell);
   outline: 1px solid #486452;
 }
-.pixel-animation__native { width: 8px; height: 8px; margin-bottom: 4px; }
+.pixel-animation__native {
+  width: calc(1px * var(--pixel-columns, 8));
+  height: calc(1px * var(--pixel-rows, 8));
+  margin-bottom: 4px;
+}
 .pixel-animation__frames {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
@@ -179,8 +199,7 @@ onBeforeUnmount(clearTimer);
 .pixel-animation__toggle:focus-visible,
 .pixel-animation__frame:focus-visible { outline: 3px solid var(--vp-c-brand-1); outline-offset: 2px; }
 @media (max-width: 420px) {
-  .pixel-animation { padding: 12px; }
-  .pixel-animation__image { width: 128px; height: 128px; background-size: 16px 16px; }
+  .pixel-animation { padding: 12px; --pixel-cell-max: 16px; --pixel-stage-max: 248px; }
   .pixel-animation__stage { min-height: 144px; }
 }
 </style>

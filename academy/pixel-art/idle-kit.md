@@ -1,13 +1,14 @@
 ---
 title: Idle RPG görsel seti
-description: Çizdiğin parçaların gerçek bir idle oyun ekranında nasıl birleştiğini beş örnekle gör.
+description: Çizdiğin parçaların gerçek bir idle oyun ekranında nasıl birleştiğini dokuz örnekle gör.
 ---
 
 # Idle RPG görsel seti
 
 İkinci fazın dersleri tek tek parçalar üretir. Bu sayfa o parçaların **gerçek
-ekranlarda** nasıl birleştiğini gösterir: savaş, dükkân, envanter, kahramanlar
-ve ödül. Hiçbiri ödev değil; bir sonraki küçük işi seçerken bakacağın örnekler.
+ekranlarda** nasıl birleştiğini gösterir: savaş, dükkân, envanter, kahramanlar,
+ödül, karşılama, kadro, karakter sayfası ve skill ağacı. Hiçbiri ödev değil; bir
+sonraki küçük işi seçerken bakacağın örnekler.
 
 Hepsi **160×96** — yani yirmi 8×8 sprite yan yana sığar. **Sprite'ların 8×8
 olması ekranın da küçük olacağı anlamına gelmez.**
@@ -129,6 +130,99 @@ kalan her şey bilgi. Sandığın çevresine saçılan ışık gözü merkeze ç
 yanındaki `X2` rozeti 1.78'de çizilmişti; iyi bir UI parçası bir kez çizilir,
 birçok yerde kullanılır.
 
+## 7 · Kadro kurma
+
+<div class="pixel-preview">
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/screens/roster.svg" width="640" height="384" alt="ROSTER başlıklı ekran: üstte guild seviyesi ve altın, ortada dört karakter kartı, altta parti sırası ile HIRE ve AUTO düğmeleri." /></div>
+    <figcaption><strong>Kadro</strong><br />Üstte durum, ortada seçim, altta sonuç ve eylem</figcaption>
+  </figure>
+</div>
+
+Oyuna tek karakterle başlanır. Guild seviyesi yükseldikçe yeni parti slotu açılır,
+altın yettikçe yeni üye satın alınır. Ekranın tamamı bu iki sayaca bağlıdır ve
+ikisi de en üstte durur.
+
+| Parça | Dersi |
+| --- | --- |
+| Karakter kartı ve seçili hâli | [1.86 — Karakter seçim kartını çiz](/pixel-art/86-hero-card) |
+| Kilitli üye ve fiyatı | [1.87 — Kilitli üyeyi ve fiyatını göster](/pixel-art/87-recruit-price) |
+| Guild seviye rozeti | [1.88 — Guild seviye rozetini çiz](/pixel-art/88-guild-badge) |
+| Parti slotlarının dört hâli | [1.89 — Parti sırasının dört slotunu çiz](/pixel-art/89-party-row) |
+| Ekranın kendisi | [1.90 — Kadro kurma ekranını kur](/pixel-art/90-roster-screen) |
+
+## 8 · Karakter sayfası
+
+<div class="pixel-preview">
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/screens/hero.svg" width="640" height="384" alt="Karakter sayfası: solda portre, seviye, XP ve can barları ile beş stat satırı; sağda üç ekipman slotu, üç skill slotu ve skill barı." /></div>
+    <figcaption><strong>Karakter sayfası</strong><br />Solda okunacaklar, sağda değiştirilebilecekler</figcaption>
+  </figure>
+</div>
+
+Her karakterin kendi statları, kendi ekipmanı ve kendi skill'leri vardır. Ekran
+ikiye bölünür: sol sütun karakterin **hâlini**, sağ sütun oyuncunun
+**değiştirebildiklerini** gösterir.
+
+| Parça | Dersi |
+| --- | --- |
+| Beş stat ikonu | [1.91 — Beş stat ikonu çiz](/pixel-art/91-stat-icons) |
+| Hizalanmış stat satırları | [1.92 — Stat satırını hizala](/pixel-art/92-stat-row) |
+| Stat farkı oku | [1.93 — Stat farkını okla göster](/pixel-art/93-stat-delta) |
+| Ekipman slotları | [1.94 — Boş ekipman slotlarını ayır](/pixel-art/94-equip-slots) |
+| Kuşanınca değişen sprite | [1.95 — Kuşanınca karakter değişsin](/pixel-art/95-equipped-look) |
+| Ekranın kendisi | [1.96 — Karakter sayfasını kur](/pixel-art/96-hero-screen) |
+
+## 9 · Skill ağacı ve otomasyon
+
+<div class="pixel-preview">
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/screens/skill-tree.svg" width="640" height="384" alt="Skill tree ekranı: üstte tek kök düğüm, altında üç dal ve iki alt düğüm; alınmış yol yeşil, bir düğüm altın kenarlı." /></div>
+    <figcaption><strong>Skill ağacı</strong><br />Yeşil yol geçmişi, altın kutu sıradaki kararı gösterir</figcaption>
+  </figure>
+</div>
+
+Skill'ler oyuncu tarafından tetiklenmez: skill barı dolduğunda **kendiliğinden**
+çıkarlar. Bu yüzden bar, slot ve çıkan efekt tek bir zincir olarak çizilir —
+oyuncu basmadığı bir olayı ancak böyle takip edebilir.
+
+| Parça | Dersi |
+| --- | --- |
+| Karaktere özel skill ikonu | [1.97 — Karaktere özel skill ikonu çiz](/pixel-art/97-skill-icons) |
+| Dolan skill barı | [1.98 — Skill barını dört karede doldur](/pixel-art/98-skill-bar) |
+| Cooldown ve hazır hâli | [1.99 — Cooldown'ı ve hazır hâlini ayır](/pixel-art/99-skill-cooldown) |
+| AUTO tetiklenmesi | [1.100 — AUTO tetiklenmesini göster](/pixel-art/100-auto-cast) |
+| Ağaç düğümü ve hatları | [1.101 — Skill tree düğümünün dört hâlini çiz](/pixel-art/101-tree-node) ve [1.102 — Düğümleri bağlayan hattı çiz](/pixel-art/102-tree-link) |
+| Ekranın kendisi | [1.103 — Skill tree ekranını kur](/pixel-art/103-tree-screen) |
+
+## 10 · Durum etkileri
+
+Durum etkileri yalnız bir ikon şeridinde durmaz; **karakterin üstünde** görünür.
+Kural iki cümlede biter: kötü durum karakterin paletini alır, iyi durum karaktere
+bir katman ekler.
+
+<div class="pixel-preview">
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/status/effect-row.svg" width="416" height="128" alt="Üç durum yan yana: yanan sıcak rampada, donan soğuk rampada, sersemleyen kendi renklerinde ama yıldızlı." /></div>
+    <figcaption><strong>Kötü durumlar</strong><br />Palet değişir; stun ise yalnız yıldız ekler</figcaption>
+  </figure>
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/status/layer-row.svg" width="560" height="128" alt="Buff aurasının iki karesi ve kalkan kabuğunun iki karesi." /></div>
+    <figcaption><strong>İyi durumlar</strong><br />Aura altta, kabuk dışta; palet hiç değişmez</figcaption>
+  </figure>
+  <figure>
+    <div class="pixel-canvas"><img src="/pixel-art/status/badge-strip.svg" width="408" height="168" alt="Portre ve yanında iki durum rozeti; altlarında kalan süreler." /></div>
+    <figcaption><strong>Rozet şeridi</strong><br />Karakterin üstü şimdiyi, şerit kalan süreyi söyler</figcaption>
+  </figure>
+</div>
+
+| Parça | Dersi |
+| --- | --- |
+| Zehir tiki | [1.104 — Zehri karakterin üstünde göster](/pixel-art/104-status-poison) |
+| Yanma, donma ve stun | [1.105 — Yanma, donma ve stun'ı ayır](/pixel-art/105-status-burn-freeze) |
+| Buff aurası ve kalkan | [1.106 — Buff aurasını ve kalkan kabuğunu çiz](/pixel-art/106-status-layers) |
+| Portre rozetleri | [1.107 — Durum rozetlerini portrede sırala](/pixel-art/107-status-badges) |
+
 ## Her parça neden farklı ölçüde?
 
 Ölçüyü stil değil, **parçanın işi** belirler.
@@ -145,11 +239,11 @@ birçok yerde kullanılır.
 | Zemin tile'ı | 8×8 | Yan yana dizilerek ekranı boydan boya kaplar |
 | Ekranın kendisi | 160×96 | Bütün bunları aynı anda barındıracak kadar |
 
-## Beş ekranda ortak olan dört kural
+## Bütün ekranlarda ortak olan dört kural
 
 - **UI kenarda, oyun ortada:** bilgi üst ve alt şeritlere, olay ortaya oturur.
-- **Aynı kalıbı tekrarla:** dükkânın üç satırı, envanterin on altı slotu ve
-  kahramanların dört sütunu hep aynı kalıptan çıkar.
+- **Aynı kalıbı tekrarla:** dükkânın üç satırı, envanterin on altı slotu,
+  kadronun dört kartı ve ağacın altı düğümü hep aynı kalıptan çıkar.
 - **Renk bir dil:** mor çerçeve, mor slime ve mor EPIC yazısı aynı şeyi söyler.
 - **En parlak şey eylemdir:** BUY, COLLECT ve artı düğmesi paletteki en açık
   rengi kullanır; kilitli ve boş olan söner.

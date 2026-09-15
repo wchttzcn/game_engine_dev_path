@@ -47,7 +47,7 @@ Hazırlıkta kılıç 1. sütunda 1–4. satırlar. Vuruşta kılıç 8. sütund
 :::
 
 ::: details Deep Dive — Buradan sonra ne var?
-Pakette yazılı ders bitti ama yol bitmedi. [Yol haritası](/pixel-art/roadmap) hangi konuların ders olarak yazılabileceğini gruplar; [Idle RPG görsel seti](/pixel-art/idle-kit) parçaların bir arada nasıl durduğunu gösterir. Yeni bir asset çizdiğinde [1.86 — Asset'lerini tek sprite sheet'e topla](/pixel-art/86-sprite-sheet) dersindeki kit'e bir frame eklemen yeterli.
+Pakette yazılı ders bitti ama yol bitmedi. [Yol haritası](/pixel-art/roadmap) hangi konuların ders olarak yazılabileceğini gruplar; [Idle RPG görsel seti](/pixel-art/idle-kit) parçaların bir arada nasıl durduğunu gösterir. Yeni bir asset çizdiğinde [1.108 — Asset'lerini tek sprite sheet'e topla](/pixel-art/108-sprite-sheet) dersindeki kit'e bir frame eklemen yeterli.
 :::
 
 ## Birincil kaynak
@@ -55,7 +55,7 @@ Pakette yazılı ders bitti ama yol bitmedi. [Yol haritası](/pixel-art/roadmap)
 [Aseprite — Animation](https://www.aseprite.org/docs/animation/).
 `RESOURCES.md` içindeki bu belge, frame sırası ve playback için kullanıldı; [Frame Duration](https://www.aseprite.org/docs/frame-duration/) süre dağılımı içindir. Hazırlık, vuruş ve duruş kurgusu bu dersin özgün seçimidir.
 
-**Kazanım:** Bir hareketi başı, ortası ve sonu olan bir olaya dönüştürebiliyorsun. Bundan sonrası, çizdiklerini 1.86'daki kit'e eklemek ve idle oyununda kullanmak.
+**Kazanım:** Bir hareketi başı, ortası ve sonu olan bir olaya dönüştürebiliyorsun. Bundan sonrası, çizdiklerini 1.108'deki kit'e eklemek ve idle oyununda kullanmak.
 
 **“Pixel Art 1.34 denememi değerlendir”** yaz; çizimini inceleyelim.
 

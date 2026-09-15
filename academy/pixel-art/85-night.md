@@ -64,4 +64,4 @@ Ay 25–28. sütunlarda 2–5. satırlarda. Yıldızlar ağaç ve çadırın dı
 
 **“Pixel Art 1.85 denememi değerlendir”** yaz; çizimini inceleyelim.
 
-Sonraki adım: [1.86 — Asset'lerini tek sprite sheet'e topla](/pixel-art/86-sprite-sheet).
+Sonraki adım: [1.86 — Karakter seçim kartını çiz](/pixel-art/86-hero-card).

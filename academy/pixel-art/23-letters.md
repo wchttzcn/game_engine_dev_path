@@ -39,7 +39,7 @@ section: Teknik · tekrar eden parçalar
   </figure>
 </div>
 
-Harfleri rakamlarla aynı dosyada tutmak işini kolaylaştırır: tek bir metin seti olur ve 1.86'daki kit'e tek grup olarak girer. Küçük harf çizmene gerek yok; bu ölçüde büyük harf hem daha okunur hem daha az iş.
+Harfleri rakamlarla aynı dosyada tutmak işini kolaylaştırır: tek bir metin seti olur ve 1.108'deki kit'e tek grup olarak girer. Küçük harf çizmene gerek yok; bu ölçüde büyük harf hem daha okunur hem daha az iş.
 
 ## Sınırlar
 
