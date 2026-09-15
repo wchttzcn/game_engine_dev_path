@@ -5,7 +5,8 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const LESSON_FILE = /^(\d{2})-([a-z0-9-]+)\.md$/;
+// Ders numarası iki ya da üç haneli olabilir (1.9'dan 1.108'e).
+const LESSON_FILE = /^(\d{2,3})-([a-z0-9-]+)\.md$/;
 const TITLE = /^(\d+\.\d+)\s+—\s+(.+)$/;
 
 export const WORLDS = {
@@ -38,7 +39,8 @@ export function readLessons(dir, idPrefix, urlBase) {
   return readdirSync(dir)
     .map((file) => ({ file, match: LESSON_FILE.exec(file) }))
     .filter(({ match }) => match !== null)
-    .sort((a, b) => a.file.localeCompare(b.file))
+    // Dosya adına göre değil numaraya göre sırala: 100, 86'dan sonra gelir.
+    .sort((a, b) => Number(a.match[1]) - Number(b.match[1]))
     .map(({ file, match }) => {
       const slug = file.replace(/\.md$/, '');
       const frontmatter = parseFrontmatter(readFileSync(join(dir, file), 'utf8'));

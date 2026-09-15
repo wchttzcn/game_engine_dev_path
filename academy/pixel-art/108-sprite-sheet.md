@@ -1,5 +1,5 @@
 ---
-title: "1.86 — Asset'lerini tek sprite sheet'e topla"
+title: "1.108 — Asset'lerini tek sprite sheet'e topla"
 description: "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir."
 section: Idle oyun · oyuna bağlan
 next: false
@@ -32,15 +32,15 @@ Bir kural var: **aynı ölçüdekiler birlikte gider.** 8×8 eşyalar, monster'l
 
 <div class="pixel-steps pixel-steps-wide">
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-frames.svg" width="384" height="32" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:32px 32px;outline:1px solid #486452" alt="On iki 8×8 asset tek dosyada yan yana frame olarak sıralanmış." /></div>
+    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-frames.svg" width="384" height="32" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:4px 4px;outline:1px solid #486452" alt="On iki 8×8 asset tek dosyada yan yana frame olarak sıralanmış." /></div>
     <figcaption><strong>1 · Frame sırası</strong><br />Her asset kendi frame'inde. Izgara çizgileri frame sınırlarını gösterir; sıra senin seçtiğin gruplamadır.</figcaption>
   </figure>
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-tags.svg" width="384" height="48" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:32px 32px;outline:1px solid #486452" alt="Frame şeridinin üstünde items, monsters ve heroes tag bantları." /></div>
+    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-tags.svg" width="384" height="48" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:4px 4px;outline:1px solid #486452" alt="Frame şeridinin üstünde items, monsters ve heroes tag bantları." /></div>
     <figcaption><strong>2 · Tag'ler</strong><br />Üstteki üç bant sırasıyla <code>items</code>, <code>monsters</code> ve <code>heroes</code>. Her bant kendi frame aralığı kadar uzun.</figcaption>
   </figure>
   <figure>
-    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-sheet.svg" width="256" height="192" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:64px 64px;outline:1px solid #486452" alt="Dört sütun üç satırlık 32×24 sprite sheet." /></div>
+    <div class="pixel-canvas"><img src="/pixel-art/kit/kit-sheet.svg" width="256" height="192" style="background-image:linear-gradient(to right,#486452 1px,transparent 1px),linear-gradient(to bottom,#486452 1px,transparent 1px);background-size:8px 8px;outline:1px solid #486452" alt="Dört sütun üç satırlık 32×24 sprite sheet." /></div>
     <figcaption><strong>3 · Çıkan sheet</strong><br />On iki frame, 4 sütun × 3 satır olarak 32×24 tek PNG. Şeritteki sıra satır satır devam eder.</figcaption>
   </figure>
 </div>
@@ -74,4 +74,4 @@ Export penceresinin Output bölümünde bir veri dosyası da çıkarabilirsin. B
 
 **Kazanım:** Ayrı ayrı çizdiğin asset'ler artık tek bir oyun dosyası. Yeni bir asset çizdiğinde sheet'e bir frame eklemen yeterli.
 
-**“Pixel Art 1.86 denememi değerlendir”** yaz; çizimini inceleyelim.
+**“Pixel Art 1.108 denememi değerlendir”** yaz; çizimini inceleyelim.

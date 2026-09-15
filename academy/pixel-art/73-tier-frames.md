@@ -45,7 +45,7 @@ Envanterde onlarca eşya olur. Her birinin ne kadar değerli olduğunu yazıyla 
   </figure>
 </div>
 
-`Edit > Replace Color` ile kenar rengini tek adımda değiştirebilirsin. Dört durumu ayrı frame'lerde tutmak, 1.86'daki kit'e girerken işini kolaylaştırır: aynı ölçüdeki dört çerçeve tek grup olur.
+`Edit > Replace Color` ile kenar rengini tek adımda değiştirebilirsin. Dört durumu ayrı frame'lerde tutmak, 1.108'deki kit'e girerken işini kolaylaştırır: aynı ölçüdeki dört çerçeve tek grup olur.
 
 ## Sınırlar
 

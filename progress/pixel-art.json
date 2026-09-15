@@ -456,7 +456,7 @@
     {
       "id": "pixel-art-51-hero-hurt",
       "title": "1.51 — Hurt ve death'i kadroya taşı",
-      "description": "Slime'da öğrendiğin vuruş ve ölüm tepkisini karakterlere uygula.",
+      "description": "Vuruş tepkisini bütün kadroya ver, ölümü her karakterin kimliğine göre ayır.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
       "url": "/pixel-art/51-hero-hurt",
       "status": "not_started",
@@ -465,7 +465,7 @@
     {
       "id": "pixel-art-52-hero-flip",
       "title": "1.52 — Karakteri sola çevir",
-      "description": "Yatay çevirmenin neyi bozduğunu gör ve asimetrik parçaya karar ver.",
+      "description": "Bütün kadroyu ters yöne baktır ve her karakterde çevirmenin neyi bozduğuna karar ver.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
       "url": "/pixel-art/52-hero-flip",
       "status": "not_started",
@@ -474,7 +474,7 @@
     {
       "id": "pixel-art-53-walk-cycle",
       "title": "1.53 — Dört frame'lik yürüyüş döngüsü kur",
-      "description": "İki pozluk adımlamayı, gövdenin alçalıp yükseldiği gerçek bir döngüye çevir.",
+      "description": "Gövdenin ne zaman alçalıp ne zaman yükseldiğini doğru kurarak kadroyu gerçekten yürüt.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
       "url": "/pixel-art/53-walk-cycle",
       "status": "not_started",
@@ -769,11 +769,209 @@
       "evidence": []
     },
     {
-      "id": "pixel-art-86-sprite-sheet",
-      "title": "1.86 — Asset'lerini tek sprite sheet'e topla",
+      "id": "pixel-art-86-hero-card",
+      "title": "1.86 — Karakter seçim kartını çiz",
+      "description": "Bir karakteri seçilebilir hâle getiren kartı ve o kartın seçili hâlini kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/86-hero-card",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-87-recruit-price",
+      "title": "1.87 — Kilitli üyeyi ve fiyatını göster",
+      "description": "Alınmamış bir parti üyesini silüetle göster ve fiyatın rengiyle alım gücünü söyle.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/87-recruit-price",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-88-guild-badge",
+      "title": "1.88 — Guild seviye rozetini çiz",
+      "description": "Sabit bir kutunun içinde değişen bir sayıyı okunur tut.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/88-guild-badge",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-89-party-row",
+      "title": "1.89 — Parti sırasının dört slotunu çiz",
+      "description": "Aynı kutunun dört farklı anlamını yalnız kenar rengiyle ayır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/89-party-row",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-90-roster-screen",
+      "title": "1.90 — Kadro kurma ekranını kur",
+      "description": "1.86–1.89'da çizdiğin parçaları tek bir kadro ekranına yerleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/90-roster-screen",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-91-stat-icons",
+      "title": "1.91 — Beş stat ikonu çiz",
+      "description": "Beş statı yazı değil, birbirine benzemeyen beş şekil ayırsın.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/91-stat-icons",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-92-stat-row",
+      "title": "1.92 — Stat satırını hizala",
+      "description": "Beş stat satırını tek bir sütunda biten sayılarla oku.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/92-stat-row",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-93-stat-delta",
+      "title": "1.93 — Stat farkını okla göster",
+      "description": "Bir eşyanın daha iyi mi kötü mü olduğunu renk ve yönle birlikte anlat.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/93-stat-delta",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-94-equip-slots",
+      "title": "1.94 — Boş ekipman slotlarını ayır",
+      "description": "Boş slota sönük bir işaret koyarak oyuncuya oraya ne konacağını söyle.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/94-equip-slots",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-95-equipped-look",
+      "title": "1.95 — Kuşanınca karakter değişsin",
+      "description": "Bir eşyanın kuşanıldığını, silüeti bozmadan birkaç pixel değiştirerek göster.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/95-equipped-look",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-96-hero-screen",
+      "title": "1.96 — Karakter sayfasını kur",
+      "description": "Portre, statlar, ekipman ve skill slotlarını tek bir karakter sayfasında topla.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/96-hero-screen",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-97-skill-icons",
+      "title": "1.97 — Karaktere özel skill ikonu çiz",
+      "description": "Her karakterin skill'ini, o karakterin efektinden türeyen tek bir ikona indir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/97-skill-icons",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-98-skill-bar",
+      "title": "1.98 — Skill barını dört karede doldur",
+      "description": "Bekleyişi görünür kıl: dolan bir bar ve dolduğunda değişen bir renk.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/98-skill-bar",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-99-skill-cooldown",
+      "title": "1.99 — Cooldown'ı ve hazır hâlini ayır",
+      "description": "Bir skill slotunun dört hâlini, ikonu değiştirmeden value ile ayır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/99-skill-cooldown",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-100-auto-cast",
+      "title": "1.100 — AUTO tetiklenmesini göster",
+      "description": "Barın dolması, ikonun parlaması ve skill'in çıkması zincirini dört karede kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/100-auto-cast",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-101-tree-node",
+      "title": "1.101 — Skill tree düğümünün dört hâlini çiz",
+      "description": "Bir skill düğümünün kilitli, açılabilir, alınmış ve son seviye hâllerini ayır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/101-tree-node",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-102-tree-link",
+      "title": "1.102 — Düğümleri bağlayan hattı çiz",
+      "description": "İki düğüm arasındaki yolu, alınmış ve alınmamış hâlleriyle tek pixel genişliğinde kur.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/102-tree-link",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-103-tree-screen",
+      "title": "1.103 — Skill tree ekranını kur",
+      "description": "Bir kök, üç dal ve altı düğümle karakterin skill ağacını tek ekrana yerleştir.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/103-tree-screen",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-104-status-poison",
+      "title": "1.104 — Zehri karakterin üstünde göster",
+      "description": "Bir durum etkisini ikon şeridinden çıkar, karakterin kendisine taşı.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/104-status-poison",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-105-status-burn-freeze",
+      "title": "1.105 — Yanma, donma ve stun'ı ayır",
+      "description": "Üç durumu, üç farklı rampa ve üç farklı hareket kuralıyla birbirinden ayır.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/105-status-burn-freeze",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-106-status-layers",
+      "title": "1.106 — Buff aurasını ve kalkan kabuğunu çiz",
+      "description": "İyi durumları karakterin altına ve dışına koy; paletine hiç dokunma.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/106-status-layers",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-107-status-badges",
+      "title": "1.107 — Durum rozetlerini portrede sırala",
+      "description": "Karakterin üstündeki durumları, portrenin yanında süreleriyle birlikte özetle.",
+      "world": "Pixel Art · 8×8 oyun asset'leri",
+      "url": "/pixel-art/107-status-badges",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "pixel-art-108-sprite-sheet",
+      "title": "1.108 — Asset'lerini tek sprite sheet'e topla",
       "description": "Ayrı ayrı çizdiğin 8×8 asset'leri tag'li tek bir sheet'te birleştir.",
       "world": "Pixel Art · 8×8 oyun asset'leri",
-      "url": "/pixel-art/86-sprite-sheet",
+      "url": "/pixel-art/108-sprite-sheet",
       "status": "not_started",
       "evidence": []
     }

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="8×8 CRT stat ikonu — kritik: yıldız">
+  <rect x="3" y="0" width="1" height="1" fill="#e3ab52"/>
+  <rect x="3" y="1" width="1" height="1" fill="#e3ab52"/>
+  <rect x="2" y="2" width="3" height="1" fill="#e3ab52"/>
+  <rect x="0" y="3" width="3" height="1" fill="#e3ab52"/>
+  <rect x="3" y="3" width="1" height="1" fill="#ffe5a3"/>
+  <rect x="4" y="3" width="3" height="1" fill="#e3ab52"/>
+  <rect x="2" y="4" width="3" height="1" fill="#e3ab52"/>
+  <rect x="3" y="5" width="1" height="1" fill="#e3ab52"/>
+  <rect x="3" y="6" width="1" height="1" fill="#e3ab52"/>
+</svg>

@@ -145,7 +145,7 @@ challenge; copying the first example is allowed. Store teacher visuals under
 objects, characters, movement and skill VFX, per the user's explicit request.
 Treat a larger canvas as a later choice, never an automatic next milestone. Saint11's
 first article is a visual companion, not a required list of completed exercises.
-The current authorized pack runs to lesson 1.86 and is split into two phases.
+The current authorized pack runs to lesson 1.108 and is split into two phases.
 Phase 1 (1.1-1.24) teaches technique on small objects only - key, sword, heart,
 potion, shield, chest, coin - covering shape, export, silhouette test, outline,
 value/ramp/shading/dithering, two-frame and four-frame animation, frame timing,
@@ -155,9 +155,13 @@ applies those techniques to the idle game: one block per character
 then connecting effects to characters (origin plus one combine lesson per
 character), completing idle/hurt/death and flipping for the whole roster, items and
 monsters, UI, the idle progression set (prestige currency, multiplier badge,
-AUTO toggle, achievement, offline screen), world and the sprite sheet kit. Every Phase 2 lesson opens with a bold "Önce şu teknik" line
+AUTO toggle, achievement, offline screen), world, then the idle-RPG systems set —
+guild and party recruiting (1.86-1.90), stats and equipment (1.91-1.95), skills and
+auto-cast (1.96-1.100), the skill tree (1.101-1.103) and on-character status effects
+(1.104-1.107) — closing with the sprite sheet kit at 1.108. The game these serve is
+described in `docs/idle-rpg-design.md`; read it before changing Phase 2 scope. Every Phase 2 lesson opens with a bold "Önce şu teknik" line
 linking back to the Phase 1 lesson it uses; keep that line when editing.
-Mücahit authorized this whole range explicitly; do not extend past 1.86 without
+Mücahit authorized this whole range explicitly; do not extend past 1.108 without
 a new request. Show both playable examples and individual frames. Use supplied flat colors; keep color/volume lessons an
 optional detour and defer 60–30–10 and scene composition until requested.
 HSV color controls generate new
