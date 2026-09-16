@@ -70,7 +70,7 @@ Grid, occupancy, array ve ring buffer üzerinden yılanın gövdesini temsil ede
 
 ## Dünya 3 — Breakout / Juice Laboratory
 
-Tuğla, parçacık ve tek güçlendirmeyle nesnelerin oluşturulma ve silinme sırasını araştırırsın. İlk Dear ImGui paneli top hızı, hitstop, kamera sarsıntısı, parçacık lifetime'ı ve ses varyasyonu gibi değerleri runtime'da ayarlamayı hedefler. Ayar profili kaydetme sonraki küçük genişleme olabilir.
+[Dünya planı](/worlds/03-breakout/). Tuğla, parçacık ve tek güçlendirmeyle nesnelerin oluşturulma ve silinme sırasını araştırırsın. İlk Dear ImGui paneli top hızı, hitstop, kamera sarsıntısı, parçacık lifetime'ı ve ses varyasyonu gibi değerleri runtime'da ayarlamayı hedefler. Ayar profili kaydetme sonraki küçük genişleme olabilir.
 
 **Soru:** “Hissi değiştirmek için neden her seferinde yeniden derliyorum?” **Kanıt:** Aynı karşılaşmanın iki ayar profiliyle oynanması, etkilerin ayrı karşılaştırılması ve silinen nesneye erişim hatasının görünür kılınması. Pool veya arena, geçici nesnelerin ölçülmüş ihtiyacı varsa incelenir.
 

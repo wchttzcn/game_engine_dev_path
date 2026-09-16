@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-13-game-over-restart",
+  "currentLessonId": "breakout-01-paddle",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -312,6 +312,33 @@
       "evidence": [
         "games/snake/main.odin"
       ]
+    },
+    {
+      "id": "breakout-01-paddle",
+      "title": "3.1 — Raketi çiz ve oynat",
+      "description": "games/breakout paketini kur ve ekranın altında A/D ile yatay hareket eden, kenarlardan çıkmayan bir raket çiz.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/01-paddle",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-02-ball",
+      "title": "3.2 — Topu hareket ettir",
+      "description": "Topu velocity ve delta time ile her frame güncelle; henüz hiçbir şeyden sekmesin.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/02-ball",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-03-bounce",
+      "title": "3.3 — Duvar ve raket sekmesi",
+      "description": "Topu üç duvardan sektir, rakete çarpınca geri gönder ve alt kenardan düşünce kaybettir.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/03-bounce",
+      "status": "not_started",
+      "evidence": []
     }
   ],
   "skills": [

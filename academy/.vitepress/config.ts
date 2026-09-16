@@ -65,6 +65,7 @@ export default defineConfig({
         },
         worldSidebar('01-pong'),
         worldSidebar('02-snake'),
+        worldSidebar('03-breakout'),
       ],
     },
     outline: { level: [2, 3], label: 'Bu derste' },
