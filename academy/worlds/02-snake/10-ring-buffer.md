@@ -14,8 +14,24 @@ section: Veri temsili
 `Game` içine bir `head: int` field'ı ekle. Adım attığında `body` array'ini artık
 kaydırma: `head`'i bir slot oynat, yeni head hücresini `body[head]`'e yaz.
 Kuyruk hücresi `head` ve `length`'ten hesaplanır. 2.4'te yazdığın kaydırma
-döngüsünü tamamen sil. Çizim, kendine-çarpma taraması ve occupancy güncellemesi
-dahil, gövdeye dokunan her kod yolu artık `head` üzerinden index hesaplasın.
+döngüsünü tamamen sil.
+
+Bu bir refactor: oyun bittiğinde hiçbir şey farklı oynanmayacak. Değişen tek şey
+gövdenin hangi slotlarda durduğu — ve `body[0]`'ın artık baş olmaması. Bu yüzden
+gövdeyi okuyan **her** kod yolu değişmek zorunda. Kendi dosyanda şu altısını
+teker teker geç:
+
+1. Başlangıç gövdesinin kurulumu — `head`'in nereden başladığı da buraya dahil.
+2. `occupied`'in başlangıçta gövdeden türetilmesi.
+3. Adımda eski head'in okunması (yeni head'i hesaplarken).
+4. Adımda kuyruk hücresinin okunması (`occupied`'den düşürmek için).
+5. Adımda yeni head'in yazılması.
+6. Çizim döngüsü.
+
+Listeyi baştan sona geçmeden bitti sayma. Çizimi (6) atlarsan ilk adımda
+görürsün: yılan bozuk çizilir. `occupied` yollarını (2, 4) atlarsan ekranda
+hiçbir şey bağırmaz — yanlışlanan tek şey ölüm tespiti olur ve bunu ancak
+ölmemesi gereken bir yerde ölünce fark edersin.
 
 ## Ne zaman bitti?
 
@@ -38,6 +54,26 @@ Ring buffer bunu tersine çevirir: array'in kendisi hiç kaymaz, hareket eden ş
 `head`'in array içinde hangi hücreyi gösterdiğidir. Gövdenin `i`'inci hücresi
 artık `body[(head + i) % MAX_BODY]` ile okunur (`i` `0`'dan `length - 1`'e
 kadar); kuyruk da bu formülde `i = length - 1` olan hücredir.
+
+### Kuyruğu `head` hareket etmeden önce oku
+
+Kuyruğun index'i sabit değil: `(head + length - 1) % MAX_BODY`. Formülün içinde
+`head` var, yani `head`'i oynattığın anda formülün cevabı da değişiyor.
+
+`head`'i bir slot geri kaydırdıktan sonra bu formülü okursan, elde ettiğin hücre
+gövdeden çıkan kuyruk değil, onun bir önceki komşusudur — yani yılanın hâlâ
+üstünde durduğu hücre. Onu `occupied`'de `false` yaparsan gövdenin ortasında
+delik açarsın, gerçekten boşalan hücre ise dolu işaretli kalır. Grid ile gövde
+sessizce ayrışır.
+
+Bu, 2.7'de kaydırmadan sonra `body[length - 1]`'i okuduğunda çıkan off-by-one'ın
+aynısı. Orada kuyruğu kaydırma yok ediyordu, burada `head`'in hareketi. Kural iki
+durumda da aynı: **çıkan hücreyi, onu çıkaran işlemden önce oku.**
+
+Sıra şu: kuyruk hücresini oku (ve gerekiyorsa `occupied`'de temizle), sonra
+`head`'i oynat, sonra `body[head]`'e yeni head'i yaz.
+
+### Negatif modulo, ikinci kez
 
 2.4'teki negatif modulo tuzağı burada geri geliyor, yön tersine döndüğü için bir
 kez daha dikkat ister: Odin'de `-1 % MAX_BODY` değeri `-1` döner, `MAX_BODY - 1`
@@ -63,8 +99,7 @@ gösterdiği. Adımda önce `head`'i güncelle, sonra yeni head değerini
 ::: details İpucu 2 — Kuyruğu head'ten bulmak
 Kuyruk hücresi ring içinde başın tam `length - 1` kadar gerisinde:
 `body[(head + length - 1) % MAX_BODY]`. Büyümüyorsan (o adımda yem yemediysen)
-bu hücreyi occupancy grid'de `false` yapman gerekiyor — ama `head`'i kaydırmadan
-önce hangi `Cell` olduğunu bu formülle oku.
+bu hücreyi occupancy grid'de `false` yapman gerekiyor.
 :::
 
 ::: details İpucu 3 — Head'i kaydırma formülü
