@@ -42,6 +42,7 @@ Direction :: enum {
 Game_State :: enum {
 	Playing,
 	Dead,
+	Won,
 }
 
 cell_rect :: proc(col, row: i32) -> rl.Rectangle {
@@ -131,6 +132,8 @@ main :: proc() {
 
 	for !rl.WindowShouldClose() {
 		if rl.IsKeyPressed(.F1) do game.debug_visible = !game.debug_visible
+		if rl.IsKeyPressed(.R) do game_reset(&game)
+
 
 		switch game.state {
 		case .Playing:
@@ -184,12 +187,17 @@ main :: proc() {
 				}
 				game.occupied[new_head.row][new_head.col] = true
 
-				if grow do food_spawn(&game)
+				if grow {
+					if game.length == MAX_BODY {
+						game.state = .Won
+						break
+					}
+					food_spawn(&game)
+				}
+
 			}
 		case .Dead:
-			if rl.IsKeyPressed(.R) {
-				game_reset(&game)
-			}
+		case .Won:
 		}
 
 		rl.BeginDrawing()
@@ -211,11 +219,31 @@ main :: proc() {
 		}
 
 
-		rl.DrawRectangleRec(cell_rect(game.food.col, game.food.row), rl.RED)
+		if game.state != .Won {
+			rl.DrawRectangleRec(cell_rect(game.food.col, game.food.row), rl.RED)
+		}
 
 		if game.state == .Dead {
 			rl.DrawText(
 				rl.TextFormat("Game Over Score: %d", game.length),
+				SCREEN_WIDTH / 2 - 100,
+				SCREEN_HEIGHT / 2,
+				20,
+				rl.RED,
+			)
+		} else if game.state == .Won {
+			rl.DrawText(
+				rl.TextFormat("You Win! Score: %d", game.length),
+				SCREEN_WIDTH / 2 - 100,
+				SCREEN_HEIGHT / 2,
+				20,
+				rl.LIME,
+			)
+		}
+
+		if game.state == .Won {
+			rl.DrawText(
+				rl.TextFormat("You Won Score: %d", game.length),
 				SCREEN_WIDTH / 2 - 100,
 				SCREEN_HEIGHT / 2,
 				20,

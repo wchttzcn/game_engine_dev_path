@@ -308,8 +308,10 @@
       "description": "Game_State'e Won ekle, R tuşuna tek bir game_reset bağla ve body ile occupied'i birlikte sıfırla.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/13-game-over-restart",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     }
   ],
   "skills": [
