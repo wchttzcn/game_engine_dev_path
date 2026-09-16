@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-12-grid-debug-view",
+  "currentLessonId": "snake-13-game-over-restart",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -297,8 +297,10 @@
       "description": "F1 ile açılan bir overlay'de occupied grid'i, ring index'lerini ve allocation sayaçlarını göster.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/12-grid-debug-view",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-13-game-over-restart",

@@ -25,6 +25,7 @@ Game :: struct {
 	food:           Cell,
 	tick_timer:     f32,
 	tick_count:     int,
+	debug_visible:  bool,
 }
 
 Cell :: struct {
@@ -129,6 +130,8 @@ main :: proc() {
 	}
 
 	for !rl.WindowShouldClose() {
+		if rl.IsKeyPressed(.F1) do game.debug_visible = !game.debug_visible
+
 		switch game.state {
 		case .Playing:
 			dt := rl.GetFrameTime()
@@ -207,13 +210,6 @@ main :: proc() {
 			rl.DrawRectangleRec(cell_rect(cell.col, cell.row), i == 0 ? rl.LIME : rl.GREEN)
 		}
 
-		for col in 0 ..< GRID_COLS {
-			for row in 0 ..< GRID_ROWS {
-				if game.occupied[row][col] {
-					rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.YELLOW)
-				}
-			}
-		}
 
 		rl.DrawRectangleRec(cell_rect(game.food.col, game.food.row), rl.RED)
 
@@ -227,18 +223,46 @@ main :: proc() {
 			)
 		}
 
-		rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
-		rl.DrawText(
-			rl.TextFormat(
-				"allocs: %v  mem: %v",
-				track.total_allocation_count,
-				track.current_memory_allocated,
-			),
-			10,
-			35,
-			20,
-			rl.GREEN,
-		)
+		if game.debug_visible {
+			for col in 0 ..< GRID_COLS {
+				for row in 0 ..< GRID_ROWS {
+					if game.occupied[row][col] {
+						rl.DrawRectangleLinesEx(cell_rect(i32(col), i32(row)), 1, rl.YELLOW)
+					}
+				}
+			}
+			rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
+			rl.DrawText(
+				rl.TextFormat("head/length/MAX_BODY: %d/%d/%d", game.head, game.length, MAX_BODY),
+				10,
+				30,
+				20,
+				rl.GREEN,
+			)
+			rl.DrawText(
+				rl.TextFormat(
+					"direction/next_direction: %v / %v",
+					game.direction,
+					game.next_direction,
+				),
+				10,
+				50,
+				20,
+				rl.GREEN,
+			)
+			rl.DrawText(
+				rl.TextFormat(
+					"allocs: %v  mem: %v",
+					track.total_allocation_count,
+					track.current_memory_allocated,
+				),
+				10,
+				70,
+				20,
+				rl.GREEN,
+			)
+		}
+
 		rl.EndDrawing()
 	}
 }
