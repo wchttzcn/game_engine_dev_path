@@ -1,6 +1,7 @@
 package main
 
 import "core:math/rand"
+import mem "core:mem"
 import rl "vendor:raylib"
 
 GRID_COLS :: 20
@@ -106,6 +107,11 @@ body_index :: proc(game: ^Game, i: int) -> int {
 }
 
 main :: proc() {
+	track: mem.Tracking_Allocator
+	mem.tracking_allocator_init(&track, context.allocator)
+	context.allocator = mem.tracking_allocator(&track)
+	defer mem.tracking_allocator_destroy(&track)
+
 	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mucahit - Snake")
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
@@ -222,6 +228,17 @@ main :: proc() {
 		}
 
 		rl.DrawText(rl.TextFormat("tick: %d", game.tick_count), 10, 10, 20, rl.GREEN)
+		rl.DrawText(
+			rl.TextFormat(
+				"allocs: %v  mem: %v",
+				track.total_allocation_count,
+				track.current_memory_allocated,
+			),
+			10,
+			35,
+			20,
+			rl.GREEN,
+		)
 		rl.EndDrawing()
 	}
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-11-allocation-counter",
+  "currentLessonId": "snake-12-grid-debug-view",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -286,8 +286,10 @@
       "description": "main içinde bir tracking allocator kurup context.allocator üzerinden geçen allocation'ları ölç; ölçümün kapsamını doğru yorumla.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/11-allocation-counter",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-12-grid-debug-view",
