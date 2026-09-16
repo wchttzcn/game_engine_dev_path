@@ -9,6 +9,15 @@ section: Veri temsili
 **Hedef:** Gövdeyi her adımda baştan sona kaydırmak yerine, sabit array üzerinde
 `head` index'iyle dairesel (ring buffer) kullan.
 
+Dersin tamamı tek kurala dayanıyor:
+
+```
+gövdenin i'inci hücresi  =  body[(head + i) % MAX_BODY]
+```
+
+`i` `0`'dan `length - 1`'e gider; `i = 0` baş, `i = length - 1` kuyruk.
+Aşağıdaki altı yol, bu kuralın geçerli olması gereken altı nokta.
+
 ## Görev
 
 `Game` içine bir `head: int` field'ı ekle. Adım attığında `body` array'ini artık
@@ -43,6 +52,17 @@ hiçbir şey bağırmaz — yanlışlanan tek şey ölüm tespiti olur ve bunu a
   okuyor, `body[0]`'ı sabit baş kabul etmiyor.
 - `odin check games/snake` geçiyor.
 
+Bu dersin ekranda kendiliğinden bağıran bir sinyali yok: doğru yaptığında hiçbir
+şey değişmiyor. Sinyali kendin üret — başlangıçta `head`'i `0` yerine `37` yap ve
+oyunu çalıştır.
+
+Görüntü ve oynanış **birebir aynı olmalı**. `head`'in başlangıç değeri ring
+buffer'da hiçbir şeyi etkilemez; gövde başka slotlarda durur, ekranda fark olmaz.
+Fark görüyorsan altı yoldan birinde formül eksik, ve hangisi olduğunu belirtiden
+okuyabilirsin: yılan bozuk çiziliyorsa (6); grid debug görünümünü eklediysen
+(2.12) sarı çerçeveler gövdenin üstünde değilse (2); yem gövdenin altına
+düşüyorsa (2) veya (4). Test bitince `head`'i `0`'a geri al.
+
 ## Bilmen gereken küçük parça
 
 Şu ana kadar `body[0]` her zaman gövdenin başıydı; her adımda geri kalan her
@@ -54,6 +74,47 @@ Ring buffer bunu tersine çevirir: array'in kendisi hiç kaymaz, hareket eden ş
 `head`'in array içinde hangi hücreyi gösterdiğidir. Gövdenin `i`'inci hücresi
 artık `body[(head + i) % MAX_BODY]` ile okunur (`i` `0`'dan `length - 1`'e
 kadar); kuyruk da bu formülde `i = length - 1` olan hücredir.
+
+### Elle iz sür
+
+Formülü okumak yetmiyor; küçük bir array üzerinde elle izlemek oturtuyor.
+`MAX_BODY = 8`, `length = 3`, gövde `A B C` ve `head = 0` al. Yem yok, yani her
+adımda bir baş giriyor, bir kuyruk çıkıyor:
+
+```
+tick 0   [A B C _ _ _ _ _]   head=0   pencere: 0,1,2  ->  A B C
+tick 1   [A B C _ _ _ _ D]   head=7   pencere: 7,0,1  ->  D A B
+tick 2   [A B C _ _ _ E D]   head=6   pencere: 6,7,0  ->  E D A
+tick 3   [A B C _ _ F E D]   head=5   pencere: 5,6,7  ->  F E D
+```
+
+Tabloya bakarak değil, kendin türeterek yap: her tick'te üç şey yaz — kuyruğun
+index'i, yeni `head`, pencere.
+
+İki şey görünür hale geliyor. Birincisi tick 1'de `head` `0`'dan `7`'ye atlıyor;
+negatif modulo tuzağının neden var olduğu artık ezber değil, elinde. İkincisi
+slot 2'deki `C` tick 1'den sonra hâlâ orada duruyor: gövdeden çıkan hücre
+**silinmiyor**, sadece pencerenin dışında kaldığı için sayılmıyor. Array çöple
+dolu, oyun doğru. `length` pencerenin genişliği, `head` nereden başladığı;
+ikisinin dışında kalan her şey anlamsız.
+
+### `head` neden geri gidiyor
+
+Gövde `head, head+1, ..., head+length-1` slotlarını kaplıyor — `i` büyüdükçe
+kuyruğa doğru gidiyorsun. Yeni bir baş eklediğinde eski başın `i = 1` olması
+gerekiyor. `yeni_head = head - 1` seçersen:
+
+```
+yeni_head + 1  =  head
+```
+
+Eski baş kendiliğinden `i = 1` oluyor, gövdenin geri kalanı da bir kayıyor —
+hiçbir hücreye dokunmadan. 2.4'te `length` tane yazmayla yaptığın kaydırma
+burada `head`'i bir eksiltmenin yan etkisi. Kaydırma kaybolmadı, bedava oldu.
+
+Bu bir doğa yasası değil, bir seçim: `head`'i `+1` yönünde de kurabilirdin, o
+zaman gövdeyi `(head - i + MAX_BODY) % MAX_BODY` ile okurdun. İkisi de geçerli;
+şart olan tek yönde tutarlı kalmak.
 
 ### Kuyruğu `head` hareket etmeden önce oku
 
