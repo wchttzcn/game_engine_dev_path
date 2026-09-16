@@ -18,6 +18,7 @@ Game :: struct {
 	length:         int,
 	direction:      Direction,
 	next_direction: Direction,
+	head:           int,
 	state:          Game_State,
 	occupied:       [GRID_ROWS][GRID_COLS]bool,
 	food:           Cell,
@@ -59,29 +60,16 @@ game_reset :: proc(game: ^Game) {
 	game.direction = .Right
 
 	game.occupied = {}
-	game.body[0] = {
-		col = GRID_COLS / 2,
-		row = GRID_ROWS / 2,
-	}
-	game.body[1] = {
-		col = GRID_COLS / 2 - 1,
-		row = GRID_ROWS / 2,
-	}
-	game.body[2] = {
-		col = GRID_COLS / 2 - 2,
-		row = GRID_ROWS / 2,
-	}
-	game.body[3] = {
-		col = GRID_COLS / 2 - 3,
-		row = GRID_ROWS / 2,
-	}
-	game.body[4] = {
-		col = GRID_COLS / 2 - 4,
-		row = GRID_ROWS / 2,
-	}
+	game.head = 0
 	game.length = 5
 	for i in 0 ..< game.length {
-		cell := game.body[i]
+		cell := Cell {
+			col = i32(GRID_COLS / 2 - i),
+			row = GRID_ROWS / 2,
+		}
+
+		idx := body_index(game, i)
+		game.body[idx] = cell
 		game.occupied[cell.row][cell.col] = true
 	}
 
@@ -111,6 +99,10 @@ food_spawn :: proc(game: ^Game) {
 			target -= 1
 		}
 	}
+}
+
+body_index :: proc(game: ^Game, i: int) -> int {
+	return (game.head + i) % MAX_BODY
 }
 
 main :: proc() {
@@ -161,23 +153,22 @@ main :: proc() {
 					delta_col = 1
 				}
 
+				old_head := game.body[game.head]
 				new_head := Cell {
-					col = (game.body[0].col + delta_col + GRID_COLS) % GRID_COLS,
-					row = (game.body[0].row + delta_row + GRID_ROWS) % GRID_ROWS,
+					col = (old_head.col + delta_col + GRID_COLS) % GRID_COLS,
+					row = (old_head.row + delta_row + GRID_ROWS) % GRID_ROWS,
 				}
 				grow := new_head == game.food
 
 				if !grow {
-					tail := game.body[game.length - 1]
+					tail := game.body[body_index(&game, game.length - 1)]
 					game.occupied[tail.row][tail.col] = false
 				} else {
 					game.length += 1
 				}
 
-				for i := game.length - 1; i > 0; i -= 1 {
-					game.body[i] = game.body[i - 1]
-				}
-				game.body[0] = new_head
+				game.head = (game.head - 1 + MAX_BODY) % MAX_BODY
+				game.body[game.head] = new_head
 				if game.occupied[new_head.row][new_head.col] {
 					game.state = .Dead
 					break
@@ -206,10 +197,8 @@ main :: proc() {
 		}
 
 		for i in 0 ..< game.length {
-			rl.DrawRectangleRec(
-				cell_rect(game.body[i].col, game.body[i].row),
-				i == 0 ? rl.LIME : rl.GREEN,
-			)
+			cell := game.body[body_index(&game, i)]
+			rl.DrawRectangleRec(cell_rect(cell.col, cell.row), i == 0 ? rl.LIME : rl.GREEN)
 		}
 
 		for col in 0 ..< GRID_COLS {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "snake-10-ring-buffer",
+  "currentLessonId": "snake-11-allocation-counter",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -275,8 +275,10 @@
       "description": "Sabit body array'ini kaydırmak yerine head index'iyle dairesel kullanacak şekilde yeniden yaz.",
       "world": "World 2 · Snake",
       "url": "/worlds/02-snake/10-ring-buffer",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
     },
     {
       "id": "snake-11-allocation-counter",
