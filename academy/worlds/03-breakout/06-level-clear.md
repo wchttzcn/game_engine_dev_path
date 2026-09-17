@@ -2,7 +2,6 @@
 title: "3.6 — Bölümü temizle"
 description: "Son tuğla kırılınca oyunu kazanılmış say; bölümün bittiğini hangi veriden okuduğuna karar ver."
 section: Tuğla duvarı
-next: false
 ---
 
 # 3.6 — Bölümü temizle
@@ -116,3 +115,6 @@ oynanabilirliği değil hissi değiştiriyor: kırılan tuğlanın ne kadar tatm
 olduğunu ayarlayabilmek için önce ayarlanabilir hale getirmek gerekiyor.
 
 **“Breakout 3.6 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım kırılan tuğlanın yerinde bir şey doğurmak:
+[3.7 — Parçacık havuzu](/worlds/03-breakout/07-particle-pool).

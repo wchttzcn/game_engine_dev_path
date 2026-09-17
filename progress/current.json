@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-06-level-clear",
+  "currentLessonId": "breakout-07-particle-pool",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -378,6 +378,87 @@
       "evidence": [
         "games/breakout/main.odin"
       ]
+    },
+    {
+      "id": "breakout-07-particle-pool",
+      "title": "3.7 — Parçacık havuzu",
+      "description": "Tuğla kırılınca kısa ömürlü parçacıklar doğuran, sabit kapasiteli bir havuz kur.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/07-particle-pool",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-08-powerup-drop",
+      "title": "3.8 — Güçlendirmeyi düşür ve yakala",
+      "description": "Tuğladan belirli bir olasılıkla düşen bir güçlendirmeyi raketle yakala ve süreli etkisini başlat.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/08-powerup-drop",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-09-stale-index",
+      "title": "3.9 — Ölü slota tutunan index",
+      "description": "Havuzdaki bir slotun yeniden kullanılmasıyla ortaya çıkan bayat referansı görünür kıl ve çöz.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/09-stale-index",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-10-hitstop",
+      "title": "3.10 — Hitstop",
+      "description": "Tuğla kırıldığı anda simülasyonu birkaç frame dondurarak vuruşa ağırlık kat.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/10-hitstop",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-11-screen-shake",
+      "title": "3.11 — Kamera sarsıntısı",
+      "description": "Vuruşta ekranı sarsan, tek bir trauma değerinden türeyen ve zamanla sönen bir kamera kur.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/11-screen-shake",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-12-easing-curves",
+      "title": "3.12 — Eğriler",
+      "description": "Bir değerin A'dan B'ye lineer değil, eğrisel gitmesiyle parçacıkların sönüşüne his kat.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/12-easing-curves",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-13-sound-variation",
+      "title": "3.13 — Ses ve varyasyon",
+      "description": "Dosya kullanmadan kendi sample buffer'ından bir ses üret ve her çalışta pitch'ini dar bir aralıkta rastgele seç.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/13-sound-variation",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-14-tuning-panel",
+      "title": "3.14 — F1 ayar paneli",
+      "description": "3.10-3.13'ün sabitlerini tek bir Tuning struct'ında topla ve F1 ile açılan raygui panelinden runtime'da değiştir.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/14-tuning-panel",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-15-two-profiles",
+      "title": "3.15 — İki profil, aynı karşılaşma",
+      "description": "İki adlandırılmış Tuning değeri tut, bir tuşla aralarında geçiş yap ve aynı oyunu iki his profiliyle karşılaştır.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/15-two-profiles",
+      "status": "not_started",
+      "evidence": []
     }
   ],
   "skills": [
