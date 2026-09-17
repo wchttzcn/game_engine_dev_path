@@ -341,8 +341,10 @@
       "description": "Topu üç duvardan sektir, rakete çarpınca geri gönder ve alt kenardan düşünce kaybettir.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/03-bounce",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     }
   ],
   "skills": [
@@ -357,9 +359,10 @@
         "pong-10-score-and-reset",
         "pong-15-collision-shapes",
         "snake-01-draw-grid",
-        "breakout-01-paddle"
+        "breakout-01-paddle",
+        "breakout-03-bounce"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok. 3.1'de aynı clamp'i yeni eksende (x, ekran genişliği) kurdu ve sağ kenarda uzak kenarı (x + width) ilk denemede doğru seçti — 1.10'da sağ tarafta yaptığı hatanın tekrarı olmadı. Paddle merkez/üst kenar ayrımı hâlâ sınanmadı.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok. 3.1'de aynı clamp'i yeni eksende (x, ekran genişliği) kurdu ve sağ kenarda uzak kenarı (x + width) ilk denemede doğru seçti — 1.10'da sağ tarafta yaptığı hatanın tekrarı olmadı. Paddle merkez/üst kenar ayrımı hâlâ sınanmadı. 3.3'te üç duvarın üçünde de uzak kenarı (pos.x - radius, pos.x + radius, pos.y - radius) ipucusuz doğru seçti; 1.10'daki yakın/uzak kenar hatası tekrarlamadı. Ayrı bir kenar hatası çizim tarafında çıktı: DrawText'in posX'i metnin sol üst köşesi olduğu halde SCREEN_WIDTH / 2 verdi, yazı ekranın ortasından başlayıp sağ kenarı aştı; MeasureText ile ortalamayı gösterildikten sonra kurdu. Merkez/kenar ayrımı geometri tarafında sağlam, UI tarafında ilk kez sınandı ve ilk denemede kaçtı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -443,12 +446,14 @@
       "status": "learning",
       "lessons": [
         "pong-06-wall-bounce",
-        "pong-08-collision-response"
+        "pong-08-collision-response",
+        "breakout-03-bounce"
       ],
-      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık.",
+      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık. 3.3'te üç duvarda ve rakette konumu sınıra sabitleyip sonra işareti çevirme kalıbını dört kez ipucusuz uyguladı; 1.6/1.8'de İpucu 2-3 gerektiren ayrım artık refleks. vel.y > 0 guard'ını da kendi koydu, raketin içinde titreme yok.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -486,13 +491,15 @@
         "pong-10-score-and-reset",
         "pong-12-match-over",
         "pong-13-update-render",
-        "snake-06-self-collision"
+        "snake-06-self-collision",
+        "breakout-03-bounce"
       ],
-      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. 1.13'te frame döngüsünü update_game/draw_game olarak ikiye ayırdı; parametreyi ^Game seçip çağrıyı &game ile yaptı. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı. 2.6'da game_reset'i kendi inisiyatifiyle çıkardı ve 1.12'de açık kalan noktayı kapattı: başlangıç kurulumu da game_reset'ten geçiyor, 'yeni oyun' tek yerde tanımlı. İlk denemede tick_timer'ı reset kapsamı dışında bıraktı, uyarı sonrası ekledi.",
+      "note": "1.12'de game_reset'i kendi kurdu: ^Game alıyor, skorları sıfırlıyor ve position/velocity'yi kopyalamak yerine ball_reset'e devrediyor. İlk denemesi servis yönünü skordan türetiyordu, uyarı sonrası sabit yöne çekti. 1.13'te frame döngüsünü update_game/draw_game olarak ikiye ayırdı; parametreyi ^Game seçip çağrıyı &game ile yaptı. Açık kalan: main'deki başlangıç kurulumu hâlâ game_reset'ten geçmiyor, 'yeni maç' iki yerde tanımlı. 2.6'da game_reset'i kendi inisiyatifiyle çıkardı ve 1.12'de açık kalan noktayı kapattı: başlangıç kurulumu da game_reset'ten geçiyor, 'yeni oyun' tek yerde tanımlı. İlk denemede tick_timer'ı reset kapsamı dışında bıraktı, uyarı sonrası ekledi. 3.3'te game_reset'i üç turda doğru kurdu. İlk tur yalnız topu sıfırlıyordu, raket kabul kriterinde olduğu halde dışarıda kaldı. İkinci turda raketi ekledi ama game.player.rect = {x, y} yazarak tüm struct'ı atadı ve width/height sıfırlandı — raket görünmez oldu, çarpışma hiç tetiklenmedi, compiler sessiz kaldı. Odin compound literal'in yazılmayan alanları sıfırladığı ve asıl sorunun başlangıç durumunun iki yerde tanımlı olması olduğu gösterilince üçüncü turda main'i game: Game + game_reset(&game)'e indirdi. 2.6'da kapattığı 'yeni oyun tek yerde' noktası yeni dosyada kendiliğinden taşınmadı. Çağrı yerinde game.state = .Playing tekrarı kaldı, review'da not edildi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -502,13 +509,15 @@
       "lessons": [
         "pong-11-serve-state",
         "pong-12-match-over",
-        "snake-06-self-collision"
+        "snake-06-self-collision",
+        "breakout-03-bounce"
       ],
-      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde). 2.6'da Playing/Dead enum'ını, update ve draw'un state'e göre dallanmasını ve R restart'ını kurdu; restart'ı yine switch içinde Dead kolunda tuttu, bu kez doğru yerde (transition değil, Dead'e özel input). 1.12'de açık kalan nokta burada tekrarladı: state .Dead olduktan sonra tick catch-up döngüsü aynı frame devam ediyordu, uyarı sonrası break ekledi. State'i ekrana yansıtmada iki tur gerekti: önce Dead'de yalnız metin çizip tahtayı gizledi, sonra draw switch'ini tamamen kaldırırken Dead metnini de sildi; üçüncü denemede kalıcı çizim + state'e bağlı overlay ayrımını doğru kurdu.",
+      "note": "Üç state'li enum'ı, skor sonrası dallanmayı ve state'e göre ayrı draw switch'ini kurdu. Restart'ın transition değil tam yeniden kurulum olduğunu — yani switch'in dışına ait olduğunu — ilk denemede Match_Over koluna koymuştu, gözlem sonrası düzeltti. Açık kalan: bir kolda state değiştikten sonra kolun kalanının aynı frame çalışmaya devam ettiğini henüz fark etmedi (bugün zararsız, top merkezde). 2.6'da Playing/Dead enum'ını, update ve draw'un state'e göre dallanmasını ve R restart'ını kurdu; restart'ı yine switch içinde Dead kolunda tuttu, bu kez doğru yerde (transition değil, Dead'e özel input). 1.12'de açık kalan nokta burada tekrarladı: state .Dead olduktan sonra tick catch-up döngüsü aynı frame devam ediyordu, uyarı sonrası break ekledi. State'i ekrana yansıtmada iki tur gerekti: önce Dead'de yalnız metin çizip tahtayı gizledi, sonra draw switch'ini tamamen kaldırırken Dead metnini de sildi; üçüncü denemede kalıcı çizim + state'e bağlı overlay ayrımını doğru kurdu. 3.3'te Playing/Lost enum'ını, R'yi switch'in dışında ve boş .Lost koluyla topu durdurmayı ilk denemede doğru kurdu. Çizim tarafında 2.6'daki hata tekrarladı: .Lost kolunda yalnız metin çizip top ve raketi gizledi; kalıcı sahne + state'e bağlı overlay ayrımı hatırlatılınca düzeltti. State değiştikten sonra kolun kalanının aynı frame çalışması (bottom .Lost yapıyor, altındaki raket kontrolü yine de çalışıyor) üçüncü kez görüldü; bugün zararsız olduğu için gözlem olarak bırakıldı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -564,7 +573,8 @@
         "snake-01-draw-grid",
         "snake-07-occupancy-grid",
         "breakout-01-paddle",
-        "breakout-02-ball"
+        "breakout-02-ball",
+        "breakout-03-bounce"
       ],
       "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi. 3.1'de Paddle'ı Pong'dan olduğu gibi taşıdı: x/y/width/height alanları + aynı dört sayıyı tutan rect alanı, her frame elle senkron edilen bir mirror. Davranış doğru ama türetilmiş ikinci temsil kalıbı yeni dosyada kendiliğinden tekrarlandı; rl.Rectangle'ın zaten o dört alan olduğunu fark etmedi. Ayrıca başlangıç x'i (SCREEN_WIDTH / 2) - 50 ile yazıldı, yani raket genişliği 50/100 olarak iki yerde kodlu. Review'da ikisi de gösterildi; aynı oturumda düzeltti: Paddle yalnız rect + speed tutuyor, clamp/input/çizim tek alandan okuyor ve PADDLE_WIDTH sabiti hem başlangıç x'ini hem genişliği besliyor. Kalıbı kendi fark etmesi tuğla duvarında (3.4) sınanacak. 3.2'de Ball'a ayrı bir speed alanı eklemedi — velocity'nin zaten hem yön hem hız olduğu Deep Dive'da yazıyordu ama ipucu açılmadan doğru tarafa yerleşti. 3.1 düzeltmesinin ardından aynı dosyada ikinci doğru uygulama.",
       "lastRecallAt": null,
