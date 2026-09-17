@@ -94,6 +94,24 @@ main :: proc() {
 				game.ball.pos.y = game.player.rect.y - game.ball.radius
 				game.ball.vel.y = -game.ball.vel.y
 			}
+
+			for &brick in game.bricks {
+				if !brick.alive do continue
+				if rl.CheckCollisionCircleRec(game.ball.pos, game.ball.radius, brick.rect) {
+					dx := game.ball.pos.x - (brick.rect.x + brick.rect.width / 2)
+					dy := game.ball.pos.y - (brick.rect.y + brick.rect.height / 2)
+					overlap_x := (brick.rect.width / 2 + game.ball.radius) - abs(dx)
+					overlap_y := (brick.rect.height / 2 + game.ball.radius) - abs(dy)
+					if overlap_x < overlap_y {
+						game.ball.vel.x = -game.ball.vel.x
+					} else {
+						game.ball.vel.y = -game.ball.vel.y
+					}
+					brick.alive = false
+					break
+				}
+			}
+
 		case .Lost:
 		}
 

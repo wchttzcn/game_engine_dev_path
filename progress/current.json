@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-05-brick-collision",
+  "currentLessonId": "breakout-06-level-clear",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -363,8 +363,10 @@
       "description": "Topu canlı tuğlalarla çarpıştır, çarpılanı düşür ve topun hangi yüzden girdiğine bakarak doğru ekseni ters çevir.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/05-brick-collision",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-06-level-clear",
@@ -478,9 +480,10 @@
       "lessons": [
         "pong-06-wall-bounce",
         "pong-08-collision-response",
-        "breakout-03-bounce"
+        "breakout-03-bounce",
+        "breakout-05-brick-collision"
       ],
-      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık. 3.3'te üç duvarda ve rakette konumu sınıra sabitleyip sonra işareti çevirme kalıbını dört kez ipucusuz uyguladı; 1.6/1.8'de İpucu 2-3 gerektiren ayrım artık refleks. vel.y > 0 guard'ını da kendi koydu, raketin içinde titreme yok.",
+      "note": "Yön kararını 1.6'daki abs kalıbını yeni bağlama taşıyarak kendi kurdu. Penetration'ı önce update sırasını çevirerek dolaylı çözdü — çalışan ama dt'ye bağımlı bir çözüm; kalıcı düzeltmenin neden ayrı bir iş olduğunu İpucu 1 ve sayısal kenar açıklaması sonrası uyguladı. Position correction ile yön kararının iki ayrı iş olduğu artık kodda ayrık. 3.3'te üç duvarda ve rakette konumu sınıra sabitleyip sonra işareti çevirme kalıbını dört kez ipucusuz uyguladı; 1.6/1.8'de İpucu 2-3 gerektiren ayrım artık refleks. vel.y > 0 guard'ını da kendi koydu, raketin içinde titreme yok. 3.5'te yanıt ilk kez bilinmeyen yüzle geldi: 3.3'te hangi duvara çarpıldığı if'in kendisinden belliydi, burada eksen çalışma zamanında overlap karşılaştırmasından çıkıyor. Küçük overlap'in girilen yüz olduğunu doğru yönde kullandı, tuğla aynı frame öldüğü için position correction yazmadı — 3.3'teki kalıbı körlemesine kopyalamadığı anlamına geliyor. Overlap formülü ders metninde hazır verildiği için bağımsız sinyal değil.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -493,12 +496,14 @@
       "status": "learning",
       "lessons": [
         "pong-07-paddle-collision",
-        "pong-08-collision-response"
+        "pong-08-collision-response",
+        "breakout-05-brick-collision"
       ],
-      "note": "Overlap testini iki rakete ayrı ayrı uyguladı; hangi rakete çarptığını ayırt etmesi gerektiğini yapısal uyarı sonrası tek || ifadesini bölerek çözdü. Detection ile response ayrımını koruyor. Kendi collision testini elle yazması henüz görülmedi.",
+      "note": "Overlap testini iki rakete ayrı ayrı uyguladı; hangi rakete çarptığını ayırt etmesi gerektiğini yapısal uyarı sonrası tek || ifadesini bölerek çözdü. Detection ile response ayrımını koruyor. Kendi collision testini elle yazması henüz görülmedi. 3.5'te collision testi ilk kez tek bir şekle değil, bir array'in üstünde çalıştı: ölü elemanı atlayan, çarpışmayanı atlayan ve ilk eşleşmede duran tarama tek denemede doğru kuruldu. Raket testindeki vel.y > 0 guard'ını tuğla döngüsüne taşımadı — tuğlaya her yönden çarpılabildiği için doğru karar. Kendi collision testini elle yazması hâlâ görülmedi.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -652,12 +657,14 @@
       "status": "learning",
       "lessons": [
         "snake-04-direction-step",
-        "snake-05-input-buffer"
+        "snake-05-input-buffer",
+        "breakout-05-brick-collision"
       ],
-      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü. 2.5'te enum'ın zero value'sunu (Direction sıfırıncı üye .Up) hesaba katmadı: next_direction'a başlangıç vermeyince oyun ilk tick'te yukarı sapıyordu. Uyarı sonrası ikisini de .Right'a çekti.",
+      "note": "2.4'te head := game.body[0] yazıp kopyayı değiştirdi, geri yazmadı; yılan iki tick'te tek hücreye çöktü. Odin kullanılmayan local'e hata vermediği için compiler sessiz kaldı. İpucu 1 ile (kopya mı referans mı) kendisi düzeltti. Pong'da ^Game ile çalıştığı için ayrımı ilk kez burada gördü. 2.5'te enum'ın zero value'sunu (Direction sıfırıncı üye .Up) hesaba katmadı: next_direction'a başlangıç vermeyince oyun ilk tick'te yukarı sapıyordu. Uyarı sonrası ikisini de .Right'a çekti. 3.5'te aynı array iki döngüde farklı şekilde dolaşıldı: çizimde for brick (okuma), çarpışmada for &brick (yazma). 2.4'teki kopyaya-yazma hatası tekrarlamadı ve derleyici hatasına hiç düşmedi. Ders & işaretini ve hata metnini önceden gösterdiğinden bağımsız sinyal sayılmıyor; ayrım uyarısız bir derste sınanmalı.",
       "lastRecallAt": null,
       "evidence": [
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -693,12 +700,14 @@
       "lessons": [
         "snake-06-self-collision",
         "snake-07-occupancy-grid",
-        "snake-09-food-placement"
+        "snake-09-food-placement",
+        "breakout-05-brick-collision"
       ],
-      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor. 2.9'da tarama ilk kez yazma yönünde kullanıldı: tekrar-deneme yerine sabit iki taramalı say-ve-seç yöntemini kendi kurdu ve yöntemin neden her zaman sonlandığını doğru anladı. Üç hata review'da çıktı: sayaç boş hücreleri değil tüm hücreleri saydı, sayaç karşılaştırmadan önce arttığı için target=0 hiç eşleşmedi ve empty_count==0 guard'ı yoktu (rand.int_max(0) panic'ler). Üçünü de gösterildikten sonra düzeltti.",
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor. 2.9'da tarama ilk kez yazma yönünde kullanıldı: tekrar-deneme yerine sabit iki taramalı say-ve-seç yöntemini kendi kurdu ve yöntemin neden her zaman sonlandığını doğru anladı. Üç hata review'da çıktı: sayaç boş hücreleri değil tüm hücreleri saydı, sayaç karşılaştırmadan önce arttığı için target=0 hiç eşleşmedi ve empty_count==0 guard'ı yoktu (rand.int_max(0) panic'ler). Üçünü de gösterildikten sonra düzeltti. 3.5'te tarama üçüncü şekliyle geldi: sorgu değil, ilk eşleşmede duran ve elemanı değiştiren tarama. continue ile ölü eleme, break ile frame başına tek kırılma tek denemede doğru; 2.9'daki sayaç sırası hatalarına benzer bir sıra hatası çıkmadı.",
       "lastRecallAt": null,
       "evidence": [
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
