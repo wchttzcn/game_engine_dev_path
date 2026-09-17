@@ -97,6 +97,13 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
   that applies the concept in a new situation, without a separate reporting task.
 - Review correctness, ownership/lifetimes, data layout, relevant performance,
   architecture, game feel, and debuggability in proportion to the current lesson.
+- Show idiomatic practice, not only an acceptance-criteria verdict; Mücahit asked
+  for this explicitly. When code passes but a better shape exists, show the shape
+  with the concrete reason it is better: a language semantic that bites (an Odin
+  compound literal zeroing the fields it omits), a duplicated definition collapsed
+  into one, a name that misreports what a value holds, a lifetime or formatting
+  hazard. Tie it to the code in front of you; do not turn it into a general style
+  lecture, and keep it separate from what actually blocks the lesson.
 - Distinguish compiler success, behavioral correctness, and demonstrated
   understanding. State only what was actually observed; describe unverified claims.
 - Keep engine extraction tied to demonstrated reuse. Justify exercise constraints
