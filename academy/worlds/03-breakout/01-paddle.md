@@ -32,11 +32,13 @@ yatay, `x` ekseninde hareket ediyor ve sınırı ekran genişliği.
 Clamp fikri birebir aynı:
 
 ```odin
-if paddle.x < 0 do paddle.x = 0
-if paddle.x + paddle.width > SCREEN_WIDTH do paddle.x = SCREEN_WIDTH - paddle.width
+if paddle.rect.x < 0 do paddle.rect.x = 0
+if paddle.rect.x + paddle.rect.width > SCREEN_WIDTH {
+	paddle.rect.x = SCREEN_WIDTH - paddle.rect.width
+}
 ```
 
-Sağ kenarda `paddle.x`'i değil `paddle.x + paddle.width`'i kontrol ettiğine
+Sağ kenarda `paddle.rect.x`'i değil `paddle.rect.x + paddle.rect.width`'i kontrol ettiğine
 dikkat et — raketin sağ ucu ekranı geçmemeli, sol köşesi değil.
 
 Pencere boyutu sende, ama Breakout'ta üstte tuğla duvarı olacağı için Pong'un
@@ -49,20 +51,29 @@ Pencere boyutu sende, ama Breakout'ta üstte tuğla duvarı olacağı için Pong
   gibi `main` içinde inline tutabilirsin.
 
 ::: details İpucu 1 — Ne tutman gerekiyor
-Raketin çizilmesi ve hareket ettirilmesi için gereken en küçük veri: `x`, `y`,
-`width`, `height`, `speed`. Pong'daki `Paddle` struct'ının aynısı.
+Raketin çizilmesi ve hareket ettirilmesi için gereken en küçük veri: nerede
+olduğu, ne kadar büyük olduğu ve ne kadar hızlı gittiği. İlk ikisi tek bir
+`rl.Rectangle`'a sığıyor — `x`, `y`, `width`, `height` alanlarını zaten o taşıyor,
+yani aynı dört sayıyı struct'ta ikinci kez tutmana gerek yok:
+
+```odin
+Paddle :: struct {
+	rect:  rl.Rectangle,
+	speed: f32,
+}
+```
 :::
 
 ::: details İpucu 2 — Delta time
-`dt := rl.GetFrameTime()` ve hareket `paddle.x += paddle.speed * dt`.
+`dt := rl.GetFrameTime()` ve hareket `paddle.rect.x += paddle.speed * dt`.
 `speed` saniye başına pixel, yani `400` gibi bir değer. Frame başına sabit
 ekleme yaparsan hız FPS'e bağlanır.
 :::
 
 ::: details İpucu 3 — Input ve çizim
 ```odin
-if rl.IsKeyDown(.A) do game.paddle.x -= game.paddle.speed * dt
-if rl.IsKeyDown(.D) do game.paddle.x += game.paddle.speed * dt
+if rl.IsKeyDown(.A) do game.player.rect.x -= game.player.speed * dt
+if rl.IsKeyDown(.D) do game.player.rect.x += game.player.speed * dt
 ```
 `IsKeyDown`, `IsKeyPressed` değil — raket tuş basılı tutuldukça hareket etmeli.
 Çizim için `rl.DrawRectangleRec` ve bir `rl.Rectangle`.

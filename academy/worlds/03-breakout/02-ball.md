@@ -29,7 +29,7 @@ Pong'un topuyla aynı fikir: konum bir vektör, velocity bir vektör, her frame
 
 Breakout'a özgü tek şey başlangıç yönü. Pong'da top yatay servis ediliyordu;
 burada tuğlalar yukarıda olduğu için topun **yukarı** gitmesi gerekiyor. raylib'de
-`y` ekseni aşağı doğru büyür, yani yukarı gitmek negatif `velocity_y` demek.
+`y` ekseni aşağı doğru büyür, yani yukarı gitmek negatif bir `y` velocity'si demek.
 
 Topu rakete yakın bir yerden, hafif eğimli başlat — tam dikey bir top sadece iki
 duvar arasında gidip gelir, oyun olmaz.
@@ -41,21 +41,31 @@ duvar arasında gidip gelir, oyun olmaz.
   açılır açılmaz hareket etsin.
 
 ::: details İpucu 1 — Ne tutman gerekiyor
-`x`, `y`, `radius`, `velocity_x`, `velocity_y`. Pong'daki `Ball` struct'ının
-aynısı; rengi sabit tutabilirsin.
+Konum, velocity ve yarıçap. Konum ile velocity'nin ikisi de iki bileşenli, yani
+her biri tek bir `rl.Vector2`'ye sığıyor:
+
+```odin
+Ball :: struct {
+	pos, vel: rl.Vector2,
+	radius:   f32,
+}
+```
+
+Rengi sabit tutabilirsin.
 :::
 
 ::: details İpucu 2 — Güncelleme
 ```odin
-game.ball.x += game.ball.velocity_x * dt
-game.ball.y += game.ball.velocity_y * dt
+game.ball.pos += game.ball.vel * dt
 ```
-`speed` gibi ayrı bir alan tutmana gerek yok; velocity zaten hem yön hem hız.
+`rl.Vector2` bir `[2]f32` olduğu için aritmetik bileşen bazlı çalışıyor; iki
+ekseni ayrı satırlarda toplamana gerek yok. `speed` gibi ayrı bir alan da
+tutmana gerek yok; velocity zaten hem yön hem hız.
 :::
 
 ::: details İpucu 3 — Başlangıç değerleri
-`velocity_y` negatif olmalı ki top yukarı gitsin. `{velocity_x = 220, velocity_y = -260}`
-gibi bir çift iyi bir başlangıç. Topu raketin biraz üstünden başlat.
+`vel.y` negatif olmalı ki top yukarı gitsin. `vel = {220, -260}` gibi bir çift
+iyi bir başlangıç. Topu raketin biraz üstünden başlat.
 :::
 
 ::: details Deep Dive — Neden ayrı bir `speed` alanı tutmuyoruz?
