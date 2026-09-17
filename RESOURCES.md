@@ -37,6 +37,17 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   verirken hangi temsilin beklendiği, `TextFormat`'in sabit buffer davranışı ve
   `fmt.bprintf` üzerinden Odin verb'lerini kullanması. 1.10 bu iki dosyadan
   doğrulandı.
+- `vendor:raylib/easings.odin` — kurulu derleyicideki easing procedure'ları.
+  Hepsi `proc(t, b, c, d: f32) -> f32` imzasını paylaşır: `t` geçen süre, `b`
+  başlangıç değeri, `c` toplam değişim, `d` toplam süre. Şunun için:
+  `EaseQuadOut`, `EaseBackOut`, `EaseElasticOut` gibi eğrilerin doğru parametre
+  sırası. Dosya raylib'in `easings.h` çevirisidir; kurulu derleyiciyle
+  doğrulandı.
+- `vendor:raylib` audio modülü — `InitAudioDevice`, `LoadSoundFromWave`,
+  `SetSoundPitch`, `PlaySound` ve `Wave` struct'ı (`frameCount`, `sampleRate`,
+  `sampleSize`, `channels`, `data`). Şunun için: dosyaya bağlı kalmadan, kendi
+  sample buffer'ından ses üretmek. `Wave`'i elle doldurup `LoadSoundFromWave`'e
+  vermenin çalıştığı kurulu derleyicide çalıştırılarak doğrulandı.
 - [Odin vendor:raylib README — çalışan başlangıç örneği](https://github.com/odin-lang/Odin/blob/master/vendor/raylib/README.md#basic-example)
   Pencere açan en küçük tam program. Şunun için: game loop iskeletinin
   doğrulanması.
@@ -59,6 +70,14 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   var mı?" taraması. Kesin imza için Odin binding referansına bak; isimler
   eşleşir, tipler Odin'de farklıdır.
 
+- [raygui — raysan5'in immediate-mode GUI kütüphanesi](https://github.com/raysan5/raygui)
+  Yazarının kendi deposu; kütüphaneyi “a simple and easy-to-use immediate-mode-gui
+  library” diye tanımlıyor ve control listesini verir. Şunun için: runtime ayar
+  paneli. Odin tarafında ayrı bir paket değil — binding `vendor:raylib` içinde,
+  `$ODIN_ROOT/vendor/raylib/raygui.odin` dosyasında ve aynı `package raylib`
+  altında; yani `rl.GuiSlider` mevcut `import rl "vendor:raylib"` ile çağrılır,
+  ek kurulum yok. Kurulu derleyiciyle derlenip link edildiği doğrulandı.
+
 ### Oyun sistemleri
 
 - [Game Programming Patterns — Robert Nystrom](https://gameprogrammingpatterns.com/)
@@ -66,7 +85,10 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   [Game Loop](https://gameprogrammingpatterns.com/game-loop.html) (update/render
   ayrımı), [State](https://gameprogrammingpatterns.com/state.html) (match state,
   FSM), [Update Method](https://gameprogrammingpatterns.com/update-method.html)
-  (entity başına davranış).
+  (entity başına davranış) ve
+  [Object Pool](https://gameprogrammingpatterns.com/object-pool.html) (sabit
+  kapasiteli havuz, boş slot arama ve slot yeniden kullanımının getirdiği
+  tehlikeler).
 - [Gaffer On Games — Glenn Fiedler](https://gafferongames.com/)
   Şunun için:
   [Integration Basics](https://gafferongames.com/post/integration_basics/)
@@ -74,6 +96,15 @@ Yanlış çıkan veya yüzeysel kalan kaynak listede tutulmaz, silinir.
   [Fix Your Timestep!](https://gafferongames.com/post/fix_your_timestep/)
   (delta time, sabit timestep, accumulator). İkincisi Pong'un ihtiyacından
   derindir; delta time sorusu büyüdüğünde dönülecek kaynak.
+- [Squirrel Eiserloh — Math for Game Programmers: Juicing Your Cameras With Math (GDC 2016)](https://archive.org/details/GDC2016Eiserloh)
+  Konuşmanın serbest erişilebilir arşivi. Şunun için: kamera sarsıntısını ayrı
+  ayrı efektler yerine `trauma` adlı tek bir değerden türetmek, trauma'nın zamanla
+  sönmesi ve sarsıntı büyüklüğünün trauma'nın karesi/küpü olarak alınması.
+- [Jan Willem Nijman (Vlambeer) — The Art of Screenshake](https://archive.org/details/the-art-of-screenshake)
+  INDIGO Classes 2013 konuşmasının serbest arşivi. Şunun için: aynı oyuna tek tek
+  eklenen küçük geri bildirim katmanlarının (vuruşta duraklama, sarsıntı, parçacık,
+  ses) hissi nasıl değiştirdiği; efektleri ayrı ayrı açıp kapatarak karşılaştırma
+  fikri buradan geliyor.
 - [MDN — 2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
   AABB ve circle-circle testleri, broad/narrow phase ayrımı. Şunun için:
   collision mantığının JavaScript arka planından okunması. Circle-rectangle
@@ -183,8 +214,11 @@ yazılmadan önce araştırılacak.
   türetiyor — `speed * dt` adımı hedefe kalan mesafeden büyükse salınım
   kaçınılmazdır — ama control theory tarafında doğrulanmış bir birincil kaynak
   henüz seçilmedi.
-- **Dear ImGui Odin binding'i**: Breakout'ta (Dünya 3) gerekecek; kurulum ve
-  binding seçimi o ders yazılırken güncel kaynaklarla doğrulanacak.
+- **Dear ImGui Odin binding'i**: çözüldü, boşluk değil. Kurulu derleyicinin
+  `vendor/` koleksiyonunda Dear ImGui yok; `microui` ve `raylib/raygui.odin` var.
+  Dünya 3'ün ayar paneli raygui ile yazılıyor: oyun zaten raylib'e bağlı, binding
+  aynı paketin içinde ve ek kurulum gerektirmiyor. Dear ImGui'ye dönme kararı,
+  raygui'nin yetmediği somut bir araç ihtiyacı çıkarsa verilir.
 - **macOS grafik API'si / kendi renderer'ın**: Dünya 1-2 kapsamı dışında.
 - **Cache locality ve AoS/SoA ölçümü**: Snake'te (Dünya 2) gerekecek; ölçüm
   yöntemi için kaynak henüz seçilmedi.
