@@ -14,11 +14,12 @@ tuğlanın konumunu index'inden türet.
 `Game` içine sabit boyutlu bir tuğla array'i ekle. Her tuğla bir dikdörtgen ve
 hâlâ ayakta olup olmadığını söyleyen bir bayrak tutsun. Duvarı `game_reset`
 içinde tek bir döngüde kur, her tuğlanın konumunu index'inden hesapla ve ayakta
-olanları çiz.
+olanları çiz. Tuğlalar ekranda birbirinden ayırt edilebilsin.
 
 ## Ne zaman bitti?
 
 - Ekranın üstünde satır ve sütun düzeninde bir tuğla duvarı görünüyor.
+- Tuğlalar tek tek seçilebiliyor; duvar tek bir beyaz blok gibi görünmüyor.
 - Tuğla sayısı satır ve sütun sabitlerinden türüyor; adet elle sayılmıyor.
 - Her tuğlanın konumu tek bir formülden geliyor; koordinatlar tek tek yazılmıyor.
 - Duvar `game_reset` içinde kuruluyor, `R` duvarı yeniden diziyor.
@@ -63,6 +64,25 @@ for i in 0 ..< len(game.bricks) {
 `len` sabit boyutlu array'de derleme zamanı bir sabit; ayrı bir sayaç tutmana
 gerek yok.
 
+Izgara hücresi ile tuğlanın kendisi aynı şey değil. `BRICK_WIDTH` bir **hücrenin**
+genişliği; tuğla o hücrenin içine biraz daralarak oturur. Aradaki pay duvarı
+görünür kılan şey: bitişik ve aynı renk dikdörtgenler ekranda tek bir beyaz blok
+olarak okunur, 50 tuğla olduğunu göremezsin.
+
+```odin
+BRICK_PAD :: 4
+
+rect = {
+	x     = f32(col) * BRICK_WIDTH + BRICK_PAD,
+	width = BRICK_WIDTH - BRICK_PAD * 2,
+	// y ve height de aynı şekilde
+}
+```
+
+Payı `rect`'in kendisine yaz, çizerken daraltma. 3.5'te çarpışma testi bu aynı
+`rect`'i kullanacak; çizilen dikdörtgen ile çarpışan dikdörtgen ayrışırsa top
+görünmeyen bir kenara çarpar ve sebebini ekranda bulamazsın.
+
 Bir ayrıntı: `i`, `row` ve `col` birer `int`, `rl.Rectangle`'ın alanları ise
 `f32`. Dönüşümü çarpımdan **önce** yaz — `f32(col) * BRICK_WIDTH`, `f32(col *
 BRICK_WIDTH)` değil. Bu duvarda ikisi de aynı sayıyı verir, ama cast'i sınırın
@@ -84,7 +104,8 @@ için de böyle yapmıştın.
 Tuğla genişliğini elle seçmek yerine ekran genişliğinden türetebilirsin:
 `BRICK_WIDTH :: SCREEN_WIDTH / BRICK_COLS`. O zaman sütun sayısını değiştirdiğinde
 duvar kendiliğinden yeniden sığar. Üstte biraz boşluk bırakmak için satır
-hesabına sabit bir offset ekle.
+hesabına sabit bir offset ekle. Tuğlaları birbirinden ayırmak için de hücre ile
+tuğla arasına sabit bir pay koy — hücre ızgarası aynı kalır, tuğla küçülür.
 :::
 
 ::: details İpucu 3 — Kurulum döngüsü
@@ -95,10 +116,10 @@ for i in 0 ..< len(game.bricks) {
 	game.bricks[i] = Brick {
 		alive = true,
 		rect = {
-			x = f32(col) * BRICK_WIDTH,
-			y = BRICK_TOP + f32(row) * BRICK_HEIGHT,
-			width = BRICK_WIDTH,
-			height = BRICK_HEIGHT,
+			x = f32(col) * BRICK_WIDTH + BRICK_PAD,
+			y = BRICK_TOP + f32(row) * BRICK_HEIGHT + BRICK_PAD,
+			width = BRICK_WIDTH - BRICK_PAD * 2,
+			height = BRICK_HEIGHT - BRICK_PAD * 2,
 		},
 	}
 }
