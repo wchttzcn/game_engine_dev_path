@@ -84,8 +84,8 @@ kalan bir top her frame işaret çevirip yerinde titrer.
 
 ::: details Deep Dive — Neden konumu da düzeltiyoruz?
 Çarpışmayı frame frame örneklediğin için topu tam temas anında değil, biraz
-geçtikten sonra yakalıyorsun. Sadece velocity'yi çevirmek "artık ters yöne
-gidiyorum" der ama "hâlâ içerideyim" gerçeğini değiştirmez; hızlı topta bir
+geçtikten sonra yakalıyorsun. Sadece velocity'yi çevirmek “artık ters yöne
+gidiyorum” der ama “hâlâ içerideyim” gerçeğini değiştirmez; hızlı topta bir
 sonraki frame de içeride biter ve ikinci bir çevirme olur. Buna tünel etkisinin
 küçük kardeşi diyebilirsin. Konumu sınıra sabitlemek, durumu çarpışma anının
 fiziksel olarak geçerli olduğu yere geri koyuyor. 3.5'te topun tuğlaya hangi
@@ -102,4 +102,4 @@ soruyu Pong'un raketleri için çözmüştün.
 raket onu tutuyor, kaçırırsan kaybediyorsun. Eksik olan tek şey oynamak için bir
 sebep: vurulacak bir şey.
 
-**"Breakout 3.3 denememi değerlendir"** yaz; kodunu inceleyelim.
+**“Breakout 3.3 denememi değerlendir”** yaz; kodunu inceleyelim.

@@ -78,6 +78,6 @@ Basılı tutma ile tek basış arasındaki farkın imza tarafı burada; Snake'te
 eksende çözdün. Buradan sonrası Pong'un tekrarı değil: Breakout'un topu üç
 duvardan seker, dördüncüsünden düşer.
 
-**"Breakout 3.1 denememi değerlendir"** yaz; kodunu inceleyelim.
+**“Breakout 3.1 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım topu sahneye sokmak: [3.2 — Topu hareket ettir](/worlds/03-breakout/02-ball).

@@ -76,6 +76,6 @@ pixel olarak yazıldığını doğrulayan imza.
 Şimdiye kadar hiçbiri diğerini bilmiyor — bir sonraki ders bu ikisini ilk kez
 karşılaştıracak.
 
-**"Breakout 3.2 denememi değerlendir"** yaz; kodunu inceleyelim.
+**“Breakout 3.2 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım topu sahnenin içinde tutmak: [3.3 — Duvar ve raket sekmesi](/worlds/03-breakout/03-bounce).
