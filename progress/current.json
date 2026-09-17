@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-02-ball",
+  "currentLessonId": "breakout-03-bounce",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -330,8 +330,10 @@
       "description": "Topu velocity ve delta time ile her frame güncelle; henüz hiçbir şeyden sekmesin.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/02-ball",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-03-bounce",
@@ -425,12 +427,14 @@
       "status": "independent",
       "lessons": [
         "pong-05-ball-velocity",
-        "pong-06-wall-bounce"
+        "pong-06-wall-bounce",
+        "breakout-02-ball"
       ],
-      "note": "Velocity'yi çalışma anında değiştirdi: duvar response'unda magnitude'ı abs ile koruyup işareti duvara dayattı. Position correction ile yön değişikliğinin ayrı iki iş olduğunu, İpucu 2 ve 3'ten sonra uyguladı.",
+      "note": "Velocity'yi çalışma anında değiştirdi: duvar response'unda magnitude'ı abs ile koruyup işareti duvara dayattı. Position correction ile yön değişikliğinin ayrı iki iş olduğunu, İpucu 2 ve 3'ten sonra uyguladı. 3.2'de velocity'yi ilk kez skaler çift yerine rl.Vector2 olarak tuttu ve güncellemeyi pos += vel * dt tek satırına indirdi; ders iki skaler satır gösteriyordu, bileşen bazlı aritmetiği kendi seçti. Yön/hız ayrımı yeni oyunda ipucusuz kuruldu; işaret değiştirme 3.3'te sınanacak.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -559,9 +563,10 @@
         "pong-15-collision-shapes",
         "snake-01-draw-grid",
         "snake-07-occupancy-grid",
-        "breakout-01-paddle"
+        "breakout-01-paddle",
+        "breakout-02-ball"
       ],
-      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi. 3.1'de Paddle'ı Pong'dan olduğu gibi taşıdı: x/y/width/height alanları + aynı dört sayıyı tutan rect alanı, her frame elle senkron edilen bir mirror. Davranış doğru ama türetilmiş ikinci temsil kalıbı yeni dosyada kendiliğinden tekrarlandı; rl.Rectangle'ın zaten o dört alan olduğunu fark etmedi. Ayrıca başlangıç x'i (SCREEN_WIDTH / 2) - 50 ile yazıldı, yani raket genişliği 50/100 olarak iki yerde kodlu. Review'da ikisi de gösterildi; aynı oturumda düzeltti: Paddle yalnız rect + speed tutuyor, clamp/input/çizim tek alandan okuyor ve PADDLE_WIDTH sabiti hem başlangıç x'ini hem genişliği besliyor. Kalıbı kendi fark etmesi tuğla duvarında (3.4) sınanacak.",
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi. 3.1'de Paddle'ı Pong'dan olduğu gibi taşıdı: x/y/width/height alanları + aynı dört sayıyı tutan rect alanı, her frame elle senkron edilen bir mirror. Davranış doğru ama türetilmiş ikinci temsil kalıbı yeni dosyada kendiliğinden tekrarlandı; rl.Rectangle'ın zaten o dört alan olduğunu fark etmedi. Ayrıca başlangıç x'i (SCREEN_WIDTH / 2) - 50 ile yazıldı, yani raket genişliği 50/100 olarak iki yerde kodlu. Review'da ikisi de gösterildi; aynı oturumda düzeltti: Paddle yalnız rect + speed tutuyor, clamp/input/çizim tek alandan okuyor ve PADDLE_WIDTH sabiti hem başlangıç x'ini hem genişliği besliyor. Kalıbı kendi fark etmesi tuğla duvarında (3.4) sınanacak. 3.2'de Ball'a ayrı bir speed alanı eklemedi — velocity'nin zaten hem yön hem hız olduğu Deep Dive'da yazıyordu ama ipucu açılmadan doğru tarafa yerleşti. 3.1 düzeltmesinin ardından aynı dosyada ikinci doğru uygulama.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",

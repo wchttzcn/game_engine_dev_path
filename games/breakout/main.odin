@@ -9,11 +9,16 @@ PADDLE_WIDTH :: 100
 
 Game :: struct {
 	player: Paddle,
+	ball:   Ball,
 }
 
 Paddle :: struct {
 	rect:  rl.Rectangle,
 	speed: f32,
+}
+Ball :: struct {
+	pos, vel: rl.Vector2,
+	radius:   f32,
 }
 
 main :: proc() {
@@ -31,6 +36,7 @@ main :: proc() {
 				height = 20,
 			},
 		},
+		ball = Ball{radius = 5, pos = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2}, vel = {220, -260}},
 	}
 
 
@@ -47,8 +53,12 @@ main :: proc() {
 		if game.player.rect.x < 0 do game.player.rect.x = 0
 		if game.player.rect.x + game.player.rect.width > SCREEN_WIDTH do game.player.rect.x = SCREEN_WIDTH - game.player.rect.width
 
+
+		game.ball.pos += game.ball.vel * dt
+
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+		rl.DrawCircleV(game.ball.pos, game.ball.radius, rl.WHITE)
 		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
 		rl.EndDrawing()
 	}
