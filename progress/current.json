@@ -345,6 +345,33 @@
       "evidence": [
         "games/breakout/main.odin"
       ]
+    },
+    {
+      "id": "breakout-04-brick-wall",
+      "title": "3.4 — Tuğla duvarını kur",
+      "description": "Sabit kapasiteli bir tuğla array'i kur, her tuğlanın konumunu index'inden türet ve duvarı ekranın üstüne çiz.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/04-brick-wall",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-05-brick-collision",
+      "title": "3.5 — Tuğlayı kır",
+      "description": "Topu canlı tuğlalarla çarpıştır, çarpılanı düşür ve topun hangi yüzden girdiğine bakarak doğru ekseni ters çevir.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/05-brick-collision",
+      "status": "not_started",
+      "evidence": []
+    },
+    {
+      "id": "breakout-06-level-clear",
+      "title": "3.6 — Bölümü temizle",
+      "description": "Son tuğla kırılınca oyunu kazanılmış say; bölümün bittiğini hangi veriden okuduğuna karar ver.",
+      "world": "World 3 · Breakout",
+      "url": "/worlds/03-breakout/06-level-clear",
+      "status": "not_started",
+      "evidence": []
     }
   ],
   "skills": [

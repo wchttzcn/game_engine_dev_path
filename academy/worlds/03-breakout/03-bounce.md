@@ -2,7 +2,6 @@
 title: "3.3 — Duvar ve raket sekmesi"
 description: "Topu üç duvardan sektir, rakete çarpınca geri gönder ve alt kenardan düşünce kaybettir."
 section: Breakout iskeleti
-next: false
 ---
 
 # 3.3 — Duvar ve raket sekmesi
@@ -103,3 +102,5 @@ raket onu tutuyor, kaçırırsan kaybediyorsun. Eksik olan tek şey oynamak içi
 sebep: vurulacak bir şey.
 
 **“Breakout 3.3 denememi değerlendir”** yaz; kodunu inceleyelim.
+
+Sonraki adım sahneye vurulacak bir şey koymak: [3.4 — Tuğla duvarını kur](/worlds/03-breakout/04-brick-wall).
