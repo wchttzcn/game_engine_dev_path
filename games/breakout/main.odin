@@ -37,6 +37,7 @@ Brick :: struct {
 Game_State :: enum {
 	Playing,
 	Lost,
+	Won,
 }
 
 main :: proc() {
@@ -111,16 +112,18 @@ main :: proc() {
 					break
 				}
 			}
+			alive_count := 0
+			for brick in game.bricks {
+				if brick.alive do alive_count += 1
+			}
+			if alive_count == 0 do game.state = .Won
 
 		case .Lost:
+		case .Won:
 		}
-
-		text: cstring = "You lost - Press R to reset"
-		measure_text := SCREEN_WIDTH / 2 - rl.MeasureText(text, 32) / 2
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
-
 		for brick in game.bricks {
 			if brick.alive {
 				rl.DrawRectangleRec(brick.rect, rl.WHITE)
@@ -129,11 +132,20 @@ main :: proc() {
 
 		rl.DrawCircleV(game.ball.pos, game.ball.radius, rl.WHITE)
 		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
-		if game.state == .Lost {
-			rl.DrawText(text, measure_text, SCREEN_HEIGHT / 2, 32, rl.RED)
+		switch game.state {
+		case .Playing:
+		case .Lost:
+			draw_center_text("You lost - Press R to reset", 32, rl.RED)
+		case .Won:
+			draw_center_text("You win - Press R to reset", 32, rl.GREEN)
 		}
 		rl.EndDrawing()
 	}
+}
+
+draw_center_text :: proc(text: cstring, font_size: i32, color: rl.Color) {
+	text_x := SCREEN_WIDTH / 2 - rl.MeasureText(text, font_size) / 2
+	rl.DrawText(text, text_x, SCREEN_HEIGHT / 2, font_size, color)
 }
 
 game_reset :: proc(game: ^Game) {
