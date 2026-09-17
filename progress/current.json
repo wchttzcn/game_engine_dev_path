@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-03-bounce",
+  "currentLessonId": "breakout-05-brick-collision",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -352,8 +352,10 @@
       "description": "Sabit kapasiteli bir tuğla array'i kur, her tuğlanın konumunu index'inden türet ve duvarı ekranın üstüne çiz.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/04-brick-wall",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-05-brick-collision",
@@ -387,14 +389,16 @@
         "pong-15-collision-shapes",
         "snake-01-draw-grid",
         "breakout-01-paddle",
-        "breakout-03-bounce"
+        "breakout-03-bounce",
+        "breakout-04-brick-wall"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok. 3.1'de aynı clamp'i yeni eksende (x, ekran genişliği) kurdu ve sağ kenarda uzak kenarı (x + width) ilk denemede doğru seçti — 1.10'da sağ tarafta yaptığı hatanın tekrarı olmadı. Paddle merkez/üst kenar ayrımı hâlâ sınanmadı. 3.3'te üç duvarın üçünde de uzak kenarı (pos.x - radius, pos.x + radius, pos.y - radius) ipucusuz doğru seçti; 1.10'daki yakın/uzak kenar hatası tekrarlamadı. Ayrı bir kenar hatası çizim tarafında çıktı: DrawText'in posX'i metnin sol üst köşesi olduğu halde SCREEN_WIDTH / 2 verdi, yazı ekranın ortasından başlayıp sağ kenarı aştı; MeasureText ile ortalamayı gösterildikten sonra kurdu. Merkez/kenar ayrımı geometri tarafında sağlam, UI tarafında ilk kez sınandı ve ilk denemede kaçtı.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok. 3.1'de aynı clamp'i yeni eksende (x, ekran genişliği) kurdu ve sağ kenarda uzak kenarı (x + width) ilk denemede doğru seçti — 1.10'da sağ tarafta yaptığı hatanın tekrarı olmadı. Paddle merkez/üst kenar ayrımı hâlâ sınanmadı. 3.3'te üç duvarın üçünde de uzak kenarı (pos.x - radius, pos.x + radius, pos.y - radius) ipucusuz doğru seçti; 1.10'daki yakın/uzak kenar hatası tekrarlamadı. Ayrı bir kenar hatası çizim tarafında çıktı: DrawText'in posX'i metnin sol üst köşesi olduğu halde SCREEN_WIDTH / 2 verdi, yazı ekranın ortasından başlayıp sağ kenarı aştı; MeasureText ile ortalamayı gösterildikten sonra kurdu. Merkez/kenar ayrımı geometri tarafında sağlam, UI tarafında ilk kez sınandı ve ilk denemede kaçtı. 3.4'te index'ten satır/sütun türetirken col := i % BRICK_ROWS yazdı; modulus'a sütun sayısı yerine satır sayısını verdi, duvar 10 yerine 5 sütuna düştü ve her hücreye iki tuğla bindi — review'da gösterilince düzeltti. Aynı derste 2.1'de açık kalan cast sınırı kapandı: f32(col) * BRICK_WIDTH ipucusuz doğru yazıldı. Üçüncü sinyal olumlu: bitişik ve aynı renk dikdörtgenlerin ekranda tek blok olarak okunduğunu kendisi fark edip sordu; ızgara hücresi ile çizilen dikdörtgen ayrımı bu soruyla ders metnine eklendi.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
         "progress/notes/2026-09-11-world0-pong-review.md",
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -617,12 +621,14 @@
       "status": "learning",
       "lessons": [
         "snake-02-snake-body",
-        "snake-08-food-and-growth"
+        "snake-08-food-and-growth",
+        "breakout-04-brick-wall"
       ],
-      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı. 2.8'de uzunluk ilk kez değişti. length'i kaydırma döngüsünden sonra artırdığı için yeni slot (body[eski_length]) hiç yazılmadı ve gövdenin sonunda bayat bir hücre kaldı; artırmanın kaydırmadan önce gelmesi gerektiğini review'da gördükten sonra doğru kurdu. MAX_BODY'nin taşamayacağı gerekçesini kendi sormadı, review'da doğrulandı.",
+      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı. 2.8'de uzunluk ilk kez değişti. length'i kaydırma döngüsünden sonra artırdığı için yeni slot (body[eski_length]) hiç yazılmadı ve gövdenin sonunda bayat bir hücre kaldı; artırmanın kaydırmadan önce gelmesi gerektiğini review'da gördükten sonra doğru kurdu. MAX_BODY'nin taşamayacağı gerekçesini kendi sormadı, review'da doğrulandı. 3.4'te üçüncü kalıp geldi: kapasite sabit, uzunluk hiç değişmiyor, ölü eleman array'de kalıp alive bayrağıyla eleniyor. Array boyutunu iki sabitten türetti, çizimi len'e bağladı, elle adet saymadı — ama bu ders metni struct'ı ve array tanımını hazır verdiğinden bağımsız sinyal sayılmaz; kapasite ayrımının kendi kurulduğu yeni bir durum hâlâ bekliyor.",
       "lastRecallAt": null,
       "evidence": [
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {

@@ -7,10 +7,18 @@ SCREEN_WIDTH :: 800
 
 PADDLE_WIDTH :: 100
 
+BRICK_COLS :: 10
+BRICK_ROWS :: 5
+BRICK_WIDTH :: SCREEN_WIDTH / BRICK_COLS
+BRICK_HEIGHT :: 20
+BRICK_TOP :: 70
+BRICK_PAD :: 4
+
 Game :: struct {
 	player: Paddle,
 	ball:   Ball,
 	state:  Game_State,
+	bricks: [BRICK_ROWS * BRICK_COLS]Brick,
 }
 
 Paddle :: struct {
@@ -20,6 +28,10 @@ Paddle :: struct {
 Ball :: struct {
 	pos, vel: rl.Vector2,
 	radius:   f32,
+}
+Brick :: struct {
+	rect:  rl.Rectangle,
+	alive: bool,
 }
 
 Game_State :: enum {
@@ -40,7 +52,6 @@ main :: proc() {
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
-			game.state = .Playing
 		}
 
 		switch game.state {
@@ -91,6 +102,13 @@ main :: proc() {
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+
+		for brick in game.bricks {
+			if brick.alive {
+				rl.DrawRectangleRec(brick.rect, rl.WHITE)
+			}
+		}
+
 		rl.DrawCircleV(game.ball.pos, game.ball.radius, rl.WHITE)
 		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
 		if game.state == .Lost {
@@ -101,15 +119,33 @@ main :: proc() {
 }
 
 game_reset :: proc(game: ^Game) {
-  game.state = .Playing
-  game. player = Paddle {
-			speed = 400.0,
+	game.state = .Playing
+	game.player = Paddle {
+		speed = 400.0,
+		rect = {
+			x = (SCREEN_WIDTH / 2) - (PADDLE_WIDTH / 2),
+			y = SCREEN_HEIGHT - 60,
+			width = PADDLE_WIDTH,
+			height = 20,
+		},
+	}
+	game.ball = Ball {
+		radius = 10,
+		pos    = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2},
+		vel    = {220, -260},
+	}
+
+	for i in 0 ..< len(game.bricks) {
+		row := i / BRICK_COLS
+		col := i % BRICK_COLS
+		game.bricks[i] = {
 			rect = {
-				x = (SCREEN_WIDTH / 2) - (PADDLE_WIDTH / 2),
-				y = SCREEN_HEIGHT - 60,
-				width = PADDLE_WIDTH,
-				height = 20,
+				x = f32(col) * BRICK_WIDTH + BRICK_PAD,
+				y = BRICK_TOP + f32(row) * BRICK_HEIGHT + BRICK_PAD,
+				width = BRICK_WIDTH - BRICK_PAD * 2,
+				height = BRICK_HEIGHT - BRICK_PAD * 2,
 			},
+			alive = true,
 		}
-  game.ball = Ball{radius = 10, pos = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2}, vel = {220, -260}}
+	}
 }
