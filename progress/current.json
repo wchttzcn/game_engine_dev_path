@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-01-paddle",
+  "currentLessonId": "breakout-02-ball",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -319,8 +319,10 @@
       "description": "games/breakout paketini kur ve ekranın altında A/D ile yatay hareket eden, kenarlardan çıkmayan bir raket çiz.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/01-paddle",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-02-ball",
@@ -352,9 +354,10 @@
         "pong-09-opponent-ai",
         "pong-10-score-and-reset",
         "pong-15-collision-shapes",
-        "snake-01-draw-grid"
+        "snake-01-draw-grid",
+        "breakout-01-paddle"
       ],
-      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok.",
+      "note": "Kenar tabanlı sınır kontrollerinde sağlam; 1.10'da sol çıkış testinde uzak kenarı (x + radius) ilk denemede doğru seçti, sağ tarafta aynı ifadeyi kopyalayıp yakın kenarı kullandı ve uyarı sonrası düzeltti. 1.9'daki paddle merkez/üst kenar karışıklığı hâlâ açık; ayrım 1.15 collision shape overlay'inde sınanacak. 1.15'te merkez çizgisini SCREEN_WIDTH / 2 ekseninden doğru kurdu ve outline'ları kendi shape'lerinin üstüne oturttu; 1.9'daki merkez/üst kenar karışıklığına dair yeni bir hata görülmedi, ayrım hâlâ paddle collision tarafında sınanmadı. 2.1'de grid coordinate (i32 col/row) ile pixel coordinate ayrımını doğru kurdu, i32() dönüşümünü çağrı yerinde yazdı; ancak çarpımı integer tarafında yapıp sonra cast etti (f32(CELL_SIZE * col)), ders f32(col) * CELL_SIZE istiyordu — bu grid'te sonuç aynı, cast sınırını erken koyma alışkanlığı henüz yok. 3.1'de aynı clamp'i yeni eksende (x, ekran genişliği) kurdu ve sağ kenarda uzak kenarı (x + width) ilk denemede doğru seçti — 1.10'da sağ tarafta yaptığı hatanın tekrarı olmadı. Paddle merkez/üst kenar ayrımı hâlâ sınanmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
@@ -388,12 +391,14 @@
         "pong-12-match-over",
         "pong-14-debug-overlay",
         "snake-04-direction-step",
-        "snake-05-input-buffer"
+        "snake-05-input-buffer",
+        "breakout-01-paddle"
       ],
-      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak. 2.5'te IsKeyDown'dan IsKeyPressed'e kendi kararıyla geçti; basılı tutmanın tick başına tek yön değişimi anlamına gelmesi gerektiğini kavradı.",
+      "note": "IsKeyDown'ı sürekli harekette, IsKeyPressed'i servis ve restart gibi tek atımlık transition'larda doğru ayırdı. 1.12'de R'yi ders kolu göstermeden switch'in dışına, her state'in gördüğü yere koydu. 1.14'te F1 toggle'ını ilk denemede IsKeyPressed ile kurdu; dersin tek tuzağıydı, ipucu gerekmedi. 2.4'te yönü IsKeyDown ile her frame okudu, WASD'ı kendi tercihi olarak sürdürdü (ders metni buna göre güncellendi). Tek atımlık basış ile basılı tutma ayrımı Snake tarafında henüz sınanmadı; 2.5 input tamponunda sınanacak. 2.5'te IsKeyDown'dan IsKeyPressed'e kendi kararıyla geçti; basılı tutmanın tick başına tek yön değişimi anlamına gelmesi gerektiğini kavradı. 3.1'de sürekli hareket için IsKeyDown'ı doğrudan doğru seçti; Snake'in IsKeyPressed refleksini yeni oyuna taşımadı.",
       "lastRecallAt": null,
       "evidence": [
-        "games/pong/main.odin"
+        "games/pong/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -403,13 +408,15 @@
       "lessons": [
         "pong-04-delta-time",
         "pong-05-ball-velocity",
-        "snake-03-tick-timer"
+        "snake-03-tick-timer",
+        "breakout-01-paddle"
       ],
-      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı. 2.3'te dt'yi doğrudan harekete değil, bir akümülatöre besledi; sürekli hareket ile ayrık adım arasındaki farkı uyarısız doğru tarafa yerleştirdi.",
+      "note": "Aynı dt'yi yeni bir bağlamda, input olmadan ve iki eksende topa uyguladı. Hız/saniye modeli raketten topa taşındı. 2.3'te dt'yi doğrudan harekete değil, bir akümülatöre besledi; sürekli hareket ile ayrık adım arasındaki farkı uyarısız doğru tarafa yerleştirdi. 3.1'de üçüncü oyunun ilk dosyasında dt'yi ipucusuz kurdu; speed saniye başına pixel.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
@@ -551,13 +558,15 @@
       "lessons": [
         "pong-15-collision-shapes",
         "snake-01-draw-grid",
-        "snake-07-occupancy-grid"
+        "snake-07-occupancy-grid",
+        "breakout-01-paddle"
       ],
-      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi.",
+      "note": "1.15'te debug outline'larını collision'ın okuduğu field'lardan türetti, paralel bir debug shape tutmadı; render/collision/debug temsillerinin ayrışma riskini uyarısız doğru çözdü. Merkez çizgisini bilinçli olarak overlay yerine sahne elemanı yaptı. 2.1'de grid/pixel dönüşümünü tek bir cell_rect procedure'ında topladı; CELL_SIZE ile bir coordinate çarpımı dosyanın başka hiçbir yerinde geçmiyor, kavram ikinci ve farklı bir bağlamda ipucusuz uygulandı (hint level 0). 2.7'de ilk denemede başlangıç düzenini iki yerde yazdı: body'ye beş atama, occupied'e aynı koordinatlarla beş atama daha. 1.15'teki türetme refleksi yeni temsile kendiliğinden taşınmadı; 'türet' kelimesinin ne demek olduğunu açıkça sordu. Açıklama sonrası body'nin ilk length hücresi üzerinden dönen döngüyü kurdu ve game_reset'e occupied = {} sıfırlamasını ekledi. 3.1'de Paddle'ı Pong'dan olduğu gibi taşıdı: x/y/width/height alanları + aynı dört sayıyı tutan rect alanı, her frame elle senkron edilen bir mirror. Davranış doğru ama türetilmiş ikinci temsil kalıbı yeni dosyada kendiliğinden tekrarlandı; rl.Rectangle'ın zaten o dört alan olduğunu fark etmedi. Ayrıca başlangıç x'i (SCREEN_WIDTH / 2) - 50 ile yazıldı, yani raket genişliği 50/100 olarak iki yerde kodlu. Review'da ikisi de gösterildi; aynı oturumda düzeltti: Paddle yalnız rect + speed tutuyor, clamp/input/çizim tek alandan okuyor ve PADDLE_WIDTH sabiti hem başlangıç x'ini hem genişliği besliyor. Kalıbı kendi fark etmesi tuğla duvarında (3.4) sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/pong/main.odin",
-        "games/snake/main.odin"
+        "games/snake/main.odin",
+        "games/breakout/main.odin"
       ]
     },
     {
