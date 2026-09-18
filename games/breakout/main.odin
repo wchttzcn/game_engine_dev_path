@@ -26,17 +26,19 @@ MAX_PARTICLES :: 64
 PARTICLE_BURST :: 8
 
 Game :: struct {
-	player:        Paddle,
-	ball:          Ball,
-	state:         Game_State,
-	bricks:        [BRICK_ROWS * BRICK_COLS]Brick,
+	player:             Paddle,
+	ball:               Ball,
+	state:              Game_State,
+	bricks:             [BRICK_ROWS * BRICK_COLS]Brick,
 
 	// powerup
-	powerups:      [MAX_POWERUPS]Powerup,
-	powerup_timer: f32,
+	powerups:           [MAX_POWERUPS]Powerup,
+	powerup_timer:      f32,
+	active_powerup_pos: rl.Vector2,
 
 	// particles
-	particles:     [MAX_PARTICLES]Particle,
+	particles:          [MAX_PARTICLES]Particle,
+	debug_visible:      bool,
 }
 
 Paddle :: struct {
@@ -83,6 +85,16 @@ main :: proc() {
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
+		}
+
+		if rl.IsKeyPressed(.P) {
+			for i in 0 ..< 3 {
+				powerup_spawn(&game, {f32(200 + i * 60), 100})
+			}
+		}
+
+		if rl.IsKeyPressed(.F1) {
+			game.debug_visible = !game.debug_visible
 		}
 
 		switch game.state {
@@ -188,6 +200,19 @@ main :: proc() {
 			}
 		}
 
+		if game.powerup_timer > 0 {
+			rl.DrawCircleV(game.active_powerup_pos, 4, rl.YELLOW)
+		}
+		if game.debug_visible {
+			rl.DrawText(
+				rl.TextFormat("active_powerup_pos: %v", game.active_powerup_pos),
+				10,
+				30,
+				10,
+				rl.GREEN,
+			)
+		}
+
 		switch game.state {
 		case .Playing:
 		case .Lost:
@@ -279,6 +304,7 @@ powerup_update :: proc(game: ^Game, dt: f32) {
 			game.player.rect.width = PADDLE_WIDTH * 1.5
 			game.powerup_timer = POWERUP_DURATION
 			p.alive = false
+			game.active_powerup_pos = {p.rect.x, p.rect.y}
 		} else if p.rect.y > SCREEN_HEIGHT {
 			p.alive = false
 		}
