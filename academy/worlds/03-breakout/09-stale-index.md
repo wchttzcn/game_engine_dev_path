@@ -12,10 +12,9 @@ başladığı bayat index hatasını önce görünür kıl, sonra çöz.
 ## Görev
 
 Efekt aktifken, onu tetikleyen güçlendirmenin konumunu ekranda küçük bir
-işaretle göster. Naif çözüm: yakalama anında slotun index'ini
-`game.active_powerup`'a yaz, çizerken `game.powerups[game.active_powerup]`'a
-bak. Bu bozuk — slot yeniden kullanılabiliyor. Önce bir debug tuşuyla hatayı
-tetikle ve F1 overlay'inde göster, sonra çöz.
+işaretle göster. Slotun index'ini tutmak cazip geliyor — ama slot yeniden
+kullanılıyor, index bir süre sonra başka bir nesneyi gösteriyor. Bir debug
+tuşuyla bunu kendin tetikle, F1 overlay'inde gör, sonra çöz.
 
 ## Ne zaman bitti?
 
@@ -29,23 +28,12 @@ tetikle ve F1 overlay'inde göster, sonra çöz.
 
 ## Elindekiler
 
-3.8'deki güçlendirme havuzuna üç alan ekleniyor. İlki naif çözümün alanı,
-üçüncüsü hatayı gördükten sonra onun yerine geçen alan:
+3.8'deki güçlendirme havuzuna iki alan ekleniyor:
 
 ```odin
-// Game'e eklenecek üç alan:
-//   active_powerup:     int,          // naif: en son yakalanan slotun index'i, yoksa -1
-//   active_powerup_pos: rl.Vector2,   // çözüm: index yerine yakalama anındaki konum
+// Game'e eklenecek iki alan:
+//   active_powerup_pos: rl.Vector2,   // yakalama anındaki konum
 //   debug_visible:      bool,
-```
-
-Slotun index'ini yakalama anında bulmak için döngüye ikinci bir değişken
-eklenir — Odin'de `for` bir değer yanında index de verebilir:
-
-```odin
-for &p, i in game.powerups {
-	// i, p'nin havuzdaki sırası
-}
 ```
 
 F1 kalıbı 2.14'teki gibi: `rl.IsKeyPressed(.F1)` ile `game.debug_visible`'ı
@@ -61,17 +49,20 @@ zaten tanıdık.
 
 ::: details İpucu 1 — Neyi görünür kılıp neyi düzelteceksin
 Önce hatayı üret: `P`'ye basınca art arda birkaç `powerup_spawn` çağır —
-gerçek tuğla kırmayı bekleme. F1 debug satırına `game.active_powerup` ve o
-index'teki slotun `alive` durumunu yaz. Aynı slotu hızla boşaltıp doldurunca
-satırda index sabit kalırken slotun içeriğinin değiştiğini göreceksin. Sonra
-fikri değiştir: index yerine yakalama anındaki **konumu** kopyala ve sakla;
-artık havuza hiç bakmana gerek kalmaz.
+gerçek tuğla kırmayı bekleme. Yakaladığın güçlendirmenin slotu anında
+boşalıyor, aynı slota hemen yenisi doğabiliyor. Efekt hâlâ sürerken o slotun
+içeriği çoktan değişmiş oluyor: bir index tutsaydın, gösterdiği nesne artık
+senin yakaladığın nesne olmazdı. Onun yerine yakalama anındaki **konumu**
+kopyala ve sakla; artık havuza hiç bakmana gerek kalmaz. F1 satırına da bu
+konumu yazdır, işaretin nereye gittiğini gözle takip et.
 :::
 
 ::: details İpucu 2 — Index bir slotu işaret eder, kimliği değil
-Yakalanan güçlendirme hemen `alive = false` olur, slotu boşaltır. Efekt hâlâ
-sürerken yeni bir güçlendirme tam o slota doğabilir — `active_powerup` aynı
-sayıyı tutmaya devam eder ama artık başka bir nesneyi gösterir. Derleyici
+Yakalanan güçlendirme hemen `alive = false` olur, slotu boşaltır. Süresi
+dolana kadar süren şey **efekt** (`powerup_timer`); nesne değil — nesne
+yakalandığı karede ölür. Efekt sürerken yeni bir güçlendirme tam o slota
+doğabilir: tuttuğun index aynı sayıyı korur ama artık başka bir nesneyi
+gösterir. Derleyici
 bunu yakalamaz: index geçerli bir sayı, sınır aşımı yok, sadece yanlış nesne.
 :::
 
@@ -101,8 +92,8 @@ if game.debug_visible {
 ## Kaynak
 
 [Odin Overview — resmi dil rehberi](https://odin-lang.org/docs/overview/),
-`#array-programming` bölümü. Bu ders `for &p, i in game.powerups` ile
-pointer'ı ve index'i birlikte almaya dayanıyor; sözdizimi buradan doğrulandı.
+`#array-programming` bölümü. Bu ders havuzu `for &p in game.powerups` ile
+pointer üzerinden gezmeye dayanıyor; sözdizimi buradan doğrulandı.
 
 ## Daha derine
 
