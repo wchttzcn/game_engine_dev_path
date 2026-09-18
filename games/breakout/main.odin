@@ -15,17 +15,28 @@ BRICK_HEIGHT :: 20
 BRICK_TOP :: 70
 BRICK_PAD :: 4
 
+// Powerups
+MAX_POWERUPS :: 4
+POWERUP_DROP_CHANCE :: 0.2
+POWERUP_SPEED :: 120
+POWERUP_DURATION :: 6
+
+// Particle
 MAX_PARTICLES :: 64
 PARTICLE_BURST :: 8
 
 Game :: struct {
-	player:    Paddle,
-	ball:      Ball,
-	state:     Game_State,
-	bricks:    [BRICK_ROWS * BRICK_COLS]Brick,
+	player:        Paddle,
+	ball:          Ball,
+	state:         Game_State,
+	bricks:        [BRICK_ROWS * BRICK_COLS]Brick,
+
+	// powerup
+	powerups:      [MAX_POWERUPS]Powerup,
+	powerup_timer: f32,
 
 	// particles
-	particles: [MAX_PARTICLES]Particle,
+	particles:     [MAX_PARTICLES]Particle,
 }
 
 Paddle :: struct {
@@ -44,6 +55,10 @@ Particle :: struct {
 	alive:    bool,
 	life:     f32,
 	pos, vel: rl.Vector2,
+}
+Powerup :: struct {
+	rect:  rl.Rectangle,
+	alive: bool,
 }
 
 Game_State :: enum {
@@ -64,6 +79,7 @@ main :: proc() {
 		dt := rl.GetFrameTime()
 
 		particle_update(&game, dt)
+		powerup_update(&game, dt)
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
@@ -131,6 +147,11 @@ main :: proc() {
 					for _ in 0 ..< PARTICLE_BURST {
 						particle_spawn(&game, center)
 					}
+
+					if rand.float32_range(0, 1) < POWERUP_DROP_CHANCE {
+						powerup_spawn(&game, center)
+					}
+
 					break
 				}
 			}
@@ -161,6 +182,12 @@ main :: proc() {
 			}
 		}
 
+		for powerup in game.powerups {
+			if powerup.alive {
+				rl.DrawRectangleRec(powerup.rect, rl.YELLOW)
+			}
+		}
+
 		switch game.state {
 		case .Playing:
 		case .Lost:
@@ -179,6 +206,10 @@ draw_center_text :: proc(text: cstring, font_size: i32, color: rl.Color) {
 
 game_reset :: proc(game: ^Game) {
 	game.state = .Playing
+	game.powerups = {}
+	game.powerup_timer = 0
+	game.particles = {}
+
 	game.player = Paddle {
 		speed = 400.0,
 		rect = {
@@ -227,5 +258,34 @@ particle_update :: proc(game: ^Game, dt: f32) {
 		}
 		p.pos += p.vel * dt * 3
 		p.life -= dt
+	}
+}
+
+powerup_spawn :: proc(game: ^Game, pos: rl.Vector2) {
+	for &p in game.powerups {
+		if p.alive do continue
+		p.rect = {pos.x, pos.y, 16, 16}
+		p.alive = true
+		return
+	}
+}
+
+powerup_update :: proc(game: ^Game, dt: f32) {
+	for &p in game.powerups {
+		if !p.alive do continue
+		p.rect.y += POWERUP_SPEED * dt
+
+		if rl.CheckCollisionRecs(p.rect, game.player.rect) {
+			game.player.rect.width = PADDLE_WIDTH * 1.5
+			game.powerup_timer = POWERUP_DURATION
+			p.alive = false
+		} else if p.rect.y > SCREEN_HEIGHT {
+			p.alive = false
+		}
+	}
+
+	if game.powerup_timer > 0 {
+		game.powerup_timer -= dt
+		if game.powerup_timer <= 0 do game.player.rect.width = PADDLE_WIDTH
 	}
 }
