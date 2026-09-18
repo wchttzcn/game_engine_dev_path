@@ -15,9 +15,11 @@ hangi sırada verildiğini doğru kur.
 yerleştirme henüz yok — bu 2.9'un konusu). Adım attığında önce yeni head'i
 yerel bir `new_head: Cell` değişkeni olarak hesapla — henüz `body`'ye yazma.
 `grow := new_head == game.food` ile büyüme kararını bu aday üzerinden ver.
-Ancak bundan sonra gövdeyi güncelle: `grow` doğruysa `length`'i bir artır ve o
-adımda kuyruğu çıkarma (dolayısıyla `occupied`'de bırak); değilse kuyruğu her
-zamanki gibi çıkar.
+Ancak bundan sonra gövdeyi güncelle. Sıra önemli: `grow` doğruysa `length`'i
+**kaydırma döngüsünden önce** bir artır — 2.4'teki döngü sınırını mevcut
+`length`'ten aldığı için, artış sonra gelirse yeni slot hiç yazılmaz. `grow`
+doğruysa kuyruğu o adımda çıkarma (dolayısıyla `occupied`'de bırak); değilse
+kuyruğu her zamanki gibi çıkar.
 
 ## Ne zaman bitti?
 
@@ -76,16 +78,26 @@ zaman `new_head == game.food`'u, `new_head` hesaplandığı anda, ayrı bir
 değişken olarak kontrol etmek.
 :::
 
-::: details İpucu 3 — Koşullu kuyruk
+::: details İpucu 3 — Tick'in tam sırası
 ```odin
+new_head := // yeni head hücresi
+grow := new_head == game.food
+
 if grow {
-	game.length += 1
+	game.length += 1          // kaydırmadan ÖNCE: döngü sınırı length'ten geliyor
 } else {
-	// kuyruk hücresini normal şekilde `occupied`'de false yap
+	// kuyruk hücresini `occupied`'de false yap
 }
+
+for i := game.length - 1; i > 0; i -= 1 {
+	game.body[i] = game.body[i - 1]
+}
+game.body[0] = new_head
+game.occupied[new_head.row][new_head.col] = true
 ```
-Gövdeyi kaydıran döngü her zaman çalışır; yalnızca kuyruk çıkarma ve
-`occupied` güncellemesi `grow`'a göre koşullu.
+Kaydıran döngü her zaman çalışır; koşullu olan yalnız `length` artışı ile
+kuyruk çıkarma. Artışı döngüden sonra yaparsan `body[eski_length]` hiç
+yazılmaz ve gövdenin sonunda bayat bir hücre kalır.
 :::
 
 ## Birincil kaynak

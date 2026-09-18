@@ -23,6 +23,7 @@ kaybolsun.
 - Raket ona değince raket genişliyor; genişleme geçici, süre dolunca geri
   dönüyor.
 - Yakalanmayan güçlendirme ekranın altından çıkınca slotu boşaltıyor.
+- `R` ile oyun sıfırlanınca havuz ve süre sayacı da temizleniyor.
 - `odin check games/breakout` geçiyor.
 
 ## Elindekiler

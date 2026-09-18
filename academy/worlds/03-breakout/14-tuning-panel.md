@@ -65,6 +65,9 @@ Tuning :: struct {
 
 tuning_defaults :: proc() -> Tuning {
 }
+
+// vendor:raylib — Vector2Normalize :: proc "c" (v: Vector2) -> Vector2
+// Yönü koruyup boyu 1 yapar; hız büyüklüğünü ayrı bir f32'den çarpmak için.
 ```
 
 ## Sınırlar
@@ -81,7 +84,7 @@ tuning_defaults :: proc() -> Tuning {
 3.13'ün pitch aralığı, top hızının bugünkü büyüklüğü — hepsi `tuning_defaults`
 içinde birer alana yazılır, `game_reset` bu değeri `game.tuning`'e atar. Top
 hızı bir `Vector2` değil `f32`: yönü sabit tutup büyüklüğü
-`game.tuning.ball_speed`'den oku — `vel = normalize(yön) * game.tuning.ball_speed`.
+`game.tuning.ball_speed`'den oku — `vel = rl.Vector2Normalize(yön) * game.tuning.ball_speed`.
 :::
 
 ::: details İpucu 2 — Paneli kameranın neresine çiziyorsun

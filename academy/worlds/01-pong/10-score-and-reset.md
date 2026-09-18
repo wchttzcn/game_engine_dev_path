@@ -87,9 +87,11 @@ olarak kalır.
 
 - Sadece top tamamen sol veya sağ sınırı geçtiğinde skoru artır; üst ve alt duvar
   bu dersin konusu değil.
-- Reset işlemini tek bir küçük procedure'da topla. İki çıkış kolunda aynı
-  position/velocity atamalarını kopyalama; bu kuralın iki kez değişmesi
-  ileride hata üretir.
+- İki çıkış kolunda aynı position/velocity atamalarını kopyalama; bu kuralın
+  iki kez değişmesi ileride hata üretir. Hangi taraftan çıktığını bir servis
+  yönü değişkenine (`-1` veya `+1`) yaz, sıfırlamayı o değişkeni okuyan tek bir
+  yerde yap. Bunu ayrı bir procedure'a çıkarmak 1.13'ün konusu; burada tek yol
+  yeter.
 - Servis hızı sabit ve yönü deterministic kalsın. Rastgelelik game feel için
   daha sonra anlamlı bir karar olacak.
 
@@ -101,9 +103,11 @@ demek için topun **uzak** kenarına bakarsın, yakın kenarına değil: soldan
 olur ve ekrandan hiç çıkmaz.
 :::
 
-::: details İpucu 2 — Reset procedure'ın girdisi
-Procedure'a yalnızca `ball: ^Ball` ve servis yönü için bir işaret (`-1` veya
-`+1`) vermek yeterli olabilir. Skor değişimi çağıranın sorumluluğunda kalsın.
+::: details İpucu 2 — Sıfırlamayı tek yola indirmek
+İki `if` dalının içinde yalnız skoru artır ve servis yönünü bir değişkene yaz
+(`dir := f32(-1)` veya `+1`). Dalların dışında, o değişken sıfırdan farklıysa
+topu merkeze koy ve hızını `dir` ile çarp. Böylece position/velocity ataması
+dosyada tek bir yerde durur.
 :::
 
 ::: details İpucu 3 — Yön tablosu

@@ -7,7 +7,7 @@ neden her seferinde yeniden derliyorsun?
 Tuğlalar oyuna sürekli nesne doğup ölmesini getiriyor — bir tuğla yok oluyor,
 yerine parçacıklar doğuyor, onlar da ölüyor. Nesnelerin oluşturulma ve silinme
 sırası bu dünyanın veri tarafı. Hitstop, kamera sarsıntısı, eğriler ve ses
-varyasyonu da his tarafı. İkisini birbirine bağlayan şey Dear ImGui paneli:
+varyasyonu da his tarafı. İkisini birbirine bağlayan şey raygui paneli:
 değerleri oyun çalışırken çevirebildiğinde "iyi his" bir tahmin olmaktan çıkıp
 denenebilir bir şey oluyor.
 
@@ -26,7 +26,7 @@ odin run games/breakout -out:/tmp/mucahit-breakout
 ## Paket bittiğinde
 
 Oynanabilir bir Breakout olacak: raket, top, tuğla duvarı, bölüm temizleme ve
-kaybetme. Üstünde F1'le açılan bir Dear ImGui paneli top hızını, hitstop
+kaybetme. Üstünde F1'le açılan bir raygui paneli top hızını, hitstop
 süresini, kamera trauma'sını, parçacık lifetime'ını ve ses pitch aralığını
 runtime'da ayarlayacak. Aynı karşılaşmayı iki farklı ayar profiliyle oynayıp
 farkı karşılaştırabileceksin.

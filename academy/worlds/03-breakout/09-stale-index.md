@@ -29,12 +29,14 @@ tetikle ve F1 overlay'inde göster, sonra çöz.
 
 ## Elindekiler
 
-3.8'deki güçlendirme havuzuna iki alan ekleniyor:
+3.8'deki güçlendirme havuzuna üç alan ekleniyor. İlki naif çözümün alanı,
+üçüncüsü hatayı gördükten sonra onun yerine geçen alan:
 
 ```odin
-// Game'e eklenecek iki alan:
-//   active_powerup: int,   // en son yakalanan slotun index'i, yoksa -1
-//   debug_visible:  bool,
+// Game'e eklenecek üç alan:
+//   active_powerup:     int,          // naif: en son yakalanan slotun index'i, yoksa -1
+//   active_powerup_pos: rl.Vector2,   // çözüm: index yerine yakalama anındaki konum
+//   debug_visible:      bool,
 ```
 
 Slotun index'ini yakalama anında bulmak için döngüye ikinci bir değişken
@@ -75,9 +77,7 @@ bunu yakalamaz: index geçerli bir sayı, sınır aşımı yok, sadece yanlış 
 
 ::: details İpucu 3 — Tam çözüm
 ```odin
-// Game'e: active_powerup_pos: rl.Vector2 (index yerine)
-
-// powerup_update içindeki yakalama dalında:
+// powerup_update içindeki yakalama dalında — index yerine konum yazılıyor:
 if rl.CheckCollisionRecs(p.rect, game.player.rect) {
 	game.player.rect.width = PADDLE_WIDTH * 1.5
 	game.powerup_timer = POWERUP_DURATION

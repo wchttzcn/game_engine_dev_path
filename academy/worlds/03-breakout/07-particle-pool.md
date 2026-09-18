@@ -24,6 +24,7 @@ kullanılabilsin.
 - Havuz dolduğunda oyun çökmüyor veya donmuyor; yeni parçacık isteği sessizce
   düşüyor.
 - Ölü bir slot bir sonraki doğumda yeniden kullanılıyor.
+- `R` ile sıfırlanınca havuz da temizleniyor; parçacıklar yeni oyuna taşınmıyor.
 - `odin check games/breakout` geçiyor.
 
 ## Elindekiler
