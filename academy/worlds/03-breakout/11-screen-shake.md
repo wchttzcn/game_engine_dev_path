@@ -11,104 +11,80 @@ section: Oyun hissi
 
 ## Görev
 
-`Game` içine `trauma: f32` adında bir değer ekle, `0..1` aralığında tutulsun.
-Tuğla kırıldığında bu değeri artır; her frame zamanla azalt. Sarsıntının gerçek
-büyüklüğünü `trauma`'nın karesinden (veya küpünden) türet ve bu büyüklüğü bir
-`rl.Camera2D`'nin `offset`'ine rastgele bir kayma olarak uygula. Sahneyi bu
-kamerayla çiz; kazandın/kaybettin metni kameranın dışında, sarsılmadan kalsın.
+`Game`'e `trauma: f32` ekle, `0..1` aralığında tut. Tuğla kırılınca artır,
+her frame zamanla azalt. Sarsıntı büyüklüğünü `trauma`'nın karesinden türet
+ve bir `rl.Camera2D`'nin `offset`'ine rastgele kayma olarak uygula. Sahneyi
+bu kamerayla çiz; kazandın/kaybettin metni kameranın dışında, sarsılmadan
+kalsın.
 
 ## Ne zaman bitti?
 
 - Tuğla kırıldığında ekran kısa bir süre sarsılıyor, sonra sakinleşiyor.
-- Sarsıntı ani sıçramalarla değil, `trauma` zamanla azaldıkça küçülerek
-  sönüyor.
-- `trauma` küçükken sarsıntı görünmeyecek kadar hafif, büyükken belirgin —
-  kare alma bu geçişi keskinleştiriyor.
-- Kazandın/kaybettin metni sarsılmıyor; yalnız oyun sahnesi (raket, top,
-  tuğlalar) sarsılıyor.
+- Sarsıntı ani sıçramayla değil, `trauma` azaldıkça küçülerek sönüyor.
+- `trauma` küçükken sarsıntı hafif, büyükken belirgin.
+- Kazandın/kaybettin metni sarsılmıyor; yalnız oyun sahnesi sarsılıyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-`rl.Camera2D` şimdiye kadar kullanmadığın bir tür. Alanları:
+```odin
+// Game'e eklenecek alan:
+//   trauma: f32,
+
+TRAUMA_ON_HIT    :: 0.3
+TRAUMA_DECAY     :: 1.5
+MAX_SHAKE_OFFSET :: 10
+```
+
+`rl.Camera2D` ilk kez kullandığın bir tür:
 
 ```odin
 Camera2D :: struct {
-	offset:   Vector2, // kameranın hedeften kayması
-	target:   Vector2, // kameranın baktığı nokta
-	rotation: f32,     // derece cinsinden dönüş
-	zoom:     f32,      // ölçek — 1.0 varsayılan
+	offset:   Vector2, // hedeften kayma
+	target:   Vector2, // bakılan nokta
+	rotation: f32,     // derece
+	zoom:     f32,     // ölçek
 }
 ```
 
-Sahneyi bu kamerayla çizmek için `rl.BeginMode2D`/`rl.EndMode2D` arasına al:
+Sahneyi bu kamerayla çizmek için ilgili çizim çağrılarını
+`rl.BeginMode2D`/`rl.EndMode2D` arasına alırsın:
 
 ```odin
+// vendor:raylib — BeginMode2D :: proc(camera: Camera2D) ---
+// vendor:raylib — EndMode2D :: proc() ---
 rl.BeginMode2D(camera)
-// top, raket, tuğlalar burada çizilir
-rl.EndMode2D()
-// UI, kazandın/kaybettin metni burada çizilir — kameranın dışında
-```
-
-**Kritik tuzak:** Odin'de bir compound literal yazılmayan alanı sıfırlar. 3.3'te
-`game.player.rect = {x, y}` yazınca `width` ve `height` sıfırlanıp raket
-görünmez olmuştu — aynı tuzağın burada ikinci karşılaşması. Bir `Camera2D`
-değerini compound literal ile kurarken `zoom` alanını yazmazsan sıfır kalır, ve
-`zoom` sıfır demek her şeyin sıfır boyuta küçülmesi demek — ekran tamamen boş
-görünür, hiçbir hata mesajı vermez. `zoom` mutlaka `1.0` olarak set edilmeli:
-
-```odin
-camera := rl.Camera2D{
-	zoom = 1.0,
-}
-```
-
-`trauma`'yı olay anında artırıyorsun, her frame `dt` ile azaltıyorsun:
-
-```odin
-game.trauma = min(game.trauma + TRAUMA_ON_HIT, 1.0)
 // ...
-game.trauma = max(game.trauma - TRAUMA_DECAY * dt, 0.0)
+rl.EndMode2D()
 ```
 
-Eiserloh'un önerdiği fikir tek bir `trauma` değerinden büyüklük türetmek —
-`shake := trauma * trauma`. Kare almanın etkisi: `trauma` küçükken (örnek
-`0.2`) kare `0.04`'e düşer, yani sarsıntı neredeyse hissedilmez; `trauma`
-büyükken (`0.9`) kare `0.81`, yani neredeyse tam güçte. Küçük tetiklenmeler
-gürültü yapmaz, büyük tetiklenmeler belirgin kalır — his lineer artıştan daha
-temiz oluyor.
-
-Rastgele kayma için `rand.float32_range(-1, 1)` iki eksende ayrı ayrı çağrılıp
-`shake` ile ölçeklenebilir:
-
-```odin
-offset_x := rand.float32_range(-1, 1) * shake * MAX_SHAKE_OFFSET
-offset_y := rand.float32_range(-1, 1) * shake * MAX_SHAKE_OFFSET
-camera.offset = {SCREEN_WIDTH / 2 + offset_x, SCREEN_HEIGHT / 2 + offset_y}
-```
+`rand.float32_range` 3.7'den tanıdık; `min`/`max` builtin'leri sınırlama
+için yeter.
 
 ## Sınırlar
 
-- Kamera dönüşü (`rotation`) bu derste kullanılmıyor; yalnız pozisyon kayması
-  yeterli, ek bir eksen kognitif yükü artırmadan aynı hissi veriyor.
-- Zoom sarsıntı efekti için oynatılmıyor; `zoom` sabit `1.0` kalıyor.
+- Kamera dönüşü (`rotation`) bu derste kullanılmıyor; yalnız pozisyon
+  kayması yeterli.
+- `zoom` sarsıntı için oynatılmıyor; sabit `1.0` kalıyor.
 
-::: details İpucu 1 — Neyi kameranın içine, neyi dışına koyacaksın
-Çizim bölümünü ikiye ayır: `rl.BeginMode2D(camera)` ile `rl.EndMode2D()`
-arasında yalnız oyun dünyasının parçaları kalsın — tuğlalar, top, raket. UI
-katmanı (kazandın/kaybettin metni) bu aralığın dışında, her zamanki gibi
-çizilsin. Bu ayrım rastgele değil: oyuncu skoru veya durumu okurken metnin
-titremesi okunabilirliği bozar, ama oyun dünyasının sarsılması vuruşu
-güçlendirir.
+::: details İpucu 1 — Trauma'dan kamerayı kurmanın adımları
+Tuğla kırılınca `trauma`'yı bir miktar artır, `1.0`'ı aşmasın. Her frame
+zamanla azalt, `0.0`'ın altına düşmesin. Büyüklüğü `trauma`'nın karesi (veya
+küpü) olarak hesapla — küçük tetiklenmeler neredeyse hissedilmez kalır,
+büyükler belirgin kalır. İki eksende ayrı rastgele sayı çekip büyüklükle
+ölçekle, kameranın `offset`'ine ekle. Çizimi `BeginMode2D`/`EndMode2D`
+arasına al; UI dışında kalsın.
 :::
 
-::: details İpucu 2 — trauma nerede yaşıyor, nerede güncelleniyor
-`trauma` `Game` struct'ının bir alanı — `hitstop` ile aynı yerde, aynı mantıkla
-yaşıyor. Tuğla kırılma noktasında artır, `.Playing` kolunun her frame'inde
-zamanla azalt. Sıfırın altına düşmesin diye `max` ile tabanla.
+::: details İpucu 2 — zoom'u unutma
+Odin'de bir compound literal yazılmayan alanı sıfırlar. `Camera2D` değerini
+`{offset = ..., target = ...}` gibi kurup `zoom`'u hiç yazmazsan sıfır kalır
+— sıfır zoom demek her şeyin sıfır boyuta küçülmesi demek, ekran tamamen boş
+görünür, hata mesajı vermez. `zoom` mutlaka `1.0` olarak set edilmeli. Aynı
+tuzağın 3.3'teki `rect` alan sıfırlamasıyla aynı ailesi.
 :::
 
-::: details İpucu 3 — Kamerayı kurup çizim döngüsüne bağlamak
+::: details İpucu 3 — Tam çözüm
 ```odin
 camera := rl.Camera2D{
 	target = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2},
@@ -122,11 +98,9 @@ camera.offset = {SCREEN_WIDTH / 2 + offset_x, SCREEN_HEIGHT / 2 + offset_y}
 
 rl.BeginDrawing()
 rl.ClearBackground(rl.BLACK)
-
 rl.BeginMode2D(camera)
 // mevcut tuğla/top/raket çizimi
 rl.EndMode2D()
-
 switch game.state {
 case .Playing:
 case .Lost:
@@ -136,45 +110,42 @@ case .Won:
 }
 rl.EndDrawing()
 ```
-`target` ile `offset` birlikte ekranın merkezini kameranın odak noktası
-yapıyor; sarsıntı yalnız `offset`'i oynatıyor, `target`'a dokunmuyor.
+Tuğla kırılma noktasında `game.trauma = min(game.trauma + TRAUMA_ON_HIT,
+1.0)`; `.Playing` kolunda her frame
+`game.trauma = max(game.trauma - TRAUMA_DECAY * dt, 0.0)`.
 :::
 
-::: details Deep Dive — Rastgele mi, gürültü mü? Ve dönüş sarsıntısı gerekli mi?
-`rand.float32_range(-1, 1)` her frame tamamen bağımsız bir sayı üretir: bir
-frame `-0.9`, sonraki `0.7` olabilir — kamera frame'den frame'e rastgele
-zıplar. Perlin noise (veya benzeri sürekli gürültü fonksiyonları) bunun yerine
-zamanın bir fonksiyonu olarak **sürekli bir yol** çizer: komşu zaman
-noktalarındaki değerler birbirine yakın kalır, kamera pürüzsüz ama öngörülemez
-bir şekilde kayar. Vlambeer'in `The Art of Screenshake` konuşması ve
-Eiserloh'un kendi konuşması ikisi de noise tabanlı sarsıntıyı öneriyor çünkü
-saf rastgelelik göz için “titreşim” gibi okunabiliyor, noise ise daha organik
-hissettiriyor. Bu derste saf rastgele yeterli — fark küçük tuğla kırılmalarında
-gözle ayırt edilmiyor; noise'a geçmek, sarsıntı süresi uzadıkça (örneğin büyük
-bir patlama anında) daha çok işe yarayan bir incelik.
+## Kaynak
 
-Eiserloh ayrıca `rotation` alanını da sarsıntıya katmayı öneriyor — translational
-(kayma) sarsıntı yanında rotational (dönüş) sarsıntı ekranın köşelerini de
-oynatarak sarsıntıyı daha “fiziksel” hissettiriyor. Breakout'ta sahne küçük ve
-dikdörtgen, oyuncu her zaman merkeze yakın bakıyor; dönüş eklemek bu ölçekte
-fark edilir bir kazanç getirmiyor ve `rotation`'ı da `trauma`'dan türetip
-ayrıca ölçeklemek gerektiriyor — ekstra karmaşıklık, küçük görsel kazanç. Daha
-büyük bir sahne veya top hızının yüksek olduğu bir oyunda bu değiş tokuş
-tersine dönebilir.
-:::
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/),
+`#Camera2D` ve `#BeginMode2D` anchor'ları. Bu dersin yeni türü ve yeni
+çağrıları orada; imzalar kurulu derleyicideki `vendor/raylib/raylib.odin`
+ile doğrulandı.
 
-## Birincil kaynak
+## Daha derine
 
-[Squirrel Eiserloh — Math for Game Programmers: Juicing Your Cameras With Math (GDC 2016)](https://archive.org/details/GDC2016Eiserloh).
-`trauma` fikri — ayrı sarsıntı efektleri yerine tek bir `0..1` değeri tutup
-zamanla söndürmek ve sarsıntı büyüklüğünü bu değerin karesi/küpü olarak almak —
+Ders bittikten sonra: [Squirrel Eiserloh — Math for Game Programmers:
+Juicing Your Cameras With Math (GDC 2016)](https://archive.org/details/GDC2016Eiserloh).
+`trauma` fikri — ayrı efektler yerine tek bir `0..1` değeri tutup zamanla
+söndürmek, sarsıntı büyüklüğünü bu değerin karesi/küpü olarak almak —
 doğrudan bu konuşmadan geliyor.
 
-**Kazanım:** Artık iki katmanlı bir geri bildirim sistemin var: hitstop vuruşu
-durduruyor, kamera sarsıntısı vuruşu hissettiriyor. İkisi de aynı olaydan
-(tuğla kırılması) tetikleniyor ama birbirinden bağımsız sayaçlarla yaşıyor —
-birini kapatıp diğerini açık bırakarak hangisinin ne kattığını
-karşılaştırabilirsin.
+`rand.float32_range(-1, 1)` her frame bağımsız bir sayı üretir, kamera
+frame'den frame'e rastgele zıplar. Perlin noise bunun yerine zamanın sürekli
+bir fonksiyonu olarak yumuşak bir yol çizer; Eiserloh ve Vlambeer'in [The Art
+of Screenshake](https://archive.org/details/the-art-of-screenshake) konuşması
+ikisi de bunu öneriyor çünkü saf rastgelelik göz için titreşim gibi okunur.
+Bu derste saf rastgele yeterli; fark küçük kırılmalarda ayırt edilmiyor.
+Eiserloh ayrıca `rotation`'ı da sarsıntıya katmayı öneriyor — Breakout'un
+küçük, dikdörtgen sahnesinde bu ekstra karmaşıklığa değecek görsel kazanç
+getirmiyor.
+
+## Kazanım
+
+Artık iki katmanlı bir geri bildirim sistemin var: hitstop vuruşu
+durduruyor, kamera sarsıntısı hissettiriyor. İkisi de aynı olaydan
+tetikleniyor ama bağımsız sayaçlarla yaşıyor — birini kapatıp diğerini açık
+bırakarak hangisinin ne kattığını karşılaştırabilirsin.
 
 **“Breakout 3.11 denememi değerlendir”** yaz; kodunu inceleyelim.
 

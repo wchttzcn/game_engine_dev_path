@@ -39,29 +39,50 @@ chooses platform work. His normal workflow is read a short lesson → write Odin
   topic list is background, not a prerequisite checklist; use the short scope below.
   The current learner preferences here override the source pack's prediction,
   observation-report and reflection routines.
-- Show the shape, never the solution. When a lesson needs an Odin construct or a
-  raylib call the learner has not met, put a minimal worked example in the body —
-  the call signature and one line using it — not buried in a hint. Withhold the
-  game logic he is meant to derive, never the syntax of the language feature he
-  has never seen. Before writing a lesson, list the language features and API
-  calls it requires and confirm each was taught in an earlier lesson or is taught
-  in this one; a concept named in passing is not taught. A lesson that states its
-  acceptance criteria without teaching what they require is a defect, not rigour.
+- Hide exactly two things, never more: the bodies of the procedures the learner
+  must write, and the integration point — where those procedures get called from.
+  Everything else is given in the lesson body under `## Elindekiler`: the full
+  struct with its field names and types, the procedure signatures with empty
+  bodies, any new constants, and the signature plus one usage line of every API
+  call the learner has not met. Deriving the data model is not the exercise;
+  deriving the algorithm is. A hint that supplies a struct field or a signature
+  is a defect — that content belongs in the body. Before writing a lesson, list
+  the language features and API calls it requires and confirm each was taught in
+  an earlier lesson or is taught in this one; a concept named in passing is not
+  taught. A lesson that states its acceptance criteria without teaching what they
+  require is a defect, not rigour.
 - Verify every signature against the installed compiler under
   `$ODIN_ROOT/vendor` and `$ODIN_ROOT/core` before it appears in a lesson.
-- Ground lesson content in `RESOURCES.md`, never in recalled API knowledge. Every
-  lesson ends with a **Birincil kaynak** section naming one entry from that file
-  and one line on why it is the source for this lesson. Before writing any API
-  claim, verify the symbol against the installed compiler and the Odin binding
-  documentation. When a lesson needs a source the file lacks, verify the source,
-  add it to `RESOURCES.md` with its one-line note, then cite it. Record missing
-  areas under that file's `## Boşluklar` heading instead of citing a weak source.
-- Give exactly one primary idea and one small challenge per lesson. Lead with a
-  one-sentence goal, challenge and acceptance criteria; required context stays
-  within a few short paragraphs. Include constraints only with an educational
-  reason, three closed hints, optional Deep Dive and reward/next step. Teach the
-  smallest useful idea for the next problem, not an exhaustive topic reference.
-  Defer adjacent topics to later lessons; optional content is never a gate.
+- Ground lesson content in `RESOURCES.md`, never in recalled API knowledge.
+  Sources split by role and the split is load-bearing. `## Kaynak` is mandatory:
+  one `RESOURCES.md` entry for the Odin API this lesson uses, plus one line on
+  why. It is consulted *during* the lesson. `## Daha derine` is optional and
+  always last: the conceptual or pattern source — Game Programming Patterns, a
+  GDC talk, anything written in C or C++ — read *after* the lesson is done. A
+  conceptual source is never a prerequisite for doing the work; if the lesson
+  cannot be completed without reading it, the lesson body is missing something.
+  Never invent a conceptual source to fill the section — omit it instead. Before
+  writing any API claim, verify the symbol against the installed compiler and the
+  Odin binding documentation. When a lesson needs a source the file lacks, verify
+  the source, add it to `RESOURCES.md` with its one-line note, then cite it.
+  Record missing areas under that file's `## Boşluklar` heading instead of citing
+  a weak source.
+- Give exactly one primary idea and one small challenge per lesson, in this
+  section order: `**Hedef:**` (one sentence), `## Görev`, `## Ne zaman bitti?`,
+  `## Elindekiler`, `## Sınırlar`, exactly three `::: details İpucu N` blocks,
+  `## Kaynak`, optional `## Daha derine`, `## Kazanım`. The three hints have
+  fixed roles: İpucu 1 states the algorithm's steps in prose, İpucu 2 names this
+  lesson's specific trap, İpucu 3 is the complete solution — procedure bodies and
+  the call site, nothing withheld. Word budgets, prose only (fenced code does not
+  count): `Görev` 60, `Elindekiler` 150, `Sınırlar` 60, each hint 80, `Daha
+  derine` 200, `Ne zaman bitti?` at most 7 bullets, and the whole lesson at most
+  600. The total binds: a lesson cannot max every section. A lesson that cannot
+  fit 600 carries two ideas — split it in two rather than compress the prose.
+  `scripts/lesson-shape.test.mjs` enforces all of this; its `SHAPED` list names
+  the lessons already converted, and converting another lesson means adding its
+  number there. Teach the smallest useful idea for the next problem, not an
+  exhaustive topic reference. Defer adjacent topics to later lessons; optional
+  content is never a gate.
 - Use chat as the primary mentor interface; the existing Academy is an optional
   reader. Author content that works in either. Preserve working functionality;
   add no UI features without a concrete current learning need and user request.

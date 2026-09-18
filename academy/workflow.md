@@ -33,9 +33,26 @@ sorun varsa sohbette bildir; onarımı ben üstlenirim.
 
 ## Ders biçimi
 
-Her ders önce hedefi, görevi ve kabul koşulunu gösterir. Ardından yalnız göreve
-yetecek kadar açıklama gelir. İpuçları ve Deep Dive isteğe bağlıdır. Bir ders
-bir ana fikir taşır; sonraki sorun için gerekmeyen teori sonraya kalır.
+Her ders önce hedefi, görevi ve kabul koşulunu gösterir. Sonra **Elindekiler**
+gelir: struct'ın tamamı, proc imzaları (gövdeleri boş) ve ilk kez gördüğün her
+API çağrısının imzası. Ders sana yalnız iki şeyi vermez — proc gövdeleri ve bu
+procleri nereden çağıracağın. Veri modelini tasarlamak ödev değil; algoritmayı
+kurmak ödev.
+
+Ardından üç ipucu, sabit rollerle: **İpucu 1** algoritmanın adımlarını düz
+yazıyla söyler, **İpucu 2** o derse özgü tuzağı gösterir, **İpucu 3** tam
+çözümdür — gövdeler ve çağrı yeri, saklanan hiçbir şey kalmaz. Üçüncüsünü
+açmak "pes ettim" demek değil, dersin sonunu görmek demek.
+
+Kaynaklar rollerine göre ayrı. **Kaynak** zorunludur ve Odin'dir: dersin
+kullandığı API, ders *sırasında* bakılacak yer. **Daha derine** isteğe bağlıdır
+ve ders *bittikten sonra* okunur: kavram ve desen kaynakları — Game Programming
+Patterns, GDC konuşmaları, C veya C++ ile yazılmış her şey. Bir dersi yapmak
+için oraya bakman hiçbir zaman gerekmez; gerekiyorsa dersin gövdesi eksiktir,
+bana söyle.
+
+Bir ders bir ana fikir taşır ve 600 kelimeyi aşmaz. Aşıyorsa iki fikir
+sıkışmış demektir, ders ikiye bölünür. Bu sınırlar `npm test` ile denetlenir.
 
 ## İnceleme
 

@@ -11,82 +11,42 @@ tuğlanın konumunu index'inden türet.
 
 ## Görev
 
-`Game` içine sabit boyutlu bir tuğla array'i ekle. Her tuğla bir dikdörtgen ve
-hâlâ ayakta olup olmadığını söyleyen bir bayrak tutsun. Duvarı `game_reset`
-içinde tek bir döngüde kur, her tuğlanın konumunu index'inden hesapla ve ayakta
-olanları çiz. Tuğlalar ekranda birbirinden ayırt edilebilsin.
+`Game`'e sabit boyutlu bir tuğla array'i ekle. Her tuğla bir dikdörtgen ve
+ayakta olup olmadığını söyleyen bir bayrak tutsun. Duvarı `game_reset` içinde
+tek bir döngüde kur, her tuğlanın konumunu index'inden hesapla ve ayakta
+olanları çiz.
 
 ## Ne zaman bitti?
 
 - Ekranın üstünde satır ve sütun düzeninde bir tuğla duvarı görünüyor.
-- Tuğlalar tek tek seçilebiliyor; duvar tek bir beyaz blok gibi görünmüyor.
+- Tuğlalar tek tek seçilebiliyor; duvar tek bir blok gibi görünmüyor.
 - Tuğla sayısı satır ve sütun sabitlerinden türüyor; adet elle sayılmıyor.
-- Her tuğlanın konumu tek bir formülden geliyor; koordinatlar tek tek yazılmıyor.
+- Her tuğlanın konumu tek bir formülden geliyor; koordinatlar tek tek
+  yazılmıyor.
 - Duvar `game_reset` içinde kuruluyor, `R` duvarı yeniden diziyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Snake'in gövdesi `[MAX_BODY]Cell` artı bir `length` idi: kapasite sabit, canlı
-uzunluk değişken. Duvar ikinci kalıp — kapasite sabit, uzunluk **hiç
-değişmiyor**. Bir tuğla kırıldığında array'den çıkmıyor, yalnız bayrağı düşüyor:
+`Game`'e eklenecek alan: `bricks: [BRICK_ROWS * BRICK_COLS]Brick`.
 
 ```odin
+BRICK_COLS   :: 10
+BRICK_ROWS   :: 5
+BRICK_WIDTH  :: SCREEN_WIDTH / BRICK_COLS
+BRICK_HEIGHT :: 20
+BRICK_TOP    :: 70
+BRICK_PAD    :: 4
+
 Brick :: struct {
 	rect:  rl.Rectangle,
 	alive: bool,
 }
 ```
 
-Duvarın büyüklüğü iki sabitten türer, array de o iki sabitten:
-
-```odin
-BRICK_COLS :: 10
-BRICK_ROWS :: 5
-
-Game :: struct {
-	// ...
-	bricks: [BRICK_ROWS * BRICK_COLS]Brick,
-}
-```
-
-Tek boyutlu array'i satır/sütun olarak okumak `/` ve `%` ile oluyor — 2.4'te
-wrap için kullandığın `%` burada sütunu veriyor:
-
-```odin
-for i in 0 ..< len(game.bricks) {
-	row := i / BRICK_COLS
-	col := i % BRICK_COLS
-	// ...
-}
-```
-
-`len` sabit boyutlu array'de derleme zamanı bir sabit; ayrı bir sayaç tutmana
-gerek yok.
-
-Izgara hücresi ile tuğlanın kendisi aynı şey değil. `BRICK_WIDTH` bir **hücrenin**
-genişliği; tuğla o hücrenin içine biraz daralarak oturur. Aradaki pay duvarı
-görünür kılan şey: bitişik ve aynı renk dikdörtgenler ekranda tek bir beyaz blok
-olarak okunur, 50 tuğla olduğunu göremezsin.
-
-```odin
-BRICK_PAD :: 4
-
-rect = {
-	x     = f32(col) * BRICK_WIDTH + BRICK_PAD,
-	width = BRICK_WIDTH - BRICK_PAD * 2,
-	// y ve height de aynı şekilde
-}
-```
-
-Payı `rect`'in kendisine yaz, çizerken daraltma. 3.5'te çarpışma testi bu aynı
-`rect`'i kullanacak; çizilen dikdörtgen ile çarpışan dikdörtgen ayrışırsa top
-görünmeyen bir kenara çarpar ve sebebini ekranda bulamazsın.
-
-Bir ayrıntı: `i`, `row` ve `col` birer `int`, `rl.Rectangle`'ın alanları ise
-`f32`. Dönüşümü çarpımdan **önce** yaz — `f32(col) * BRICK_WIDTH`, `f32(col *
-BRICK_WIDTH)` değil. Bu duvarda ikisi de aynı sayıyı verir, ama cast'i sınırın
-neresine koyduğun büyüyen sayılarda sonucu değiştirir.
+`BRICK_WIDTH`/`BRICK_HEIGHT` bir **hücrenin** boyutu; tuğla `BRICK_PAD` kadar
+daralarak o hücrenin içine oturur. Sabit boyutlu array'de `len(game.bricks)`
+derleme zamanı sabiti — ayrı bir sayaç tutmana gerek yok.
 
 ## Sınırlar
 
@@ -94,21 +54,21 @@ neresine koyduğun büyüyen sayılarda sonucu değiştirir.
 - Skor, seviye, farklı tuğla türü yok. Tek renk yeterli.
 - Duvarın ekranı tam doldurması şart değil; kenarlarda boşluk kalabilir.
 
-::: details İpucu 1 — Ne tutman gerekiyor
-Bir tuğlanın çizilmesi ve ileride kırılması için gereken en küçük veri: nerede
-olduğu ve ayakta olup olmadığı. Konum zaten bir `rl.Rectangle`; 3.1'de raket
-için de böyle yapmıştın.
+::: details İpucu 1 — Index'ten satır ve sütuna
+Tek boyutlu array'i satır/sütun olarak okumak `/` ve `%` ile olur — Snake'te
+wrap için kullandığın `%` burada sütunu verir: `row := i / BRICK_COLS`,
+`col := i % BRICK_COLS`. Konumu bu ikisinden hesapla: `x` sütuna, `y` satıra
+ve `BRICK_TOP` offsetine bağlı. Payı `rect`'in kendisine yaz.
 :::
 
-::: details İpucu 2 — Duvarı ekrana sığdırmak
-Tuğla genişliğini elle seçmek yerine ekran genişliğinden türetebilirsin:
-`BRICK_WIDTH :: SCREEN_WIDTH / BRICK_COLS`. O zaman sütun sayısını değiştirdiğinde
-duvar kendiliğinden yeniden sığar. Üstte biraz boşluk bırakmak için satır
-hesabına sabit bir offset ekle. Tuğlaları birbirinden ayırmak için de hücre ile
-tuğla arasına sabit bir pay koy — hücre ızgarası aynı kalır, tuğla küçülür.
+::: details İpucu 2 — Payı nereye yazdığın önemli
+Tuğlayı tam hücre boyutunda çizip yalnız çizim sırasında küçültmek cazip ama
+hatalı: 3.5'te çarpışma testi `rect`'in kendisini kullanacak, çizilen ile
+çarpışan dikdörtgen ayrışırsa top görünmeyen bir kenara çarpar. Payı
+`rect.width`/`rect.height`'in kendisinden düş, çizerken daraltma.
 :::
 
-::: details İpucu 3 — Kurulum döngüsü
+::: details İpucu 3 — Tam çözüm
 ```odin
 for i in 0 ..< len(game.bricks) {
 	row := i / BRICK_COLS
@@ -116,38 +76,43 @@ for i in 0 ..< len(game.bricks) {
 	game.bricks[i] = Brick {
 		alive = true,
 		rect = {
-			x = f32(col) * BRICK_WIDTH + BRICK_PAD,
-			y = BRICK_TOP + f32(row) * BRICK_HEIGHT + BRICK_PAD,
-			width = BRICK_WIDTH - BRICK_PAD * 2,
+			x      = f32(col) * BRICK_WIDTH + BRICK_PAD,
+			y      = BRICK_TOP + f32(row) * BRICK_HEIGHT + BRICK_PAD,
+			width  = BRICK_WIDTH - BRICK_PAD * 2,
 			height = BRICK_HEIGHT - BRICK_PAD * 2,
 		},
 	}
 }
 ```
-Çizim tarafında aynı array'i dolaşıp `alive` olanları çiz.
+Bu döngü `game_reset`'in içine, top ve raket kurulumundan sonra giriyor.
+Çizim tarafında aynı array'i dolaşıp yalnız `alive` olanları
+`rl.DrawRectangleRec` ile çiz; bu döngü çizim bölümünde topun ve raketin
+çiziminden önce yer alıyor.
 :::
 
-::: details Deep Dive — Neden bayrak, neden array'den silmek değil?
-Kırılan tuğlayı array'den çıkarmanın iki yolu var: kalanları kaydırmak, ya da
-son elemanı boşalan yere taşımak. İkisi de elemanların index'ini değiştirir.
-Bayrak yaklaşımında index ömür boyu sabit kalıyor — 3.5'te top bir tuğlaya
-çarptığında elindeki tek şey o tuğlanın index'i olacak, ve o index'in bir sonraki
-frame'de başka bir tuğlayı göstermemesi işini kolaylaştırıyor.
-
-Bedeli: ölü tuğlalar bellekte kalmaya ve her taramada atlanmaya devam ediyor. 50
-elemanda bu bedel yok denecek kadar az. 50.000 mermi olsaydı soru tersine
-dönerdi; o zaman ölüleri sona toplamak taramayı canlı olanlarla sınırlar.
-:::
-
-## Birincil kaynak
+## Kaynak
 
 [Odin Overview — resmi dil rehberi](https://odin-lang.org/docs/overview/#fixed-arrays).
-Sabit boyutlu array'in boyutunun tipin parçası olduğu ve `len`'in orada derleme
-zamanı sabiti olduğu burada yazıyor; Snake'te kapasiteyi bu yüzden sabitten
-türetmiştin.
+Sabit boyutlu array'in boyutunun tipin parçası olduğu ve `len`'in orada
+derleme zamanı sabiti olduğu burada yazıyor; Snake'te kapasiteyi bu yüzden
+sabitten türetmiştin.
 
-**Kazanım:** Sahnede ilk kez tek tek elle yerleştirilmemiş, bir formülden doğan
-nesneler var. Duvarın şeklini değiştirmek artık iki sabiti değiştirmek demek.
+## Daha derine
+
+Kırılan tuğlayı array'den çıkarmanın iki yolu var: kalanları kaydırmak ya da
+son elemanı boşalan yere taşımak. İkisi de elemanların index'ini değiştirir.
+Bayrak yaklaşımında index ömür boyu sabit kalıyor — 3.5'te top bir tuğlaya
+çarptığında elindeki tek şey o tuğlanın index'i olacak, ve bu index'in bir
+sonraki frame'de başka bir tuğlayı göstermemesi işi kolaylaştırır. Bedeli:
+ölü tuğlalar bellekte kalmaya ve her taramada atlanmaya devam ediyor; 50
+elemanda bu bedel yok denecek kadar az.
+[Game Programming Patterns — Object Pool](https://gameprogrammingpatterns.com/object-pool.html)
+bu ödünleşimi genel olarak anlatıyor.
+
+## Kazanım
+
+Sahnede ilk kez tek tek elle yerleştirilmemiş, bir formülden doğan nesneler
+var. Duvarın şeklini değiştirmek artık iki sabiti değiştirmek demek.
 Sıradaki ders bu duvarı topla buluşturuyor.
 
 **“Breakout 3.4 denememi değerlendir”** yaz; kodunu inceleyelim.

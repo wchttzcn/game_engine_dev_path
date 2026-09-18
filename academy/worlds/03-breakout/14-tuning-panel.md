@@ -11,136 +11,141 @@ ve `F1` ile açılan bir panelden bu değerleri oyunu kapatmadan değiştir.
 
 ## Görev
 
-3.10-3.13'te yazdığın sayılar — hitstop süresi, trauma miktarı, parçacık ömrü
-ve sayısı, pitch aralığı, top hızı — şu an birer `::` sabiti, yani her
-değişiklikte yeniden derliyorsun. Bunların hepsini tek bir `Tuning` struct'ında
-topla, `Game` içine bir alan olarak ekle, ve kodun her yerini o sabitler yerine
-bu struct'tan okuyacak şekilde değiştir. Sonra `F1` ile açılıp kapanan bir
-panel çiz; panelin slider'ları bu struct'ın alanlarını doğrudan değiştirsin.
+3.10-3.13'te yazdığın sayıları — hitstop süresi, trauma miktarı, parçacık
+ömrü, pitch aralığı, top hızı — tek bir `Tuning` struct'ında topla, `Game`'e
+ekle, ve kodun her yerini bu struct'tan okuyacak şekilde değiştir. Sonra `F1`
+ile açılıp kapanan bir panel çiz; panelin slider'ları struct'ın alanlarını
+doğrudan değiştirsin.
 
 ## Ne zaman bitti?
 
-- `Tuning` adında bir struct var; en azından hitstop süresi, trauma miktarı,
-  parçacık ömrü/sayısı, pitch aralığı ve top hızını alan olarak tutuyor.
+- `Tuning` adında bir struct var: hitstop süresi, trauma miktarı, parçacık
+  ömrü, pitch aralığı, top hızı alan olarak tutuluyor.
 - `Game` içinde bir `tuning: Tuning` alanı var.
-- Hitstop, kamera sarsıntısı, parçacık, ses pitch'i ve top hızı kodun hiçbir
-  yerinde artık sabit okumuyor; hepsi `game.tuning`'den okuyor.
+- Hitstop, kamera sarsıntısı, parçacık ömrü, ses pitch'i ve top hızı kodun
+  hiçbir yerinde artık sabit okumuyor; hepsi `game.tuning`'den okuyor.
 - `F1` panel açıp kapatıyor.
-- Panel açıkken bir slider'ı sürüklediğinde oyunun hissi anında değişiyor —
-  yeniden derlemeye gerek yok.
+- Panel açıkken bir slider'ı sürüklediğinde oyunun hissi anında değişiyor.
 - Panel sahne kamerasının dışında çiziliyor; 3.11'in sarsıntısı panelin
   kendisini sallamıyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Dünyanın açılış sorusuna geldik: hissi değiştirmek için neden her seferinde
-yeniden derliyorsun? Çünkü şu ana kadar yazdığın sayılar derleme zamanında
-donmuş sabitlerdi. Bu ders onları runtime'da değiştirilebilir veriye çeviriyor
-— tek fark bir sabiti (`::`) bir struct alanına taşımak, ama sonucu köklü:
-artık oyunu her denemende yeniden derlemene gerek yok.
-
-raygui, Odin tarafında ayrı bir paket **değil**. `package raylib` içinde,
-`vendor:raylib`'in kendi dosyalarından biri olarak geliyor — hâlâ kullandığın
-`import rl "vendor:raylib"` ile çağrılır, ek kurulum, ek import, ek link adımı
-yok. Dear ImGui kurmayı bekliyorsan gerek yok; kurulu derleyicinin `vendor/`
-koleksiyonunda Dear ImGui zaten yok, `raygui` var ve oyun zaten raylib'e bağlı
-olduğu için sıfır ek maliyetle geliyor.
-
-Bir slider'ı çizip okumanın çağrı şekli şu:
+raygui Odin tarafında ayrı bir paket değil — `vendor:raylib`'in bir dosyası,
+hâlâ `import rl "vendor:raylib"` ile çağrılır, ek kurulum yok.
 
 ```odin
-volume: f32 = 0.5
-rl.GuiSlider(rl.Rectangle{20, 50, 200, 20}, "sessiz", "yüksek", &volume, 0, 1)
+GuiSlider :: proc(bounds: Rectangle, textLeft: cstring, textRight: cstring, value: ^f32, minValue: f32, maxValue: f32) -> c.int
 ```
 
-`value` parametresi bir `^f32` — `volume` slider'ı sürüklediğin anda **yerinde**
-değişir; dönen `c.int` çoğu zaman yok sayılır. Bu, immediate mode GUI'nin
-anlamı: panelin kendine ait ayrı bir state'i yok, her frame yeniden çiziliyor
-ve doğrudan senin verdiğin değişkeni düzenliyor.
+`value` bir `^f32`; sürüklediğin anda **yerinde** değişir, dönen değer çoğu
+zaman yok sayılır:
 
-Panel çizimi 3.11'in sahne kamerasının **dışında** kalmalı. `rl.BeginMode2D`/
-`rl.EndMode2D` arasında çizilen her şey kameranın `target`/`zoom`/`rotation`'ından
-geçer — trauma sarsıntısı da bu dönüşümden geliyordu. Panel o çiftin içinde
-kalırsa hem sarsıntıyla birlikte sallanır hem de slider'a tıkladığın ekran
-koordinatı artık sahne koordinatıyla örtüşmez, slider'a tıklayamaz hâle
-gelirsin.
+```odin
+rl.GuiSlider(rl.Rectangle{20, 50, 200, 20}, "az", "çok", &game.tuning.trauma_on_hit, 0, 1)
+```
+
+Struct, `Game`'e eklenecek iki alan, ve doldurman gereken procedure:
+
+```odin
+Tuning :: struct {
+	hitstop_duration:  f32,
+	trauma_on_hit:     f32,
+	trauma_decay:      f32,
+	particle_lifetime: f32,
+	pitch_min:         f32,
+	pitch_max:         f32,
+	ball_speed:        f32,
+}
+
+// Game'e eklenecek iki alan:
+//   tuning:            Tuning,
+//   show_tuning_panel: bool,
+
+tuning_defaults :: proc() -> Tuning {
+}
+```
 
 ## Sınırlar
 
-- raygui'nin görsel teması (renk, stil) konu değil; varsayılan görünüm yeterli.
+- raygui'nin görsel teması (renk, stil) konu değil; varsayılan görünüm
+  yeterli.
 - Panele yeni bir tuning parametresi eklemek zorunlu değil; görev yalnızca
   zaten var olan sabitleri struct'a taşımak ve onlara panelden erişmek.
-- İki farklı ayar profili tutmak bu dersin konusu değil — tek bir `Tuning`
-  değerini değiştirmek yeterli; birden fazla profil sıradaki derste geliyor.
+- İki farklı ayar profili tutmak bu dersin konusu değil; sıradaki derste
+  geliyor.
 
 ::: details İpucu 1 — Hangi sabitleri topluyorsun
-3.10'un hitstop süresi, 3.11'in trauma miktarı, 3.7'nin parçacık ömrü ve
-doğurma sayısı, 3.13'ün pitch aralığı, ve 3.2'den beri sabit duran top hızı —
-hepsi birer `::` tanımı olarak dosyanın başında duruyor. Her birini `Tuning`
-struct'ında bir alan yap, `Game`'e `tuning: Tuning` ekle, `game_reset` içinde
-(veya başlangıçta) başlangıç değerlerini ata.
+3.10'un hitstop süresi, 3.11'in trauma miktarı ve sönmesi, parçacık ömrü,
+3.13'ün pitch aralığı, top hızının bugünkü büyüklüğü — hepsi `tuning_defaults`
+içinde birer alana yazılır, `game_reset` bu değeri `game.tuning`'e atar. Top
+hızı bir `Vector2` değil `f32`: yönü sabit tutup büyüklüğü
+`game.tuning.ball_speed`'den oku — `vel = normalize(yön) * game.tuning.ball_speed`.
 :::
 
-::: details İpucu 2 — Slider'ı neye bağlıyorsun
-Sliderın `value` parametresi bir pointer. Kendine şunu sor: bu pointer'ı ayrı
-bir yerel değişkene mi veriyorsun — mesela bir `trauma_slider: f32` tutup her
-frame `game.tuning.trauma_amount = trauma_slider` diye elle kopyalıyor musun —
-yoksa struct'ın alanının kendisine mi? 3.1'de Paddle'ı hatırla: ayrı
-`x`, `y`, `width` ve `height` alanlarını `rect`'in bir aynası olarak
-tutmuştun ve ikisi senkronsuz kalmıştı. Burada da aynı tuzak var — iki yerde tutulan bir sayı, iki
-yerin birbirini takip etmesini gerektirir.
+::: details İpucu 2 — Paneli kameranın neresine çiziyorsun
+Panel çizimini `rl.BeginMode2D`/`rl.EndMode2D` çiftinin içine koymak cazip,
+çünkü çizim kodu zaten orada — ama o çift içinde çizilen her şey kameranın
+`offset`/`zoom`'undan geçer, 3.11'in sarsıntısı da bu dönüşümden geliyordu.
+Panel içeride kalırsa hem sarsıntıyla sallanır hem tıkladığın ekran
+koordinatı artık sahne koordinatıyla örtüşmediği için slider'a tıklayamaz hâle
+gelirsin. Paneli `rl.EndMode2D()`'den sonra çiz.
 :::
 
-::: details İpucu 3 — Doğrudan struct alanına yaz
-Slider'a `game.tuning`'in kendi alanının adresini ver:
-
+::: details İpucu 3 — Tam çözüm
 ```odin
-rl.GuiSlider(
-	rl.Rectangle{20, 50, 200, 20},
-	"az", "cok",
-	&game.tuning.trauma_amount,
-	0, 1,
-)
+tuning_defaults :: proc() -> Tuning {
+	return {
+		hitstop_duration  = HITSTOP_DURATION,
+		trauma_on_hit     = TRAUMA_ON_HIT,
+		trauma_decay      = TRAUMA_DECAY,
+		particle_lifetime = 1.0,
+		pitch_min         = 0.95,
+		pitch_max         = 1.05,
+		ball_speed        = 340,
+	}
+}
 ```
-
-Ayrı bir slider değişkeni yok. Panel her frame yeniden çizildiğinde
-`game.tuning`'in güncel değerini gösteriyor, ve sen sürüklediğinde doğrudan
-`game.tuning`'i değiştiriyorsun — okuma ve yazma aynı hücrede buluşuyor,
-kopyalanacak ikinci bir yer hiç açılmıyor.
+`game_reset` içinde: `game.tuning = tuning_defaults()`. Açma/kapama:
+`if rl.IsKeyPressed(.F1) { game.show_tuning_panel = !game.show_tuning_panel }`.
+Çizim, `rl.EndMode2D()`'den sonra:
+```odin
+if game.show_tuning_panel {
+	rl.GuiSlider(rl.Rectangle{20, 50, 200, 20}, "az", "çok", &game.tuning.trauma_on_hit, 0, 1)
+	// diğer alanlar için aynı desen, ayrı bir dikdörtgen ve etiketle
+}
+```
 :::
 
-::: details Deep Dive — Immediate mode ve neden Dear ImGui değil
-Retained mode bir GUI kütüphanesinde (çoğu masaüstü UI framework'ü gibi)
-widget'lar kendi state'ini tutan, bir kere kurulan ve olay (event) ile
-güncellenen nesnelerdir — bir slider'ın kendi iç `value`'su vardır, sen ona
-abone olursun. Immediate mode'da widget diye bir nesne yok: `GuiSlider` her
-frame yeniden çağrılan bir procedure, kendi hafızası yok, sen ne veriyorsan
-onu okuyup çiziyor. Bunun bedeli, retained mode'un sahip olduğu bazı şeyleri
-(odak yönetimi, animasyonlu geçişler, karmaşık layout) kendin kurman gerekmesi;
-kazancı, bir debug/tuning aracı için bakım maliyetinin neredeyse sıfır olması
-— yeni bir alan eklemek yeni bir widget kaydı değil, yeni bir `GuiSlider`
-çağrısı ve struct'a bir field.
-
-Kurulu Odin derleyicisinin `vendor/` koleksiyonunda Dear ImGui yok; `microui`
-ve `raylib/raygui.odin` var. Oyun zaten raylib'e bağlı olduğu için raygui
-sıfır ek kurulumla geliyor — Dear ImGui'ye dönme kararı ancak raygui'nin
-yetmediği somut bir araç ihtiyacı çıkarsa verilir, bugün için değil.
-:::
-
-## Birincil kaynak
+## Kaynak
 
 [raygui — raysan5'in immediate-mode GUI kütüphanesi](https://github.com/raysan5/raygui)
-(`RESOURCES.md`). Kütüphanenin immediate-mode tasarımı ve control listesi
-buradan; Odin tarafında ayrı paket olmayıp `vendor:raylib` içinde geldiği
-kurulu derleyiciyle derlenip link edilerek doğrulandı.
+(`RESOURCES.md`). Kütüphanenin control listesi buradan; Odin tarafında ayrı
+paket olmayıp `vendor:raylib` içinde geldiği kurulu derleyiciyle derlenip
+link edilerek doğrulandı.
 
-**Kazanım:** Artık oyunun hissini oyunu kapatmadan, canlı canlı
-ayarlayabiliyorsun. Bu, `Tuning` struct'ının tek doğruluk kaynağı olmasıyla
-mümkün oldu — slider doğrudan onu okuyup yazıyor, araya kopya giren bir ikinci
-temsil yok. Sıradaki ders bu struct'ın bir değer olmasının asıl gücünü
-gösterecek: aynı struct'tan iki farklı kopya tutup aralarında geçiş
-yapabilirsin.
+## Daha derine
+
+Retained mode bir GUI kütüphanesinde widget'lar kendi state'ini tutan, bir
+kere kurulan nesnelerdir. Immediate mode'da widget diye bir nesne yok:
+`GuiSlider` her frame yeniden çağrılan bir procedure, kendi hafızası yok, sen
+ne veriyorsan onu okuyup çiziyor. Bedeli, odak yönetimi ve karmaşık layout
+gibi şeyleri kendin kurman; kazancı, bir debug/tuning aracı için bakım
+maliyetinin neredeyse sıfır olması — yeni bir alan eklemek yeni bir `GuiSlider`
+çağrısı ve struct'a bir field.
+
+Kurulu derleyicinin `vendor/` koleksiyonunda Dear ImGui yok; `microui` ve
+`raylib/raygui.odin` var. Oyun zaten raylib'e bağlı olduğu için raygui sıfır
+ek kurulumla geliyor — Dear ImGui'ye dönme kararı ancak raygui'nin yetmediği
+somut bir araç ihtiyacı çıkarsa verilir.
+
+## Kazanım
+
+Artık oyunun hissini oyunu kapatmadan, canlı canlı ayarlayabiliyorsun. Bu,
+`Tuning` struct'ının tek doğruluk kaynağı olmasıyla mümkün oldu. Sıradaki ders
+bu struct'ın bir değer olmasının asıl gücünü gösterecek: aynı struct'tan iki
+farklı kopya tutup aralarında geçiş yapabilirsin.
 
 **“Breakout 3.14 denememi değerlendir”** yaz; kodunu inceleyelim.
 

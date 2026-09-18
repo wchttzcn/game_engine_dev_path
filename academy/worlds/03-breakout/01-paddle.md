@@ -11,9 +11,9 @@ yatay hareket eden, ekrandan çıkmayan bir raket çiz.
 
 ## Görev
 
-`games/breakout/main.odin` oluştur. Pencereyi aç, bir `Game` struct'ı içinde
-raketin konumunu ve boyutunu tut, `A`/`D` ile `x` ekseninde hareket ettir ve
-raketi ekranın içinde tut. Hareket delta time ile hesaplansın.
+`games/breakout/main.odin` oluştur, pencereyi aç ve `Game` struct'ında raketin
+konumunu tut. `A`/`D` ile `x` ekseninde hareket ettir, hareketi delta time ile
+hesapla ve raketi ekranın içinde tut.
 
 ## Ne zaman bitti?
 
@@ -23,26 +23,34 @@ raketi ekranın içinde tut. Hareket delta time ile hesaplansın.
 - Hız saniye başına pixel cinsinden; FPS değişse de aynı hızda gidiyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Bunların hepsini Pong'da yaptın. Değişen tek şey eksen: Pong'un raketi dikeydi,
-`y` ekseninde hareket ediyordu ve sınırı ekran yüksekliğiydi. Breakout'un raketi
-yatay, `x` ekseninde hareket ediyor ve sınırı ekran genişliği.
-
-Clamp fikri birebir aynı:
+Pencere açma ve oyun döngüsü Pong'dakiyle aynı: `rl.InitWindow`,
+`rl.SetTargetFPS(60)`, `for !rl.WindowShouldClose()` içinde
+`rl.BeginDrawing()`/`rl.EndDrawing()`. Yeni olan `Game` ve `Paddle`
+struct'ları ile sabitler:
 
 ```odin
-if paddle.rect.x < 0 do paddle.rect.x = 0
-if paddle.rect.x + paddle.rect.width > SCREEN_WIDTH {
-	paddle.rect.x = SCREEN_WIDTH - paddle.rect.width
+package main
+
+import rl "vendor:raylib"
+
+SCREEN_WIDTH  :: 800
+SCREEN_HEIGHT :: 600
+PADDLE_WIDTH  :: 100
+
+Game :: struct {
+	player: Paddle,
+}
+
+Paddle :: struct {
+	rect:  rl.Rectangle,
+	speed: f32,
 }
 ```
 
-Sağ kenarda `paddle.rect.x`'i değil `paddle.rect.x + paddle.rect.width`'i kontrol ettiğine
-dikkat et — raketin sağ ucu ekranı geçmemeli, sol köşesi değil.
-
-Pencere boyutu sende, ama Breakout'ta üstte tuğla duvarı olacağı için Pong'un
-`800×450`'sinden daha uzun bir pencere işine yarar; `800×600` iyi bir başlangıç.
+Çizim için `rl.DrawRectangleRec` ve girdi için `rl.IsKeyDown` — ikisini de
+Pong'dan biliyorsun.
 
 ## Sınırlar
 
@@ -50,44 +58,45 @@ Pencere boyutu sende, ama Breakout'ta üstte tuğla duvarı olacağı için Pong
 - `update_game`/`draw_game` gibi proc'lara bölmek zorunda değilsin; Snake'teki
   gibi `main` içinde inline tutabilirsin.
 
-::: details İpucu 1 — Ne tutman gerekiyor
-Raketin çizilmesi ve hareket ettirilmesi için gereken en küçük veri: nerede
-olduğu, ne kadar büyük olduğu ve ne kadar hızlı gittiği. İlk ikisi tek bir
-`rl.Rectangle`'a sığıyor — `x`, `y`, `width`, `height` alanlarını zaten o taşıyor,
-yani aynı dört sayıyı struct'ta ikinci kez tutmana gerek yok:
-
-```odin
-Paddle :: struct {
-	rect:  rl.Rectangle,
-	speed: f32,
-}
-```
+::: details İpucu 1 — Hareket ve sınır
+Her frame: `A` basılıysa `x`'ten `speed * dt` çıkar, `D` basılıysa ekle. Sonra
+konumu iki sınırla karşılaştır: `x` sıfırın altındaysa sıfırla; raketin sağ ucu
+(`x + width`) ekran genişliğini geçtiyse sağa yasla. Önce hareket, sonra sınır
+kontrolü.
 :::
 
-::: details İpucu 2 — Delta time
-`dt := rl.GetFrameTime()` ve hareket `paddle.rect.x += paddle.speed * dt`.
-`speed` saniye başına pixel, yani `400` gibi bir değer. Frame başına sabit
-ekleme yaparsan hız FPS'e bağlanır.
+::: details İpucu 2 — Hangi kenarı kontrol ediyorsun
+Sağ kenarda `paddle.rect.x`'i `SCREEN_WIDTH` ile karşılaştırmak cazip ama
+yanlış: raketin sol köşesi ekranı geçmeden, genişliği kadar önce durur ve
+sağda boş bir şerit kalır. Karşılaştırman gereken raketin sağ ucu, yani
+`x + width`.
 :::
 
-::: details İpucu 3 — Input ve çizim
+::: details İpucu 3 — Tam çözüm
 ```odin
 if rl.IsKeyDown(.A) do game.player.rect.x -= game.player.speed * dt
 if rl.IsKeyDown(.D) do game.player.rect.x += game.player.speed * dt
+
+if game.player.rect.x < 0 do game.player.rect.x = 0
+if game.player.rect.x + game.player.rect.width > SCREEN_WIDTH {
+	game.player.rect.x = SCREEN_WIDTH - game.player.rect.width
+}
 ```
-`IsKeyDown`, `IsKeyPressed` değil — raket tuş basılı tutuldukça hareket etmeli.
-Çizim için `rl.DrawRectangleRec` ve bir `rl.Rectangle`.
+Bu kod `for !rl.WindowShouldClose()` döngüsünün içine, çizimden önce giriyor.
+`game.player.speed`'i kurulumda `400` gibi bir değere ayarla.
 :::
 
-## Birincil kaynak
+## Kaynak
 
-[Odin vendor:raylib — `IsKeyDown`](https://pkg.odin-lang.org/vendor/raylib/#IsKeyDown).
-Basılı tutma ile tek basış arasındaki farkın imza tarafı burada; Snake'te
-`IsKeyPressed` kullanmıştın çünkü orada yön bir kez seçiliyordu.
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/) —
+`#IsKeyDown` anchor'ı. Basılı tutma ile tek basış arasındaki fark burada;
+Pong'da aynı çağrıyı dikey eksende kullanmıştın, burada eksen değişiyor.
 
-**Kazanım:** Üçüncü oyununun iskeleti ayakta ve tanıdık bir problemi yeni bir
-eksende çözdün. Buradan sonrası Pong'un tekrarı değil: Breakout'un topu üç
-duvardan seker, dördüncüsünden düşer.
+## Kazanım
+
+Üçüncü oyununun iskeleti ayakta ve tanıdık bir problemi yeni bir eksende
+çözdün. Buradan sonrası Pong'un tekrarı değil: Breakout'un topu üç duvardan
+seker, dördüncüsünden düşer.
 
 **“Breakout 3.1 denememi değerlendir”** yaz; kodunu inceleyelim.
 

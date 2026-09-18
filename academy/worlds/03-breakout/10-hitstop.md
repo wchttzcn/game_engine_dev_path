@@ -10,93 +10,61 @@ section: Oyun hissi
 
 ## Görev
 
-`Game` içine bir hitstop sayacı ekle. Tuğla kırıldığı anda bu sayacı sabit bir
-süreye set et. Her frame bu süre `dt` kadar azalsın. Sayaç sıfırdan büyükken o
-frame'in simülasyon adımını — topun hareketi, raketin hareketi, çarpışmalar —
-atla; sıfıra indiğinde oyun kaldığı yerden devam etsin.
+`Game` içine bir hitstop sayacı ekle. Tuğla kırıldığında sayacı sabit bir
+süreye kur, her frame `dt` kadar azalt. Sayaç sıfırdan büyükken o frame'in
+simülasyon adımını — top, raket, çarpışmalar — atla; sıfıra inince kaldığı
+yerden devam et. Pencere kapatma ve `R` sıfırlaması hitstop sırasında da
+çalışmalı.
 
 ## Ne zaman bitti?
 
-- Bir tuğlaya çarptığında top ve sahne kısa bir an donuyor, sonra devam ediyor.
-- Donma birkaç frame sürüyor (30-80ms civarı); göze fark edilir ama oyunu
-  kilitleyecek kadar uzun değil.
-- Pencere hâlâ kapanabiliyor, `R` hâlâ oyunu sıfırlıyor — hitstop sırasında da.
-- Hitstop devam ederken tekrar tuğlaya çarpma gibi bir şey olmuyor; simülasyon
-  gerçekten duruyor, yalnızca yavaşlamıyor.
+- Tuğlaya çarpınca top ve sahne kısa bir an donuyor, sonra devam ediyor.
+- Donma birkaç frame sürüyor (30-80ms civarı), oyunu kilitlemiyor.
+- Pencere hâlâ kapanabiliyor, `R` hâlâ sıfırlıyor — hitstop sırasında da.
+- Hitstop devam ederken simülasyon gerçekten duruyor, yavaşlamıyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
-
-Hitstop bir çizim efekti değil. Ekranda parlayan, titreyen bir şey eklemiyorsun;
-tam tersine, bir şeyi eklemiyorsun — o frame'lerde `update`'i hiç çalıştırmıyorsun.
-Kod tarafında bu, `dt`'yi kullanan bütün bloğu bir `if`'in içine almak kadar basit.
-
-Asıl karar nerede biteceği. `Game_State :: enum { Playing, Lost, Won }` etrafında
-kurduğun `switch`'in `.Playing` kolu şu an topu hareket ettiriyor, raketi
-hareket ettiriyor, çarpışmaları kontrol ediyor. Hitstop bu kolun **içine**
-girer — kolun dışına değil. Çünkü `rl.WindowShouldClose()` kontrolü, `R` ile
-`game_reset` çağrısı ve çizim çağrıları hitstop'tan etkilenmemeli: pencereyi
-donmuş gibi göstermek istemiyorsun, yalnızca oyunun içindekileri.
-
-Bu, STYLE_GUIDE'ın sorduğu sorunun tam burada karşına çıkması: **bu gameplay
-state mi, presentation state mi?** Topun konumu, raketin konumu, tuğlaların
-`alive` bayrağı — bunlar gameplay state, hitstop bunları dondurmalı. Pencere
-event'leri ve çizim çağrıları presentation tarafı, hitstop onlara dokunmamalı.
-
-Sayacın şekli:
+## Elindekiler
 
 ```odin
 Game :: struct {
 	// ...
 	hitstop: f32,
 }
+
+HITSTOP_DURATION :: 0.05 // saniye
 ```
 
-Tuğla kırıldığı anda set edilir:
-
-```odin
-brick.alive = false
-game.hitstop = HITSTOP_DURATION
-```
-
-Her frame `dt` kadar düşer. Sayaç sıfırdan büyükse o frame'in simülasyon
-kısmını atla:
-
-```odin
-if game.hitstop > 0 {
-	game.hitstop -= dt
-} else {
-	// top hareketi, raket hareketi, çarpışmalar burada
-}
-```
+Hitstop bir çizim efekti değil: o frame'lerde `update` kısmını hiç
+çalıştırmıyorsun. Şu an `Game_State :: enum { Playing, Lost, Won }` üzerindeki
+`switch`'in `.Playing` kolu topu, raketi ve çarpışmaları güncelliyor; hitstop
+bu kolun **içine** girer, dışına değil — pencere olayları ve çizim çağrıları
+ondan etkilenmemeli.
 
 ## Sınırlar
 
-- Hitstop yalnız tuğla kırılınca tetiklenir; raket-top sekmesinde veya duvar
-  sekmesinde tetiklenmiyor. Tek bir olay türüyle sınırlı tutmak, “nereyi
-  dondurdum” sorusuna net bir cevap veriyor.
-- Süre bir sabit olarak kalabilir; runtime'da değiştirilebilir bir panel bu
-  paketin sonunda geliyor.
+- Hitstop yalnız tuğla kırılınca tetiklenir; raket-top veya duvar sekmesinde
+  değil.
+- Süre şimdilik sabit; runtime'da değiştirilebilir panel paketin sonunda
+  geliyor.
 
 ::: details İpucu 1 — Hangi blok donacak
-`.Playing` kolunun içindeki her şey — raket hareketi, top pozisyon güncellemesi,
-duvar/raket/tuğla çarpışmaları — `dt`'ye dayanıyor. Hitstop aktifken bu bloğun
-hiçbiri çalışmamalı. Kolun en başına bir kontrol koyup geri kalan her şeyi
-`else` dalına almak, mevcut kodu neredeyse hiç yeniden yazmadan bu ayrımı verir.
+`.Playing` kolunun içindeki her şey — raket hareketi, top pozisyonu,
+duvar/raket/tuğla çarpışmaları — `dt`'ye dayanıyor. Hitstop aktifken bu
+bloğun hiçbiri çalışmamalı. Kolun en başına bir kontrol koyup geri kalan her
+şeyi bir dalın içine almak, mevcut kodu neredeyse hiç yeniden yazmadan bu
+ayrımı verir.
 :::
 
 ::: details İpucu 2 — Sayaç sırası
-2.8'de büyüme kararını gövdeyi değiştirdikten sonra kullanman gövdeyi bozmuştu;
-2.9'da sayaç karşılaştırmadan önce arttığı için hedef hiç eşleşmemişti. Burada
-aynı ailede bir tuzak var: `game.hitstop -= dt` çalıştıktan **sonra** aynı
-frame'de simülasyonu da çalıştırırsan, hitstop biteceği frame'de hem sayaç
-azalır hem top hareket eder — sayaç sıfıra iniyor ama hâlâ o frame donmuş
-olması gerekiyordu. Sıra şu olmalı: önce “hitstop aktif mi?” diye bak, aktifse
-yalnız sayacı azalt ve simülasyona hiç girme; değilse simülasyonu çalıştır.
-İkisini aynı frame'de birlikte yapma.
+Aynı frame'de önce sayacı azaltıp sonra simülasyonu da çalıştırırsan,
+hitstop biteceği frame'de hem sayaç sıfıra iner hem top hareket eder — ama o
+frame hâlâ donmuş olması gerekiyordu. Sıra şu olmalı: önce “hitstop aktif
+mi?” diye bak; aktifse yalnız sayacı azalt, simülasyona hiç girme; değilse
+simülasyonu çalıştır. İkisini aynı frame'de birlikte yapma.
 :::
 
-::: details İpucu 3 — Donma değil dondurma
+::: details İpucu 3 — Tam çözüm
 ```odin
 switch game.state {
 case .Playing:
@@ -110,42 +78,37 @@ case .Won:
 }
 ```
 Tuğla kırılma noktasında (`brick.alive = false` satırının hemen ardında)
-`game.hitstop = HITSTOP_DURATION` satırını ekle. `HITSTOP_DURATION` saniye
-cinsinden küçük bir sabit, örneğin `0.05`.
+`game.hitstop = HITSTOP_DURATION` satırını ekle.
 :::
 
-::: details Deep Dive — Süreyi neyle ölçüyorsun, ve neden “doğru” değer yok
-Hitstop süresini saniyeyle mi ölçmelisin, yoksa “3 frame dur” diye frame
-sayısıyla mı? Frame sayısıyla ölçersen 30 FPS'te çalışan biri senin 60 FPS'te
-ayarladığın “3 frame”i iki katı süre hissedecek — donma göreceli olarak daha
-uzun sürer. Saniyeyle ölçmek (yani `hitstop -= dt`, sabit değer saniye cinsinden)
-bu sorunu ortadan kaldırır: donma her cihazda aynı gerçek süre kadar sürer, kaç
-frame'e denk geldiği FPS'e göre değişir. Bu yüzden `f32` bir saniye sayacı,
-sabit bir “N frame” sayacından daha sağlam.
+## Kaynak
 
-İkinci soru daha ilginç: 0ms ile 100ms arasında “doğru” hitstop süresi nedir?
-Cevap yok — çünkü bu bir doğruluk sorusu değil, bir his sorusu. 20ms fark
-edilmeyebilir, 150ms “donuk” hissettirmeye başlar, arada bir yer “tam oturmuş”
-hissettirir ama o yer oyuna, hıza, oyuncunun beklentisine göre değişir. Tek yol
-denemek: değeri değiştir, derle, oyna, hisset. Şu an bu döngü `HITSTOP_DURATION`
-sabitini değiştirip her denemede yeniden derlemek demek — yavaş bir döngü.
-Paketin ilerisinde (3.14) bu sabitleri runtime'da bir panelden canlı
-değiştirebileceksin; o zaman aynı soruyu saniyeler içinde onlarca kez
-sorabileceksin. Şimdilik sabit değiştirip derlemek, o ihtiyacın nereden
-geldiğini hissetmenin yolu.
-:::
+[Odin Overview — resmi dil rehberi](https://odin-lang.org/docs/overview/),
+`#switch-statement` bölümü. Bu ders yeni kontrol akışını mevcut bir
+`switch` kolunun içine yerleştiriyor; kolun kapsamı ve dallanma sözdizimi
+buradan doğrulandı.
 
-## Birincil kaynak
+## Daha derine
 
-[Jan Willem Nijman (Vlambeer) — The Art of Screenshake](https://archive.org/details/the-art-of-screenshake).
-Konuşma, aynı oyuna tek tek eklenen küçük geri bildirim katmanlarının (vuruşta
-duraklama, sarsıntı, parçacık, ses) hissi nasıl kökten değiştirdiğini gösteriyor;
-hitstop bu katmanların ilki ve genelde en ucuzu.
+Ders bittikten sonra: [Jan Willem Nijman (Vlambeer) — The Art of
+Screenshake](https://archive.org/details/the-art-of-screenshake). Aynı oyuna
+tek tek eklenen küçük geri bildirim katmanlarının (vuruşta duraklama,
+sarsıntı, parçacık, ses) hissi nasıl değiştirdiğini gösteriyor; hitstop bu
+katmanların ilki ve genelde en ucuzu.
 
-**Kazanım:** Artık oyunun “doğru” çalışması ile “iyi hissettirmesi” iki ayrı
-soru olduğunu görüyorsun. Kod tarafında hitstop küçük bir `if`, ama nereyi
-dondurup nereyi dondurmayacağını seçmek dersin asıl işiydi. Bu ayrım — gameplay
-state'i mi, presentation state'i mi — sıradaki iki derste de karşına çıkacak.
+Süreyi saniyeyle ölçmek (`hitstop -= dt`), “N frame dur” demekten daha
+sağlamdır: frame sayısıyla ölçersen 30 FPS'te oynayan biri senin 60 FPS'te
+ayarladığın süreyi iki katı hisseder. “Doğru” hitstop süresi de yok — 20ms
+fark edilmeyebilir, 150ms donuk hissettirir, arası oyuna göre değişir. Tek
+yol denemek: değeri değiştir, derle, oyna, hisset. 3.14'te bu sabitleri
+runtime'da bir panelden canlı değiştireceksin.
+
+## Kazanım
+
+Oyunun “doğru” çalışması ile “iyi hissettirmesi” iki ayrı soru. Kod tarafında
+hitstop küçük bir `if`, ama nereyi dondurup nereyi dondurmayacağını seçmek
+dersin asıl işiydi. Bu ayrım — gameplay state mi, presentation state mi —
+sıradaki iki derste de karşına çıkacak.
 
 **“Breakout 3.10 denememi değerlendir”** yaz; kodunu inceleyelim.
 

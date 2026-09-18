@@ -6,144 +6,125 @@ section: Nesne ömrü
 
 # 3.9 — Ölü slota tutunan index
 
-**Hedef:** Aktif güçlendirme etkisinin havuzdaki yanlış slotu okumaya
-başladığı hatayı görünür kıl, sonra çöz.
+**Hedef:** Aktif güçlendirme etkisinin havuzdaki yanlış slotu göstermeye
+başladığı bayat index hatasını önce görünür kıl, sonra çöz.
 
 ## Görev
 
-3.8'de yazdığın süreli etkiye bak: etki süresi boyunca hangi güçlendirme
-türünü uyguladığını hâlâ o slotun index'inden okuyorsa (`game.active_powerup`
-gibi bir alanda sadece index tutuyorsa), bir sorun var. Etki sürerken o slot
-havuzda yeniden kullanılabilir — başka bir güçlendirme aynı index'e doğabilir.
-O anda etkin index hâlâ eski değerini tutuyor, ama artık orada duran nesne
-başka bir şey.
-
-Önce bunu **görünür** yap: bir debug tuşuyla güçlendirmeleri art arda,
-üst üste doğur (aynı slotu hızla boşaltıp dolduracak kadar sık) ve ekranda
-küçük bir debug satırında tutulan index'i ve o index'teki slotun neyi
-gösterdiğini yaz. Sonra hatayı çöz.
+Efekt aktifken, onu tetikleyen güçlendirmenin konumunu ekranda küçük bir
+işaretle göster. Naif çözüm: yakalama anında slotun index'ini
+`game.active_powerup`'a yaz, çizerken `game.powerups[game.active_powerup]`'a
+bak. Bu bozuk — slot yeniden kullanılabiliyor. Önce bir debug tuşuyla hatayı
+tetikle ve F1 overlay'inde göster, sonra çöz.
 
 ## Ne zaman bitti?
 
-- Bir debug tuşu güçlendirmeleri normalden çok daha sık doğurabiliyor, hatayı
-  tetiklemek kolaylaşıyor.
-- Ekranda (örneğin F1 ile açılan bir debug satırında) etkin güçlendirmenin
-  index'i ve o slotun güncel içeriği görünüyor.
-- Bayat index okuma sorunu çözüldü: bir slot yeniden kullanıldığında, süren
-  etki artık o slotu izlemiyor veya yanlış veri okumuyor.
+- `P` tuşu, doğurma olasılığını atlayıp art arda birkaç güçlendirme doğuruyor
+  (hatayı tetiklemek için).
+- F1 açtığında ekranda aktif güçlendirmeyle ilgili debug bilgisi görünüyor.
+- Efekt aktifken ekrandaki işaret, slot yeniden kullanılsa bile hep yakalanan
+  orijinal güçlendirmenin konumunu gösteriyor — bayat index hatası yok.
+- İki güçlendirme art arda hızlı yakalanınca işaret yanlış yere zıplamıyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Bu hatanın tehlikeli tarafı, derleyicinin hiçbir şey söylememesi. `index`
-geçerli bir sayı, array sınırları aşılmıyor, program çökmüyor — sadece o
-index'teki slot artık beklediğin nesne değil. Sessizce yanlış davranış, en
-kötü hata türü: onu bulman için önce **görmen** gerekiyor. 2.12'de grid debug
-görünümünü aynı sebeple yazmıştın; occupied grid'in içini gözle görülür
-kılmak, hatayı tahmin etmek yerine ekranda okumak.
-
-Kökün nedeni şu: index bir slotu işaret ediyor, ama slotun **kimliğini**
-değil. Havuzdaki bir eleman öldüğünde slot boşalır ve numarası aynı kalır —
-3.7'de tam olarak bunu istemiştin, ölü bir slotun yeniden kullanılabilir
-olmasını. Ama biri o slotu “bu nesneyi izliyorum” diye uzun süre elinde
-tutuyorsa, slot kendisinden habersiz el değiştirebilir.
-
-Bu, 2.7'deki `occupied` grid hatasıyla aynı hastalık değil — orada iki ayrı
-temsil (gövde ve grid) birbirinden ayrışmıştı, biri güncellenip diğeri
-unutulmuştu. Burada tek bir temsil var (havuz); sorun onun **bir slotuna
-tutunan bayat bir referans**. Belirti benzer — veri okunduğunda yanlış şeyi
-gösteriyor — ama kaynağı farklı.
-
-## Sınırlar
-
-- Debug tuşunun ürettiği aşırı hızlı doğurma yalnız hatayı görünür kılmak
-  için; normal oynanışta böyle bir hız yok, bu tuşu oyunun geri kalanına
-  karıştırma.
-- Genel amaçlı, her senaryoyu kapsayan bir referans sistemi kurmuyorsun; bu
-  oyundaki tek somut bayat referansı çözmen yeterli.
-
-::: details İpucu 1 — Hatayı önce ekranda göster
-2.12'de `occupied` grid'ini, ring index'lerini ve sayaçları F1 overlay'inde
-gösterdiğin refleksin aynısı. Debug satırına şunu yaz: etkin güçlendirmenin
-tuttuğu index, ve o index'teki slotun şu an `alive`/`occupied` mi ve neyi
-tuttuğu. Sonra bir tuşa (örneğin `P`) basınca art arda birkaç güçlendirme
-doğur — gerçek bir tuğla kırmayı beklemeden. Aynı slotu hızla boşaltıp
-doldurunca debug satırında index sabit kalırken slotun içeriğinin değiştiğini
-göreceksin.
-:::
-
-::: details İpucu 2 — Veriyi kopyala, index'i tutma
-En basit çözüm: etkinin ihtiyaç duyduğu veriyi (örneğin güçlendirmenin türü)
-yakalama anında slottan **kopyala** ve ayrı bir alanda tut. Etki süresi
-boyunca artık havuza hiç bakmıyorsun — index'in o an geçerli olup olmadığını
-sormana gerek kalmıyor, çünkü zaten ona tutunmuyorsun.
+3.8'deki güçlendirme havuzuna iki alan ekleniyor:
 
 ```odin
-// yakalama anında
-game.active_powerup_kind = powerup.kind
-game.powerup_timer = 6.0
+// Game'e eklenecek iki alan:
+//   active_powerup: int,   // en son yakalanan slotun index'i, yoksa -1
+//   debug_visible:  bool,
 ```
 
-Etkiyi güncellerken veya bitirirken `game.active_powerup_kind`'a bakıyorsun,
-havuzdaki slota değil.
-:::
-
-::: details İpucu 3 — Generation ile doğrulanan Handle
-Kopyalamanın yetmeyeceği durumlarda (etkinin havuzdaki nesneyi sürekli
-güncellemesi, örneğin nesnenin konumunu okuması gerekiyorsa) index tek başına
-yetersiz kalır. Çözüm, index'e bir kimlik numarası eklemek:
+Slotun index'ini yakalama anında bulmak için döngüye ikinci bir değişken
+eklenir — Odin'de `for` bir değer yanında index de verebilir:
 
 ```odin
-Handle :: struct {
-	index:      int,
-	generation: int,
+for &p, i in game.powerups {
+	// i, p'nin havuzdaki sırası
 }
 ```
 
-Her slot kendi `generation` sayacını tutar; slot yeniden kullanıldığında
-(yeni bir nesne doğduğunda) o slotun `generation`'ı bir artar. Bir `Handle`
-tutan kod, okumadan önce elindeki `generation`'ın slotun güncel
-`generation`'ıyla eşleşip eşleşmediğini kontrol eder — eşleşmiyorsa nesne
-artık orada değil demektir, okuma güvenle reddedilir.
+F1 kalıbı 2.12'deki gibi: `rl.IsKeyPressed(.F1)` ile `game.debug_visible`'ı
+tersine çevir, çizim tarafı yalnız sonucu okur. `rl.DrawText`/`rl.TextFormat`
+zaten tanıdık.
 
-Bu oyun için İpucu 2 yeterli; `Handle`'ı burada zorunlu tutmuyoruz, ama
-Deep Dive'da ne zaman gerekli olduğunu tartışıyoruz.
+## Sınırlar
+
+- `P` tuşunun hızlı doğurması yalnız hatayı tetiklemek için; normal oynanışa
+  karışmıyor.
+- Genel bir handle/generation sistemi kurmuyorsun; bu oyundaki tek somut
+  hatayı çözmen yeterli.
+
+::: details İpucu 1 — Neyi görünür kılıp neyi düzelteceksin
+Önce hatayı üret: `P`'ye basınca art arda birkaç `powerup_spawn` çağır —
+gerçek tuğla kırmayı bekleme. F1 debug satırına `game.active_powerup` ve o
+index'teki slotun `alive` durumunu yaz. Aynı slotu hızla boşaltıp doldurunca
+satırda index sabit kalırken slotun içeriğinin değiştiğini göreceksin. Sonra
+fikri değiştir: index yerine yakalama anındaki **konumu** kopyala ve sakla;
+artık havuza hiç bakmana gerek kalmaz.
 :::
 
-::: details Deep Dive — Kopyalama ne zaman yetmez?
-Bu oyunda kopyalama yeterli çünkü etkinin ihtiyacı olan tek şey — güçlendirme
-türü — yakalama anında sabitleniyor, sonrasında havuzdaki nesneyle hiç
-konuşması gerekmiyor. Etki kendi kopyasıyla yaşıyor, havuzdan koptu.
-
-`Handle`/`generation` deseni asıl gücünü, referansın **canlı** nesneyle sürekli
-konuşması gerektiğinde gösterir: bir mermi başka bir mermiyi hedef alıyorsa,
-bir kamera bir düşmanı takip ediyorsa, bir görev sistemi belirli bir NPC'yi
-izliyorsa. Bu durumlarda veriyi bir kere kopyalamak yetmez — nesnenin güncel
-konumunu, güncel durumunu her frame okumak gerekir, ve nesne o sırada ölüp
-slotu başka bir nesneye devretmiş olabilir. `generation` kontrolü, “bu index
-hâlâ benim izlediğim nesne mi?” sorusunu her okumada ucuza cevaplar.
-
-Breakout'ta böyle sürekli-canlı bir referans hiç yok — güçlendirmeler
-yakalandığı anda etkilerini bırakıp havuzdan çıkıyorlar. Bu yüzden burada
-`Handle` inşa etmek, ihtiyaç doğmadan bir soyutlama eklemek olurdu; 3.7'nin
-Deep Dive'ındaki “vazgeç” kararıyla aynı mantık — kapasiteyi büyütmek yerine
-sessizce vazgeçmek nasıl bu oyunun ihtiyacına yetiyorsa, index'i handle'a
-çevirmek yerine kopyalamak da burada yetiyor. Motor büyüyüp gerçek zamanlı
-nesne referansları gerektiğinde bu desen tekrar karşına çıkacak.
+::: details İpucu 2 — Index bir slotu işaret eder, kimliği değil
+Yakalanan güçlendirme hemen `alive = false` olur, slotu boşaltır. Efekt hâlâ
+sürerken yeni bir güçlendirme tam o slota doğabilir — `active_powerup` aynı
+sayıyı tutmaya devam eder ama artık başka bir nesneyi gösterir. Derleyici
+bunu yakalamaz: index geçerli bir sayı, sınır aşımı yok, sadece yanlış nesne.
 :::
 
-## Birincil kaynak
+::: details İpucu 3 — Tam çözüm
+```odin
+// Game'e: active_powerup_pos: rl.Vector2 (index yerine)
 
-[Game Programming Patterns — Object Pool](https://gameprogrammingpatterns.com/object-pool.html).
-Kitabın kendisi havuzdaki slotların dışarıdan tutulan referanslarla
-yeniden kullanılmasının tehlikesini açıkça tartışıyor; bu dersin kurgusu
-tam olarak o uyarının somutlaşmış hali.
+// powerup_update içindeki yakalama dalında:
+if rl.CheckCollisionRecs(p.rect, game.player.rect) {
+	game.player.rect.width = PADDLE_WIDTH * 1.5
+	game.powerup_timer = POWERUP_DURATION
+	game.active_powerup_pos = {p.rect.x, p.rect.y}
+	p.alive = false
+}
+```
+Çizim tarafında artık havuza bakmıyorsun:
+```odin
+if game.powerup_timer > 0 {
+	rl.DrawCircleV(game.active_powerup_pos, 4, rl.YELLOW)
+}
+if game.debug_visible {
+	rl.DrawText(rl.TextFormat("active_powerup_pos: %v", game.active_powerup_pos), 10, 30, 10, rl.GREEN)
+}
+```
+`P` tuşu `game_reset`'in yanına, `.Playing` kolunun başına eklenir; birkaç kez
+`powerup_spawn` çağırır.
+:::
 
-**Kazanım:** Artık “derleyici sessiz kaldı ama davranış yanlış” sınıfındaki
-bir hatayı önce görünür kılıp sonra çözebiliyorsun. Bu, ileride havuz
-kullanan her sistemde (mermiler, efektler, ağ nesneleri) karşına çıkacak bir
-dikkat — bir index veya pointer'ın işaret ettiği şeyin hâlâ **aynı** nesne
-olduğundan emin olmak.
+## Kaynak
+
+[Odin Overview — resmi dil rehberi](https://odin-lang.org/docs/overview/),
+`#array-programming` bölümü. Bu ders `for &p, i in game.powerups` ile
+pointer'ı ve index'i birlikte almaya dayanıyor; sözdizimi buradan doğrulandı.
+
+## Daha derine
+
+Ders bittikten sonra: [Game Programming Patterns — Object
+Pool](https://gameprogrammingpatterns.com/object-pool.html). Kitap,
+havuzdaki slotların dışarıdan tutulan referanslarla yeniden kullanılmasının
+tehlikesini açıkça tartışıyor; bu dersin kurgusu o uyarının somutlaşmış hali.
+
+Kopyalamanın yetmeyeceği durumlar var: efekt havuzdaki nesneyi sürekli
+güncellemesi gerekiyorsa (konumunu her frame okumak gibi) index tek başına
+yetmez. O zaman index'e bir `generation` sayacı eklenir — her slot yeniden
+kullanıldığında sayaç artar, tutulan `Handle` okumadan önce kendi
+`generation`'ını slotunkiyle karşılaştırır. Breakout'ta böyle sürekli-canlı
+bir referans yok; güçlendirme yakalandığı anda etkisini bırakıp havuzdan
+çıkıyor. Bu yüzden burada kopyalamak yetiyor — `Handle` inşa etmek burada
+ihtiyaç doğmadan bir soyutlama eklemek olurdu.
+
+## Kazanım
+
+Artık “derleyici sessiz kaldı ama davranış yanlış” sınıfındaki bir hatayı
+önce görünür kılıp sonra çözebiliyorsun. Bu, ileride havuz kullanan her
+sistemde (mermiler, efektler, ağ nesneleri) karşına çıkacak bir dikkat.
 
 **“Breakout 3.9 denememi değerlendir”** yaz; kodunu inceleyelim.
 

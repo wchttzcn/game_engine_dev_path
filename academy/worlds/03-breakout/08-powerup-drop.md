@@ -11,139 +11,144 @@ süreli bir etki başlasın.
 
 ## Görev
 
-Tuğla kırıldığında belirli bir olasılıkla bir güçlendirme doğsun ve aşağı doğru
-sabit hızla insin. Raket onu yakalarsa raket bir süreliğine genişlesin; süre
-dolunca eski genişliğine dönsün. Ekranın altından çıkarsa güçlendirme
+Tuğla kırıldığında belirli bir olasılıkla bir güçlendirme doğsun ve sabit hızla
+aşağı insin. Raket ona değerse raket bir süreliğine genişlesin, süre dolunca
+eski genişliğine dönsün. Yakalanmayan güçlendirme ekranın altından çıkınca
 kaybolsun.
 
 ## Ne zaman bitti?
 
-- Bir tuğla kırıldığında bazen (her seferinde değil) bir güçlendirme düşüyor.
+- Tuğla kırıldığında bazen — her seferinde değil — bir güçlendirme düşüyor.
 - Güçlendirme sabit hızla aşağı iniyor.
-- Raket ona değerse raket genişliyor; genişleme geçici, bir süre sonra geri
+- Raket ona değince raket genişliyor; genişleme geçici, süre dolunca geri
   dönüyor.
-- Yakalanmayan güçlendirme ekranın altından çıkınca kayboluyor, sonsuza kadar
-  düşmeye devam etmiyor.
-- Güçlendirmeler sabit kapasiteli bir havuzda tutuluyor, 3.7'deki kalıbın
-  tekrarı.
+- Yakalanmayan güçlendirme ekranın altından çıkınca slotu boşaltıyor.
 - `odin check games/breakout` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Bu ders 3.7'nin aynı iskeletini ikinci kez kuruyor: sabit kapasiteli havuz, boş
-slot ara, doğur, ömrü (ya da bu sefer ekran dışına çıkma) bitince slotu boşalt.
-Farkı şu — bu sefer nesne yalnız kendi başına yaşayıp ölmüyor, **oyuncuyla
-etkileşiyor**. Kalıbı ikinci kez kurman bilinçli bir tekrar: aynı şekli ikinci
-kez görünce onu kendi gözünle tanıman isteniyor, bu yüzden burada da alan
-listesi verilmiyor — güçlendirmenin konumu, hızı ve yaşayıp yaşamadığı için
-hangi veriye ihtiyacın olduğuna 3.7'de verdiğin cevaba bakarak kendin karar
-ver.
-
-Doğurma olasılığı için 3.7'de gördüğün `rand.float32_range`'i tekrar
-kullanabilirsin: `0` ile `1` arasında bir sayı çek, sabit bir eşikten küçükse
-doğur.
-
-Raket ile güçlendirme arasındaki çarpışma testi için raylib'de hazır bir
-prosedür var — iki dikdörtgen kesişiyor mu diye bakan `CheckCollisionRecs`:
+3.7'deki havuz kalıbının ikinci kurulumu. Bu sefer nesne kendi başına yaşayıp
+ölmüyor, oyuncuyla etkileşiyor. Struct ve imzalar aşağıda; **proc gövdeleri ve
+bu procleri nereden çağıracağın sana ait.**
 
 ```odin
-if rl.CheckCollisionRecs(powerup.rect, game.player.rect) {
-	// yakalandı
+MAX_POWERUPS :: 4
+POWERUP_DROP_CHANCE :: 0.2
+POWERUP_SPEED :: 120
+POWERUP_DURATION :: 6
+
+Powerup :: struct {
+	rect:  rl.Rectangle,
+	alive: bool,
+}
+
+// Game'e eklenecek iki alan:
+//   powerups:      [MAX_POWERUPS]Powerup,
+//   powerup_timer: f32,
+
+powerup_spawn :: proc(game: ^Game, pos: rl.Vector2) {
+}
+
+powerup_update :: proc(game: ^Game, dt: f32) {
 }
 ```
 
-Bunun yerine kendi overlap testini elle de yazabilirsin (3.5'te tuğla-top
-çarpışmasında overlap hesabını gördün); ikisi de kabul, dersi zorlamıyor.
+Doğurma olasılığı için 3.7'de gördüğün `rand.float32_range(0, 1)` yeter: eşikten
+küçükse doğur. Raket-güçlendirme çarpışması iki dikdörtgen kesişme testi, raylib
+bunu hazır veriyor:
 
-Süreli etki için yeni bir sayaç gerekiyor — 2.3'teki tick timer'la aynı fikir:
-bir süre alanını her frame `dt` kadar azalt, sıfıra inince etkiyi geri al.
+```odin
+// vendor:raylib — CheckCollisionRecs :: proc(rec1, rec2: Rectangle) -> bool
+if rl.CheckCollisionRecs(powerup.rect, game.player.rect) {
+}
+```
+
+Süreli etkinin sayacı güçlendirmeye değil, `Game`'e ait: etki başlayınca
+`POWERUP_DURATION`'a kurulur, her frame `dt` kadar azalır.
 
 ## Sınırlar
 
-- Tek etki, tek tür: yalnız raketi genişletme. Farklı güçlendirme türleri
-  (çoklu top, yavaşlatma, vb.) bu dersin kapsamı dışında.
-- Güçlendirme şekli tek bir küçük dikdörtgen olabilir; ikon veya sprite yok.
-- Aynı anda birden fazla güçlendirme düşebilir ama derste yalnız tek bir tür
-  var; ikisinin etkisi birbiriyle çakışabilir, bunu Deep Dive'da tartışıyoruz.
+- Tek tür, tek etki: yalnız raketi genişletme. Çoklu top, yavaşlatma gibi
+  türler bu dersin dışında.
+- Güçlendirme tek bir küçük dikdörtgen; ikon veya sprite yok.
 
-::: details İpucu 1 — Ne tutman gerekiyor
-3.7'de bir parçacığın çizilmesi, hareket etmesi ve ölmesi için gereken veriyi
-kendin bulmuştun. Burada aynı üç soruya bir dördüncüsü ekleniyor: bu nesne
-**raketle çarpıştığında** ne olacağını bilmem için neye ihtiyacım var? Cevap
-muhtemelen 3.7'deki struct'ının neredeyse aynısı, üstüne raketin çarpışma
-testinde kullanabileceği bir `rl.Rectangle`.
+::: details İpucu 1 — `powerup_update`'in üç işi
+Her frame, yaşayan her güçlendirme için sırayla: aşağı ilerlet; raketle
+kesişiyor mu bak, kesişiyorsa etkiyi başlat ve slotu boşalt; ekranın altını
+geçtiyse slotu boşalt.
+
+Sayaç bundan bağımsız, aynı procün sonunda: sıfırdan büyükse `dt` kadar azalt;
+azaltma sonucu sıfırın altına indiyse raketin genişliğini geri yaz.
 :::
 
-::: details İpucu 2 — Doğurma olasılığı ve düşme
-```odin
-POWERUP_DROP_CHANCE :: 0.2
+::: details İpucu 2 — Genişliği katlamak yerine yazmak
+Yakalama anında raketi büyütürken `game.player.rect.width *= 1.5` yazmak
+cazip ama hatalı: etki sürerken ikinci bir güçlendirme yakalanırsa genişlik
+üst üste katlanır ve süre dolunca dönülecek tek bir “eski genişlik” kalmaz.
 
-if rand.float32_range(0, 1) < POWERUP_DROP_CHANCE {
-	// güçlendirme doğur
-}
-```
-
-Doğurma, 3.5'teki tuğla kırılma anının hemen yanına, `brick.alive = false`
-satırının yakınına gidiyor. Düşme hareketi parçacığınkinden farklı değil —
-`pos += vel * dt`, yalnız `vel` sabit ve aşağı yönlü.
+Genişliği her zaman sabitten hesapla — `PADDLE_WIDTH * 1.5` — ve geri
+dönerken de sabite dön. Böylece kaç kez yakalandığı önemsizleşir.
 :::
 
-::: details İpucu 3 — Yakalama ve süreli etki
+::: details İpucu 3 — Tam çözüm
 ```odin
-if rl.CheckCollisionRecs(powerup.rect, game.player.rect) {
-	game.player.rect.width = PADDLE_WIDTH * 1.5
-	game.powerup_timer = 6.0
-	// powerup'ı öldür
+powerup_spawn :: proc(game: ^Game, pos: rl.Vector2) {
+	for &p in game.powerups {
+		if p.alive do continue
+		p.rect = {pos.x, pos.y, 16, 16}
+		p.alive = true
+		return
+	}
 }
-```
 
-Süre her frame azalıyor, sıfırı geçince raket eski genişliğine dönüyor:
-
-```odin
-if game.powerup_timer > 0 {
-	game.powerup_timer -= dt
-	if game.powerup_timer <= 0 {
-		game.player.rect.width = PADDLE_WIDTH
+powerup_update :: proc(game: ^Game, dt: f32) {
+	for &p in game.powerups {
+		if !p.alive do continue
+		p.rect.y += POWERUP_SPEED * dt
+		if rl.CheckCollisionRecs(p.rect, game.player.rect) {
+			game.player.rect.width = PADDLE_WIDTH * 1.5
+			game.powerup_timer = POWERUP_DURATION
+			p.alive = false
+		} else if p.rect.y > SCREEN_HEIGHT {
+			p.alive = false
+		}
+	}
+	if game.powerup_timer > 0 {
+		game.powerup_timer -= dt
+		if game.powerup_timer <= 0 do game.player.rect.width = PADDLE_WIDTH
 	}
 }
 ```
 
-Genişliği değiştirirken raketin `x`'ini sabit bıraktığını fark et — raket sola
-doğru büyür, merkezi kaymaz. Bunu istiyorsan `x`'i de yeniden hesaplaman
-gerekir; istemiyorsan olduğu gibi bırak, ikisi de geçerli bir tercih.
+Doğurma çağrısı tuğlanın kırıldığı yere, `particle_spawn` çağrısının yanına
+gidiyor; `powerup_update` ise `particle_update` ile aynı yerden çağrılıyor.
 :::
 
-::: details Deep Dive — Sabit artık başlangıç değeri
-Raketi büyütmeden önce `PADDLE_WIDTH` raketin genişliği hakkında bildiğin tek
-gerçekti — sabit, değişmez, tek doğruluk kaynağı. Artık değil: raketin
-**güncel** genişliği `game.player.rect.width` alanında, runtime'da değişen bir
-değer. `PADDLE_WIDTH` hâlâ var ama artık yalnızca “oyun başladığında raket ne
-kadar genişti” ve “etki bitince neye dönüyoruz” sorularının cevabı — raketin
-şu anki genişliğini soran hiçbir kod artık ona bakmamalı, `game.player.rect`'e
-bakmalı. Bu ayrımı gözden kaçırmak kolay bir hata sınıfı açar: bir yerde
-sabitten, başka bir yerde struct'tan okursan iki farklı “raket genişliği”
-aynı anda var olur.
+## Kaynak
 
-İkinci soru: iki güçlendirme üst üste yakalanırsa ne olur? Bu dersin
-uyguladığı basit modelde (`powerup_timer`'ı sabit bir değere set etmek) ikinci
-yakalama süreyi **sıfırlar**, uzatmaz — zaten geri sayan sayaç yeniden
-altı saniyeye döner. Süreyi biriktirmek (`+=`) istersen bu bilinçli bir
-tasarım kararı, ders bunu zorunlu kılmıyor. Hangisini seçtiysen incelemede
-gerekçesini sorarım.
-:::
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/) —
+`#CheckCollisionRecs` anchor'ı. Bu dersin tek yeni çağrısı orada; imza kurulu
+derleyicideki `vendor/raylib/raylib.odin` ile doğrulandı.
 
-## Birincil kaynak
+## Daha derine
 
-[Game Programming Patterns — Update Method](https://gameprogrammingpatterns.com/update-method.html).
-Her nesnenin kendi `update` mantığıyla (hareket, çarpışma testi, ömür/süre
-azaltma) tek bir merkezi döngüde ilerletilmesi bu bölümün konusu; güçlendirme
-düşürme ve süreli etki tam olarak bu deseni uyguluyor.
+Ders bittikten sonra: [Game Programming Patterns — Update
+Method](https://gameprogrammingpatterns.com/update-method.html). Her nesnenin
+kendi `update` adımıyla tek merkezi döngüde ilerletilmesi o bölümün konusu.
 
-**Kazanım:** Artık yalnız kendi başına yaşayıp ölen değil, oyuncunun kararını
-etkileyen nesnelerin var — havuz kalıbı bir kere öğrenilip iki farklı nesne
-türüne uygulandı. Sıradaki ders bu havuzun içindeki bir slotu, o slot başka
-bir nesne tarafından ele geçirildikten sonra okumanın ne kadar sinsi bir hataya
-yol açabileceğini gösteriyor.
+Bu derste bir sabit anlam değiştirdi. `PADDLE_WIDTH` artık “raketin genişliği”
+değil, yalnız “başlangıç genişliği” ve “etki bitince dönülecek genişlik”.
+Raketin **şu anki** genişliğini soran kod `game.player.rect`'e bakmalı. İkisini
+karıştırmak, aynı anda iki farklı raket genişliği yaşayan bir hata sınıfı açar.
+
+İkinci karar: etki sürerken ikinci güçlendirme yakalanırsa süre sıfırlanır mı,
+uzar mı? Yukarıdaki model sıfırlıyor (`=`). Biriktirmek (`+=`) de geçerli;
+hangisini seçtiysen incelemede gerekçesini sorarım.
+
+## Kazanım
+
+Havuz kalıbı bir kere öğrenilip iki farklı nesne türüne uygulandı — biri kendi
+başına ölen, biri oyuncunun kararını etkileyen.
 
 **“Breakout 3.8 denememi değerlendir”** yaz; kodunu inceleyelim.
 
