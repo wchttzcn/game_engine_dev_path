@@ -1,18 +1,18 @@
 ---
-title: "2.13 — Oyun sonu ve restart"
+title: "2.15 — Oyun sonu ve restart"
 description: "Game_State'e Won ekle, R tuşuna tek bir game_reset bağla ve body ile occupied'i birlikte sıfırla."
 section: Araç ve maç
 next: false
 ---
 
-# 2.13 — Oyun sonu ve restart
+# 2.15 — Oyun sonu ve restart
 
 **Hedef:** Kazanma durumunu ekle ve `R` ile iki temsili de — `body`'yi de
 `occupied`'i de — tutarlı biçimde sıfırdan kur.
 
 ## Görev
 
-`Game_State`'e üçüncü bir üye ekle: `Won` (2.9'un bitiş koşulu — occupancy
+`Game_State`'e üçüncü bir üye ekle: `Won` (2.10'un bitiş koşulu — occupancy
 grid'de boş hücre kalmadığında). `Dead` veya `Won` durumundayken ekranda hangi
 durumda olduğunu söyleyen bir metin göster. 2.6'dan beri `R`'ye bağlı kaba bir
 restart zaten var; bunu tek bir `game_reset(&game)` çağrısı altında topla ve
@@ -35,7 +35,7 @@ kursun, tick timer'ı sıfırlasın, yeni bir yem yerleştirsin ve state'i
 [1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over)'ta reset iki skoru
 sıfırlayıp topu döndürmekti — düz ve tek parçaydı. 2.6'daki `R` de benzer
 şekilde tekti, çünkü o an sıfırlanacak tek temsil `body`'ydi. O günden bu yana
-`occupied` (2.7) ve ring buffer index'i `head` (2.10) eklendi; asıl iş artık
+`occupied` (2.7) ve ring buffer index'i `head` (2.11) eklendi; asıl iş artık
 `R`'yi ilk kez var etmek değil, bu temsillerin hepsini **tek seferde ve
 tutarlı** sıfırlayan bir `game_reset`'te toplamak. `body`'nin söylediği ile
 `occupied`'in söylediği yeniden eşleşmeli. En sık kaçan bug tam burada:
@@ -105,4 +105,4 @@ genel kurala dayanıyor.
 **Kazanım:** Snake artık baştan sona oynanabilir: ölüyor, kazanıyor, `R` ile
 temiz bir oyuna dönüyor — ve iki temsili de aynı anda doğru tutuyorsun.
 
-**“Snake 2.13 denememi değerlendir”** yaz; kodunu inceleyelim.
+**“Snake 2.15 denememi değerlendir”** yaz; kodunu inceleyelim.

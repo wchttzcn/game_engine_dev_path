@@ -44,7 +44,7 @@ kelime), çoğu yalnız kritik formülü veriyor.
 | `03-breakout/index.md:10,29` | İki yerde "Dear ImGui paneli"; 3.14 raygui kullanıyor, `RESOURCES.md` boşluğu raygui ile kapatılmış | "raygui" yaz |
 | `03-breakout/14-tuning-panel.md` | `Ne zaman bitti?` "top hızı tuning'den okuyor" diyor, İpucu 3 bu geçişi hiç göstermiyor | İpucu 3'e gövdeyi ekle |
 | `01-pong/10-score-and-reset.md:104` | `Sınırlar` reset'i bir procedure'a toplamayı zorunlu kılıyor, İpucu 2 `^Ball` öneriyor; proc tanımlama 1.1-1.9'da hiç geçmiyor, pointer parametre 1.13'te öğretiliyor | `^Ball`'u kaldır, değer döndüren biçim öner ya da zorunluluğu 1.13'e kaydır |
-| `02-snake/08-food-and-growth.md:18` | `length` artışının kaydırma döngüsüne göre sırası hiç yazılmamış; İpucu 3 de vermiyor | Görev + İpucu 3'e sıralı iskelet: length artışı → kaydırma → head → koşullu kuyruk |
+| `02-snake/09-food-and-growth.md:18` | `length` artışının kaydırma döngüsüne göre sırası hiç yazılmamış; İpucu 3 de vermiyor | Görev + İpucu 3'e sıralı iskelet: length artışı → kaydırma → head → koşullu kuyruk |
 | `01-pong/15-collision-shapes.md:64` | `DrawRectangleLinesEx`, `DrawCircleLinesV`, `DrawLineEx` imzaları ilk kez İpucu 2/3'te | Gövdeye taşı |
 | `01-pong/14-debug-overlay.md:56` | `rl.DrawFPS` ve `%v` ilk kez İpucu 2'de | Gövdeye taşı |
 
@@ -52,7 +52,7 @@ kelime), çoğu yalnız kritik formülü veriyor.
 
 `progress/current.json` reviews/skills notlarıyla çapraz kontrol:
 
-- **2.8, `length` sırası** — ders eksikti. Metin sırayı hiç söylemiyor; hata
+- **2.8 (şimdi 2.9), `length` sırası** — ders eksikti. Metin sırayı hiç söylemiyor; hata
   ders boşluğunun doğrudan sonucu.
 - **3.7/3.8, `game_reset` havuzu temizlemiyor** — ders eksikti, iki kez. Her iki
   dersin `Ne zaman bitti?` listesinde bu kriter yok. 3.3'te kurulan "R oyunu
@@ -97,10 +97,10 @@ Aşanlar — hepsi denetlenmeyen dünyalarda, sözleşmeye göre "iki fikir sık
 
 | Ders | ~Kelime | Sıkışan iki fikir |
 |---|---|---|
-| `02-snake/10-ring-buffer` | 1141 | formül + altı entegrasyon noktası / `head`'in `-1` yönü + negatif modulo |
-| `02-snake/07-occupancy-grid` | 1012 | dosyada açıkça "Tur A" ve "Tur B" |
+| ~~`02-snake/10-ring-buffer`~~ | 1141 | bölündü: 2.11 + 2.12 |
+| ~~`02-snake/07-occupancy-grid`~~ | 1012 | bölündü: 2.7 + 2.8 |
 | `01-pong/09-opponent-ai` | 865 | controller / dead zone + zorluk ayarı |
-| `02-snake/11-allocation-counter` | 761 | + İpucu 3 yeni mimari öneri sızdırıyor |
+| `02-snake/13-allocation-counter` | 761 | + İpucu 3 yeni mimari öneri sızdırıyor |
 | `01-pong/10-score-and-reset` | 691 | |
 | `02-snake/06-self-collision` | 623 | |
 | `01-pong/11-serve-state` | 614 | |
@@ -133,7 +133,7 @@ Biçim testi başlık/sıra/kelime sayıyor; şunları denetlemiyor:
 5. ~~`01-pong/10-score-and-reset.md`~~ — procedure zorunluluğu kaldırıldı,
    `^Ball` ipucu yerine servis yönü değişkeniyle tek sıfırlama yolu; procedure'a
    çıkarma 1.13'e havale edildi.
-6. ~~`02-snake/08-food-and-growth.md`~~ — `length` artışının kaydırma
+6. ~~`02-snake/09-food-and-growth.md`~~ — `length` artışının kaydırma
    döngüsünden önce geldiği hem `Görev`'e hem İpucu 3'e yazıldı; İpucu 3 artık
    tick'in tam sırasını kod olarak veriyor.
 
@@ -147,7 +147,9 @@ Kalan (bu commit'te yapılmadı):
 
 **Sonra (biçim dönüşümü, dünya 2 önce — 3'e daha yakın):**
 
-7. `02-snake/07` ve `10`'u ikiye böl (bölme numaralandırmayı etkiler, erken yap)
+7. ~~`02-snake/07` ve `10`'u ikiye böl~~ — yapıldı: 2.7+2.8 ve 2.11+2.12,
+   dünya 2 artık 15 ders; 2.8-2.13 birer/ikişer kaydı, id'ler ve ~40 çapraz
+   atıf göçürüldü, dört yeni ders `SHAPED`'e eklendi.
 8. `02-snake`'in kalan 11 dersini yeni biçime çevir, `SHAPED`'e ekle
 9. `01-pong/09-opponent-ai`'yi ikiye böl
 10. `01-pong`'un 15 dersini çevir; İpucu 3'lere gerçek kod yaz (en büyük iş)
@@ -165,3 +167,20 @@ Kalan (bu commit'te yapılmadı):
 oturumda dosyadan ve kurulu derleyiciden ayrıca doğrulandı. Doğrulanmayan tek
 iddia: Odin dil turu anchor'larının (`#arrays`, `#structs`, `#for-statement`)
 iddia edilen içeriği kapsayıp kapsamadığı — sayfalar çekilmedi.
+
+## Ek — 2026-09-18, bölme sonrası
+
+2.7 ve 2.10 bölündü, dünya 2 15 derse çıktı. Yeni numaralar: 2.7 occupancy
+grid (kur + tut + çiz), 2.8 occupancy lookup (taramayı tek okumaya çevir),
+2.11 ring buffer (mekanik refactor), 2.12 index'i tek yerde topla (`body_index`
++ `-1` yönünün türetimi + negatif modulo + `head = 37` doğrulaması). Eski
+2.8-2.13 sırasıyla 2.9, 2.10, 2.13, 2.14, 2.15 oldu.
+
+Dört yeni ders yeni biçimde yazıldı ve `SHAPED` listesine eklendi; `npm test`
+artık onları da denetliyor. Bölme sırasında bulunan ek defekt: eski 2.7 ve
+onun mirasçısı metinler `head_hits_body` adlı bir procedure'dan söz ediyordu —
+böyle bir procedure ne 2.6'da öğretiliyor ne de öğrencinin kodunda var. Hayalet
+isim kaldırıldı, yerine "2.6'daki tarama döngüsü" yazıldı.
+
+Dünya 2'de kalan biçim borcu: 11 ders (2.1-2.6, 2.9, 2.10, 2.13, 2.14, 2.15).
+Bunlardan 2.6 (623 kelime) ve 2.13 (761 kelime) hâlâ bütçe üstünde.

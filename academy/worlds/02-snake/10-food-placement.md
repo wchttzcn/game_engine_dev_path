@@ -1,17 +1,17 @@
 ---
-title: "2.9 — Yemi nereye koyalım?"
+title: "2.10 — Yemi nereye koyalım?"
 description: "Occupancy grid'i kullanarak yemi her zaman boş bir hücreye rastgele yerleştir; grid dolduğunda kilitlenme."
 section: Veri temsili
 ---
 
-# 2.9 — Yemi nereye koyalım?
+# 2.10 — Yemi nereye koyalım?
 
 **Hedef:** Occupancy grid'in cevapladığı ikinci soruyu kullan — boş hücre
 nerede — ve yemi oradan seç.
 
 ## Görev
 
-2.8'deki sabit yem hücresini kaldır. Head yem hücresine girip `grow` doğru
+2.9'deki sabit yem hücresini kaldır. Head yem hücresine girip `grow` doğru
 olduğunda, `occupied` grid'ini kullanarak yemi her zaman boş bir hücreye
 yeniden yerleştir; gövdeyi tarama. Boş hücre kalmadığında yeni yem
 yerleştirmeyi deneme; oyunu kilitlemeden mevcut durumda bırak.
@@ -52,7 +52,7 @@ cevabıdır.
 - Rastgele bir hücre seçip doluysa tekrar deneyen naif yöntemi kullanma;
   occupancy'den türeyen sayma + seçme yöntemini kur.
 - Boş hücre kalmama durumunu resmi bir kazanıldı state'i olarak modelleme;
-  şimdilik oyunun kilitlenmemesi yeterli — `Won` durumu 2.13'te geliyor.
+  şimdilik oyunun kilitlenmemesi yeterli — `Won` durumu 2.15'te geliyor.
 - Skor veya seviye sistemi yok.
 
 ::: details İpucu 1 — Boş hücre sayısı
@@ -83,7 +83,7 @@ kullandığın imza ve `0..<n` aralığı burada tanımlı.
 ikinci faydası bedava geldi — aynı veri nerede yer var sorusunu da cevaplıyor,
 ve bunu sonsuz döngüye hiç girmeden yapıyorsun.
 
-**“Snake 2.9 denememi değerlendir”** yaz; kodunu inceleyelim.
+**“Snake 2.10 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım gövdeyi kaydırmadan büyüyüp ilerleyen bir temsile geçmek:
-[2.10 — Ring buffer](/worlds/02-snake/10-ring-buffer).
+[2.11 — Ring buffer](/worlds/02-snake/11-ring-buffer).

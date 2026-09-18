@@ -45,7 +45,7 @@ sıradaki derse geçilir. Her ders için commit atman veya rapor tutman gerekmez
 
 Pong'un 1.1–1.15 dersleri (15 ders) tamamlandı: oynanabilir maç, açık match
 state, update/render ayrımı ve collision shape'lerini görünür kılan ilk debug
-overlay. Snake'in 2.1–2.13 dersleri (13 ders) hazırdır; bu paket grid, sabit
+overlay. Snake'in 2.1–2.15 dersleri (15 ders) hazırdır; bu paket grid, sabit
 kapasiteli gövde array'i, tick tabanlı zaman, occupancy grid, ring buffer ve
 allocation ölçümü üzerinden oynanabilir Snake'e gider. Sonraki dersler, mevcut
 iş kontrol edildikten sonra oyunda karşılaşılan ihtiyaca göre hazırlanır.

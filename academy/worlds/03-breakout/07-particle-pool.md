@@ -56,7 +56,7 @@ particle_update :: proc(game: ^Game, dt: f32) {
 kırılmada kaç tane doğacağı ayrı bir sayı ve onu sen seçiyorsun.
 
 `life` hem “yaşıyor mu” hem “ne kadar kaldı” sorusunu tek alanda cevaplıyor;
-`alive` ayrı bir bayrak. 2.9'da kullandığın `rand.int_max` tamsayı
+`alive` ayrı bir bayrak. 2.10'da kullandığın `rand.int_max` tamsayı
 döndürüyordu; burada bir aralıktan ondalıklı `f32` çekiyorsun:
 
 ```odin

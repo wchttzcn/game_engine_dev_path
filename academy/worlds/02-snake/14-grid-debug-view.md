@@ -1,10 +1,10 @@
 ---
-title: "2.12 — Grid debug görünümü"
+title: "2.14 — Grid debug görünümü"
 description: "F1 ile açılan bir overlay'de occupied grid'i, ring index'lerini ve allocation sayaçlarını göster."
 section: Araç ve maç
 ---
 
-# 2.12 — Grid debug görünümü
+# 2.14 — Grid debug görünümü
 
 **Hedef:** F1 ile açılan bir overlay'de Snake'in görünmeyen temsilini —
 occupancy grid'i, ring index'lerini, allocation sayaçlarını — oynarken oku.
@@ -15,7 +15,7 @@ occupancy grid'i, ring index'lerini, allocation sayaçlarını — oynarken oku.
 taşı: `Game` içine `debug_visible: bool` ekle, `F1`'e her basışta tersine çevir.
 Overlay açıkken şunları göster: `occupied` grid'ini dolu hücrelerin outline'ı
 olarak, `head` index'ini, `length`/`MAX_BODY`'yi, tick sayacını, `direction` ile
-`next_direction`'ı ve 2.11'daki allocation sayaçlarını. Overlay kapalıyken bu
+`next_direction`'ı ve 2.13'daki allocation sayaçlarını. Overlay kapalıyken bu
 çizim ve metinlerin hiçbiri görünmesin.
 
 ## Ne zaman bitti?
@@ -90,7 +90,7 @@ burada; 1.15'te aynı çağrıyı raket dikdörtgenleri için kullanmıştın.
 **Kazanım:** Artık `body` ile `occupied`'in aynı gerçeği söylediğini gözle
 doğrulayabiliyorsun; ayrıştıklarında bunu ilk overlay'de görürsün.
 
-**“Snake 2.12 denememi değerlendir”** yaz; kodunu inceleyelim.
+**“Snake 2.14 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım bu görünür temsili maç bitişine ve yeniden başlatmaya bağlamak:
-[2.13 — Oyun sonu ve restart](/worlds/02-snake/13-game-over-restart).
+[2.15 — Oyun sonu ve restart](/worlds/02-snake/15-game-over-restart).

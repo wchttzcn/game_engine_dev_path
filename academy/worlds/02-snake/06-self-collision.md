@@ -49,9 +49,9 @@ vermiyor. Elindeki tek yol her seferinde baştan sona taramak: `length` kadar
 karşılaştırma yapmak.
 
 Eklediğin `R` restart'ı şimdilik yalnızca gövdeyi, yönü ve state'i
-sıfırlıyor — `occupied` grid'i (2.7) ve ring buffer index'i (2.10) henüz yok,
+sıfırlıyor — `occupied` grid'i (2.7) ve ring buffer index'i (2.11) henüz yok,
 yani henüz senkronize edilecek ikinci bir temsil de yok. Birden fazla
-temsili tek seferde tutarlı kuran tam `game_reset` disiplini 2.13'te geliyor;
+temsili tek seferde tutarlı kuran tam `game_reset` disiplini 2.15'te geliyor;
 burada amaç yalnızca collision ve büyüme üzerinde çalışırken programı elle
 yeniden başlatmak zorunda kalmamak.
 

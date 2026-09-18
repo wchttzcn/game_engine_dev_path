@@ -248,66 +248,88 @@
       ]
     },
     {
-      "id": "snake-08-food-and-growth",
-      "title": "2.8 — Yemi ye ve büyü",
+      "id": "snake-08-occupancy-lookup",
+      "title": "2.8 — Occupancy lookup",
+      "description": "Kendine çarpma taramasını, occupied grid'in tek hücre okumasıyla değiştir.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/08-occupancy-lookup",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-09-food-and-growth",
+      "title": "2.9 — Yemi ye ve büyü",
       "description": "Sabit bir yem hücresini ye; büyüme kararını gövde değişmeden önce, aday new_head üzerinden ver.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/08-food-and-growth",
+      "url": "/worlds/02-snake/09-food-and-growth",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
       ]
     },
     {
-      "id": "snake-09-food-placement",
-      "title": "2.9 — Yemi nereye koyalım?",
+      "id": "snake-10-food-placement",
+      "title": "2.10 — Yemi nereye koyalım?",
       "description": "Occupancy grid'i kullanarak yemi her zaman boş bir hücreye rastgele yerleştir; grid dolduğunda kilitlenme.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/09-food-placement",
+      "url": "/worlds/02-snake/10-food-placement",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
       ]
     },
     {
-      "id": "snake-10-ring-buffer",
-      "title": "2.10 — Ring buffer",
+      "id": "snake-11-ring-buffer",
+      "title": "2.11 — Ring buffer",
       "description": "Sabit body array'ini kaydırmak yerine head index'iyle dairesel kullanacak şekilde yeniden yaz.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/10-ring-buffer",
+      "url": "/worlds/02-snake/11-ring-buffer",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
       ]
     },
     {
-      "id": "snake-11-allocation-counter",
-      "title": "2.11 — Allocation sayacı",
+      "id": "snake-12-index-single-source",
+      "title": "2.12 — İndex'i tek yerde topla",
+      "description": "Altı yere dağılmış ring buffer index hesabını tek bir procedure'da topla ve head'in yönünü kendin türet.",
+      "world": "World 2 · Snake",
+      "url": "/worlds/02-snake/12-index-single-source",
+      "status": "completed",
+      "evidence": [
+        "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "snake-13-allocation-counter",
+      "title": "2.13 — Allocation sayacı",
       "description": "main içinde bir tracking allocator kurup context.allocator üzerinden geçen allocation'ları ölç; ölçümün kapsamını doğru yorumla.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/11-allocation-counter",
+      "url": "/worlds/02-snake/13-allocation-counter",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
       ]
     },
     {
-      "id": "snake-12-grid-debug-view",
-      "title": "2.12 — Grid debug görünümü",
+      "id": "snake-14-grid-debug-view",
+      "title": "2.14 — Grid debug görünümü",
       "description": "F1 ile açılan bir overlay'de occupied grid'i, ring index'lerini ve allocation sayaçlarını göster.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/12-grid-debug-view",
+      "url": "/worlds/02-snake/14-grid-debug-view",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
       ]
     },
     {
-      "id": "snake-13-game-over-restart",
-      "title": "2.13 — Oyun sonu ve restart",
+      "id": "snake-15-game-over-restart",
+      "title": "2.15 — Oyun sonu ve restart",
       "description": "Game_State'e Won ekle, R tuşuna tek bir game_reset bağla ve body ile occupied'i birlikte sıfırla.",
       "world": "World 2 · Snake",
-      "url": "/worlds/02-snake/13-game-over-restart",
+      "url": "/worlds/02-snake/15-game-over-restart",
       "status": "completed",
       "evidence": [
         "games/snake/main.odin"
@@ -718,12 +740,12 @@
       "status": "learning",
       "lessons": [
         "snake-02-snake-body",
-        "snake-08-food-and-growth",
+        "snake-09-food-and-growth",
         "breakout-04-brick-wall",
         "breakout-07-particle-pool",
         "breakout-08-powerup-drop"
       ],
-      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı. 2.8'de uzunluk ilk kez değişti. length'i kaydırma döngüsünden sonra artırdığı için yeni slot (body[eski_length]) hiç yazılmadı ve gövdenin sonunda bayat bir hücre kaldı; artırmanın kaydırmadan önce gelmesi gerektiğini review'da gördükten sonra doğru kurdu. MAX_BODY'nin taşamayacağı gerekçesini kendi sormadı, review'da doğrulandı. 3.4'te üçüncü kalıp geldi: kapasite sabit, uzunluk hiç değişmiyor, ölü eleman array'de kalıp alive bayrağıyla eleniyor. Array boyutunu iki sabitten türetti, çizimi len'e bağladı, elle adet saymadı — ama bu ders metni struct'ı ve array tanımını hazır verdiğinden bağımsız sinyal sayılmaz; kapasite ayrımının kendi kurulduğu yeni bir durum hâlâ bekliyor. 3.7'de kalıp üçüncü biçimiyle geldi: slotları game_reset'te bir kerede dolan bir dizi değil, oyun sırasında tek tek dolup boşalan bir havuz. Boş slot arama, tek doğurma ve taşmada sessizce vazgeçme tek denemede doğruydu. Kapasite ile tek seferde doğan miktarın ayrı iki sayı olduğu henüz kendiliğinden gelmedi — 'return'ü kaldırırsam olmaz mı' sorusu tam bu ayrımın eksikliğiydi; senaryo gösterildikten sonra ayrımı kabul etti ama kodu istedi. 3.8'de aynı havuz oyuncuyla etkileşen bir nesne için ikinci kez kurulacak. 3.8'de havuz kalıbı ikinci nesne türü için kuruldu ama kod İpucu 3'teki çözümle satır satır aynı geldi; kalıbın bağımsız kurulduğuna dair yeni sinyal yok. 3.7'de açık kalan 'kapasite ile tek seferde doğan miktar ayrı sayılardır' ayrımı bu derste sınanmadı, çünkü kırılma başına tek güçlendirme doğuyor. Havuzun dışında kalan tek davranışsal hata doğurma eşiğinin yönüydü: rand.float32_range(0, 1) >= POWERUP_DROP_CHANCE yazdı, yani %20 yerine %80 düşürüyordu; eşiğin istenen oranın kendisi olduğu gösterilince < ile düzeltti. İncelemede süreli etkinin sayacı için '=' (sıfırla) mı '+=' (biriktir) mi seçtiği soruldu; kararın kendisine ait olmadığını, doğrudan İpucu 3'teki çözümden geldiğini söyledi — 3.8 boyunca bağımsız tasarım kararı yok.",
+      "note": "2.2'de gövdeyi [MAX_BODY]Cell + length olarak kurdu, çizim döngüsünü length'e bağladı, dynamic array veya allocation'a hiç gitmedi. Kapasite/uzunluk ayrımı ilk derste ipucusuz oturdu; henüz uzunluğun değiştiği bir durumda (büyüme, ring buffer) sınanmadı. 2.9'de uzunluk ilk kez değişti. length'i kaydırma döngüsünden sonra artırdığı için yeni slot (body[eski_length]) hiç yazılmadı ve gövdenin sonunda bayat bir hücre kaldı; artırmanın kaydırmadan önce gelmesi gerektiğini review'da gördükten sonra doğru kurdu. MAX_BODY'nin taşamayacağı gerekçesini kendi sormadı, review'da doğrulandı. 3.4'te üçüncü kalıp geldi: kapasite sabit, uzunluk hiç değişmiyor, ölü eleman array'de kalıp alive bayrağıyla eleniyor. Array boyutunu iki sabitten türetti, çizimi len'e bağladı, elle adet saymadı — ama bu ders metni struct'ı ve array tanımını hazır verdiğinden bağımsız sinyal sayılmaz; kapasite ayrımının kendi kurulduğu yeni bir durum hâlâ bekliyor. 3.7'de kalıp üçüncü biçimiyle geldi: slotları game_reset'te bir kerede dolan bir dizi değil, oyun sırasında tek tek dolup boşalan bir havuz. Boş slot arama, tek doğurma ve taşmada sessizce vazgeçme tek denemede doğruydu. Kapasite ile tek seferde doğan miktarın ayrı iki sayı olduğu henüz kendiliğinden gelmedi — 'return'ü kaldırırsam olmaz mı' sorusu tam bu ayrımın eksikliğiydi; senaryo gösterildikten sonra ayrımı kabul etti ama kodu istedi. 3.8'de aynı havuz oyuncuyla etkileşen bir nesne için ikinci kez kurulacak. 3.8'de havuz kalıbı ikinci nesne türü için kuruldu ama kod İpucu 3'teki çözümle satır satır aynı geldi; kalıbın bağımsız kurulduğuna dair yeni sinyal yok. 3.7'de açık kalan 'kapasite ile tek seferde doğan miktar ayrı sayılardır' ayrımı bu derste sınanmadı, çünkü kırılma başına tek güçlendirme doğuyor. Havuzun dışında kalan tek davranışsal hata doğurma eşiğinin yönüydü: rand.float32_range(0, 1) >= POWERUP_DROP_CHANCE yazdı, yani %20 yerine %80 düşürüyordu; eşiğin istenen oranın kendisi olduğu gösterilince < ile düzeltti. İncelemede süreli etkinin sayacı için '=' (sıfırla) mı '+=' (biriktir) mi seçtiği soruldu; kararın kendisine ait olmadığını, doğrudan İpucu 3'teki çözümden geldiğini söyledi — 3.8 boyunca bağımsız tasarım kararı yok.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin",
@@ -794,10 +816,10 @@
       "lessons": [
         "snake-06-self-collision",
         "snake-07-occupancy-grid",
-        "snake-09-food-placement",
+        "snake-10-food-placement",
         "breakout-05-brick-collision"
       ],
-      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor. 2.9'da tarama ilk kez yazma yönünde kullanıldı: tekrar-deneme yerine sabit iki taramalı say-ve-seç yöntemini kendi kurdu ve yöntemin neden her zaman sonlandığını doğru anladı. Üç hata review'da çıktı: sayaç boş hücreleri değil tüm hücreleri saydı, sayaç karşılaştırmadan önce arttığı için target=0 hiç eşleşmedi ve empty_count==0 guard'ı yoktu (rand.int_max(0) panic'ler). Üçünü de gösterildikten sonra düzeltti. 3.5'te tarama üçüncü şekliyle geldi: sorgu değil, ilk eşleşmede duran ve elemanı değiştiren tarama. continue ile ölü eleme, break ile frame başına tek kırılma tek denemede doğru; 2.9'daki sayaç sırası hatalarına benzer bir sıra hatası çıkmadı.",
+      "note": "2.6'da 'bu hücre dolu mu' sorusunu body array'ini 1..<length tarayarak cevapladı; struct'ları == ile karşılaştırdı ve head'i kendisiyle karşılaştırmama sınırını doğru kurdu. Taramanın tick başına length karşılaştırma demek olduğu anlatıldı ama maliyeti henüz kendi ölçmedi; sabit sürede cevap veren ikinci temsil 2.7'de sınanacak. 2.7'de taramayı tek occupied[row][col] okumasıyla değiştirdi; kontrolü head'i işaretlemeden önceye koyması gerektiğini uyarı sonrası doğru yerleştirdi ve head_hits_body'yi ölü kod olarak sildi. Taramanın neden pahalı olduğunu artık somut karşılaştırmayla söyleyebiliyor. 2.10'da tarama ilk kez yazma yönünde kullanıldı: tekrar-deneme yerine sabit iki taramalı say-ve-seç yöntemini kendi kurdu ve yöntemin neden her zaman sonlandığını doğru anladı. Üç hata review'da çıktı: sayaç boş hücreleri değil tüm hücreleri saydı, sayaç karşılaştırmadan önce arttığı için target=0 hiç eşleşmedi ve empty_count==0 guard'ı yoktu (rand.int_max(0) panic'ler). Üçünü de gösterildikten sonra düzeltti. 3.5'te tarama üçüncü şekliyle geldi: sorgu değil, ilk eşleşmede duran ve elemanı değiştiren tarama. continue ile ölü eleme, break ile frame başına tek kırılma tek denemede doğru; 2.10'daki sayaç sırası hatalarına benzer bir sıra hatası çıkmadı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin",
@@ -810,10 +832,10 @@
       "status": "learning",
       "lessons": [
         "snake-07-occupancy-grid",
-        "snake-08-food-and-growth",
-        "snake-09-food-placement"
+        "snake-09-food-and-growth",
+        "snake-10-food-placement"
       ],
-      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.10) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak. 2.8'de aynı bakım hatasının üçüncü biçimi çıktı: büyüyen tick'te de kuyruğu occupied'den sildi, yani occupied ile length bir hücre ayrıştı ve gövdenin son segmenti grid'de görünmez oldu. 2.9'da occupied'i ilk kez okuma yönünde kullandı — aynı veriden 'nerede yer var' sorusunu cevapladı — ama ilk denemede grid'i hiç okumadan seçim yaptı ve boş sayısını length'ten türetti; türetilmiş verinin sorgu tarafı henüz refleks değil. Ayrıca game_reset yemi yenilemiyordu, yani restart'ta yem gövdenin üstünde kalabiliyordu; hatırlatma sonrası spawn'ı reset'in içine taşıdı.",
+      "note": "2.7'de body'den türeyen occupied cache'ini kurdu, ama bakım modeli iki kez yanlış çıktı. Önce 'body değişiyorsa occupied de değişmeli' modeliyle kaydırma döngüsünün içinde her gövde hücresini false yaptı; grid tek head hücresine indi. Index kayması ile hücrenin el değiştirmesinin farklı şeyler olduğu, kaplanan kümenin tick başına yalnız iki eleman değiştiği anlatıldıktan sonra iki yazmaya indirdi. İkinci hata off-by-one: tail'i kaydırmadan sonra okudu, yani çıkan hücre yerine yeni kuyruğu temizledi. İpucu 1 ve görevin Tur A/Tur B olarak ikiye bölünmesi gerekti. Dersi zor bulduğunu kendi söyledi; kavramı sonunda uyguladı ama bağımsız değil. Ring buffer'a geçince (2.11) aynı bakımın kaydırma olmadan nasıl göründüğü ikinci sınav olacak. 2.9'de aynı bakım hatasının üçüncü biçimi çıktı: büyüyen tick'te de kuyruğu occupied'den sildi, yani occupied ile length bir hücre ayrıştı ve gövdenin son segmenti grid'de görünmez oldu. 2.10'da occupied'i ilk kez okuma yönünde kullandı — aynı veriden 'nerede yer var' sorusunu cevapladı — ama ilk denemede grid'i hiç okumadan seçim yaptı ve boş sayısını length'ten türetti; türetilmiş verinin sorgu tarafı henüz refleks değil. Ayrıca game_reset yemi yenilemiyordu, yani restart'ta yem gövdenin üstünde kalabiliyordu; hatırlatma sonrası spawn'ı reset'in içine taşıdı.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
@@ -824,9 +846,9 @@
       "title": "Tick içinde karar sırası",
       "status": "learning",
       "lessons": [
-        "snake-08-food-and-growth"
+        "snake-09-food-and-growth"
       ],
-      "note": "2.8'de büyüme kararını doğru state'ten okudu (aday yeni head, eski body[0] değil) ama kararı gövdeyi değiştirdikten sonra kullandı: kuyruk her tick koşulsuz silindi, karar en sona kaldı. Sonuç bir tick gecikmesi değil, bozuk gövdeydi — grow yolunda hem kuyruk silindi hem yeni slot yazılmadı. İpucu yetmedi, düzeltilmiş tick sırası kod olarak verildi; ikinci denemede kararı gövdeye dokunmadan önce verip kuyruk silmeyi grow'a bağladı. Karar-sonra-mutasyon sırası ring buffer'da (2.10) yeniden sınanacak.",
+      "note": "2.9'de büyüme kararını doğru state'ten okudu (aday yeni head, eski body[0] değil) ama kararı gövdeyi değiştirdikten sonra kullandı: kuyruk her tick koşulsuz silindi, karar en sona kaldı. Sonuç bir tick gecikmesi değil, bozuk gövdeydi — grow yolunda hem kuyruk silindi hem yeni slot yazılmadı. İpucu yetmedi, düzeltilmiş tick sırası kod olarak verildi; ikinci denemede kararı gövdeye dokunmadan önce verip kuyruk silmeyi grow'a bağladı. Karar-sonra-mutasyon sırası ring buffer'da (2.11) yeniden sınanacak.",
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"

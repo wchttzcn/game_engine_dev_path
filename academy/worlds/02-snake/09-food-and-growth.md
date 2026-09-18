@@ -1,10 +1,10 @@
 ---
-title: "2.8 — Yemi ye ve büyü"
+title: "2.9 — Yemi ye ve büyü"
 description: "Sabit bir yem hücresini ye; büyüme kararını gövde değişmeden önce, aday new_head üzerinden ver."
 section: Veri temsili
 ---
 
-# 2.8 — Yemi ye ve büyü
+# 2.9 — Yemi ye ve büyü
 
 **Hedef:** Bir tick içinde “büyüyecek miyim?” kararının hangi state üzerinden,
 hangi sırada verildiğini doğru kur.
@@ -12,7 +12,7 @@ hangi sırada verildiğini doğru kur.
 ## Görev
 
 `food: Cell` ekle ve grid üzerinde sabit, tek bir hücreye yerleştir (yeniden
-yerleştirme henüz yok — bu 2.9'un konusu). Adım attığında önce yeni head'i
+yerleştirme henüz yok — bu 2.10'un konusu). Adım attığında önce yeni head'i
 yerel bir `new_head: Cell` değişkeni olarak hesapla — henüz `body`'ye yazma.
 `grow := new_head == game.food` ile büyüme kararını bu aday üzerinden ver.
 Ancak bundan sonra gövdeyi güncelle. Sıra önemli: `grow` doğruysa `length`'i
@@ -60,7 +60,7 @@ bayrağa göre atla.
 ## Sınırlar
 
 - Yem bu derste sabit tek bir hücrede duruyor; boş hücre seçimi ve yeniden
-  yerleştirme 2.9'un konusu.
+  yerleştirme 2.10'un konusu.
 - Ring buffer kurma; kaydırma hâlâ 2.4'teki `body[i] = body[i - 1]`
   biçiminde kalıyor.
 - Skor veya seviye sistemi yok.
@@ -109,8 +109,8 @@ yazılmaz ve gövdenin sonunda bayat bir hücre kalır.
 **Kazanım:** Bir tick içinde hangi kararın hangi state üzerinden, hangi
 sırada verildiği artık senin kontrolünde; büyüme kararı bir tick geç gelmiyor.
 
-**“Snake 2.8 denememi değerlendir”** yaz; kodunu inceleyelim.
+**“Snake 2.9 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım bu sabit yemi occupancy grid'in ikinci sorusuyla — boş hücre
-nerede — yeniden yerleştirmek: [2.9 — Yemi nereye
-koyalım?](/worlds/02-snake/09-food-placement).
+nerede — yeniden yerleştirmek: [2.10 — Yemi nereye
+koyalım?](/worlds/02-snake/10-food-placement).

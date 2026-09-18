@@ -1,10 +1,10 @@
 ---
-title: "2.11 — Allocation sayacı"
+title: "2.13 — Allocation sayacı"
 description: "main içinde bir tracking allocator kurup context.allocator üzerinden geçen allocation'ları ölç; ölçümün kapsamını doğru yorumla."
 section: Veri temsili
 ---
 
-# 2.11 — Allocation sayacı
+# 2.13 — Allocation sayacı
 
 **Hedef:** “Oynanış sırasında allocation yapmıyorum” varsayımını bir tracking
 allocator ile ölç — ve ölçümün gerçekte neyi kapsadığını doğru yorumla.
@@ -15,7 +15,7 @@ allocator ile ölç — ve ölçümün gerçekte neyi kapsadığını doğru yor
 ve `context.allocator`'ı ona bağla; bunu yaptıktan sonra `context.allocator`
 üzerinden geçen her allocation bu sayaca kaydedilir. Ekranın bir köşesine
 `total_allocation_count` ve `current_memory_allocated` değerlerini yaz (F1
-toggle'ı henüz gerekmiyor, 2.12'de bu sayaçları oraya taşıyacaksın).
+toggle'ı henüz gerekmiyor, 2.14'de bu sayaçları oraya taşıyacaksın).
 
 Sayacın gerçekten bağlı olduğunu kanıtlamak için bilerek küçük bir kontrol
 yap: geçici olarak bir `make([]byte, 64)` veya `fmt.aprintf` çağrısı ekle,
@@ -134,7 +134,7 @@ sayacın raylib'in kendi C çağrılarını neden görmediğinin kaynağı buras
 değil — ve bu ölçümün tam olarak neyi kapsadığını, neyi kapsamadığını
 biliyorsun.
 
-**“Snake 2.11 denememi değerlendir”** yaz; kodunu inceleyelim.
+**“Snake 2.13 denememi değerlendir”** yaz; kodunu inceleyelim.
 
 Sonraki adım bu sayaçları ve gövdenin diğer gizli state'ini tek bir yerde
-toplamak: [2.12 — Grid debug görünümü](/worlds/02-snake/12-grid-debug-view).
+toplamak: [2.14 — Grid debug görünümü](/worlds/02-snake/14-grid-debug-view).

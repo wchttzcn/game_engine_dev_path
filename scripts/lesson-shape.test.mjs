@@ -13,7 +13,10 @@ const repoRoot = repoRootFrom(import.meta.url, 1);
 // Biçim 3.8'de başlıyor. Yalnız buradaki ders numaraları denetlenir; eski
 // biçimdeki dersler dokunulmadan kalır. Bir ders yeni biçime çevrildiğinde
 // numarası bu listeye eklenir — liste, biçimin nereye kadar yayıldığının kaydı.
-const SHAPED = { '03-breakout': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] };
+const SHAPED = {
+  '02-snake': [7, 8, 11, 12],
+  '03-breakout': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+};
 
 const REQUIRED = ['Görev', 'Ne zaman bitti?', 'Elindekiler', 'Sınırlar', 'Kaynak'];
 const OPTIONAL_LAST = 'Daha derine';

@@ -7,8 +7,8 @@ Oyun yaparak oyunların altındaki sistemleri öğreneceksin. React ve TypeScrip
 <CurrentLesson />
 
 Pong'un 1.1–1.15 dersleri (15 ders) tamamlandı; paket oynanabilir maç ve
-collision shape'lerini gösteren debug overlay'e kadar gitti. Snake'in 2.1–2.13
-dersleri (13 ders) hazır ve sırada.
+collision shape'lerini gösteren debug overlay'e kadar gitti. Snake'in 2.1–2.15
+dersleri (15 ders) hazır ve sırada.
 
 ## Ders döngüsü
 
@@ -58,7 +58,7 @@ Bu isimler mekanik ilhamını belirtir; ilgili oyunların iç mimarisi hakkında
 
 ## Dünya 2 — Snake
 
-[Dünya planı](/worlds/02-snake/). 2.1–2.13 dersleri grid, sabit kapasiteli gövde
+[Dünya planı](/worlds/02-snake/). 2.1–2.15 dersleri grid, sabit kapasiteli gövde
 array'i, tick tabanlı zaman, input tamponu, occupancy grid, ring buffer ve
 allocation ölçümü üzerinden oynanabilir Snake'e gider. AoS/SoA ile cache
 locality ölçümleri bu paketten doğan gerçek bir erişim sorusuyla `labs/` altında
