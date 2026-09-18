@@ -33,7 +33,7 @@ dolduran ama uzunluğu hiç değişmeyen bir kalıp. Struct ve imzalar aşağıd
 **proc gövdeleri ve bu procleri nereden çağıracağın sana ait.**
 
 ```odin
-MAX_PARTICLES :: 5
+MAX_PARTICLES :: 64
 
 Particle :: struct {
 	alive:    bool,
@@ -50,6 +50,9 @@ particle_spawn :: proc(game: ^Game, pos: rl.Vector2) {
 particle_update :: proc(game: ^Game, dt: f32) {
 }
 ```
+
+`MAX_PARTICLES` havuzun tavanı: aynı anda yaşayabilecek en çok parçacık. Tek
+kırılmada kaç tane doğacağı ayrı bir sayı ve onu sen seçiyorsun.
 
 `life` hem “yaşıyor mu” hem “ne kadar kaldı” sorusunu tek alanda cevaplıyor;
 `alive` ayrı bir bayrak. 2.9'da kullandığın `rand.int_max` tamsayı

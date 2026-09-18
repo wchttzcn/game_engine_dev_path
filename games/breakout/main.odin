@@ -1,5 +1,6 @@
 package main
 
+import "core:math/rand"
 import rl "vendor:raylib"
 
 SCREEN_HEIGHT :: 600
@@ -14,11 +15,17 @@ BRICK_HEIGHT :: 20
 BRICK_TOP :: 70
 BRICK_PAD :: 4
 
+MAX_PARTICLES :: 64
+PARTICLE_BURST :: 8
+
 Game :: struct {
-	player: Paddle,
-	ball:   Ball,
-	state:  Game_State,
-	bricks: [BRICK_ROWS * BRICK_COLS]Brick,
+	player:    Paddle,
+	ball:      Ball,
+	state:     Game_State,
+	bricks:    [BRICK_ROWS * BRICK_COLS]Brick,
+
+	// particles
+	particles: [MAX_PARTICLES]Particle,
 }
 
 Paddle :: struct {
@@ -32,6 +39,11 @@ Ball :: struct {
 Brick :: struct {
 	rect:  rl.Rectangle,
 	alive: bool,
+}
+Particle :: struct {
+	alive:    bool,
+	life:     f32,
+	pos, vel: rl.Vector2,
 }
 
 Game_State :: enum {
@@ -50,6 +62,8 @@ main :: proc() {
 
 	for !rl.WindowShouldClose() {
 		dt := rl.GetFrameTime()
+
+		particle_update(&game, dt)
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
@@ -109,6 +123,14 @@ main :: proc() {
 						game.ball.vel.y = -game.ball.vel.y
 					}
 					brick.alive = false
+
+					center := rl.Vector2 {
+						brick.rect.x + brick.rect.width / 2,
+						brick.rect.y + brick.rect.height / 2,
+					}
+					for _ in 0 ..< PARTICLE_BURST {
+						particle_spawn(&game, center)
+					}
 					break
 				}
 			}
@@ -132,6 +154,13 @@ main :: proc() {
 
 		rl.DrawCircleV(game.ball.pos, game.ball.radius, rl.WHITE)
 		rl.DrawRectangleRec(game.player.rect, rl.WHITE)
+
+		for particle in game.particles {
+			if particle.alive {
+				rl.DrawCircleV(particle.pos, 5, rl.WHITE)
+			}
+		}
+
 		switch game.state {
 		case .Playing:
 		case .Lost:
@@ -177,5 +206,26 @@ game_reset :: proc(game: ^Game) {
 			},
 			alive = true,
 		}
+	}
+}
+
+particle_spawn :: proc(game: ^Game, pos: rl.Vector2) {
+	for &p in game.particles {
+		if p.life > 0 do continue
+		p.pos = pos
+		p.life = 1
+		p.vel = {rand.float32_range(-80, 80), rand.float32_range(-80, 80)}
+		p.alive = true
+		return
+	}
+}
+particle_update :: proc(game: ^Game, dt: f32) {
+	for &p in game.particles {
+		if p.life <= 0 {
+			p.alive = false
+			continue
+		}
+		p.pos += p.vel * dt * 3
+		p.life -= dt
 	}
 }
