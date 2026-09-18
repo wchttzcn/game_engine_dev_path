@@ -48,7 +48,7 @@ for &p, i in game.powerups {
 }
 ```
 
-F1 kalıbı 2.14'deki gibi: `rl.IsKeyPressed(.F1)` ile `game.debug_visible`'ı
+F1 kalıbı 2.14'teki gibi: `rl.IsKeyPressed(.F1)` ile `game.debug_visible`'ı
 tersine çevir, çizim tarafı yalnız sonucu okur. `rl.DrawText`/`rl.TextFormat`
 zaten tanıdık.
 

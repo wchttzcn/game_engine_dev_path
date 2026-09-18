@@ -15,7 +15,7 @@ allocator ile ölç — ve ölçümün gerçekte neyi kapsadığını doğru yor
 ve `context.allocator`'ı ona bağla; bunu yaptıktan sonra `context.allocator`
 üzerinden geçen her allocation bu sayaca kaydedilir. Ekranın bir köşesine
 `total_allocation_count` ve `current_memory_allocated` değerlerini yaz (F1
-toggle'ı henüz gerekmiyor, 2.14'de bu sayaçları oraya taşıyacaksın).
+toggle'ı henüz gerekmiyor, 2.14'te bu sayaçları oraya taşıyacaksın).
 
 Sayacın gerçekten bağlı olduğunu kanıtlamak için bilerek küçük bir kontrol
 yap: geçici olarak bir `make([]byte, 64)` veya `fmt.aprintf` çağrısı ekle,
@@ -64,7 +64,7 @@ defer mem.tracking_allocator_destroy(&track)
 
 Bunu `rl.InitWindow`'dan önce, `main`'in başına koy — o andan sonraki her
 `make`, `append` veya `fmt.aprintf` çağrısı bu allocator'dan geçer.
-[1.14 — Debug overlay](/worlds/01-pong/14-debug-overlay)'de öğrendiğin
+[1.15 — Debug overlay](/worlds/01-pong/15-debug-overlay)'de öğrendiğin
 `rl.TextFormat` kendi static buffer'ına yazar, allocate etmez; `fmt.aprintf`
 gibi bir çağrı heap'ten alır. Overlay metnini yanlışlıkla `fmt.aprintf` ile
 kurarsan sayaç bunu anında ele verir.

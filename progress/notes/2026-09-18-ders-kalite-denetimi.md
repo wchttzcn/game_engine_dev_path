@@ -184,3 +184,28 @@ isim kaldırıldı, yerine "2.6'daki tarama döngüsü" yazıldı.
 
 Dünya 2'de kalan biçim borcu: 11 ders (2.1-2.6, 2.9, 2.10, 2.13, 2.14, 2.15).
 Bunlardan 2.6 (623 kelime) ve 2.13 (761 kelime) hâlâ bütçe üstünde.
+
+## Ek — 2026-09-18, dünya 1 çevrimi
+
+Dünya 1'in 15 dersi yeni biçime çevrildi ve 1.9 ikiye bölündü; dünya artık 16
+ders. Eski 1.10-1.15 sırasıyla 1.11-1.16 oldu.
+
+- 1.9 yalnız controller + dead zone + clamp taşıyor (865 kelimeden 401'e).
+- 1.10 (yeni) rakibin hızını zorluk ayarı olarak öğretiyor: `speed` topun dikey
+  hızının altında olmalı, yoksa ıskalamak matematiksel olarak imkânsız.
+- 16 dersin 16'sında da İpucu 3 artık gerçek kod veriyor (çevrimden önce
+  hiçbirinde kod yoktu, ortalama 21-38 kelimelik düz yazıydı).
+- Kaynak rolü ihlalleri kapandı: Gaffer On Games, Game Programming Patterns ve
+  MDN linkleri `## Daha derine`'ye taşındı, zorunlu `## Kaynak` her derste Odin
+  veya raylib binding referansı.
+- İpucuda ilk kez doğan API imzaları gövdeye taşındı: 1.15'te `DrawFPS` ve `%v`,
+  1.16'da `DrawRectangleLinesEx`, `DrawCircleLinesV`, `DrawLineEx`.
+- 1.11'deki öğretilmemiş procedure/pointer gereksinimi kaldırıldı; tam çözüm
+  artık servis yönü değişkeniyle tek yollu, procedure'a çıkarma 1.14'e bırakıldı.
+- Dünya 1'in 16 dersi `SHAPED` listesine eklendi; `npm test` hepsini denetliyor.
+
+Numaralandırma göçünün yan etkisi olarak Türkçe ekler bozuldu (`1.16'te`,
+`1.11'da`); okunuşa göre denetleyen bir script yazıldı, 18 ek düzeltildi —
+bunların 5'i dünya 2 göçünden kalmıştı.
+
+Kalan biçim borcu yalnız dünya 2'de: 11 ders (2.1-2.6, 2.9, 2.10, 2.13-2.15).

@@ -10,18 +10,11 @@ section: Temel hareket
 
 ## Görev
 
-W ve S tuşlarıyla sol raketi yukarı/aşağı hareket ettir. Raket pencerenin üstüne
-veya altına taşmamalı.
-
-Sınırı kontrol edebilmek için önce ona bir isim ver: `SCREEN_WIDTH` ve
-`SCREEN_HEIGHT` sabitlerini dosya seviyesinde tanımla ve `rl.InitWindow`
-çağrısında da bunları kullan; aynı sayıyı iki ayrı yerde tutarsan pencere
-boyutunu değiştirdiğin gün sınır kontrolü sessizce yanlış kalır. Bu derste
-dikey sınır yeter; `SCREEN_WIDTH` 1.10'da yatay sınır olarak işini görecek.
-
-Input ve `game.player.y` güncellemesini `BeginDrawing`'den önce, game loop'un içinde yap;
-render kodu yalnızca güncel game state'ini çizsin. Bu ders için frame başına
-sabit bir hareket miktarı kullanabilirsin.
+W ve S tuşlarıyla sol raketi yukarı/aşağı hareket ettir; raket pencerenin
+üstüne veya altına taşmasın. Önce `SCREEN_WIDTH` ve `SCREEN_HEIGHT` sabitlerini
+dosya seviyesinde tanımla ve `rl.InitWindow` da bunları kullansın. Input ve
+`y` güncellemesi `BeginDrawing`'den önce olsun; çizim yalnız güncel state'i
+göstersin.
 
 ## Ne zaman bitti?
 
@@ -32,75 +25,82 @@ sabit bir hareket miktarı kullanabilirsin.
 - Rakip ve top sabit kalır.
 - `odin check games/pong` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-`rl.IsKeyDown` tuş basılı kaldığı her frame `true` döner. Beklediği tuş değeri
-`rl.KeyboardKey` enum'undan gelir. Odin, parametrenin tipini zaten bildiği için
-enum adını tekrar yazmana gerek yok; başına nokta koyup `.W` yazman yeterli:
-
-```odin
-if rl.IsKeyDown(.W) {
-    game.player.y -= 5.0
-}
-```
-
-Uzun hali `rl.KeyboardKey.W`; ikisi de aynı değeri verir. `rl.W` biçimi derlenmez.
-
-Bu, React'teki tek seferlik key event'e değil, her frame çalışan bir update'e
-benzer. Aynı anda iki tuş basılıysa iki koşul da çalışabilir; bu Pong için kabul
-edilebilir bir başlangıç davranışı.
-
-Sınır kontrolünde yalnızca `game.player.y` değil, raketin tamamı önemlidir. Alt
-sınır, `game.player.y + game.player.height` değerini `SCREEN_HEIGHT` ile
-karşılaştırarak bulunur.
-
-Sabitleri 1.2'de `Paddle` için kullandığın `::` ile yazarsın; untyped
-kaldıkları için hem `rl.InitWindow`'ın integer parametresine hem de `f32` raket
-hesabına dönüşümsüz girerler:
+Aynı sayıyı iki yerde tutmamak için sabitler; `::` ile untyped kaldıkları için
+hem `InitWindow`'ın integer parametresine hem `f32` hesaba dönüşümsüz girerler:
 
 ```odin
 SCREEN_WIDTH :: 800
 SCREEN_HEIGHT :: 450
 ```
 
+Tuş okuma çağrısı ve kullanımı:
+
+```odin
+// vendor:raylib — IsKeyDown :: proc(key: KeyboardKey) -> bool
+// Tuş basılı kaldığı HER frame true döner.
+if rl.IsKeyDown(.W) {
+}
+```
+
+Beklenen değer `rl.KeyboardKey` enum'undan gelir. Odin parametrenin tipini
+bildiği için enum adını tekrar yazmazsın: `.W` yeter. Uzun hâli
+`rl.KeyboardKey.W`; `rl.W` derlenmez.
+
 ## Sınırlar
 
-Yalnızca player raketini kontrol et. Rakip AI, acceleration, input mapping ve
-delta time henüz gerekli değil. Sınır kontrolünü eklemek, bir sonraki hız
-değişikliğinde görünmeyen bir gameplay bug birikmesini önler.
+- Yalnız player raketi. Rakip AI, acceleration ve input mapping yok.
+- Delta time henüz yok; bu derste frame başına sabit bir miktar kullan.
+- İki tuş aynı anda basılıysa iki koşul da çalışabilir; bu şimdilik kabul
+  edilebilir.
 
-::: details İpucu 1 — Tuş kontrolünün yeri
-`for !rl.WindowShouldClose()` bloğunda, `BeginDrawing()`'den önce iki ayrı
-`rl.IsKeyDown` koşulu yaz. Böylece çizim güncel state'i görür.
+::: details İpucu 1 — Sıra
+Döngünün içinde, `BeginDrawing`'den önce iki ayrı `IsKeyDown` koşulu yaz: biri
+`y`'yi azaltsın, diğeri artırsın. Hemen ardından iki sınır kontrolü gelsin —
+önce hareket, sonra düzeltme. Çizim bölümü bu ikisinden sonra çalıştığı için
+oyuncu hiçbir zaman sınır dışında bir kare görmez.
 :::
 
-::: details İpucu 2 — Alt kenar
-Yukarı hareketten sonra `game.player.y < 0` ise `game.player.y = 0` yap. Aşağı için
-`game.player.y + game.player.height > SCREEN_HEIGHT` durumunda `game.player.y`'yi
-`SCREEN_HEIGHT - game.player.height` değerine sabitle.
+::: details İpucu 2 — Hangi kenar taşar
+Üst sınırda raketin `y`'si yeter, ama alt sınırda raketin **alt** kenarı
+taşar: karşılaştırman gereken değer `y + height`. Yalnız `y`'yi
+`SCREEN_HEIGHT` ile karşılaştırırsan raket yüksekliği kadar ekranın altına
+sarkar ve hata raket boyu değişene kadar görünmez.
 :::
 
-::: details İpucu 3 — Tuş adları
-Çağrılar `rl.IsKeyDown(.W)` ve `rl.IsKeyDown(.S)` şeklinde olmalı. W için
-`y` azaltılır, S için artırılır.
+::: details İpucu 3 — Tam çözüm
+```odin
+if rl.IsKeyDown(.W) {
+	game.player.y -= 5.0
+}
+if rl.IsKeyDown(.S) {
+	game.player.y += 5.0
+}
+
+if game.player.y < 0 {
+	game.player.y = 0
+}
+if game.player.y + game.player.height > SCREEN_HEIGHT {
+	game.player.y = SCREEN_HEIGHT - game.player.height
+}
+```
+Bu blok `for !rl.WindowShouldClose()` döngüsünde, `rl.BeginDrawing()`
+çağrısından önce durur.
 :::
 
-::: details Deep Dive — Input state neden her frame okunur?
-Bir tuşun basılması bir olaydır; basılı kalması ise zamana yayılan state'tir.
-Pong'da raketin hareketi ikinci bilgiye ihtiyaç duyar. Daha sonra dash gibi
-tek-atımlı hareketlerde `IsKeyPressed`, devam eden yürüyüşte `IsKeyDown`
-arasındaki fark oyuncu hissini doğrudan belirleyecek.
-:::
+## Kaynak
 
-## Birincil kaynak
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/) —
+`#IsKeyDown` anchor'ı. Basılı tutma ile tek atımlık basışın (`IsKeyPressed`)
+imzaları orada yan yana; ikisinin farkı ilerideki dash gibi hareketlerde işine
+yarayacak.
 
-[Odin vendor:raylib — `IsKeyDown`](https://pkg.odin-lang.org/vendor/raylib/#IsKeyDown).
-Basılı tutma ile tek atımlık basışın (`IsKeyPressed`) imzalarını yan yana
-gördüğün yer. Bu derste tanıtılan `::` sabit tanımı için [Odin Overview —
-Constant declarations](https://odin-lang.org/docs/overview/#constant-declarations).
+## Kazanım
 
-**Kazanım:** Input'un game state'i değiştirdiği, render'ın da sonucu gösterdiği
-ilk frame akışını kurdun.
+Input'un state'i değiştirdiği, render'ın sonucu gösterdiği ilk frame akışını
+kurdun. Sınır kontrolünü uzak kenardan yapmak, ileride raket boyu veya hızı
+değiştiğinde sessizce bozulmayan tek yoldur.
 
 **“Pong 1.3 denememi değerlendir”** yaz; kodunu inceleyelim.
 

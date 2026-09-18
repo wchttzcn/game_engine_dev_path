@@ -28,7 +28,7 @@ olarak çiz.
 
 Snake'in bütün mantığı `col`/`row` gibi grid coordinate'leri üzerinde çalışacak
 — bunlar `i32`, yani tam sayı hücre index'leri. Pixel coordinate ise yalnızca
-çizim anında, `cell_rect` çağrıldığında doğar. Bu ayrım Pong 1.15'teki
+çizim anında, `cell_rect` çağrıldığında doğar. Bu ayrım Pong 1.16'daki
 tek-kaynak fikrinin aynısı: dönüşüm ikinci bir yere kopyalanırsa, birileri
 `CELL_SIZE`'ı değiştirdiğinde oyun mantığı ile çizim ayrışır.
 
@@ -38,7 +38,7 @@ yapmaz; `cell_rect(col, row)` yazarsan `Cannot assign value 'col' of type
 'int' to 'i32' in a procedure argument` hatasıyla derleme durur. Dönüşümü
 açıkça yaz: `cell_rect(i32(col), i32(row))`.
 
-`cell_rect` zaten bir `rl.Rectangle` döndürüyor; Pong 1.15'te kullandığın
+`cell_rect` zaten bir `rl.Rectangle` döndürüyor; Pong 1.16'da kullandığın
 `rl.DrawRectangleLinesEx(rec: rl.Rectangle, lineThick: f32, color: rl.Color)`
 tam olarak bunu bekliyor, yani döndürdüğü rectangle'ı doğrudan geçebilirsin —
 `x`, `y`, `width`, `height` field'larını tek tek `i32()` ile çevirmene gerek

@@ -32,7 +32,7 @@ kursun, tick timer'ı sıfırlasın, yeni bir yem yerleştirsin ve state'i
 
 ## Bilmen gereken küçük parça
 
-[1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over)'ta reset iki skoru
+[1.13 — Maç sonu ve restart](/worlds/01-pong/13-match-over)'ta reset iki skoru
 sıfırlayıp topu döndürmekti — düz ve tek parçaydı. 2.6'daki `R` de benzer
 şekilde tekti, çünkü o an sıfırlanacak tek temsil `body`'ydi. O günden bu yana
 `occupied` (2.7) ve ring buffer index'i `head` (2.11) eklendi; asıl iş artık
@@ -60,12 +60,12 @@ kod yolu olmaz.
 ## Sınırlar
 
 - Menü, skor tablosu, seviye veya kayıt (save) sistemi yok.
-- `R` kontrolünü [1.12 — Maç sonu ve restart](/worlds/01-pong/12-match-over)'ta
+- `R` kontrolünü [1.13 — Maç sonu ve restart](/worlds/01-pong/13-match-over)'ta
   olduğu gibi tek yerde topla; `switch game.state` satırından önce kontrol et
   ki hangi state'te olursan ol aynı reset çalışsın.
 
 ::: details İpucu 1 — R'nin yeri
-1.12'deki gibi, `R` kontrolünü `switch game.state`'ten **önce** koy. Böylece
+1.13'teki gibi, `R` kontrolünü `switch game.state`'ten **önce** koy. Böylece
 `Playing`, `Dead` veya `Won` — hangisinde olursan ol — aynı reset çağrısı çalışır.
 :::
 

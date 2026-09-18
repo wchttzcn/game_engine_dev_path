@@ -14,6 +14,7 @@ const repoRoot = repoRootFrom(import.meta.url, 1);
 // biçimdeki dersler dokunulmadan kalır. Bir ders yeni biçime çevrildiğinde
 // numarası bu listeye eklenir — liste, biçimin nereye kadar yayıldığının kaydı.
 const SHAPED = {
+  '01-pong': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
   '02-snake': [7, 8, 11, 12],
   '03-breakout': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
 };

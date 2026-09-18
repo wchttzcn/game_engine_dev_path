@@ -10,12 +10,10 @@ section: Oynanış
 
 ## Görev
 
-`games/pong/main.odin` içindeki hareket eden topa üst ve alt duvar collision'ı
-ekle. Topun merkezi `game.ball.y`, radius'u `game.ball.radius`, dikey hızı
-`game.ball.velocity_y` ise görünür alan `game.ball.radius` ile
-`SCREEN_HEIGHT - game.ball.radius` arasındadır. Top bu sınırlardan birini
-geçerse önce `game.ball.y` değerini geçerli sınıra düzelt, sonra dikey
-velocity'yi o duvardan uzağa yönlendir.
+Hareket eden topa üst ve alt duvar collision'ı ekle. Topun görünür alanı
+`game.ball.radius` ile `SCREEN_HEIGHT - game.ball.radius` arasındadır. Top
+bu sınırlardan birini geçerse önce `game.ball.y`'yi geçerli sınıra düzelt,
+sonra `game.ball.velocity_y`'yi o duvardan uzağa yönlendir.
 
 ## Ne zaman bitti?
 
@@ -23,56 +21,68 @@ velocity'yi o duvardan uzağa yönlendir.
 - Sol/sağ hareketi bu değişiklikten etkilenmiyor.
 - `odin check games/pong` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Velocity bir frame'de position'a eklenen yönlü hızdır. `y` aşağı doğru arttığı
-için negatif dikey velocity topu yukarı, pozitif değer aşağı götürür. Hızın
-magnitude'ını `abs` ile koruyup işaretini duvardan uzağa göre seçmek yönü
-güvenceye alır.
+Yeni alan veya sabit yok; `game.ball.y`, `.radius` ve `.velocity_y` zaten
+1.5'ten beri elinde. Yönü tersine çevirirken hızın büyüklüğünü bozmadan
+işaretini seçmek gerekiyor — bunun için Odin'in `abs` builtin'i kullanışlı:
 
-Bu collision bir alan çakışması değildir: topun bir sınırı geçip geçmediğini
-kontrol ediyorsun. Merkez koordinatını doğrudan `0` ve `SCREEN_HEIGHT` ile
-karşılaştırmak yeterli değildir; dairenin kenarı merkezinden `game.ball.radius`
-kadar uzaktadır.
+```odin
+// core:builtin — abs :: proc(value: T) -> T
+magnitude := abs(game.ball.velocity_y)
+```
+
+`abs` import gerektirmeden her sayısal tipte çalışır; `clamp`, `min`, `max`
+ile aynı builtin listesinde.
 
 ## Sınırlar
 
-Bu derste yalnızca `game.ball.y` ile `game.ball.velocity_y` değişsin. Topun hızını artırma, skorlama
-ekleme veya paddle collision'ına geçme; hedef duvarın hareket yönüne etkisini
-izole etmek.
+Bu derste yalnızca `game.ball.y` ile `game.ball.velocity_y` değişsin. Topun
+hızını artırma, skorlama ekleme veya paddle collision'ına geçme; hedef
+duvarın hareket yönüne etkisini izole etmek.
 
-::: details İpucu 1 — Hangi kenarı izleyeceksin?
-Üst kenar `game.ball.y - game.ball.radius`, alt kenar `game.ball.y + game.ball.radius` olur.
-Bu iki değeri `0` ve `SCREEN_HEIGHT` ile karşılaştır.
+::: details İpucu 1 — Adımlar
+Önce topu velocity ve `dt` ile hareket ettir. Üst kenar
+`game.ball.y - game.ball.radius`, alt kenar `game.ball.y + game.ball.radius`
+olur; bu iki değeri `0` ve `SCREEN_HEIGHT` ile karşılaştır. Üst kenar
+sınırın dışına çıktıysa `y`'yi `radius`'a eşitle ve `velocity_y`'yi pozitif
+yap; alt kenar çıktıysa `y`'yi `SCREEN_HEIGHT - radius`'a eşitle ve
+`velocity_y`'yi negatif yap.
 :::
 
-::: details İpucu 2 — Yönü tersine çevir
-Üst duvar response'u dikey velocity'yi pozitif, alt duvar response'u negatif
-yapmalı. `abs` Odin'in builtin'idir; import gerekmeden `abs(...)` ile
-magnitude'ı koruyup doğru işareti seçebilirsin.
+::: details İpucu 2 — Tuzak: yalnız işaret değil, konum da düzelt
+Yalnızca `velocity_y`'nin işaretini değiştirip `y`'ye dokunmazsan top
+sınırın biraz dışında kalabilir; sonraki frame aynı collision yeniden
+tetiklenip hız tekrar tekrar çevrilebilir, top duvara yapışır. Position
+correction bu titremeyi önler: `y`'yi her zaman geçerli sınıra taşı,
+işareti ayrıca seç.
 :::
 
-::: details İpucu 3 — Kontrolü nereye koyacaksın?
-Önce position'ı velocity ve `dt` ile güncelle. Ardından yeni position'ın
-sınırı geçip geçmediğini kontrol et; `game.ball.y` değerini sınıra koyup velocity'yi
-doğru yöne ayarla.
+::: details İpucu 3 — Tam çözüm
+```odin
+if game.ball.y - game.ball.radius < 0 {
+	game.ball.y = game.ball.radius
+	game.ball.velocity_y = abs(game.ball.velocity_y)
+}
+if game.ball.y + game.ball.radius > SCREEN_HEIGHT {
+	game.ball.y = SCREEN_HEIGHT - game.ball.radius
+	game.ball.velocity_y = -abs(game.ball.velocity_y)
+}
+```
+Bu blok topu velocity ile hareket ettiren satırlardan hemen sonra, render
+çağrılarından önce gidiyor.
 :::
 
-::: details Deep Dive — Position correction neden gerekli?
-Bir frame topu sınırın birkaç pixel dışına taşıyabilir. Yalnızca velocity'nin
-işaretini değiştirirsen sonraki frame hâlâ dışarıdaki topu yeniden işleyebilirsin.
-Position correction o frame'i tekrar geçerli state'e getirir; 1.8'de aynı fikri
-paddle overlap'ine uygulayacağız.
-:::
-
-## Birincil kaynak
+## Kaynak
 
 [Odin builtin — `abs`](https://pkg.odin-lang.org/base/builtin/#abs).
-Velocity'nin magnitude'ını almak için import gerektirmeyen builtin; `clamp`,
-`min` ve `max` ile aynı sayfada.
+Velocity'nin magnitude'ını almak için import gerektirmeyen builtin;
+`clamp`, `min` ve `max` ile aynı sayfada.
 
-**Kazanım:** Position ile velocity'nin ayrı state olduğunu, collision'ın da
-velocity'yi değiştirebildiğini kullandın.
+## Kazanım
+
+Position ile velocity'nin ayrı state olduğunu, collision'ın da velocity'yi
+değiştirebildiğini kullandın.
 
 **“Pong 1.6 denememi değerlendir”** yaz; kodunu inceleyelim.
 

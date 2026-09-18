@@ -6,77 +6,105 @@ section: Temel hareket
 
 # 1.4 — Delta time
 
-**Hedef:** Raket hızını “frame başına pixel” yerine “saniye başına pixel” olarak tanımla.
+**Hedef:** Raket hızını “frame başına pixel” yerine “saniye başına pixel”
+olarak tanımla.
 
 ## Görev
 
-Player hareketini delta time kullanacak hale getir. Raket hızını örneğin
-`400.0` pixel/saniye olarak bir named sabitte tut ve W/S input'unda bu hız ile
-`rl.GetFrameTime()` sonucunu çarp.
-
-Önceki dersteki aynı sınırları koru. Oyun 60 FPS hedeflese de hız hesabının
-frame sayısına bağlı kalmaması gerekiyor.
+Player hareketini delta time'a çevir. Hızı pixel/saniye cinsinden adlandırılmış
+bir değerde tut ve W/S güncellemesinde bu hızı frame süresiyle çarp. Önceki
+dersin sınır kontrolleri aynı kalsın. Oyun 60 FPS hedeflese de hesap frame
+sayısına bağlı kalmasın.
 
 ## Ne zaman bitti?
 
-- Hızın anlamı kodda açık: pixel/saniye cinsinden named bir değer var.
-- Her frame `rl.GetFrameTime()` çağrılıyor ve input güncellemesinde kullanılıyor.
+- Hızın anlamı kodda açık: pixel/saniye cinsinden adlandırılmış bir değer var.
+- Her frame `rl.GetFrameTime()` çağrılıyor ve hareket bununla çarpılıyor.
 - W/S ile hareket sürüyor, raket ekran dışına taşmıyor.
 - `odin check games/pong` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Bir frame'in süresi `dt` ise o frame'deki mesafe şudur:
+Bir frame'in süresi `dt` ise o frame'de alınan yol `hız × dt`. 60 FPS'te `dt`
+yaklaşık `1/60` saniye, yani `400` pixel/saniye hız o frame'de ≈ `6.67` pixel
+eder. FPS düşünce frame uzar ve aynı gerçek zamanda toplam mesafe korunur.
 
-```text
-mesafe = hız × dt
+Frame süresini veren çağrı:
+
+```odin
+// vendor:raylib — GetFrameTime :: proc() -> f32
+// Son frame'in süresi, saniye cinsinden.
+dt := rl.GetFrameTime()
 ```
 
-60 FPS'te `dt` yaklaşık `1 / 60` saniyedir. `400 pixel/saniye` hız, o frame'de
-yaklaşık `6.67 pixel` hareket üretir. FPS düştüğünde frame daha uzun sürer ve
-aynı gerçek zaman içinde toplam mesafe korunur.
+Hızı taşıyacak sabit — `game.player.speed` alanı da olabilir, dosya seviyesinde
+bir sabit de:
 
-Raylib `rl.GetFrameTime()` ile son frame'in süresini `f32` saniye olarak verir.
-Örneğin döngü başında `dt := rl.GetFrameTime()` al; update'te `player_speed * dt`
-kullan. `game.player.y` zaten `f32` olduğu için dönüşüme gerek kalmaz.
+```odin
+PLAYER_SPEED :: 400.0
+```
+
+`game.player.y` zaten `f32`; çarpım dönüşüm istemez.
 
 ## Sınırlar
 
-Bu ders variable timestep'in pratik kullanımını kuruyor. Fixed timestep,
-frame-time spike limiti ve reusable update API'si daha sonra gerçek physics
-ihtiyacıyla gelecek. Şimdilik yalnızca player hareketinin birimini düzelt.
+- Bu ders variable timestep kuruyor. Fixed timestep, frame-time spike limiti ve
+  yeniden kullanılabilir update API'si gerçek physics ihtiyacıyla gelecek.
+- Yalnız player hareketinin birimini düzelt; top ve rakip bu derste yok.
 
-::: details İpucu 1 — Adlandırma
-`PLAYER_SPEED :: 400.0` gibi bir sabit oluştur. İsminin birimini anlatmasına
-yardım etmek istersen `PLAYER_SPEED_PIXELS_PER_SECOND` da kullanabilirsin.
+::: details İpucu 1 — Nereden başlar
+Döngünün ilk satırında frame süresini bir yerel değişkene al; aynı frame'de
+birden çok yerde kullanacaksan iki kez çağırma, tek değeri paylaş. Sonra
+input bloğundaki sabit miktarı hız ile bu değerin çarpımına çevir. Sınır
+kontrolleri olduğu gibi kalır; onlar mesafeyle değil sonuç konumuyla
+ilgileniyor.
 :::
 
-::: details İpucu 2 — Eski miktarı değiştir
-`5.0` yerine `PLAYER_SPEED * dt` kullan. Yukarıda çıkar, aşağıda eklerken aynı
-çarpım kalır.
+::: details İpucu 2 — Hedef FPS hız kontrolü değildir
+`rl.SetTargetFPS(60)` döngüyü o aralıkta tutmaya *çalışır*, hızın birimi
+değildir. Pencere taşınırken, debugger dururken veya makine başka iş
+yaparken frame süresi değişir. Sabit miktarla hareket eden bir raket o
+anlarda yavaşlar ya da fırlar; `dt` bu farkı state güncellemesine taşıdığı
+için hareket aynı kalır.
 :::
 
-::: details İpucu 3 — Sıra
-Önce `dt`'yi al, sonra input ile `game.player.y`'yi güncelle, ardından önceki dersteki
-clamp koşullarını uygula. Render bölümü bu değişiklikten habersiz kalır.
+::: details İpucu 3 — Tam çözüm
+```odin
+for !rl.WindowShouldClose() {
+	dt := rl.GetFrameTime()
+
+	if rl.IsKeyDown(.W) {
+		game.player.y -= game.player.speed * dt
+	}
+	if rl.IsKeyDown(.S) {
+		game.player.y += game.player.speed * dt
+	}
+	// ... 1.3'teki sınır kontrolleri değişmeden devam eder
+}
+```
+`speed` değerini `Paddle` kurulumunda `400.0` olarak ver; çizim bölümü bu
+değişiklikten habersiz kalır.
 :::
 
-::: details Deep Dive — Target FPS hız kontrolü değildir
-`SetTargetFPS(60)` render döngüsünü hedeflenen bir aralıkta tutmaya çalışır;
-oyun hızının matematiksel birimi değildir. Frame süresi değişebilir: pencere
-taşınabilir, debugger durabilir veya makine başka iş yapabilir. `dt` bu farkı
-state güncellemesine taşır. Deterministik replay ya da sağlam collision gerektiğinde
-fixed timestep'i ayrıca ele alacağız.
-:::
+## Kaynak
 
-## Birincil kaynak
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/) —
+`#GetFrameTime` anchor'ı. Dönüş tipinin `f32` saniye olduğunu ve çağrının frame
+başına bir kez yapıldığını orada görürsün.
+
+## Daha derine
 
 [Fix Your Timestep! — Glenn Fiedler](https://gafferongames.com/post/fix_your_timestep/).
-Delta time'ın neden ölçülüp hesaba katıldığını ve variable timestep'in nerede
-bozulduğunu anlatan klasik yazı. Pong'un ihtiyacından derin; accumulator
-bölümünü şimdi okuman gerekmiyor.
+Delta time'ın neden ölçülüp hesaba katıldığını, variable timestep'in nerede
+bozulduğunu ve accumulator'ın ne işe yaradığını anlatan klasik yazı. Pong'un
+bugünkü ihtiyacından derin — ders bittikten sonra oku, accumulator bölümü
+Snake'in sabit tick'ine gelince anlam kazanacak.
 
-**Kazanım:** Hareketi frame sayısına değil geçen zamana bağladın.
+## Kazanım
+
+Hareketi frame sayısına değil geçen zamana bağladın. Bundan sonra oyuna giren
+her hareketli şey aynı birimi kullanacak; karıştırdığın gün fark, makine
+değiştirdiğinde ortaya çıkar.
 
 **“Pong 1.4 denememi değerlendir”** yaz; kodunu inceleyelim.
 

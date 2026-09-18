@@ -10,14 +10,10 @@ section: Oynanış
 
 ## Görev
 
-1.7'deki overlap'lerden biri true olduğunda iki response uygula:
-
-1. `game.ball.x` değerini çarptığı raketin hemen dışına taşı.
-2. `game.ball.velocity_x` değerini raketten uzağa doğru ayarla: sol paddle sonrası
-   pozitif, sağ paddle sonrası negatif.
-
-Topun radius'unu yeni `x` position'ına katmayı unutma. Collision rengi bu
-derste kalabilir; response'u debugging için görünür tutar.
+1.7'deki overlap'lerden biri true olduğunda iki response uygula: topu
+çarptığı raketin hemen dışına taşı, sonra yatay velocity'sini raketten
+uzağa yönlendir — sol paddle sonrası pozitif, sağ paddle sonrası negatif.
+Topun radius'unu yeni `x` position'ına katmayı unutma.
 
 ## Ne zaman bitti?
 
@@ -27,60 +23,85 @@ derste kalabilir; response'u debugging için görünür tutar.
   değiştirmez.
 - `odin check games/pong` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-Overlap bulunması tek başına geçerli bir sonraki frame üretmez. Top önceki
-hareketten dolayı raketin içinde kalmışsa, aynı collision bir sonraki frame'de
-de true olur. Bu yüzden response iki iş yapar: penetration'ı çözer ve sonraki
-hareket yönünü belirler.
+Yeni alan yok; sol raketin sağ kenarı `game.player.x + game.player.width`,
+sağ raketin sol kenarı `game.opponent.x`'tir. Yatay velocity'nin
+büyüklüğünü, 1.6'da tanıdığın `abs` ile koruyabilirsin:
 
-Sol raketin sağ kenarı `game.player.x + game.player.width`, sağ raketin sol
-kenarı `game.opponent.x` olur. Topun merkezi ilgili kenarın dışında en az
-`game.ball.radius` kadar uzakta olmalıdır. Yatay velocity'nin magnitude'ını koruyup
-işaretini paddle tarafına göre seçmek hızı değiştirmeden yönü güvenceye alır.
+```odin
+speed := abs(game.ball.velocity_x)
+```
+
+İşareti paddle tarafına göre sen seçiyorsun; büyüklüğü bu satır değiştirmez.
 
 ## Sınırlar
 
-Bu response iki paddle için de yalnızca yatay yönü belirler ve yandan gelen
-temas için doğrudur: top raketin üst veya alt kenarına yukarıdan değerse
-yatay düzeltme onu yanlış tarafa iter. Bu durumu şimdilik kabul ediyoruz.
-Açıya göre sekme, hızlanma ve skor sonraki küçük problemlerdir. Amaç
-güvenilir bir temas sonrası state'i kurmak.
+Bu response yalnızca yatay yönü belirler ve yandan gelen temas için
+doğrudur: top raketin üst veya alt kenarına yukarıdan değerse yatay
+düzeltme onu yanlış tarafa iter. Açıya göre sekme, hızlanma ve skor
+sonraki küçük problemlerdir.
 
-::: details İpucu 1 — Yeni güvenli merkez
-Sol hit'te sol raketin sağ kenarına `game.ball.radius` ekle. Sağ hit'te sağ raketin
-sol kenarından `game.ball.radius` çıkar. Böylece circle'ın kenarı paddle'ın dışında
-kalır.
+::: details İpucu 1 — Adımlar
+Sol hit'te `game.ball.x`'i sol raketin sağ kenarına `game.ball.radius`
+ekleyerek kur; sağ hit'te sağ raketin sol kenarından `game.ball.radius`
+çıkararak kur. Sonra `velocity_x`'in büyüklüğünü `abs` ile bul; sol hit
+sonrası pozitif, sağ hit sonrası negatif yap. Bu iki adımı overlap true
+olan her paddle için ayrı ayrı uygula.
 :::
 
-::: details İpucu 2 — Hızı koru, yönü sabitle
-Velocity'nin magnitude'ını `abs(game.ball.velocity_x)` ile bulabilirsin. Sol
-paddle response'unda sonuç pozitif, sağ paddle response'unda negatif olmalı.
-`abs` builtin olduğu için ayrı bir import gerekmez.
+::: details İpucu 2 — Tuzak: sadece işareti çevirmek yetmez
+Yalnızca `velocity_x`'in işaretini değiştirirsen top collision frame'inde
+raketin içinde kalabilir; sonraki frame detection yeniden çalışır ve hız
+tekrar çevrilebilir — top raketin içinde titreşir. Position'ı da düzeltmek
+topu geçerli tarafa çıkarır ve bu döngüyü kırar.
 :::
 
-::: details İpucu 3 — Update sırası
-Önce topu hareket ettir, sonra collision'ı tespit et. Hit varsa aynı update
-adımında position düzeltmesini ve velocity yönünü uygula; render bundan sonra
-yeni state'i çizer.
+::: details İpucu 3 — Tam çözüm
+```odin
+if rl.CheckCollisionCircleRec(
+	rl.Vector2{game.ball.x, game.ball.y},
+	game.ball.radius,
+	game.opponent.rect,
+) {
+	game.ball.color = rl.RED
+	game.ball.x = game.opponent.x - game.ball.radius
+	game.ball.velocity_x = -abs(game.ball.velocity_x)
+}
+if rl.CheckCollisionCircleRec(
+	rl.Vector2{game.ball.x, game.ball.y},
+	game.ball.radius,
+	game.player.rect,
+) {
+	game.ball.color = rl.RED
+	game.ball.x = game.player.x + game.player.width + game.ball.radius
+	game.ball.velocity_x = abs(game.ball.velocity_x)
+}
+```
+Bu, 1.7'deki iki collision bloğunun içine ekleniyor — `color` satırının
+yanına `x` ve `velocity_x` satırları giriyor, çağrı yeri değişmiyor.
 :::
 
-::: details Deep Dive — Neden sadece velocity'yi çevirmiyoruz?
-Sadece işareti değiştirirsen top collision frame'inde raketin içinde kalabilir.
-Sonraki frame detection yeniden çalışır ve hız tekrar çevrilebilir. Position
-correction topu geçerli tarafa çıkarır; bu küçük Pong response'u sürekli bir
-physics engine gerektirmeden kararlı yapar.
-:::
+## Kaynak
 
-## Birincil kaynak
+[Odin builtin — `abs`](https://pkg.odin-lang.org/base/builtin/#abs).
+Bu dersin de temel aracı: hızın büyüklüğünü bozmadan yönünü seçmek yine
+`abs`'e dayanıyor, 1.6'daki aynı builtin.
 
-[MDN — 2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection).
+## Daha derine
+
+Ders bittikten sonra: [MDN — 2D collision
+detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection).
 Narrow phase testlerini ve overlap'in neden ayrı bir adımda çözüldüğünü
-JavaScript örnekleriyle anlatır; circle-rectangle durumunu kapsamaz, onu raylib
-üstlenir.
+JavaScript örnekleriyle anlatır; circle-rectangle durumunu kapsamaz, onu
+raylib üstlenir. Collision response'un position correction ve yön
+kararından oluştuğu fikri Pong ölçeğinde bu kadarıyla yeterli; daha genel
+bir physics engine penetrasyonu impulse ve mass ile çözer, burada gereksiz.
 
-**Kazanım:** Collision response'un position correction ve yön kararından
-oluştuğunu kullandın.
+## Kazanım
+
+Collision response'un position correction ve yön kararından oluştuğunu
+kullandın.
 
 **“Pong 1.8 denememi değerlendir”** yaz; kodunu inceleyelim.
 

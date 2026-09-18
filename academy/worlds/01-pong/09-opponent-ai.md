@@ -1,144 +1,103 @@
 ---
 title: "1.9 — Rakip kendi kendine hareket etsin"
-description: "Rakip raketin hedefe kontrollü yaklaşmasını sağla."
+description: "Rakip raketin topun y konumuna kontrollü, titremeden yaklaşmasını sağla."
 section: Oynanış
 ---
 
 # 1.9 — Rakip kendi kendine hareket etsin
 
-**Hedef:** Sağ raketi topun `y` konumuna doğru, sınırlı hızla hareket ettir.
+**Hedef:** Sağ raketi topun `y` konumuna doğru, sınırlı hızla ve titremeden
+hareket ettir.
 
 ## Görev
 
-Sağ paddle için basit bir opponent update'i yaz. Karar üç durumlu olmalı:
-raketin merkezi topun merkezinin yeterince üstündeyse aşağı, yeterince
-altındaysa yukarı hareket etsin, ikisinin arasındaysa **hiç hareket etmesin**.
-“Yeterince”nin ne demek olduğunu bir eşik sabitiyle belirle; aşağıdaki bölüm bu
-eşiğin neden gerektiğini ve ne kadar olması gerektiğini anlatıyor.
-
-Hızı raketin kendi `speed` field'ı ile sınırla ve her frame hareketi `dt` ile
-çarp. Update sonunda `game.opponent.y` değerini `0` ile
-`SCREEN_HEIGHT - game.opponent.height` arasında clamp et.
-
-Bu AI topun konumuna “teleport” etmemeli. Capped speed yüzünden hızlı bir top
-raketi geçebilmeli; bu, oyunun zorluk ayarı için kullanışlı bir davranış.
-
-Çalışan controller'ı yazdıktan sonra bir adım daha var: rakibin hızını topun
-ıskalanabileceği bir değere **ayarla**. Aşağıdaki bölüm hangi değerin işe
-yaradığını ve nedenini anlatıyor. Ayar yapılmazsa ders teknik olarak çalışır
-ama oynanamaz bir rakip üretir.
+Sağ paddle için opponent hareketini yaz. Raketin merkezini topun merkeziyle
+karşılaştır: top yeterince üstteyse raket aşağı, yeterince alttaysa yukarı
+gitsin, ikisi arasındaysa hiç hareket etmesin. “Yeterince”yi bir eşik sabitiyle
+belirle — İpucu 2 bu eşiğin neden gerektiğini türetiyor. Hareketi
+`opponent.speed * dt` ile ölçekle, sonunda `game.opponent.y`'yi ekranın
+sınırları içinde tut.
 
 ## Ne zaman bitti?
 
 - Sağ paddle topun dikey hareketini takip ediyor.
 - Raket pencerenin üstünden veya altından taşmıyor.
-- Rakibin hızı `dt` ile frame rate'ten bağımsız güncelleniyor.
-- Rakip, topun tam merkezini her frame anında yakalamıyor.
-- Top dikey olarak durduğunda raket hedefin etrafında titremiyor, duruyor.
-- Rakip her topa yetişmiyor: çapraz giden bir top onu geçebiliyor.
+- Hareket `dt` ile ölçekleniyor, frame rate'ten bağımsız.
+- Top dikeyde durduğunda raket hedefin etrafında titremiyor.
+- Rakip topun tam merkezine anında teleport etmiyor.
 - `odin check games/pong` geçiyor.
 
-## Bilmen gereken küçük parça
+## Elindekiler
 
-AI'nin hedefi `game.ball.y` olsa da paddle'ın position'ı üst kenarıdır.
-Karar verirken paddle merkezini `game.opponent.y + game.opponent.height / 2` ile topun
-merkeziyle karşılaştır. Bu, top raketin ortasına yaklaşırken yön değiştirmeyi
-sağlar.
+```odin
+OPPONENT_DEAD_ZONE :: 10.0
+```
 
-### Neden iki dal yetmiyor
+Bu, raketin “hedefe yeterince yakın” sayılacağı mesafe — değerin neden bu
+olduğunu İpucu 2 türetiyor. `Paddle`'ın `speed` field'ı 1.3'ten beri var;
+opponent için de aynı field'ı kullanacaksın.
 
-“Üstündeyse aşağı, altındaysa yukarı” kuralı tek başına raketi hedefin etrafında
-titretir. Sebebi, raketin adımının sabit olması: bir frame'de tam olarak
-`speed * dt` kadar yol alır, daha azını alamaz.
+Sınırı tutan builtin:
 
-Kendi sayılarınla: `speed` `400`, 60 fps'te `dt` ≈ `0.0167`, yani adım ≈ **6.7
-pixel**. Raket hedefin 2 pixel üstündeyken “yukarıdayım” der, 6.7 iner ve
-hedefin 4.7 pixel altına geçer. Bu sefer “aşağıdayım” der, 6.7 çıkar, 2 pixel
-üstte olur. Aynı iki durum sonsuza kadar sırayla tekrarlanır — raket hedefi
-hiçbir zaman tutturamaz, çünkü aradaki mesafe adımından küçüktür.
+```odin
+// clamp :: proc(value, minimum, maximum: T) -> T
+x = clamp(x, 0, 100)
+```
 
-Çözüm, “eşit sayılır” diyebileceğin bir aralık bırakmak: fark bir eşikten
-küçükse hareket etme. Bu aralığa **dead zone** denir ve kodda üçüncü bir dal
-olarak değil, iki dalın da çalışmadığı boşluk olarak belirir.
-
-Eşik bir frame'lik adımdan büyük olmalı. Küçük seçersen raket eşiği her adımda
-aşar, karşı tarafta yine eşiğin dışında kalır ve titreme devam eder — yani eşik
-hiç yokmuş gibi davranır. Yukarıdaki 6.7 pixel'lik adım için `10.0` rahat bir
-seçim. Sabit adı `SCREAMING_SNAKE_CASE` olmalı, dilin konvansiyonu bu.
-
-### Rakibin hızı oyunun zorluk ayarıdır
-
-Bir AI'ın “iyi” olması burada hız sabitinin tek bir sayısına bağlı, ve varsayılan
-değer seni yanıltır.
-
-Raket `speed` `400` ile başlıyor, topun dikey hızı ise `180`. Top sahayı yatayda
-`300` hızla geçiyor: iki raket arası ~670 pixel, yani ~2.2 saniye. Rakip o sürede
-`400 × 2.2` ≈ 890 pixel yol alabilir, oysa tüm saha 450 pixel yüksekliğinde.
-Rakip her topa, her seferinde yetişir. Asla gol yemez.
-
-Kuralı sayılardan bağımsız yaz: raket ile top aynı süre boyunca dikeyde yol
-alır. Raket `speed × t`, top `|velocity_y| × t` kadar. `speed` topun dikey
-hızından büyükse raket aradaki farkı her zaman kapatır — ıskalaması matematiksel
-olarak imkânsızdır. Rakibin ıskalayabilmesi için **`speed` topun dikey hızının
-altında** olmalı.
-
-`velocity_y` `180` iken `speed` değerini `150` civarına indir: rakip hâlâ
-yetkin görünür, ama çapraz giden hızlı bir topu kaçırır. Değeri `:29`'daki
-`opponent` kurulumunda değiştiriyorsun; `player` hızına dokunma, o senin
-kontrolünde kalsın.
-
-Bu ayar 1.10'un ön koşulu. Skor eklediğinde rakip hiç gol yemiyorsa skorun yarısı
-hiç çalışmaz ve bunu test edemezsin.
-
-### Sınırı tek yerde tut
-
-`clamp(value, min, max)` değeri güvenli aralığın altında veya üstündeyse sınıra
-çeker. Input ile hareket eden paddle için de aynı sınır gerekecek; burada
-opponent update'inden sonra uygula ki hareket kaynağı ne olursa olsun oyun alanı
-kuralı tek yerde kalsın.
+`clamp` generic ve import gerektirmez; `value` sınırın altında veya üstündeyse
+en yakın sınıra çeker.
 
 ## Sınırlar
 
-Rakip sadece topun güncel `y` konumunu takip etsin. Prediction, reaction delay,
-hedef sapması veya farklı zorluk seviyeleri ekleme; bunlar çalışır temel AI'ın
-sonra gelen game-feel ayarlarıdır.
+Rakip sadece topun güncel `y`'sini takip etsin; prediction, reaction delay
+veya farklı zorluk seviyeleri ekleme. Rakibin hızını bu derste değiştirme — o
+ayar 1.10'un konusu.
 
 ::: details İpucu 1 — Merkezleri karşılaştır
-`game.opponent.y` paddle'ın üstüdür, merkezi değil. Rakibin merkezini ayrı bir
-yerel değişkende hesapla ve kararı onunla ver; hareketi yine `game.opponent.y`'ye
-uygularsın. Merkez ile `game.ball.y` arasındaki farkı tek bir değişkende
-tutarsan o değişkenin işareti yönü, büyüklüğü de dead zone karşılaştırmasını
-verir.
+`game.opponent.y` paddle'ın üst kenarı, merkezi değil. Ayrı bir yerel
+değişkende `opponent_center := game.opponent.y + game.opponent.height / 2`
+hesapla, sonra `diff := game.ball.y - opponent_center` yap. `diff`
+`OPPONENT_DEAD_ZONE`'dan büyükse aşağı, `-OPPONENT_DEAD_ZONE`'dan küçükse
+yukarı hareket ettir; ikisi arasındaysa hiçbir şey yapma. Hareketi hâlâ
+`game.opponent.y`'ye uygularsın, `opponent_center`'a değil.
 :::
 
-::: details İpucu 2 — Frame başına mesafe
-Bir frame'deki hareket `opponent_speed * dt` kadar olmalı. Top yukarıdaysa bu
-değeri `game.opponent.y`'den çıkar, aşağıdaysa ekle.
+::: details İpucu 2 — Titremenin sebebi
+Sadece iki dal (“üstteyse aşağı, alttaysa yukarı”) raketi hedefin etrafında
+sonsuza kadar sallar: her frame'de tam `speed * dt` kadar yol alınır, daha
+azı alınamaz. `speed` `400`, 60 fps'te `dt` ≈ `0.0167` iken adım ≈ **6.7
+pixel** — raket hedefi bu adımdan küçük bir farkla asla tam tutturamaz. Eşik
+bu adımdan büyük olmalı; küçük seçilirse titreme sürer. `10.0` bu adım için
+rahat bir seçim.
 :::
 
-::: details İpucu 3 — Clamp API'si
-`clamp` builtin ve generic'tir; import gerekmez. `game.opponent.y`
-güncellendikten sonra minimum `0`, maksimum
-`SCREEN_HEIGHT - game.opponent.height` ile çağır.
+::: details İpucu 3 — Tam çözüm
+```odin
+opponent_center := game.opponent.y + game.opponent.height / 2
+diff := game.ball.y - opponent_center
+if diff > OPPONENT_DEAD_ZONE {
+	game.opponent.y += game.opponent.speed * dt
+} else if diff < -OPPONENT_DEAD_ZONE {
+	game.opponent.y -= game.opponent.speed * dt
+}
+game.opponent.y = clamp(game.opponent.y, 0, SCREEN_HEIGHT - game.opponent.height)
+```
+Bu blok ana döngüde, player'ın kendi clamp'inden hemen sonra gidiyor —
+sınır kontrolü hareketin hemen ardında, çizimden önce olmalı. (`update_game`
+procedure'ı henüz yok; o ayrım 1.14'ün konusu.)
 :::
 
-::: details Deep Dive — Bu neden “iyi” AI değildir?
-Bu controller yalnızca hedefe doğru sabit hızla gider; topun gelecekte nerede
-olacağını hesaplamaz. Yine de speed cap rakibin hata yapmasına izin verdiği
-için oynanabilir bir başlangıçtır. Daha sonra zorluk sorusu doğarsa reaction
-delay, hedef sapması veya prediction'i ayrı ayrı ekleyebiliriz.
-:::
+## Kaynak
 
-## Birincil kaynak
+[Odin builtin procedure'ları](https://pkg.odin-lang.org/base/builtin/).
+`clamp` burada; import gerektirmeyen, sınır içinde tutma için kullandığın
+builtin.
 
-[Update Method — Robert Nystrom, Game Programming
-Patterns](https://gameprogrammingpatterns.com/update-method.html).
-Her entity'nin kendi davranışını frame başına bir adım ilerletmesi fikri; rakip
-raketin update'i bunun en küçük hali.
+## Kazanım
 
-**Kazanım:** Hedefe yönelen, delta time kullanan ve oyun alanı sınırını koruyan
-bir AI controller yazdın.
+Hedefe yönelen, `dt` kullanan ve oyun alanı sınırını `clamp` ile tek yerde
+tutan bir AI controller yazdın.
 
 **“Pong 1.9 denememi değerlendir”** yaz; kodunu inceleyelim.
 
-Sonraki adım: [1.10 — Skor ve servis](/worlds/01-pong/10-score-and-reset).
+Sonraki adım: [1.10 — Rakibin zorluğu](/worlds/01-pong/10-opponent-difficulty).

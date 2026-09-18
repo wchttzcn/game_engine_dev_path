@@ -10,69 +10,78 @@ section: Temel hareket
 
 ## Görev
 
-`games/pong/main.odin` dosyasındaki TODO yerine beyaz bir raket çiz:
-`x = 40`, `y = 160`, `width = 20`, `height = 100`.
+`games/pong/main.odin` dosyasındaki TODO yerine tek bir çizim çağrısı ekle:
+beyaz, sol üst köşesi `x = 40, y = 160`, boyutu `width = 20, height = 100`
+olan bir dikdörtgen. Çağrı `ClearBackground` ile `EndDrawing` arasında,
+TODO'nun olduğu satırda kalsın.
 
 ## Ne zaman bitti?
 
-- Çizim döngüsünde siyah arka planın ardından beyaz raketi çizen bir çağrı var.
+- Çizim döngüsünde, arka plan temizlendikten sonra beyaz raketi çizen bir
+  çağrı var.
 - Raket görevde verilen konum ve boyutta duruyor.
 - `odin check games/pong` geçiyor.
 
-Programı oynama/debugging için çalıştırabilirsin; ayrıca gözlem raporu gerekmiyor.
+## Elindekiler
 
-## Bilmen gereken küçük parça
+Pencerenin sol üst köşesi `(0, 0)`; `x` sağa, `y` aşağı artar, ölçü birimi
+pixel — CSS'teki `left`/`top` gibi düşünebilirsin.
 
-Pencerenin sol üst köşesi `(0, 0)`. `x` sağa, `y` aşağı doğru artar;
-burada ölçü birimi pixel. CSS'teki `left` ve `top` gibi düşünebilirsin.
-
-Çizim çağrısının biçimi `rl.DrawRectangle(x, y, width, height, rl.WHITE)`.
-`rl`, dosyada import edilen raylib'in kısa adı. Çağrını TODO'nun olduğu
-yere ekle; hazır kod pencereyi açık tutup her frame yeniden çiziyor.
-Bu döngünün ayrıntılarını şimdi ezberlemen gerekmiyor.
-
-Repo kökünde çalıştır:
-
-```sh
-odin run games/pong -out:/tmp/mucahit-pong
+```odin
+// vendor:raylib — DrawRectangle :: proc(posX, posY, width, height: c.int, color: Color)
+rl.DrawRectangle(0, 0, 50, 50, rl.WHITE)
 ```
 
-İlk hali boş siyah pencere açar; raketin çizim kodunu sen ekleyeceksin.
-Kapatıp kodu değiştirebilir, aynı komutla yeniden çalıştırabilirsin.
-Kurulum veya compiler hatası olursa çıktıyı sohbete getir; birlikte çözeriz.
+İlk iki argüman dikdörtgenin sol üst köşesini, sonraki ikisi o köşeden
+itibaren genişlik ve yüksekliği verir. `rl`, dosyada import edilen raylib'in
+kısa adı.
 
-::: details İpucu 1 — Konum mu, boyut mu?
-Çağrının ilk iki argümanı konumu, sonraki ikisi boyutu belirler.
-Görevdeki değerleri bu sırayla eşleştir.
+## Sınırlar
+
+- Yalnız TODO'daki tek çağrıyı ekle; struct, state veya helper fonksiyon
+  kurma — bunlar 1.2'nin konusu.
+- Rengi veya boyutu görevdekinden farklı seçme.
+- Game loop'un başka satırlarına dokunma.
+
+::: details İpucu 1 — Argümanların sırası
+Çağrının argümanları sırasıyla konum (`x`, `y`), sonra boyut (`width`,
+`height`), sonra renk gelir. Görevdeki dört sayıyı bu sırayla diz, en sona
+`rl.WHITE` ekle.
 :::
 
-::: details İpucu 2 — Dikdörtgenin hangi köşesi?
-İlk iki argüman dikdörtgenin sol üst köşesini belirler. Sonraki ikisi
-o köşeden itibaren ne kadar geniş ve yüksek çizileceğini söyler.
+::: details İpucu 2 — Çağrının yeri
+Çağrıyı `ClearBackground`'dan önce koyarsan hemen ardından silinir, ekranda
+hiç görünmez. `BeginDrawing`/`EndDrawing` çifti içinde, `ClearBackground`
+çağrısından SONRA, TODO'nun bulunduğu satırda dur.
 :::
 
-::: details İpucu 3 — Çağrıyı kur
-Görevdeki değerleri sırasıyla `x, y, width, height` yerlerine koy;
-son argüman `rl.WHITE` kalsın.
+::: details İpucu 3 — Tam çözüm
+```odin
+rl.BeginDrawing()
+rl.ClearBackground(rl.BLACK)
+rl.DrawRectangle(40, 160, 20, 100, rl.WHITE)
+rl.EndDrawing()
+```
+Sayılar görevdeki `x`, `y`, `width`, `height` değerleriyle aynı; bu sayılar
+1.2'de state'e taşınacak.
 :::
 
-::: details Deep Dive — Çizim neden döngünün içinde?
-Her frame başında `ClearBackground` önceki görüntüyü temizler.
-Raket çağrın bunun ardından çalışır; `EndDrawing` çizilen frame'i sunar.
-Bu yüzden raketi yalnızca programın başında bir kez çizmek yerine her frame
-çiziyoruz. Şimdilik hazır döngüyü kullanman yeterli.
+## Kaynak
 
-İstersen [Odin raylib binding'indeki başlangıç örneğine](https://github.com/odin-lang/Odin/blob/master/vendor/raylib/README.md#basic-example)
-ve [DrawRectangle referansına](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangle) bakabilirsin.
-:::
-
-## Birincil kaynak
-
-[Odin vendor:raylib — `DrawRectangle`](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangle).
+[Odin vendor:raylib binding referansı](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangle).
 Odin binding'inin kendi referansı; parametre sırasını ve tiplerini C
 dokümanından değil buradan doğrula.
 
-**Kazanım:** Kendi çizim kodunla Pong'un ilk raketini ekrana koydun.
+## Daha derine
+
+Her frame `ClearBackground` önceki görüntüyü siler, çağrın hemen ardından
+çalışır, `EndDrawing` sonucu ekrana basar — bu yüzden raketi bir kez değil
+her frame çiziyoruz. Kalıbın adı game loop: [Game Programming Patterns —
+Game Loop](https://gameprogrammingpatterns.com/game-loop.html).
+
+## Kazanım
+
+Kendi çizim kodunla Pong'un ilk raketini ekrana koydun.
 
 **“Pong 1.1 denememi değerlendir”** yaz; kodunu inceleyelim.
 

@@ -11,11 +11,11 @@ occupancy grid'i, ring index'lerini, allocation sayaçlarını — oynarken oku.
 
 ## Görev
 
-[1.14 — Debug overlay](/worlds/01-pong/14-debug-overlay)'deki kalıbı Snake'e
+[1.15 — Debug overlay](/worlds/01-pong/15-debug-overlay)'deki kalıbı Snake'e
 taşı: `Game` içine `debug_visible: bool` ekle, `F1`'e her basışta tersine çevir.
 Overlay açıkken şunları göster: `occupied` grid'ini dolu hücrelerin outline'ı
 olarak, `head` index'ini, `length`/`MAX_BODY`'yi, tick sayacını, `direction` ile
-`next_direction`'ı ve 2.13'daki allocation sayaçlarını. Overlay kapalıyken bu
+`next_direction`'ı ve 2.13'teki allocation sayaçlarını. Overlay kapalıyken bu
 çizim ve metinlerin hiçbiri görünmesin.
 
 ## Ne zaman bitti?
@@ -30,7 +30,7 @@ olarak, `head` index'ini, `length`/`MAX_BODY`'yi, tick sayacını, `direction` i
 
 ## Bilmen gereken küçük parça
 
-[1.15 — Collision shape'lerini çiz](/worlds/01-pong/15-collision-shapes)'te
+[1.16 — Collision shape'lerini çiz](/worlds/01-pong/16-collision-shapes)'te
 outline'ları collision'ın okuduğu değerden türetmiştin, çünkü tek doğruluk
 kaynağı vardı. Burada bilerek iki kaynak var: sıra bilgisi `body`'de, doluluk
 bilgisi `occupied`'de duruyor (2.7). Bu yüzden overlay'i `occupied`'den çizmek
@@ -49,7 +49,7 @@ sorunun varlığını, diğeri yerini verir.
 - Overlay yalnızca okur; hiçbir field'ı değiştirmez.
 
 ::: details İpucu 1 — Toggle ve yer
-F1 formülü 1.14'teki gibi: `game.debug_visible = !game.debug_visible`,
+F1 formülü 1.15'teki gibi: `game.debug_visible = !game.debug_visible`,
 `update_game` içinde `rl.IsKeyPressed(.F1)` ile. Çizim tarafı yalnızca sonucu
 okusun.
 :::
@@ -74,7 +74,7 @@ yazdırabilirsin.
 :::
 
 ::: details Deep Dive — İki kaynak neden burada bilinçli bir tercih?
-1.15'te tek kaynak vardı çünkü Pong'un collision shape'i zaten `Game`'in tek
+1.16'da tek kaynak vardı çünkü Pong'un collision shape'i zaten `Game`'in tek
 alanıydı; overlay onu türetmekten başka bir şey yapmıyordu. Snake'te `occupied`
 performans için eklenmiş **ikinci** bir temsil (2.7); bu overlay o takasın
 bedelini görünür kılıyor. İki temsil senkron kalmazsa bunu ilk fark edeceğin
@@ -85,7 +85,7 @@ yer bir crash değil, bu ekran olacak.
 
 [Odin vendor:raylib — `DrawRectangleLinesEx`](https://pkg.odin-lang.org/vendor/raylib/#DrawRectangleLinesEx).
 Occupied grid'ini outline'a çevirirken kullandığın imza ve parametre sırası
-burada; 1.15'te aynı çağrıyı raket dikdörtgenleri için kullanmıştın.
+burada; 1.16'da aynı çağrıyı raket dikdörtgenleri için kullanmıştın.
 
 **Kazanım:** Artık `body` ile `occupied`'in aynı gerçeği söylediğini gözle
 doğrulayabiliyorsun; ayrıştıklarında bunu ilk overlay'de görürsün.

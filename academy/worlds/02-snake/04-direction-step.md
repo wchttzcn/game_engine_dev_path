@@ -39,7 +39,7 @@ döner, `19` değil. `col`'ü `-1`'e düşürüp doğrudan `% GRID_COLS` yaparsa
 negatif bir index elde edersin. Doğrusu önce pozitif tarafa taşımak:
 `(col + GRID_COLS) % GRID_COLS`.
 
-Bu kaydırma her tick'te `length` kadar hücreye yazmak demek. 2.11'da bunu
+Bu kaydırma her tick'te `length` kadar hücreye yazmak demek. 2.11'de bunu
 kaldıracağız; şimdilik en açık hali bu, ve doğruluğu anlamak performansından
 önce geliyor.
 

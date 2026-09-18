@@ -11,7 +11,7 @@ nerede — ve yemi oradan seç.
 
 ## Görev
 
-2.9'deki sabit yem hücresini kaldır. Head yem hücresine girip `grow` doğru
+2.9'daki sabit yem hücresini kaldır. Head yem hücresine girip `grow` doğru
 olduğunda, `occupied` grid'ini kullanarak yemi her zaman boş bir hücreye
 yeniden yerleştir; gövdeyi tarama. Boş hücre kalmadığında yeni yem
 yerleştirmeyi deneme; oyunu kilitlemeden mevcut durumda bırak.
