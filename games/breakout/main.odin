@@ -28,6 +28,11 @@ PARTICLE_BURST :: 8
 // Hitstop
 HITSTOP_DURATION :: 0.05 // saniye
 
+// Shake
+TRAUMA_ON_HIT :: 0.3
+TRAUMA_DECAY :: 1.5
+MAX_SHAKE_OFFSET :: 10
+
 Game :: struct {
 	player:             Paddle,
 	ball:               Ball,
@@ -43,6 +48,8 @@ Game :: struct {
 	particles:          [MAX_PARTICLES]Particle,
 	// hitstop
 	hitstop:            f32,
+	// shake
+	trauma:             f32,
 	// debug
 	debug_visible:      bool,
 }
@@ -80,6 +87,11 @@ main :: proc() {
 	defer rl.CloseWindow()
 	rl.SetTargetFPS(60)
 
+	camera := rl.Camera2D {
+		target = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2},
+		zoom   = 1.0,
+	}
+
 	game: Game
 	game_reset(&game)
 
@@ -87,6 +99,7 @@ main :: proc() {
 		dt := rl.GetFrameTime()
 
 		particle_update(&game, dt)
+		game.trauma = max(game.trauma - TRAUMA_DECAY * dt, 0.0)
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
@@ -101,6 +114,11 @@ main :: proc() {
 		if rl.IsKeyPressed(.F1) {
 			game.debug_visible = !game.debug_visible
 		}
+
+		shake := game.trauma * game.trauma
+		offset_x := rand.float32_range(-1, 1) * shake * MAX_SHAKE_OFFSET
+		offset_y := rand.float32_range(-1, 1) * shake * MAX_SHAKE_OFFSET
+		camera.offset = {SCREEN_WIDTH / 2 + offset_x, SCREEN_HEIGHT / 2 + offset_y}
 
 		switch game.state {
 		case .Playing:
@@ -162,6 +180,7 @@ main :: proc() {
 						}
 						brick.alive = false
 						game.hitstop = HITSTOP_DURATION
+						game.trauma = min(game.trauma + TRAUMA_ON_HIT, 1.0)
 
 						center := rl.Vector2 {
 							brick.rect.x + brick.rect.width / 2,
@@ -190,6 +209,7 @@ main :: proc() {
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.BLACK)
+		rl.BeginMode2D(camera)
 		for brick in game.bricks {
 			if brick.alive {
 				rl.DrawRectangleRec(brick.rect, rl.WHITE)
@@ -214,6 +234,8 @@ main :: proc() {
 		if game.powerup_timer > 0 {
 			rl.DrawCircleV(game.active_powerup_pos, 4, rl.YELLOW)
 		}
+		rl.EndMode2D()
+
 		if game.debug_visible {
 			rl.DrawText(
 				rl.TextFormat("active_powerup_pos: %v", game.active_powerup_pos),
