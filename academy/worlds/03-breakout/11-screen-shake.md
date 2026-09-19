@@ -110,9 +110,11 @@ case .Won:
 }
 rl.EndDrawing()
 ```
-Tuğla kırılma noktasında `game.trauma = min(game.trauma + TRAUMA_ON_HIT,
-1.0)`; `.Playing` kolunda her frame
-`game.trauma = max(game.trauma - TRAUMA_DECAY * dt, 0.0)`.
+Tuğla kırılma noktasında `game.trauma = min(game.trauma + TRAUMA_ON_HIT, 1.0)`
+satırını ekle. Sönmeyi state `switch`'inin dışına koy, her frame çalışsın:
+`game.trauma = max(game.trauma - TRAUMA_DECAY * dt, 0.0)`. `.Playing`'in içine
+koyarsan son tuğlada kazanınca `trauma` sıfırlanmadan donar ve kazandın ekranı
+sonsuza dek titrer.
 :::
 
 ## Kaynak
