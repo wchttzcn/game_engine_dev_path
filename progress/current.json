@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "learner": "Mücahit",
-  "currentLessonId": "breakout-09-stale-index",
+  "currentLessonId": "breakout-11-screen-shake",
   "lessons": [
     {
       "id": "pong-01-first-paddle",
@@ -440,8 +440,10 @@
       "description": "Havuzdaki bir slotun yeniden kullanılmasıyla ortaya çıkan bayat referansı görünür kıl ve çöz.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/09-stale-index",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-10-hitstop",
@@ -449,8 +451,10 @@
       "description": "Tuğla kırıldığı anda simülasyonu birkaç frame dondurarak vuruşa ağırlık kat.",
       "world": "World 3 · Breakout",
       "url": "/worlds/03-breakout/10-hitstop",
-      "status": "not_started",
-      "evidence": []
+      "status": "completed",
+      "evidence": [
+        "games/breakout/main.odin"
+      ]
     },
     {
       "id": "breakout-11-screen-shake",
@@ -863,6 +867,19 @@
       "lastRecallAt": null,
       "evidence": [
         "games/snake/main.odin"
+      ]
+    },
+    {
+      "id": "sim-presentation-split",
+      "title": "Gameplay ve presentation ayrımı",
+      "status": "learning",
+      "lessons": [
+        "breakout-10-hitstop"
+      ],
+      "note": "3.10'da hitstop'u .Playing kolunun içine bir if/else olarak kurdu; sayaç sırasını (aktifse yalnız azalt, simülasyona hiç girme) ilk denemede doğru yaptı, İpucu 2'nin tuzağına düşmedi. Win kontrolünü de dondurulan dala aldığı için son tuğlanın hitstop'u görünür kaldı. Eksik: hangi alt sistemin gameplay olduğunu taramadı — powerup_update döngünün başında, switch'in dışında kaldı, yani donmuş frame'lerde powerup'lar düşmeye, rakete değmeye ve powerup_timer erimeye devam etti. Review'da gösterilince taşıdı; particle_update'i bilerek dışarıda bırakma kararı doğruydu. Ayrım 3.11 (kamera sarsıntısı) ve 3.12'de yeniden sınanacak.",
+      "lastRecallAt": null,
+      "evidence": [
+        "games/breakout/main.odin"
       ]
     }
   ],

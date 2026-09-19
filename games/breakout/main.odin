@@ -17,13 +17,16 @@ BRICK_PAD :: 4
 
 // Powerups
 MAX_POWERUPS :: 4
-POWERUP_DROP_CHANCE :: 0.2
+POWERUP_DROP_CHANCE :: 0.2 // %20
 POWERUP_SPEED :: 120
 POWERUP_DURATION :: 6
 
 // Particle
 MAX_PARTICLES :: 64
 PARTICLE_BURST :: 8
+
+// Hitstop
+HITSTOP_DURATION :: 0.05 // saniye
 
 Game :: struct {
 	player:             Paddle,
@@ -38,6 +41,9 @@ Game :: struct {
 
 	// particles
 	particles:          [MAX_PARTICLES]Particle,
+	// hitstop
+	hitstop:            f32,
+	// debug
 	debug_visible:      bool,
 }
 
@@ -81,7 +87,6 @@ main :: proc() {
 		dt := rl.GetFrameTime()
 
 		particle_update(&game, dt)
-		powerup_update(&game, dt)
 
 		if rl.IsKeyPressed(.R) {
 			game_reset(&game)
@@ -99,80 +104,86 @@ main :: proc() {
 
 		switch game.state {
 		case .Playing:
-			if rl.IsKeyDown(.A) {
-				game.player.rect.x -= game.player.speed * dt
-			}
-			if rl.IsKeyDown(.D) {
-				game.player.rect.x += game.player.speed * dt
-			}
+			if game.hitstop > 0 {
+				game.hitstop -= dt
+			} else {
+				powerup_update(&game, dt)
 
-			if game.player.rect.x < 0 do game.player.rect.x = 0
-			if game.player.rect.x + game.player.rect.width > SCREEN_WIDTH do game.player.rect.x = SCREEN_WIDTH - game.player.rect.width
-
-			game.ball.pos += game.ball.vel * dt
-
-			// left
-			if game.ball.pos.x - game.ball.radius < 0 {
-				game.ball.pos.x = game.ball.radius
-				game.ball.vel.x = -game.ball.vel.x
-			}
-			// right
-			if game.ball.pos.x + game.ball.radius > SCREEN_WIDTH {
-				game.ball.pos.x = SCREEN_WIDTH - game.ball.radius
-				game.ball.vel.x = -game.ball.vel.x
-			}
-			// top
-			if game.ball.pos.y - game.ball.radius < 0 {
-				game.ball.pos.y = game.ball.radius
-				game.ball.vel.y = -game.ball.vel.y
-			}
-			// bottom
-			if game.ball.pos.y + game.ball.radius > SCREEN_HEIGHT {
-				// drop one health.
-				game.state = .Lost
-			}
-
-			if game.ball.vel.y > 0 &&
-			   rl.CheckCollisionCircleRec(game.ball.pos, game.ball.radius, game.player.rect) {
-				game.ball.pos.y = game.player.rect.y - game.ball.radius
-				game.ball.vel.y = -game.ball.vel.y
-			}
-
-			for &brick in game.bricks {
-				if !brick.alive do continue
-				if rl.CheckCollisionCircleRec(game.ball.pos, game.ball.radius, brick.rect) {
-					dx := game.ball.pos.x - (brick.rect.x + brick.rect.width / 2)
-					dy := game.ball.pos.y - (brick.rect.y + brick.rect.height / 2)
-					overlap_x := (brick.rect.width / 2 + game.ball.radius) - abs(dx)
-					overlap_y := (brick.rect.height / 2 + game.ball.radius) - abs(dy)
-					if overlap_x < overlap_y {
-						game.ball.vel.x = -game.ball.vel.x
-					} else {
-						game.ball.vel.y = -game.ball.vel.y
-					}
-					brick.alive = false
-
-					center := rl.Vector2 {
-						brick.rect.x + brick.rect.width / 2,
-						brick.rect.y + brick.rect.height / 2,
-					}
-					for _ in 0 ..< PARTICLE_BURST {
-						particle_spawn(&game, center)
-					}
-
-					if rand.float32_range(0, 1) < POWERUP_DROP_CHANCE {
-						powerup_spawn(&game, center)
-					}
-
-					break
+				if rl.IsKeyDown(.A) {
+					game.player.rect.x -= game.player.speed * dt
 				}
-			}
-			alive_count := 0
-			for brick in game.bricks {
-				if brick.alive do alive_count += 1
-			}
-			if alive_count == 0 do game.state = .Won
+				if rl.IsKeyDown(.D) {
+					game.player.rect.x += game.player.speed * dt
+				}
 
+				if game.player.rect.x < 0 do game.player.rect.x = 0
+				if game.player.rect.x + game.player.rect.width > SCREEN_WIDTH do game.player.rect.x = SCREEN_WIDTH - game.player.rect.width
+
+				game.ball.pos += game.ball.vel * dt
+
+				// left
+				if game.ball.pos.x - game.ball.radius < 0 {
+					game.ball.pos.x = game.ball.radius
+					game.ball.vel.x = -game.ball.vel.x
+				}
+				// right
+				if game.ball.pos.x + game.ball.radius > SCREEN_WIDTH {
+					game.ball.pos.x = SCREEN_WIDTH - game.ball.radius
+					game.ball.vel.x = -game.ball.vel.x
+				}
+				// top
+				if game.ball.pos.y - game.ball.radius < 0 {
+					game.ball.pos.y = game.ball.radius
+					game.ball.vel.y = -game.ball.vel.y
+				}
+				// bottom
+				if game.ball.pos.y + game.ball.radius > SCREEN_HEIGHT {
+					// drop one health.
+					game.state = .Lost
+				}
+
+				if game.ball.vel.y > 0 &&
+				   rl.CheckCollisionCircleRec(game.ball.pos, game.ball.radius, game.player.rect) {
+					game.ball.pos.y = game.player.rect.y - game.ball.radius
+					game.ball.vel.y = -game.ball.vel.y
+				}
+
+				for &brick in game.bricks {
+					if !brick.alive do continue
+					if rl.CheckCollisionCircleRec(game.ball.pos, game.ball.radius, brick.rect) {
+						dx := game.ball.pos.x - (brick.rect.x + brick.rect.width / 2)
+						dy := game.ball.pos.y - (brick.rect.y + brick.rect.height / 2)
+						overlap_x := (brick.rect.width / 2 + game.ball.radius) - abs(dx)
+						overlap_y := (brick.rect.height / 2 + game.ball.radius) - abs(dy)
+						if overlap_x < overlap_y {
+							game.ball.vel.x = -game.ball.vel.x
+						} else {
+							game.ball.vel.y = -game.ball.vel.y
+						}
+						brick.alive = false
+						game.hitstop = HITSTOP_DURATION
+
+						center := rl.Vector2 {
+							brick.rect.x + brick.rect.width / 2,
+							brick.rect.y + brick.rect.height / 2,
+						}
+						for _ in 0 ..< PARTICLE_BURST {
+							particle_spawn(&game, center)
+						}
+
+						if rand.float32_range(0, 1) < POWERUP_DROP_CHANCE {
+							powerup_spawn(&game, center)
+						}
+
+						break
+					}
+				}
+				alive_count := 0
+				for brick in game.bricks {
+					if brick.alive do alive_count += 1
+				}
+				if alive_count == 0 do game.state = .Won
+			}
 		case .Lost:
 		case .Won:
 		}
